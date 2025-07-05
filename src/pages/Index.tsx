@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Mail, BookOpen, Heart, Star, Users, Phone, Instagram, Facebook, Linkedin } from "lucide-react";
@@ -69,17 +68,30 @@ const Index = () => {
       {/* Founder Message */}
       <section className="py-20 bg-gradient-to-r from-teal-100 to-green-100">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center animate-fade-in">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">Dr. Pravina Kale, Founder & CEO</h2>
-            <blockquote className="text-lg text-gray-700 italic leading-relaxed mb-8 bg-white p-8 rounded-2xl shadow-xl">
-              "As a lifestyle medicine physician and pathologist, I've spent years understanding disease—but what truly lights me up is helping women prevent it and reclaim their power through lifestyle.
-              <br/><br/>
-              So many women suffer silently—irregular periods, weight struggles, fertility challenges, postpartum blues—and they don't need just prescriptions.
-              <br/><br/>
-              They need education, guidance, and hand-holding.
-              <br/><br/>
-              That's why I created Path'o'Life—where science meets support. Where women are not told what to do, but empowered to choose what works for their phase of life."
-            </blockquote>
+          <div className="max-w-6xl mx-auto animate-fade-in">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="order-2 md:order-1">
+                <h2 className="text-3xl font-bold text-gray-800 mb-6">Dr. Pravina Kale, Founder & CEO</h2>
+                <blockquote className="text-lg text-gray-700 italic leading-relaxed mb-8 bg-white p-8 rounded-2xl shadow-xl">
+                  "As a lifestyle medicine physician and pathologist, I've spent years understanding disease—but what truly lights me up is helping women prevent it and reclaim their power through lifestyle.
+                  <br/><br/>
+                  So many women suffer silently—irregular periods, weight struggles, fertility challenges, postpartum blues—and they don't need just prescriptions.
+                  <br/><br/>
+                  They need education, guidance, and hand-holding.
+                  <br/><br/>
+                  That's why I created Path'o'Life—where science meets support. Where women are not told what to do, but empowered to choose what works for their phase of life."
+                </blockquote>
+              </div>
+              <div className="order-1 md:order-2">
+                <div className="flex justify-center">
+                  <img 
+                    src="/lovable-uploads/b6aeaa4f-b346-4225-81f7-15c3c238960f.png" 
+                    alt="Dr. Pravina Kale, Founder & CEO" 
+                    className="w-80 h-80 object-cover rounded-full shadow-2xl border-4 border-white"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
