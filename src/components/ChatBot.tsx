@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { MessageCircle, Send, X, ChevronDown } from "lucide-react";
+import { MessageCircle, Send, X, ChevronDown, Maximize2, Minimize2 } from "lucide-react";
 
 interface Message {
   id: string;
@@ -13,6 +13,7 @@ interface Message {
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
@@ -173,7 +174,11 @@ const ChatBot = () => {
 
       {/* Chat Panel */}
       <div
-        className={`fixed bottom-24 right-6 w-80 h-96 bg-card border border-border rounded-2xl shadow-2xl transition-all duration-300 z-40 ${
+        className={`fixed transition-all duration-300 z-40 bg-card border border-border rounded-2xl shadow-2xl ${
+          isExpanded 
+            ? 'bottom-6 right-6 w-[50vw] h-[80vh]' 
+            : 'bottom-24 right-6 w-80 h-96'
+        } ${
           isOpen
             ? 'opacity-100 translate-y-0 scale-100'
             : 'opacity-0 translate-y-4 scale-95 pointer-events-none'
@@ -184,18 +189,35 @@ const ChatBot = () => {
           <h3 className="font-semibold text-card-foreground">
             Questions about Joining? Ask us here.
           </h3>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setIsOpen(false)}
-            className="h-8 w-8 rounded-full hover:bg-muted"
-          >
-            <X className="h-4 w-4" />
-          </Button>
+          <div className="flex items-center space-x-1">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="h-8 w-8 rounded-full hover:bg-muted"
+            >
+              {isExpanded ? (
+                <Minimize2 className="h-4 w-4" />
+              ) : (
+                <Maximize2 className="h-4 w-4" />
+              )}
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsOpen(false)}
+              className="h-8 w-8 rounded-full hover:bg-muted"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
 
         {/* Messages */}
-        <ScrollArea ref={scrollAreaRef} className="flex-1 p-4 h-64">
+        <ScrollArea 
+          ref={scrollAreaRef} 
+          className={`flex-1 p-4 ${isExpanded ? 'h-[calc(80vh-140px)]' : 'h-64'}`}
+        >
           <div className="space-y-4">
             {messages.map((message) => (
               <div
