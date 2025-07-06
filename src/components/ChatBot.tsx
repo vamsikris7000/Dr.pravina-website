@@ -40,8 +40,8 @@ const ChatBot = () => {
   }, [messages]);
 
   const sendMessageToChatbot = async (userMessage: string) => {
-    const apiKey = 'app-7WvYbQAq21HIN4UU4ZcBZcWw';
-    const apiUrl = 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages';
+    const apiKey = 'app-AZ5VwFvWHU9DD9M3zZG4wcic';
+    const apiUrl = 'https://dtxbmbumrjys5.cloudfront.net/v1/chat-messages';
 
     try {
       const response = await fetch(apiUrl, {
