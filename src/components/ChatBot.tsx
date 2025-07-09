@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Send, X, MessageCircle } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Send, X } from "lucide-react";
 
 interface Message {
   id: string;
@@ -12,7 +13,8 @@ interface Message {
 }
 
 const ChatBot = () => {
-  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
@@ -74,6 +76,7 @@ const ChatBot = () => {
         throw new Error('Failed to get response reader');
       }
 
+      // Create a bot message that we'll update as we stream
       const botMessageId = `bot-${Date.now()}`;
       setMessages(prev => [...prev, {
         id: botMessageId,
@@ -97,6 +100,7 @@ const ChatBot = () => {
             if (data.event === 'agent_message' && data.answer) {
               fullMessage += data.answer;
               
+              // Update the bot message with streaming text
               setMessages(prev => prev.map(msg => 
                 msg.id === botMessageId 
                   ? { ...msg, text: fullMessage }
@@ -126,6 +130,7 @@ const ChatBot = () => {
     const userMessage = inputValue.trim();
     const userMessageId = `user-${Date.now()}`;
     
+    // Add user message
     setMessages(prev => [...prev, {
       id: userMessageId,
       text: userMessage,
@@ -135,7 +140,7 @@ const ChatBot = () => {
 
     setInputValue("");
     setIsLoading(true);
-    setIsChatOpen(true);
+    setIsDialogOpen(true); // Open dialog when sending message
 
     try {
       await sendMessageToChatbot(userMessage);
@@ -161,142 +166,94 @@ const ChatBot = () => {
     }
   };
 
-  const handleCloseChat = () => {
-    setIsChatOpen(false);
-  };
-
-  const handleOverlayClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      handleCloseChat();
-    }
-  };
-
   return (
     <>
-      {/* Floating Chat Bar */}
-      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
-        <div className="relative max-w-md w-full">
-          <Input
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyPress={handleKeyPress}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            className="w-full h-12 pr-12 rounded-full border-muted focus:border-primary bg-card/95 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300"
-            disabled={isLoading}
-          />
-          {!isFocused && !inputValue && (
-            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground pointer-events-none select-none">
-              👋 Hello there! How can we assist you?
-            </div>
-          )}
-          <Button
-            onClick={handleSendMessage}
-            disabled={!inputValue.trim() || isLoading}
-            size="icon"
-            className="absolute right-1 top-1/2 transform -translate-y-1/2 h-10 w-10 rounded-full bg-primary hover:bg-primary/90 transition-all duration-200"
-          >
-            <Send className="h-4 w-4" />
-          </Button>
+      {/* Bottom Chat Bar */}
+      <div className="fixed bottom-4 left-0 right-0 z-50 p-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="relative">
+            <Input
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyPress={handleKeyPress}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              className="w-full h-12 pr-12 rounded-full border-muted focus:border-primary bg-card shadow-lg"
+              disabled={isLoading}
+            />
+            {!isFocused && !inputValue && (
+              <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground pointer-events-none select-none">
+                👋 Hello there! How can we assist you?
+              </div>
+            )}
+            <Button
+              onClick={handleSendMessage}
+              disabled={!inputValue.trim() || isLoading}
+              size="icon"
+              className="absolute right-1 top-1/2 transform -translate-y-1/2 h-10 w-10 rounded-full bg-primary hover:bg-primary/90"
+            >
+              <Send className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       </div>
 
-      {/* Chat Modal Overlay */}
-      {isChatOpen && (
-        <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-          style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-          onClick={handleOverlayClick}
-        >
-          <div 
-            className="relative w-full max-w-2xl h-[75vh] rounded-3xl shadow-2xl animate-in fade-in-0 zoom-in-95 duration-300 ease-out"
-            style={{
-              background: 'linear-gradient(135deg, hsl(220, 70%, 85%) 0%, hsl(280, 60%, 85%) 100%)',
-              backdropFilter: 'blur(20px)',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-white/20 backdrop-blur-sm bg-white/10 rounded-t-3xl">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                  <MessageCircle className="h-4 w-4 text-white" />
-                </div>
-                <h2 className="text-lg font-semibold text-white">
-                  Questions about Joining? Ask us here.
-                </h2>
-              </div>
+      {/* Chat Dialog */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="w-[95vw] h-[95vh] p-0 gap-0">
+          <DialogHeader className="p-4 border-b border-border">
+            <div className="flex items-center justify-between">
+              <DialogTitle className="text-card-foreground">
+                Questions about Joining? Ask us here.
+              </DialogTitle>
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={handleCloseChat}
-                className="h-8 w-8 rounded-full hover:bg-white/20 text-white"
+                onClick={() => setIsDialogOpen(false)}
+                className="h-8 w-8 rounded-full hover:bg-muted"
               >
                 <X className="h-4 w-4" />
               </Button>
             </div>
+          </DialogHeader>
 
-            {/* Messages Area */}
-            <ScrollArea 
-              ref={scrollAreaRef} 
-              className="flex-1 p-6"
-              style={{ height: 'calc(75vh - 140px)' }}
-            >
-              <div className="space-y-4">
-                {messages.map((message) => (
-                  <div
-                    key={message.id}
-                    className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
-                  >
-                    <div
-                      className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm backdrop-blur-sm ${
-                        message.isUser
-                          ? 'bg-white/90 text-gray-800 shadow-sm'
-                          : 'bg-white/70 text-gray-700 shadow-sm'
-                      }`}
-                    >
-                      {message.text}
-                    </div>
-                  </div>
-                ))}
-                {isLoading && (
-                  <div className="flex justify-start">
-                    <div className="bg-white/70 text-gray-700 rounded-2xl px-4 py-3 text-sm backdrop-blur-sm shadow-sm">
-                      <div className="flex items-center space-x-1">
-                        <div className="w-2 h-2 bg-current rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                        <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </ScrollArea>
-
-            {/* Input Area */}
-            <div className="p-6 border-t border-white/20 backdrop-blur-sm bg-white/10 rounded-b-3xl">
-              <div className="flex items-center space-x-3">
-                <Input
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Type your message..."
-                  className="flex-1 rounded-full border-white/30 bg-white/20 text-white placeholder:text-white/70 focus:border-white/50 backdrop-blur-sm"
-                  disabled={isLoading}
-                />
-                <Button
-                  onClick={handleSendMessage}
-                  disabled={!inputValue.trim() || isLoading}
-                  size="icon"
-                  className="h-10 w-10 rounded-full bg-white/20 hover:bg-white/30 text-white border border-white/30 backdrop-blur-sm"
+          {/* Messages */}
+          <ScrollArea 
+            ref={scrollAreaRef} 
+            className="flex-1 p-4"
+          >
+            <div className="space-y-4">
+              {messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
                 >
-                  <Send className="h-4 w-4" />
-                </Button>
-              </div>
+                  <div
+                    className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm ${
+                      message.isUser
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-muted text-muted-foreground'
+                    }`}
+                  >
+                    {message.text}
+                  </div>
+                </div>
+              ))}
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div className="bg-muted text-muted-foreground rounded-2xl px-3 py-2 text-sm">
+                    <div className="flex items-center space-x-1">
+                      <div className="w-2 h-2 bg-current rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                      <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-        </div>
-      )}
+          </ScrollArea>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
