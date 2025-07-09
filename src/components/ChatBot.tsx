@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { MessageCircle, Send, X, ChevronDown, Maximize2, Minimize2 } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Send, X, Maximize2, Minimize2 } from "lucide-react";
 
 interface Message {
   id: string;
@@ -12,7 +13,7 @@ interface Message {
 }
 
 const ChatBot = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -24,6 +25,7 @@ const ChatBot = () => {
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -138,6 +140,7 @@ const ChatBot = () => {
 
     setInputValue("");
     setIsLoading(true);
+    setIsDialogOpen(true); // Open dialog when sending message
 
     try {
       await sendMessageToChatbot(userMessage);
@@ -153,124 +156,140 @@ const ChatBot = () => {
     }
   };
 
+  const handleInputFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleInputBlur = () => {
+    if (!inputValue) {
+      setIsFocused(false);
+    }
+  };
+
   return (
     <>
-      {/* Chat Button */}
-      <Button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg transition-all duration-300 z-50 ${
-          isOpen 
-            ? 'bg-secondary hover:bg-secondary/90' 
-            : 'bg-primary hover:bg-primary/90'
-        }`}
-        size="icon"
-      >
-        {isOpen ? (
-          <ChevronDown className="h-6 w-6" />
-        ) : (
-          <MessageCircle className="h-6 w-6" />
-        )}
-      </Button>
-
-      {/* Chat Panel */}
-      <div
-        className={`fixed transition-all duration-300 z-40 bg-card border border-border rounded-2xl shadow-2xl ${
-          isExpanded 
-            ? 'bottom-6 right-6 w-[50vw] h-[80vh]' 
-            : 'bottom-24 right-6 w-80 h-96'
-        } ${
-          isOpen
-            ? 'opacity-100 translate-y-0 scale-100'
-            : 'opacity-0 translate-y-4 scale-95 pointer-events-none'
-        }`}
-      >
-        {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-border rounded-t-2xl bg-card">
-          <h3 className="font-semibold text-card-foreground">
-            Questions about Joining? Ask us here.
-          </h3>
-          <div className="flex items-center space-x-1">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="h-8 w-8 rounded-full hover:bg-muted"
-            >
-              {isExpanded ? (
-                <Minimize2 className="h-4 w-4" />
-              ) : (
-                <Maximize2 className="h-4 w-4" />
-              )}
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsOpen(false)}
-              className="h-8 w-8 rounded-full hover:bg-muted"
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-
-        {/* Messages */}
-        <ScrollArea 
-          ref={scrollAreaRef} 
-          className={`flex-1 p-4 ${isExpanded ? 'h-[calc(80vh-140px)]' : 'h-64'}`}
-        >
-          <div className="space-y-4">
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
-              >
-                <div
-                  className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm ${
-                    message.isUser
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted text-muted-foreground'
-                  }`}
-                >
-                  {message.text}
-                </div>
-              </div>
-            ))}
-            {isLoading && (
-              <div className="flex justify-start">
-                <div className="bg-muted text-muted-foreground rounded-2xl px-3 py-2 text-sm">
-                  <div className="flex items-center space-x-1">
-                    <div className="w-2 h-2 bg-current rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                    <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </ScrollArea>
-
-        {/* Input */}
-        <div className="p-4 border-t border-border">
-          <div className="flex items-center space-x-2">
+      {/* Bottom Chat Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-background/95 backdrop-blur-sm border-t border-border">
+        <div className="max-w-4xl mx-auto">
+          <div className="relative">
             <Input
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="What can we help you with?"
-              className="flex-1 rounded-full border-muted focus:border-primary"
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              className="w-full h-12 pr-12 rounded-full border-muted focus:border-primary bg-card shadow-lg"
               disabled={isLoading}
             />
+            {!isFocused && !inputValue && (
+              <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground pointer-events-none select-none">
+                👋 Hello there! How can we assist you?
+              </div>
+            )}
             <Button
               onClick={handleSendMessage}
               disabled={!inputValue.trim() || isLoading}
               size="icon"
-              className="rounded-full h-10 w-10 bg-primary hover:bg-primary/90"
+              className="absolute right-1 top-1/2 transform -translate-y-1/2 h-10 w-10 rounded-full bg-primary hover:bg-primary/90"
             >
               <Send className="h-4 w-4" />
             </Button>
           </div>
         </div>
       </div>
+
+      {/* Chat Dialog */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className={`${isExpanded ? 'max-w-4xl h-[80vh]' : 'max-w-lg h-[500px]'} p-0 gap-0`}>
+          <DialogHeader className="p-4 border-b border-border">
+            <div className="flex items-center justify-between">
+              <DialogTitle className="text-card-foreground">
+                Questions about Joining? Ask us here.
+              </DialogTitle>
+              <div className="flex items-center space-x-1">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className="h-8 w-8 rounded-full hover:bg-muted"
+                >
+                  {isExpanded ? (
+                    <Minimize2 className="h-4 w-4" />
+                  ) : (
+                    <Maximize2 className="h-4 w-4" />
+                  )}
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsDialogOpen(false)}
+                  className="h-8 w-8 rounded-full hover:bg-muted"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </DialogHeader>
+
+          {/* Messages */}
+          <ScrollArea 
+            ref={scrollAreaRef} 
+            className="flex-1 p-4"
+          >
+            <div className="space-y-4">
+              {messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
+                >
+                  <div
+                    className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm ${
+                      message.isUser
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-muted text-muted-foreground'
+                    }`}
+                  >
+                    {message.text}
+                  </div>
+                </div>
+              ))}
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div className="bg-muted text-muted-foreground rounded-2xl px-3 py-2 text-sm">
+                    <div className="flex items-center space-x-1">
+                      <div className="w-2 h-2 bg-current rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                      <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </ScrollArea>
+
+          {/* Input in Dialog */}
+          <div className="p-4 border-t border-border">
+            <div className="flex items-center space-x-2">
+              <Input
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="What can we help you with?"
+                className="flex-1 rounded-full border-muted focus:border-primary"
+                disabled={isLoading}
+              />
+              <Button
+                onClick={handleSendMessage}
+                disabled={!inputValue.trim() || isLoading}
+                size="icon"
+                className="rounded-full h-10 w-10 bg-primary hover:bg-primary/90"
+              >
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
