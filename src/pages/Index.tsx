@@ -17,7 +17,7 @@ const Index = () => {
               alt="Path'o'Life Logo" 
               className="w-32 h-32 mx-auto mb-6"
             />
-            <h1 className="font-playfair text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white to-teal-100 bg-clip-text text-transparent">
+            <h1 className="font-playfair text-5xl md:text-6xl font-bold mb-4 text-white">
               Path'o'Life
             </h1>
             <p className="font-poppins text-xl md:text-2xl mb-2">Women's Wellness by Dr. Pravina</p>
