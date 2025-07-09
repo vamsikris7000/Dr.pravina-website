@@ -200,21 +200,11 @@ const ChatBot = () => {
 
       {/* Chat Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="w-[95vw] h-[95vh] p-0 gap-0">
-          <DialogHeader className="p-4 border-b border-border">
-            <div className="flex items-center justify-between">
-              <DialogTitle className="text-card-foreground">
-                Questions about Joining? Ask us here.
-              </DialogTitle>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsDialogOpen(false)}
-                className="h-8 w-8 rounded-full hover:bg-muted"
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </div>
+        <DialogContent className="w-[95vw] h-[95vh] p-0 gap-0 rounded-3xl border-0 shadow-2xl bg-card">
+          <DialogHeader className="p-6 border-b border-border/20">
+            <DialogTitle className="text-xl font-semibold text-card-foreground text-center">
+              Questions about Joining? Ask us here.
+            </DialogTitle>
           </DialogHeader>
 
           {/* Messages */}
