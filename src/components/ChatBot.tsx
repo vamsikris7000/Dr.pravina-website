@@ -168,40 +168,42 @@ const ChatBot = () => {
 
   return (
     <>
-      {/* Bottom Chat Bar */}
-      <div className="fixed bottom-4 left-0 right-0 z-50 p-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="relative">
-            <Input
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={handleKeyPress}
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              className="w-full h-12 pr-12 rounded-full border-muted focus:border-primary bg-card shadow-lg"
-              disabled={isLoading}
-            />
-            {!isFocused && !inputValue && (
-              <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground pointer-events-none select-none">
-                👋 Hello there! How can we assist you?
-              </div>
-            )}
-            <Button
-              onClick={handleSendMessage}
-              disabled={!inputValue.trim() || isLoading}
-              size="icon"
-              className="absolute right-1 top-1/2 transform -translate-y-1/2 h-10 w-10 rounded-full bg-primary hover:bg-primary/90"
-            >
-              <Send className="h-4 w-4" />
-            </Button>
+      {/* Bottom Chat Bar - Only show when dialog is closed */}
+      {!isDialogOpen && (
+        <div className="fixed bottom-4 left-0 right-0 z-50 p-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              <Input
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyPress={handleKeyPress}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
+                className="w-full h-12 pr-12 rounded-full border-muted focus:border-primary bg-card shadow-lg"
+                disabled={isLoading}
+              />
+              {!isFocused && !inputValue && (
+                <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground pointer-events-none select-none">
+                  👋 Hello there! How can we assist you?
+                </div>
+              )}
+              <Button
+                onClick={handleSendMessage}
+                disabled={!inputValue.trim() || isLoading}
+                size="icon"
+                className="absolute right-1 top-1/2 transform -translate-y-1/2 h-10 w-10 rounded-full bg-primary hover:bg-primary/90"
+              >
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Chat Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="w-[95vw] h-[95vh] p-0 gap-0 rounded-3xl border-0 shadow-2xl bg-card">
-          <DialogHeader className="p-6 border-b border-border/20">
+        <DialogContent className="w-[95vw] max-w-[95vw] h-[95vh] p-0 gap-0 rounded-3xl border-0 shadow-2xl bg-card flex flex-col">
+          <DialogHeader className="p-6 border-b border-border/20 flex-shrink-0">
             <DialogTitle className="text-xl font-semibold text-card-foreground text-center">
               Questions about Joining? Ask us here.
             </DialogTitle>
@@ -242,6 +244,28 @@ const ChatBot = () => {
               )}
             </div>
           </ScrollArea>
+
+          {/* Chat Input Bar inside Dialog */}
+          <div className="p-4 border-t border-border/20 flex-shrink-0">
+            <div className="relative">
+              <Input
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyPress={handleKeyPress}
+                className="w-full h-12 pr-12 rounded-full border-muted focus:border-primary bg-background shadow-sm"
+                placeholder="Type your message..."
+                disabled={isLoading}
+              />
+              <Button
+                onClick={handleSendMessage}
+                disabled={!inputValue.trim() || isLoading}
+                size="icon"
+                className="absolute right-1 top-1/2 transform -translate-y-1/2 h-10 w-10 rounded-full bg-primary hover:bg-primary/90"
+              >
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
     </>
