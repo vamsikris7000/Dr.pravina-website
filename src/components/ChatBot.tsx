@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Send, X, Maximize2, Minimize2 } from "lucide-react";
+import { Send, X } from "lucide-react";
 
 interface Message {
   id: string;
@@ -14,7 +14,7 @@ interface Message {
 
 const ChatBot = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
+  
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
@@ -200,34 +200,20 @@ const ChatBot = () => {
 
       {/* Chat Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className={`${isExpanded ? 'max-w-4xl h-[80vh]' : 'max-w-lg h-[500px]'} p-0 gap-0`}>
+        <DialogContent className="max-w-5xl w-[80vw] h-[80vh] p-0 gap-0">
           <DialogHeader className="p-4 border-b border-border">
             <div className="flex items-center justify-between">
               <DialogTitle className="text-card-foreground">
                 Questions about Joining? Ask us here.
               </DialogTitle>
-              <div className="flex items-center space-x-1">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setIsExpanded(!isExpanded)}
-                  className="h-8 w-8 rounded-full hover:bg-muted"
-                >
-                  {isExpanded ? (
-                    <Minimize2 className="h-4 w-4" />
-                  ) : (
-                    <Maximize2 className="h-4 w-4" />
-                  )}
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setIsDialogOpen(false)}
-                  className="h-8 w-8 rounded-full hover:bg-muted"
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsDialogOpen(false)}
+                className="h-8 w-8 rounded-full hover:bg-muted"
+              >
+                <X className="h-4 w-4" />
+              </Button>
             </div>
           </DialogHeader>
 
