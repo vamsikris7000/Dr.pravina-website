@@ -169,7 +169,7 @@ const ChatBot = () => {
   return (
     <>
       {/* Bottom Chat Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-background/95 backdrop-blur-sm border-t border-border">
+      <div className="fixed bottom-4 left-0 right-0 z-50 p-4">
         <div className="max-w-4xl mx-auto">
           <div className="relative">
             <Input
@@ -200,7 +200,7 @@ const ChatBot = () => {
 
       {/* Chat Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-5xl w-[80vw] h-[80vh] p-0 gap-0">
+        <DialogContent className="w-[95vw] h-[95vh] p-0 gap-0">
           <DialogHeader className="p-4 border-b border-border">
             <div className="flex items-center justify-between">
               <DialogTitle className="text-card-foreground">
@@ -252,28 +252,6 @@ const ChatBot = () => {
               )}
             </div>
           </ScrollArea>
-
-          {/* Input in Dialog */}
-          <div className="p-4 border-t border-border">
-            <div className="flex items-center space-x-2">
-              <Input
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="What can we help you with?"
-                className="flex-1 rounded-full border-muted focus:border-primary"
-                disabled={isLoading}
-              />
-              <Button
-                onClick={handleSendMessage}
-                disabled={!inputValue.trim() || isLoading}
-                size="icon"
-                className="rounded-full h-10 w-10 bg-primary hover:bg-primary/90"
-              >
-                <Send className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
         </DialogContent>
       </Dialog>
     </>
