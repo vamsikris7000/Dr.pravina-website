@@ -27,26 +27,26 @@ const Index = () => {
           
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center max-w-4xl mx-auto">
             <Link to="/workshops">
-              <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50 font-poppins font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <Calendar className="mr-2 h-5 w-5" />
+              <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50 hover:text-teal-800 font-poppins font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-teal-600">
+                <Calendar className="mr-2 h-5 w-5 text-teal-600" />
                 Join Our Next Workshop
               </Button>
             </Link>
             <Link to="/consultations">
-              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-teal-600 font-poppins font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <Heart className="mr-2 h-5 w-5" />
+              <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50 hover:text-teal-800 font-poppins font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-teal-600">
+                <Heart className="mr-2 h-5 w-5 text-teal-600" />
                 Book a 1:1 Consultation
               </Button>
             </Link>
             <Link to="/wellness-plans">
-              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-green-600 font-poppins font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <BookOpen className="mr-2 h-5 w-5" />
+              <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50 hover:text-teal-800 font-poppins font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-teal-600">
+                <BookOpen className="mr-2 h-5 w-5 text-teal-600" />
                 Explore Wellness Plans
               </Button>
             </Link>
             <Link to="/community">
-              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-green-600 font-poppins font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <Users className="mr-2 h-5 w-5" />
+              <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50 hover:text-teal-800 font-poppins font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-teal-600">
+                <Users className="mr-2 h-5 w-5 text-teal-600" />
                 Join WhatsApp Community
               </Button>
             </Link>

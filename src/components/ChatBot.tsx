@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Send, X } from "lucide-react";
+import VoiceChatWidget from "@/components/VoiceChatWidget";
 
 interface Message {
   id: string;
@@ -170,9 +171,10 @@ const ChatBot = () => {
     <>
       {/* Bottom Chat Bar - Only show when dialog is closed */}
       {!isDialogOpen && (
-        <div className="fixed bottom-4 left-0 right-0 z-50 p-4">
+        <div className="fixed bottom-2 left-0 right-0 z-50 p-4">
           <div className="max-w-4xl mx-auto">
-            <div className="relative">
+            <div className="flex flex-row items-center justify-between gap-2 mb+2">
+              <div className="relative flex-1">
               <Input
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
@@ -195,6 +197,11 @@ const ChatBot = () => {
               >
                 <Send className="h-4 w-4" />
               </Button>
+              </div>
+              {/* Inline Voice Chat Widget Button */}
+              <div className="ml-2 flex-shrink-0">
+                <VoiceChatWidget />
+              </div>
             </div>
           </div>
         </div>
@@ -202,17 +209,22 @@ const ChatBot = () => {
 
       {/* Chat Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="w-[95vw] max-w-[95vw] h-[95vh] p-0 gap-0 rounded-3xl border-0 shadow-2xl bg-card flex flex-col">
-          <DialogHeader className="p-6 border-b border-border/20 flex-shrink-0">
-            <DialogTitle className="text-xl font-semibold text-card-foreground text-center">
+        <DialogContent
+          className="w-[75vw] max-w-[75vw] h-[75vh] max-h-[75vh] p-0 gap-0 rounded-3xl border-0 shadow-2xl bg-white flex flex-col transition-all duration-300 ease-in-out animate-fade-in overflow-hidden font-poppins
+            sm:max-w-full sm:max-h-full sm:p-2"
+          style={{ boxShadow: '0 8px 40px 0 rgba(13, 148, 136, 0.10)' }}
+        >
+          <DialogHeader className="p-6 border-b border-teal-100 flex-shrink-0 bg-gradient-to-r from-teal-50 to-green-50 rounded-t-3xl">
+            <DialogTitle className="text-2xl font-playfair font-bold text-teal-700 text-center w-full">
               Questions about Joining? Ask us here.
             </DialogTitle>
+            {/* Removed close button */}
           </DialogHeader>
 
           {/* Messages */}
           <ScrollArea 
             ref={scrollAreaRef} 
-            className="flex-1 p-4"
+            className="flex-1 p-6 bg-white overflow-y-auto"
           >
             <div className="space-y-4">
               {messages.map((message) => (
@@ -221,10 +233,10 @@ const ChatBot = () => {
                   className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm ${
+                    className={`max-w-[80%] rounded-2xl px-4 py-2 text-base font-poppins shadow-sm ${
                       message.isUser
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted text-muted-foreground'
+                        ? 'bg-teal-600 text-white'
+                        : 'bg-teal-50 text-teal-900 border border-teal-100'
                     }`}
                   >
                     {message.text}
@@ -233,11 +245,11 @@ const ChatBot = () => {
               ))}
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="bg-muted text-muted-foreground rounded-2xl px-3 py-2 text-sm">
+                  <div className="bg-teal-50 text-teal-900 rounded-2xl px-4 py-2 text-base font-poppins border border-teal-100">
                     <div className="flex items-center space-x-1">
-                      <div className="w-2 h-2 bg-current rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                      <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      <div className="w-2 h-2 bg-teal-400 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-teal-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                      <div className="w-2 h-2 bg-teal-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                     </div>
                   </div>
                 </div>
@@ -246,13 +258,13 @@ const ChatBot = () => {
           </ScrollArea>
 
           {/* Chat Input Bar inside Dialog */}
-          <div className="p-4 border-t border-border/20 flex-shrink-0">
-            <div className="relative">
+          <div className="p-6 border-t border-teal-100 flex-shrink-0 bg-gradient-to-r from-teal-50 to-green-50">
+            <div className="relative flex items-center">
               <Input
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
-                className="w-full h-12 pr-12 rounded-full border-muted focus:border-primary bg-background shadow-sm"
+                className="w-full h-12 pr-12 rounded-full border-muted focus:border-primary bg-white shadow-sm font-poppins"
                 placeholder="Type your message..."
                 disabled={isLoading}
               />
@@ -260,7 +272,7 @@ const ChatBot = () => {
                 onClick={handleSendMessage}
                 disabled={!inputValue.trim() || isLoading}
                 size="icon"
-                className="absolute right-1 top-1/2 transform -translate-y-1/2 h-10 w-10 rounded-full bg-primary hover:bg-primary/90"
+                className="absolute right-1 top-1/2 transform -translate-y-1/2 h-10 w-10 rounded-full bg-teal-600 hover:bg-teal-700 text-white shadow-md"
               >
                 <Send className="h-4 w-4" />
               </Button>

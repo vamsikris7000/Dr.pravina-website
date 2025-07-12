@@ -82,10 +82,10 @@ const Workshops = () => {
             <p className="text-lg mb-8">🎓 Includes checklists, toolkits, Q&A | 🎤 English-Marathi mix</p>
             
             <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50">
+              <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50 hover:text-teal-800 border border-teal-600 font-poppins font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                 Register for Workshop
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-teal-600">
+              <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50 hover:text-teal-800 border border-teal-600 font-poppins font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                 Join WhatsApp Community
               </Button>
             </div>

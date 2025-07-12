@@ -80,7 +80,7 @@ const Contact = () => {
                     <MessageCircle className="mr-2 h-4 w-4" />
                     Join WhatsApp Community
                   </Button>
-                  <Button variant="outline" className="justify-start">
+                  <Button variant="outline" className="justify-start text-teal-600 border-teal-600 hover:bg-teal-50 hover:text-teal-800">
                     <Phone className="mr-2 h-4 w-4" />
                     Book a Consultation
                   </Button>

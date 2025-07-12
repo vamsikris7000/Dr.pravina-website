@@ -13,8 +13,8 @@ const Community = () => {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl font-bold mb-6">Join Our Community</h1>
             <p className="text-xl mb-8">Connect, Learn, and Grow with Fellow Women on Their Wellness Journey</p>
-            <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50">
-              <MessageCircle className="mr-2 h-5 w-5" />
+            <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50 hover:text-teal-800 border border-teal-600 font-poppins font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <MessageCircle className="mr-2 h-5 w-5 text-teal-600" />
               Join WhatsApp Community
             </Button>
           </div>
@@ -167,11 +167,11 @@ const Community = () => {
             <h2 className="text-3xl font-bold mb-4">Ready to Join Our Wellness Community?</h2>
             <p className="text-xl mb-8">Take the first step towards a healthier, happier you with the support of our amazing community</p>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50">
-                <MessageCircle className="mr-2 h-5 w-5" />
+              <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50 hover:text-teal-800 border border-teal-600 font-poppins font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <MessageCircle className="mr-2 h-5 w-5 text-teal-600" />
                 Join WhatsApp Community
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-teal-600">
+              <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50 hover:text-teal-800 border border-teal-600 font-poppins font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                 Subscribe to Newsletter
               </Button>
             </div>

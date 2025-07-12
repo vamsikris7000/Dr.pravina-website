@@ -16,6 +16,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import ChatBot from "./components/ChatBot";
+import VoiceChatWidget from "@/components/VoiceChatWidget";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         <ChatBot />
+        <VoiceChatWidget />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
