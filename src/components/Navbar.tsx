@@ -20,19 +20,19 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50">
-      <div className="container mx-auto px-4">
+    <nav className="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-border">
+      <div className="container mx-auto px-6">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-3 group">
             <img 
               src="/lovable-uploads/68d9c8ae-c9bc-4365-b332-ec694fda90af.png" 
               alt="Path'o'Life Logo" 
-              className="w-10 h-10"
+              className="w-12 h-12 transition-transform duration-300 group-hover:scale-110"
             />
             <div>
-              <h1 className="text-xl font-bold text-teal-600">Path'o'Life</h1>
-              <p className="text-xs text-gray-600">Women's Wellness by Dr. Pravina</p>
+              <h1 className="text-2xl font-bold text-primary font-playfair">Path'o'Life</h1>
+              <p className="text-sm text-muted-foreground font-inter">Women's Wellness by Dr. Pravina</p>
             </div>
           </Link>
 
@@ -42,16 +42,16 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`text-sm font-medium transition-colors text-teal-600 hover:text-teal-800 ${
+                className={`text-sm font-medium transition-all duration-300 font-inter hover:text-primary hover:scale-105 ${
                   location.pathname === item.path
-                    ? "border-b-2 border-teal-600"
-                    : ""
+                    ? "text-primary border-b-2 border-primary"
+                    : "text-foreground"
                 }`}
               >
                 {item.name}
               </Link>
             ))}
-            <Button className="bg-teal-600 hover:bg-teal-700 text-white">
+            <Button variant="wellness" size="lg" className="font-inter font-semibold">
               Book Consultation
             </Button>
           </div>
