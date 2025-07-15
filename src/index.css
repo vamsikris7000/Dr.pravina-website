@@ -45,18 +45,22 @@
     --input: 218 15% 94%;
     --ring: 168 76% 36%;
 
-    /* Gradients for modern appeal */
+    /* Enhanced gradients with micro-interaction support */
     --gradient-primary: linear-gradient(135deg, hsl(168 76% 36%), hsl(168 76% 50%));
+    --gradient-primary-hover: linear-gradient(135deg, hsl(168 76% 42%), hsl(168 76% 56%));
     --gradient-secondary: linear-gradient(135deg, hsl(147 47% 94%), hsl(168 54% 85%));
     --gradient-hero: linear-gradient(135deg, hsl(168 76% 36%), hsl(168 76% 50%), hsl(147 64% 47%));
     --gradient-bg: linear-gradient(180deg, hsl(147 84% 97%), hsl(168 84% 97%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(147 84% 98%));
 
-    /* Shadows for depth */
+    /* Enhanced shadows with micro-interactions */
     --shadow-sm: 0 1px 2px 0 hsl(218 27% 18% / 0.05);
     --shadow-md: 0 4px 6px -1px hsl(218 27% 18% / 0.1), 0 2px 4px -1px hsl(218 27% 18% / 0.06);
     --shadow-lg: 0 10px 15px -3px hsl(218 27% 18% / 0.1), 0 4px 6px -2px hsl(218 27% 18% / 0.05);
     --shadow-xl: 0 20px 25px -5px hsl(218 27% 18% / 0.1), 0 10px 10px -5px hsl(218 27% 18% / 0.04);
     --shadow-glow: 0 0 40px hsl(168 76% 50% / 0.3);
+    --shadow-interactive: 0 4px 20px hsl(168 76% 36% / 0.15);
+    --shadow-elevated: 0 8px 30px hsl(218 27% 18% / 0.12);
 
     /* Typography scale */
     --font-size-xs: 0.75rem;

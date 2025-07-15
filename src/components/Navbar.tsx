@@ -67,23 +67,24 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="lg:hidden pb-4">
-            <div className="flex flex-col space-y-4">
-              {navItems.map((item) => (
+          <div className="lg:hidden pb-6 animate-fade-in">
+            <div className="flex flex-col space-y-4 bg-gradient-card rounded-2xl p-6 mt-4 shadow-elevated border border-border/50">
+              {navItems.map((item, index) => (
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`text-sm font-medium transition-colors hover:text-teal-600 ${
+                  className={`font-inter text-sm font-medium transition-all duration-300 p-3 rounded-xl hover:bg-primary/10 hover:text-primary ${
                     location.pathname === item.path
-                      ? "text-teal-600"
-                      : "text-gray-700"
+                      ? "text-primary bg-primary/10 border-l-4 border-primary"
+                      : "text-foreground hover:scale-105"
                   }`}
                   onClick={() => setIsOpen(false)}
+                  style={{animationDelay: `${index * 50}ms`}}
                 >
                   {item.name}
                 </Link>
               ))}
-              <Button className="bg-teal-600 hover:bg-teal-700 text-white w-fit">
+              <Button variant="wellness" size="lg" className="w-full font-inter font-semibold mt-4">
                 Book Consultation
               </Button>
             </div>

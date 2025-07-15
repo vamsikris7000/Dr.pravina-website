@@ -56,36 +56,42 @@ const Workshops = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-green-50 to-emerald-50">
+    <div className="min-h-screen bg-gradient-bg">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-r from-teal-600 to-green-600 text-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6">Path'o'Life Signature Workshops</h1>
-            <p className="text-xl mb-8">Live, interactive 3-hour transformative sessions</p>
+      <section className="relative py-24 bg-gradient-hero text-white overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full animate-float"></div>
+        <div className="absolute bottom-20 right-20 w-16 h-16 bg-white/10 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
+        
+        <div className="relative container mx-auto px-6">
+          <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
+            <h1 className="font-playfair text-6xl md:text-7xl font-bold mb-6 leading-tight">Path'o'Life Signature Workshops</h1>
+            <p className="font-inter text-xl md:text-2xl mb-10 opacity-90">Live, interactive 3-hour transformative sessions</p>
             
-            <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="flex items-center justify-center space-x-2">
+            <div className="grid md:grid-cols-3 gap-8 mb-10 max-w-3xl mx-auto">
+              <div className="flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-all duration-300">
                 <Calendar className="h-6 w-6" />
-                <span>Every Tuesday & Friday</span>
+                <span className="font-inter font-medium">Every Tuesday & Friday</span>
               </div>
-              <div className="flex items-center justify-center space-x-2">
+              <div className="flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-all duration-300">
                 <Clock className="h-6 w-6" />
-                <span>5:30 – 8:30 PM</span>
+                <span className="font-inter font-medium">5:30 – 8:30 PM</span>
               </div>
-              <div className="flex items-center justify-center space-x-2">
+              <div className="flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-all duration-300">
                 <Users className="h-6 w-6" />
-                <span>Google Meet</span>
+                <span className="font-inter font-medium">Google Meet</span>
               </div>
             </div>
 
-            <p className="text-lg mb-8">🎓 Includes checklists, toolkits, Q&A | 🎤 English-Marathi mix</p>
+            <p className="font-inter text-lg mb-10 opacity-90">🎓 Includes checklists, toolkits, Q&A | 🎤 English-Marathi mix</p>
             
-            <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50 hover:text-teal-800 border border-teal-600 font-poppins font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <div className="flex flex-col lg:flex-row gap-6 justify-center items-center">
+              <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20">
+                <Calendar className="mr-3 h-5 w-5" />
                 Register for Workshop
               </Button>
-              <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50 hover:text-teal-800 border border-teal-600 font-poppins font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20">
+                <Users className="mr-3 h-5 w-5" />
                 Join WhatsApp Community
               </Button>
             </div>
@@ -94,19 +100,22 @@ const Workshops = () => {
       </section>
 
       {/* Workshops Grid */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      <section className="py-24">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
             {workshops.map((workshop, index) => (
-              <Card key={index} className="hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <CardContent className="p-8">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${workshop.color} rounded-full flex items-center justify-center mb-6`}>
-                    <BookOpen className="h-8 w-8 text-white" />
+              <Card key={index} className="group hover:shadow-elevated hover:-translate-y-2 transition-all duration-500 animate-fade-in" style={{animationDelay: `${index * 100}ms`}}>
+                <CardContent className="p-10">
+                  <div className="relative mb-8">
+                    <div className={`w-20 h-20 bg-gradient-to-br ${workshop.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-glow transition-all duration-300`}>
+                      <BookOpen className="h-10 w-10 text-white" />
+                    </div>
+                    <div className="absolute inset-0 bg-primary/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">{workshop.title}</h3>
-                  <p className="text-teal-600 font-semibold mb-4">{workshop.subtitle}</p>
-                  <p className="text-gray-600 mb-6 leading-relaxed">{workshop.description}</p>
-                  <Button className="w-full bg-teal-600 hover:bg-teal-700 text-white">
+                  <h3 className="font-playfair text-2xl md:text-3xl font-bold text-foreground mb-3">{workshop.title}</h3>
+                  <p className="font-inter text-primary font-semibold mb-6 text-lg">{workshop.subtitle}</p>
+                  <p className="font-inter text-muted-foreground mb-8 leading-relaxed">{workshop.description}</p>
+                  <Button variant="wellness" size="lg" className="w-full font-inter font-semibold">
                     Register for This Workshop
                   </Button>
                 </CardContent>
@@ -117,24 +126,27 @@ const Workshops = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">How Our Workshops Work</h2>
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">1</div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Register Online</h3>
-              <p className="text-gray-600">Choose your workshop and secure your spot with easy online registration</p>
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">How Our Workshops Work</h2>
+            <p className="font-inter text-xl text-muted-foreground">Simple steps to transform your wellness journey</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+            <div className="text-center group animate-fade-in" style={{animationDelay: '100ms'}}>
+              <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 text-white font-bold text-2xl shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">1</div>
+              <h3 className="font-playfair text-2xl font-bold text-foreground mb-4">Register Online</h3>
+              <p className="font-inter text-muted-foreground leading-relaxed">Choose your workshop and secure your spot with easy online registration</p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">2</div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Join Live Session</h3>
-              <p className="text-gray-600">Attend the 3-hour interactive session via Google Meet with Q&A</p>
+            <div className="text-center group animate-fade-in" style={{animationDelay: '200ms'}}>
+              <div className="w-20 h-20 bg-gradient-to-br from-success to-success/80 rounded-full flex items-center justify-center mx-auto mb-6 text-white font-bold text-2xl shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">2</div>
+              <h3 className="font-playfair text-2xl font-bold text-foreground mb-4">Join Live Session</h3>
+              <p className="font-inter text-muted-foreground leading-relaxed">Attend the 3-hour interactive session via Google Meet with Q&A</p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">3</div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Get Resources</h3>
-              <p className="text-gray-600">Receive comprehensive toolkits, checklists, and actionable materials</p>
+            <div className="text-center group animate-fade-in" style={{animationDelay: '300ms'}}>
+              <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 text-white font-bold text-2xl shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">3</div>
+              <h3 className="font-playfair text-2xl font-bold text-foreground mb-4">Get Resources</h3>
+              <p className="font-inter text-muted-foreground leading-relaxed">Receive comprehensive toolkits, checklists, and actionable materials</p>
             </div>
           </div>
         </div>

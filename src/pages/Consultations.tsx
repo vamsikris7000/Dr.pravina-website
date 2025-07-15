@@ -50,14 +50,18 @@ const Consultations = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-green-50 to-emerald-50">
+    <div className="min-h-screen bg-gradient-bg">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-r from-teal-600 to-green-600 text-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6">1:1 Expert Consultations</h1>
-            <p className="text-xl mb-8">Personalized guidance with our team of women's health specialists</p>
-            <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50">
+      <section className="relative py-24 bg-gradient-hero text-white overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full animate-float"></div>
+        <div className="absolute bottom-20 right-20 w-16 h-16 bg-white/10 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
+        
+        <div className="relative container mx-auto px-6">
+          <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
+            <h1 className="font-playfair text-6xl md:text-7xl font-bold mb-6 leading-tight">1:1 Expert Consultations</h1>
+            <p className="font-inter text-xl md:text-2xl mb-10 opacity-90">Personalized guidance with our team of women's health specialists</p>
+            <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20">
               Book Your Consultation
             </Button>
           </div>
@@ -65,57 +69,62 @@ const Consultations = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">How It Works</h2>
-          <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">1</div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Choose Your Concern</h3>
-              <p className="text-gray-600 text-sm">Select the area you need help with from our specialties</p>
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">How It Works</h2>
+            <p className="font-inter text-xl text-muted-foreground">Simple steps to get personalized care</p>
+          </div>
+          <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            <div className="text-center group animate-fade-in" style={{animationDelay: '100ms'}}>
+              <div className="w-18 h-18 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 text-white font-bold text-xl shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">1</div>
+              <h3 className="font-playfair text-xl font-bold text-foreground mb-3">Choose Your Concern</h3>
+              <p className="font-inter text-muted-foreground">Select the area you need help with from our specialties</p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">2</div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">We Match You</h3>
-              <p className="text-gray-600 text-sm">We connect you with the right expert for your specific needs</p>
+            <div className="text-center group animate-fade-in" style={{animationDelay: '200ms'}}>
+              <div className="w-18 h-18 bg-gradient-to-br from-success to-success/80 rounded-full flex items-center justify-center mx-auto mb-6 text-white font-bold text-xl shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">2</div>
+              <h3 className="font-playfair text-xl font-bold text-foreground mb-3">We Match You</h3>
+              <p className="font-inter text-muted-foreground">We connect you with the right expert for your specific needs</p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">3</div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Fill the Form</h3>
-              <p className="text-gray-600 text-sm">Complete our consultation form with your health details</p>
+            <div className="text-center group animate-fade-in" style={{animationDelay: '300ms'}}>
+              <div className="w-18 h-18 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 text-white font-bold text-xl shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">3</div>
+              <h3 className="font-playfair text-xl font-bold text-foreground mb-3">Fill the Form</h3>
+              <p className="font-inter text-muted-foreground">Complete our consultation form with your health details</p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">4</div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Get Your Call</h3>
-              <p className="text-gray-600 text-sm">Receive a call with your consultation link and next steps</p>
+            <div className="text-center group animate-fade-in" style={{animationDelay: '400ms'}}>
+              <div className="w-18 h-18 bg-gradient-to-br from-success to-success/80 rounded-full flex items-center justify-center mx-auto mb-6 text-white font-bold text-xl shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">4</div>
+              <h3 className="font-playfair text-xl font-bold text-foreground mb-3">Get Your Call</h3>
+              <p className="font-inter text-muted-foreground">Receive a call with your consultation link and next steps</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Our Experts */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-gray-800 mb-4">Our Expert Team</h2>
-          <p className="text-xl text-center text-gray-600 mb-12">Specialized care from experienced women's health professionals</p>
+      <section className="py-24">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">Our Expert Team</h2>
+            <p className="font-inter text-xl text-muted-foreground">Specialized care from experienced women's health professionals</p>
+          </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {experts.map((expert, index) => (
-              <Card key={index} className="hover:shadow-xl transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-teal-400 to-green-400 rounded-full flex items-center justify-center mr-4">
-                      <expert.icon className="h-6 w-6 text-white" />
+              <Card key={index} className="group hover:shadow-elevated hover:-translate-y-1 transition-all duration-500 animate-fade-in" style={{animationDelay: `${index * 100}ms`}}>
+                <CardContent className="p-8">
+                  <div className="flex items-center mb-6">
+                    <div className="w-14 h-14 bg-gradient-primary rounded-full flex items-center justify-center mr-4 shadow-lg group-hover:shadow-glow transition-all duration-300">
+                      <expert.icon className="h-7 w-7 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-gray-800">{expert.name}</h3>
-                      <p className="text-teal-600 text-sm font-semibold">{expert.specialty}</p>
+                      <h3 className="font-playfair text-xl font-bold text-foreground">{expert.name}</h3>
+                      <p className="font-inter text-primary font-semibold">{expert.specialty}</p>
                     </div>
                   </div>
-                  <p className="text-gray-600 text-sm mb-4">{expert.description}</p>
-                  <div className="space-y-1">
+                  <p className="font-inter text-muted-foreground mb-6 leading-relaxed">{expert.description}</p>
+                  <div className="flex flex-wrap gap-2">
                     {expert.areas.map((area, areaIndex) => (
-                      <span key={areaIndex} className="inline-block bg-teal-100 text-teal-800 text-xs px-2 py-1 rounded-full mr-2 mb-1">
+                      <span key={areaIndex} className="inline-block bg-primary/10 text-primary text-xs px-3 py-1 rounded-full font-medium border border-primary/20">
                         {area}
                       </span>
                     ))}
@@ -128,17 +137,17 @@ const Consultations = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-teal-600 to-green-600 text-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
-            <p className="text-xl mb-8">Book your personalized consultation today and take the first step towards better health</p>
-            <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-teal-600 hover:bg-teal-50">
-                <Calendar className="mr-2 h-5 w-5" />
+      <section className="py-24 bg-gradient-hero text-white">
+        <div className="container mx-auto px-6">
+          <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
+            <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 leading-tight">Ready to Get Started?</h2>
+            <p className="font-inter text-xl mb-10 opacity-90">Book your personalized consultation today and take the first step towards better health</p>
+            <div className="flex flex-col lg:flex-row gap-6 justify-center">
+              <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20">
+                <Calendar className="mr-3 h-5 w-5" />
                 Book Consultation Now
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-teal-600">
+              <Button variant="outline" size="xl" className="border-2 border-white/50 text-white hover:bg-white hover:text-primary backdrop-blur-sm font-inter font-semibold">
                 View Our Wellness Plans
               </Button>
             </div>
