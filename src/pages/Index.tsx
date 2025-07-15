@@ -8,63 +8,74 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-bg">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-hero text-white min-h-[90vh] flex items-center">
+      <section className="relative overflow-hidden bg-gradient-hero text-white min-h-[90vh] flex items-center" role="banner">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20"></div>
         
         {/* Enhanced floating decoration elements */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full animate-float shadow-glow"></div>
-        <div className="absolute top-40 right-20 w-16 h-16 bg-white/15 rounded-full animate-float shadow-glow" style={{animationDelay: '2s'}}></div>
-        <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-white/10 rounded-full animate-float shadow-glow" style={{animationDelay: '4s'}}></div>
-        <div className="absolute top-1/2 left-20 w-8 h-8 bg-white/5 rounded-full animate-float" style={{animationDelay: '6s'}}></div>
-        <div className="absolute bottom-40 right-1/4 w-6 h-6 bg-white/10 rounded-full animate-float" style={{animationDelay: '8s'}}></div>
+        <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full animate-float shadow-glow" aria-hidden="true"></div>
+        <div className="absolute top-40 right-20 w-16 h-16 bg-white/15 rounded-full animate-float shadow-glow" style={{animationDelay: '2s'}} aria-hidden="true"></div>
+        <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-white/10 rounded-full animate-float shadow-glow" style={{animationDelay: '4s'}} aria-hidden="true"></div>
+        <div className="absolute top-1/2 left-20 w-8 h-8 bg-white/5 rounded-full animate-float" style={{animationDelay: '6s'}} aria-hidden="true"></div>
+        <div className="absolute bottom-40 right-1/4 w-6 h-6 bg-white/10 rounded-full animate-float" style={{animationDelay: '8s'}} aria-hidden="true"></div>
         
-        <div className="relative container mx-auto px-6 py-24">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="text-center lg:text-left animate-fade-in-up">
-              <div className="mb-8">
+        <div className="relative container mx-auto py-16 sm:py-20 md:py-24">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="text-center lg:text-left animate-fade-in-up px-4 sm:px-0">
+              <div className="mb-6 md:mb-8">
                 <img 
                   src="/lovable-uploads/68d9c8ae-c9bc-4365-b332-ec694fda90af.png" 
-                  alt="Path'o'Life Logo" 
-                  className="w-28 h-28 mx-auto lg:mx-0 mb-6 animate-scale-in hover:scale-110 transition-transform duration-300"
+                  alt="Path'o'Life Logo - Women's Wellness Platform" 
+                  className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 mx-auto lg:mx-0 mb-4 md:mb-6 animate-scale-in hover:scale-110 transition-transform duration-300"
                 />
               </div>
-              <h1 className="font-playfair text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white leading-tight tracking-tight">
+              <h1 className="font-playfair text-responsive-5xl font-bold mb-4 md:mb-6 text-white leading-tight tracking-tight">
                 Transform Your <br />
                 <span className="text-primary-glow animate-shimmer bg-gradient-to-r from-white via-primary-glow to-white bg-clip-text text-transparent bg-[length:200%_100%]">
                   Wellness Journey
                 </span>
               </h1>
-              <p className="font-inter text-xl md:text-2xl mb-4 font-medium opacity-95">
+              <p className="font-inter text-responsive-xl mb-3 md:mb-4 font-medium opacity-95">
                 Empowering women with evidence-based, holistic health solutions
               </p>
-              <p className="font-inter text-lg opacity-85 max-w-2xl mx-auto lg:mx-0 leading-relaxed mb-8">
+              <p className="font-inter text-responsive-base opacity-85 max-w-2xl mx-auto lg:mx-0 leading-relaxed mb-6 md:mb-8">
                 From periods to parenting — explore wellness with Dr. Pravina Kale's lifestyle medicine approach
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
                 <Link to="/consultations">
-                  <Button variant="premium" size="xl" className="group relative overflow-hidden">
-                    <Heart className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                  <Button 
+                    variant="premium" 
+                    size="xl" 
+                    className="group relative overflow-hidden w-full sm:w-auto"
+                    aria-label="Book a consultation with Dr. Pravina Kale"
+                  >
+                    <Heart className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
                     Book a Consultation
                   </Button>
                 </Link>
                 <Link to="/workshops">
-                  <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20 group">
-                    <Calendar className="mr-3 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
+                  <Button 
+                    variant="soft" 
+                    size="xl" 
+                    className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20 group w-full sm:w-auto"
+                    aria-label="Join a wellness workshop"
+                  >
+                    <Calendar className="mr-3 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" aria-hidden="true" />
                     Join a Workshop
                   </Button>
                 </Link>
               </div>
             </div>
             
-            <div className="animate-fade-in-right">
+            <div className="animate-fade-in-right px-4 sm:px-0">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary-glow to-primary rounded-3xl blur-3xl opacity-30 animate-pulse-glow"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-glow to-primary rounded-3xl blur-3xl opacity-30 animate-pulse-glow" aria-hidden="true"></div>
                 <img 
                   src="/lovable-uploads/b6aeaa4f-b346-4225-81f7-15c3c238960f.png" 
-                  alt="Dr. Pravina Kale" 
+                  alt="Dr. Pravina Kale - Lifestyle Medicine Physician and Founder of Path'o'Life" 
                   className="relative w-full max-w-md mx-auto rounded-3xl shadow-2xl border-4 border-white/20 backdrop-blur-sm hover:scale-105 transition-transform duration-500"
+                  loading="eager"
                 />
               </div>
             </div>
@@ -73,30 +84,35 @@ const Index = () => {
       </section>
 
       {/* Welcome Section */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="animate-fade-in order-2 lg:order-1">
-              <div className="relative w-96 h-96 mx-auto">
-                <div className="absolute inset-0 bg-gradient-primary rounded-full blur-2xl opacity-20 animate-pulse-glow"></div>
+      <section className="py-16 sm:py-20 md:py-24 bg-white" role="main">
+        <div className="container mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="animate-fade-in order-2 lg:order-1 px-4 sm:px-0">
+              <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 mx-auto">
+                <div className="absolute inset-0 bg-gradient-primary rounded-full blur-2xl opacity-20 animate-pulse-glow" aria-hidden="true"></div>
                 <div className="relative w-full h-full bg-gradient-primary rounded-full flex items-center justify-center shadow-2xl">
-                  <div className="w-80 h-80 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white text-7xl font-bold font-playfair border border-white/20">
+                  <div className="w-[85%] h-[85%] bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white text-5xl sm:text-6xl md:text-7xl font-bold font-playfair border border-white/20">
                     Dr. P
                   </div>
                 </div>
               </div>
             </div>
-            <div className="animate-fade-in-up order-1 lg:order-2">
-              <div className="space-y-6">
-                <h2 className="font-playfair text-5xl font-bold text-foreground leading-tight">Welcome to Path'o'Life</h2>
-                <h3 className="font-inter text-3xl text-primary font-semibold">Empowering Women Through Every Life Phase</h3>
-                <p className="font-inter text-xl text-muted-foreground leading-relaxed">
+            <div className="animate-fade-in-up order-1 lg:order-2 px-4 sm:px-0">
+              <div className="space-y-4 md:space-y-6">
+                <h2 className="font-playfair text-responsive-3xl font-bold text-foreground leading-tight">Welcome to Path'o'Life</h2>
+                <h3 className="font-inter text-responsive-2xl text-primary font-semibold">Empowering Women Through Every Life Phase</h3>
+                <p className="font-inter text-responsive-lg text-muted-foreground leading-relaxed">
                   From the first period to planning a pregnancy, from postpartum to parenting, and even through career and corporate stress—we support every phase of womanhood with evidence-based lifestyle medicine.
                 </p>
-                <div className="pt-4">
+                <div className="pt-2 md:pt-4">
                   <Link to="/community">
-                    <Button variant="wellness" size="lg" className="font-inter font-semibold">
-                      <Users className="mr-3 h-5 w-5" />
+                    <Button 
+                      variant="wellness" 
+                      size="lg" 
+                      className="font-inter font-semibold"
+                      aria-label="Join the Path'o'Life community"
+                    >
+                      <Users className="mr-3 h-5 w-5" aria-hidden="true" />
                       Join Our Community
                     </Button>
                   </Link>
@@ -155,72 +171,77 @@ const Index = () => {
       </section>
 
       {/* What We Offer */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16 animate-fade-in-up">
-            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">What We Offer</h2>
-            <p className="font-inter text-2xl text-muted-foreground">Workshops • 1:1 Consultations • Wellness Plans</p>
+      <section className="py-16 sm:py-20 md:py-24 bg-white" role="region" aria-labelledby="services-heading">
+        <div className="container mx-auto">
+          <div className="text-center mb-12 md:mb-16 animate-fade-in-up px-4 sm:px-0">
+            <h2 id="services-heading" className="font-playfair text-responsive-3xl font-bold text-foreground mb-4 md:mb-6">What We Offer</h2>
+            <p className="font-inter text-responsive-xl text-muted-foreground">Workshops • 1:1 Consultations • Wellness Plans</p>
           </div>
           
-          <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
-            <Link to="/workshops" className="group">
-              <Card className="h-full hover:shadow-elevated transition-all duration-500 hover:-translate-y-3 hover:rotate-1 cursor-pointer border-0 bg-gradient-card overflow-hidden relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <CardContent className="p-10 text-center h-full flex flex-col relative z-10">
-                  <div className="relative mb-8">
-                    <div className="w-24 h-24 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110 group-hover:rotate-12">
-                      <BookOpen className="h-12 w-12 text-white group-hover:scale-110 transition-transform duration-300" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto mb-12 md:mb-16 px-4 sm:px-0">
+            <Link to="/workshops" className="group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-2xl transition-all duration-200" aria-label="Learn more about our workshops">
+              <Card className="h-full card-hover cursor-pointer border-0 bg-gradient-card overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></div>
+                <CardContent className="p-6 md:p-10 text-center h-full flex flex-col relative z-10">
+                  <div className="relative mb-6 md:mb-8">
+                    <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110 group-hover:rotate-12">
+                      <BookOpen className="h-10 w-10 md:h-12 md:w-12 text-white group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
                     </div>
-                    <div className="absolute inset-0 bg-primary/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-primary/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></div>
                   </div>
-                  <h3 className="font-playfair text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">Workshops</h3>
-                  <p className="font-inter text-lg text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">Learn, Interact, Transform</p>
+                  <h3 className="font-playfair text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 group-hover:text-primary transition-colors duration-300">Workshops</h3>
+                  <p className="font-inter text-base md:text-lg text-muted-foreground mb-2 md:mb-3 group-hover:text-foreground transition-colors duration-300">Learn, Interact, Transform</p>
                   <p className="font-inter text-sm text-muted-foreground mt-auto opacity-80 group-hover:opacity-100 transition-opacity duration-300">Live 3-hour sessions every Tuesday & Friday</p>
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" aria-hidden="true"></div>
                 </CardContent>
               </Card>
             </Link>
             
-            <Link to="/consultations" className="group">
-              <Card className="h-full hover:shadow-elevated transition-all duration-500 hover:-translate-y-3 hover:-rotate-1 cursor-pointer border-0 bg-gradient-card overflow-hidden relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-success/5 to-success/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <CardContent className="p-10 text-center h-full flex flex-col relative z-10">
-                  <div className="relative mb-8">
-                    <div className="w-24 h-24 bg-gradient-to-br from-success to-success/80 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110 group-hover:-rotate-12">
-                      <Heart className="h-12 w-12 text-white group-hover:scale-110 transition-transform duration-300" />
+            <Link to="/consultations" className="group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-2xl transition-all duration-200" aria-label="Learn more about our 1:1 consultations">
+              <Card className="h-full card-hover cursor-pointer border-0 bg-gradient-card overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-success/5 to-success/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></div>
+                <CardContent className="p-6 md:p-10 text-center h-full flex flex-col relative z-10">
+                  <div className="relative mb-6 md:mb-8">
+                    <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-success to-success/80 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110 group-hover:-rotate-12">
+                      <Heart className="h-10 w-10 md:h-12 md:w-12 text-white group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
                     </div>
-                    <div className="absolute inset-0 bg-success/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-success/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></div>
                   </div>
-                  <h3 className="font-playfair text-2xl font-bold text-foreground mb-4 group-hover:text-success transition-colors duration-300">1:1 Consultations</h3>
-                  <p className="font-inter text-lg text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">Personal guidance, video calls</p>
+                  <h3 className="font-playfair text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 group-hover:text-success transition-colors duration-300">1:1 Consultations</h3>
+                  <p className="font-inter text-base md:text-lg text-muted-foreground mb-2 md:mb-3 group-hover:text-foreground transition-colors duration-300">Personal guidance, video calls</p>
                   <p className="font-inter text-sm text-muted-foreground mt-auto opacity-80 group-hover:opacity-100 transition-opacity duration-300">Matched with the right expert</p>
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-success to-success/80 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-success to-success/80 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" aria-hidden="true"></div>
                 </CardContent>
               </Card>
             </Link>
             
-            <Link to="/wellness-plans" className="group">
-              <Card className="h-full hover:shadow-elevated transition-all duration-500 hover:-translate-y-3 hover:rotate-1 cursor-pointer border-0 bg-gradient-card overflow-hidden relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-400/5 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <CardContent className="p-10 text-center h-full flex flex-col relative z-10">
-                  <div className="relative mb-8">
-                    <div className="w-24 h-24 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110 group-hover:rotate-12">
-                      <Users className="h-12 w-12 text-white group-hover:scale-110 transition-transform duration-300" />
+            <Link to="/wellness-plans" className="group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-2xl transition-all duration-200 sm:col-span-2 lg:col-span-1" aria-label="Learn more about our wellness plans">
+              <Card className="h-full card-hover cursor-pointer border-0 bg-gradient-card overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-amber-400/5 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></div>
+                <CardContent className="p-6 md:p-10 text-center h-full flex flex-col relative z-10">
+                  <div className="relative mb-6 md:mb-8">
+                    <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110 group-hover:rotate-12">
+                      <Users className="h-10 w-10 md:h-12 md:w-12 text-white group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
                     </div>
-                    <div className="absolute inset-0 bg-amber-400/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-amber-400/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></div>
                   </div>
-                  <h3 className="font-playfair text-2xl font-bold text-foreground mb-4 group-hover:text-amber-600 transition-colors duration-300">Wellness Plans</h3>
-                  <p className="font-inter text-lg text-muted-foreground mb-3 group-hover:text-foreground transition-colors duration-300">1, 3, 6-month lifestyle plans</p>
+                  <h3 className="font-playfair text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 group-hover:text-amber-600 transition-colors duration-300">Wellness Plans</h3>
+                  <p className="font-inter text-base md:text-lg text-muted-foreground mb-2 md:mb-3 group-hover:text-foreground transition-colors duration-300">1, 3, 6-month lifestyle plans</p>
                   <p className="font-inter text-sm text-muted-foreground mt-auto opacity-80 group-hover:opacity-100 transition-opacity duration-300">Personalized coaching by Dr. Pravina</p>
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" aria-hidden="true"></div>
                 </CardContent>
               </Card>
             </Link>
           </div>
 
-          <div className="text-center animate-fade-in">
+          <div className="text-center animate-fade-in px-4 sm:px-0">
             <Link to="/team">
-              <Button variant="outline" size="lg" className="font-inter font-semibold">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="font-inter font-semibold"
+                aria-label="Meet our expert team"
+              >
                 Meet Our Expert Team
               </Button>
             </Link>

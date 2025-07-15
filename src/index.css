@@ -170,8 +170,22 @@
     scroll-behavior: smooth;
   }
 
-  /* Focus styles for accessibility */
+  /* Enhanced focus styles for accessibility */
   *:focus-visible {
+    @apply ring-2 ring-primary ring-offset-2 outline-none transition-all duration-200;
+  }
+
+  /* Improved interactive element focus */
+  button:focus-visible, 
+  a:focus-visible, 
+  input:focus-visible, 
+  textarea:focus-visible, 
+  select:focus-visible {
+    @apply ring-2 ring-primary ring-offset-4 outline-none transform scale-105 transition-all duration-200;
+  }
+
+  /* Enhanced keyboard navigation */
+  .keyboard-navigation *:focus-visible {
     @apply ring-2 ring-primary ring-offset-2 outline-none;
   }
 
@@ -296,10 +310,49 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground rounded-full;
+    @apply bg-muted-foreground rounded-full transition-colors duration-200;
   }
 
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-primary;
+  }
+
+  /* Container spacing system */
+  .container {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Responsive typography scale */
+  .text-responsive-xs { @apply text-xs sm:text-sm; }
+  .text-responsive-sm { @apply text-sm sm:text-base; }
+  .text-responsive-base { @apply text-base sm:text-lg; }
+  .text-responsive-lg { @apply text-lg sm:text-xl; }
+  .text-responsive-xl { @apply text-xl sm:text-2xl; }
+  .text-responsive-2xl { @apply text-2xl sm:text-3xl; }
+  .text-responsive-3xl { @apply text-3xl sm:text-4xl lg:text-5xl; }
+  .text-responsive-4xl { @apply text-4xl sm:text-5xl lg:text-6xl; }
+  .text-responsive-5xl { @apply text-5xl sm:text-6xl lg:text-7xl; }
+
+  /* Accessible button states */
+  .btn-accessible {
+    @apply focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:outline-none;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+    @apply transition-all duration-200;
+  }
+
+  /* Loading states */
+  .loading-shimmer {
+    @apply bg-gradient-to-r from-muted via-muted-foreground/20 to-muted;
+    @apply bg-[length:200%_100%] animate-shimmer;
+  }
+
+  /* Enhanced card hover states */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-elevated hover:-translate-y-1 hover:scale-[1.02];
+  }
+
+  /* Smooth page transitions */
+  .page-transition {
+    @apply animate-fade-in-up;
   }
 }
