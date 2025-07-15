@@ -6,61 +6,61 @@
 
 @layer base {
   :root {
-    /* Core wellness color palette */
-    --background: 0 0% 100%;
-    --foreground: 218 27% 18%;
+    /* Reference color palette - converted to HSL */
+    --background: 220 14% 98%;
+    --foreground: 0 0% 13%;
 
     --card: 0 0% 100%;
-    --card-foreground: 218 27% 18%;
+    --card-foreground: 0 0% 13%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 218 27% 18%;
+    --popover-foreground: 0 0% 13%;
 
-    /* Wellness-focused primary colors */
-    --primary: 168 76% 36%;
+    /* Primary teal green from reference */
+    --primary: 168 46% 33%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 168 54% 85%;
-    --primary-glow: 168 76% 50%;
+    --primary-light: 180 100% 94%;
+    --primary-glow: 168 46% 40%;
 
-    /* Soft secondary colors */
-    --secondary: 147 47% 94%;
-    --secondary-foreground: 168 76% 36%;
+    /* Secondary light aqua from reference */
+    --secondary: 180 100% 94%;
+    --secondary-foreground: 168 46% 33%;
 
-    /* Muted tones for subtle elements */
-    --muted: 147 47% 94%;
-    --muted-foreground: 218 15% 50%;
+    /* Muted tones using reference colors */
+    --muted: 180 100% 94%;
+    --muted-foreground: 0 0% 33%;
 
-    /* Accent colors */
-    --accent: 147 47% 94%;
-    --accent-foreground: 168 76% 36%;
+    /* Accent soft teal from reference */
+    --accent: 180 33% 85%;
+    --accent-foreground: 168 46% 33%;
 
-    /* Status colors */
+    /* Status colors maintaining reference style */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --success: 147 64% 47%;
+    --success: 168 46% 33%;
     --success-foreground: 0 0% 100%;
 
     /* UI elements */
-    --border: 218 15% 90%;
-    --input: 218 15% 94%;
-    --ring: 168 76% 36%;
+    --border: 220 14% 90%;
+    --input: 220 14% 94%;
+    --ring: 168 46% 33%;
 
-    /* Enhanced gradients with micro-interaction support */
-    --gradient-primary: linear-gradient(135deg, hsl(168 76% 36%), hsl(168 76% 50%));
-    --gradient-primary-hover: linear-gradient(135deg, hsl(168 76% 42%), hsl(168 76% 56%));
-    --gradient-secondary: linear-gradient(135deg, hsl(147 47% 94%), hsl(168 54% 85%));
-    --gradient-hero: linear-gradient(135deg, hsl(168 76% 36%), hsl(168 76% 50%), hsl(147 64% 47%));
-    --gradient-bg: linear-gradient(180deg, hsl(147 84% 97%), hsl(168 84% 97%));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(147 84% 98%));
+    /* Enhanced gradients using reference colors */
+    --gradient-primary: linear-gradient(135deg, hsl(168 46% 33%), hsl(168 46% 40%));
+    --gradient-primary-hover: linear-gradient(135deg, hsl(168 46% 38%), hsl(168 46% 45%));
+    --gradient-secondary: linear-gradient(135deg, hsl(180 100% 94%), hsl(180 33% 85%));
+    --gradient-hero: linear-gradient(135deg, hsl(168 46% 33%), hsl(168 46% 40%), hsl(180 33% 85%));
+    --gradient-bg: linear-gradient(180deg, hsl(220 14% 98%), hsl(220 14% 96%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(180 100% 96%));
 
-    /* Enhanced shadows with micro-interactions */
-    --shadow-sm: 0 1px 2px 0 hsl(218 27% 18% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(218 27% 18% / 0.1), 0 2px 4px -1px hsl(218 27% 18% / 0.06);
-    --shadow-lg: 0 10px 15px -3px hsl(218 27% 18% / 0.1), 0 4px 6px -2px hsl(218 27% 18% / 0.05);
-    --shadow-xl: 0 20px 25px -5px hsl(218 27% 18% / 0.1), 0 10px 10px -5px hsl(218 27% 18% / 0.04);
-    --shadow-glow: 0 0 40px hsl(168 76% 50% / 0.3);
-    --shadow-interactive: 0 4px 20px hsl(168 76% 36% / 0.15);
-    --shadow-elevated: 0 8px 30px hsl(218 27% 18% / 0.12);
+    /* Enhanced shadows using reference colors */
+    --shadow-sm: 0 1px 2px 0 hsl(168 46% 33% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(168 46% 33% / 0.1), 0 2px 4px -1px hsl(168 46% 33% / 0.06);
+    --shadow-lg: 0 10px 15px -3px hsl(168 46% 33% / 0.1), 0 4px 6px -2px hsl(168 46% 33% / 0.05);
+    --shadow-xl: 0 20px 25px -5px hsl(168 46% 33% / 0.1), 0 10px 10px -5px hsl(168 46% 33% / 0.04);
+    --shadow-glow: 0 0 40px hsl(168 46% 40% / 0.3);
+    --shadow-interactive: 0 4px 20px hsl(168 46% 33% / 0.15);
+    --shadow-elevated: 0 8px 30px hsl(168 46% 33% / 0.12);
 
     /* Typography scale */
     --font-size-xs: 0.75rem;
@@ -89,68 +89,68 @@
 
     /* Sidebar colors */
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 218 27% 18%;
-    --sidebar-primary: 168 76% 36%;
+    --sidebar-foreground: 0 0% 13%;
+    --sidebar-primary: 168 46% 33%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 147 47% 94%;
-    --sidebar-accent-foreground: 168 76% 36%;
-    --sidebar-border: 218 15% 90%;
-    --sidebar-ring: 168 76% 36%;
+    --sidebar-accent: 180 100% 94%;
+    --sidebar-accent-foreground: 168 46% 33%;
+    --sidebar-border: 220 14% 90%;
+    --sidebar-ring: 168 46% 33%;
   }
 
   .dark {
-    /* Dark mode with wellness theme */
-    --background: 218 27% 6%;
+    /* Dark mode with reference colors */
+    --background: 0 0% 6%;
     --foreground: 0 0% 98%;
 
-    --card: 218 27% 8%;
+    --card: 0 0% 8%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 218 27% 8%;
+    --popover: 0 0% 8%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 168 76% 50%;
-    --primary-foreground: 218 27% 6%;
-    --primary-light: 168 54% 20%;
-    --primary-glow: 168 76% 60%;
+    --primary: 168 46% 40%;
+    --primary-foreground: 0 0% 6%;
+    --primary-light: 168 46% 20%;
+    --primary-glow: 168 46% 50%;
 
-    --secondary: 218 27% 12%;
+    --secondary: 0 0% 12%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 218 27% 12%;
-    --muted-foreground: 218 15% 70%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 70%;
 
-    --accent: 218 27% 12%;
+    --accent: 0 0% 12%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --success: 147 64% 47%;
+    --success: 168 46% 40%;
     --success-foreground: 0 0% 98%;
 
-    --border: 218 27% 15%;
-    --input: 218 27% 12%;
-    --ring: 168 76% 50%;
+    --border: 0 0% 15%;
+    --input: 0 0% 12%;
+    --ring: 168 46% 40%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(168 76% 50%), hsl(168 76% 60%));
-    --gradient-secondary: linear-gradient(135deg, hsl(218 27% 12%), hsl(168 54% 20%));
-    --gradient-hero: linear-gradient(135deg, hsl(168 76% 50%), hsl(168 76% 60%), hsl(147 64% 47%));
-    --gradient-bg: linear-gradient(180deg, hsl(218 27% 6%), hsl(218 27% 8%));
+    --gradient-primary: linear-gradient(135deg, hsl(168 46% 40%), hsl(168 46% 50%));
+    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 12%), hsl(168 46% 20%));
+    --gradient-hero: linear-gradient(135deg, hsl(168 46% 40%), hsl(168 46% 50%), hsl(180 33% 85%));
+    --gradient-bg: linear-gradient(180deg, hsl(0 0% 6%), hsl(0 0% 8%));
 
     --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.3);
     --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.4), 0 2px 4px -1px hsl(0 0% 0% / 0.2);
     --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.4), 0 4px 6px -2px hsl(0 0% 0% / 0.2);
     --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.4), 0 10px 10px -5px hsl(0 0% 0% / 0.2);
-    --shadow-glow: 0 0 40px hsl(168 76% 50% / 0.4);
+    --shadow-glow: 0 0 40px hsl(168 46% 40% / 0.4);
 
-    --sidebar-background: 218 27% 8%;
+    --sidebar-background: 0 0% 8%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 168 76% 50%;
-    --sidebar-primary-foreground: 218 27% 6%;
-    --sidebar-accent: 218 27% 12%;
+    --sidebar-primary: 168 46% 40%;
+    --sidebar-primary-foreground: 0 0% 6%;
+    --sidebar-accent: 0 0% 12%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 218 27% 15%;
-    --sidebar-ring: 168 76% 50%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 168 46% 40%;
   }
 }
 
@@ -160,7 +160,8 @@
   }
 
   body {
-    @apply bg-background text-foreground font-inter antialiased;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
   }
 
@@ -174,13 +175,16 @@
     @apply ring-2 ring-primary ring-offset-2 outline-none;
   }
 
-  /* Typography improvements */
+  /* Typography improvements - Inter font throughout */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-playfair font-semibold tracking-tight;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
   }
 
-  p, span, div {
-    @apply font-inter;
+  p, span, div, button, input, textarea, select {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   /* Enhanced animations */
