@@ -60,51 +60,66 @@ const WellnessPlans = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-green-50 to-emerald-50">
+    <div className="min-h-screen bg-gradient-bg">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-r from-teal-600 to-green-600 text-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6">Wellness Plans</h1>
-            <p className="text-xl mb-8">Personalized Women's Coaching by Dr. Pravina</p>
-            <p className="text-lg mb-8">Transform your health with evidence-based lifestyle medicine tailored to your unique needs</p>
+      <section className="relative py-24 bg-gradient-hero text-white overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full animate-float"></div>
+        <div className="absolute bottom-20 right-20 w-16 h-16 bg-white/10 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
+        
+        <div className="relative container mx-auto px-6">
+          <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
+            <h1 className="font-playfair text-6xl md:text-7xl font-bold mb-6 leading-tight">Wellness Plans</h1>
+            <p className="font-inter text-xl md:text-2xl mb-10 opacity-90">Personalized Women's Coaching by Dr. Pravina</p>
+            <p className="font-inter text-lg mb-10 opacity-90">Transform your health with evidence-based lifestyle medicine tailored to your unique needs</p>
+            <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20">
+              <Heart className="mr-3 h-5 w-5" />
+              Choose Your Plan
+            </Button>
           </div>
         </div>
       </section>
 
       {/* Plans Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
+      <section className="py-24">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">Choose Your Wellness Journey</h2>
+            <p className="font-inter text-xl text-muted-foreground">Personalized coaching plans designed for every phase of your life</p>
+          </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {plans.map((plan, index) => (
-              <Card key={index} className={`relative hover:shadow-2xl transition-all duration-300 hover:scale-105 ${plan.popular ? 'ring-4 ring-teal-200 ring-opacity-50' : ''}`}>
+              <Card key={index} className={`group hover:shadow-elevated hover:-translate-y-2 transition-all duration-500 animate-fade-in relative ${plan.popular ? 'ring-4 ring-primary/20' : ''}`} style={{animationDelay: `${index * 100}ms`}}>
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-teal-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                    <span className="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold font-inter">
                       Most Popular
                     </span>
                   </div>
                 )}
-                <CardContent className="p-8">
-                  <div className={`w-20 h-20 bg-gradient-to-br ${plan.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
-                    <Heart className="h-10 w-10 text-white" />
+                <CardContent className="p-10">
+                  <div className="relative mb-8">
+                    <div className={`w-20 h-20 bg-gradient-to-br ${plan.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110`}>
+                      <Heart className="h-10 w-10 text-white" />
+                    </div>
+                    <div className="absolute inset-0 bg-primary/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2 text-center">{plan.name}</h3>
-                  <p className="text-center text-gray-600 mb-4">{plan.duration}</p>
-                  <p className="text-4xl font-bold text-teal-600 mb-6 text-center">{plan.price}</p>
+                  <h3 className="font-playfair text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">{plan.name}</h3>
+                  <p className="font-inter text-primary font-semibold mb-4 text-center">{plan.duration}</p>
+                  <p className="font-playfair text-4xl font-bold text-primary mb-6 text-center">{plan.price}</p>
                   
-                  <p className="text-sm text-gray-600 mb-6 text-center italic">{plan.ideal}</p>
+                  <p className="font-inter text-sm text-muted-foreground mb-8 text-center italic">{plan.ideal}</p>
                   
-                  <div className="space-y-3 mb-8">
+                  <div className="space-y-4 mb-8">
                     {plan.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-start space-x-3">
-                        <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-700 text-sm">{feature}</span>
+                        <CheckCircle className="h-5 w-5 text-success flex-shrink-0 mt-0.5" />
+                        <span className="font-inter text-muted-foreground text-sm">{feature}</span>
                       </div>
                     ))}
                   </div>
                   
-                  <Button className={`w-full ${plan.popular ? 'bg-teal-600 hover:bg-teal-700' : 'bg-green-600 hover:bg-green-700'} text-white font-semibold py-3`}>
+                  <Button variant="wellness" size="lg" className="w-full font-inter font-semibold">
                     Choose This Plan
                   </Button>
                 </CardContent>
@@ -115,68 +130,71 @@ const WellnessPlans = () => {
       </section>
 
       {/* What's Included */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">What's Included in Every Plan</h2>
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">What's Included in Every Plan</h2>
+            <p className="font-inter text-xl text-muted-foreground">Comprehensive support for your wellness journey</p>
+          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Phone className="h-8 w-8 text-white" />
+            <div className="text-center group animate-fade-in" style={{animationDelay: '100ms'}}>
+              <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                <Phone className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Personal Consultations</h3>
-              <p className="text-gray-600 text-sm">Direct access to Dr. Pravina for personalized guidance</p>
+              <h3 className="font-playfair text-xl font-bold text-foreground mb-4">Personal Consultations</h3>
+              <p className="font-inter text-muted-foreground">Direct access to Dr. Pravina for personalized guidance</p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="h-8 w-8 text-white" />
+            <div className="text-center group animate-fade-in" style={{animationDelay: '200ms'}}>
+              <div className="w-20 h-20 bg-gradient-to-br from-success to-success/80 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                <Heart className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Custom Plans</h3>
-              <p className="text-gray-600 text-sm">Tailored nutrition and lifestyle recommendations</p>
+              <h3 className="font-playfair text-xl font-bold text-foreground mb-4">Custom Plans</h3>
+              <p className="font-inter text-muted-foreground">Tailored nutrition and lifestyle recommendations</p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MessageCircle className="h-8 w-8 text-white" />
+            <div className="text-center group animate-fade-in" style={{animationDelay: '300ms'}}>
+              <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                <MessageCircle className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">WhatsApp Support</h3>
-              <p className="text-gray-600 text-sm">Regular check-ins and support through WhatsApp</p>
+              <h3 className="font-playfair text-xl font-bold text-foreground mb-4">WhatsApp Support</h3>
+              <p className="font-inter text-muted-foreground">Regular check-ins and support through WhatsApp</p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="h-8 w-8 text-white" />
+            <div className="text-center group animate-fade-in" style={{animationDelay: '400ms'}}>
+              <div className="w-20 h-20 bg-gradient-to-br from-success to-success/80 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                <CheckCircle className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Progress Tracking</h3>
-              <p className="text-gray-600 text-sm">Monitor your journey with regular assessments</p>
+              <h3 className="font-playfair text-xl font-bold text-foreground mb-4">Progress Tracking</h3>
+              <p className="font-inter text-muted-foreground">Monitor your journey with regular assessments</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Payment Info */}
-      <section className="py-20 bg-gradient-to-r from-teal-100 to-green-100">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">Easy Payment Process</h2>
-            <p className="text-lg text-gray-600 mb-8">
+      <section className="py-24 bg-gradient-secondary">
+        <div className="container mx-auto px-6">
+          <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
+            <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mb-6">Easy Payment Process</h2>
+            <p className="font-inter text-xl text-muted-foreground mb-10">
               Pay securely via UPI and upload your payment screenshot to confirm your enrollment
             </p>
-            <div className="bg-white p-8 rounded-2xl shadow-xl mb-8">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">How to Pay:</h3>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div>
-                  <div className="w-12 h-12 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-2 text-white font-bold">1</div>
-                  <p className="text-sm text-gray-600">Choose your wellness plan</p>
+            <div className="bg-white p-10 rounded-2xl shadow-xl mb-10">
+              <h3 className="font-playfair text-2xl font-bold text-foreground mb-8">How to Pay:</h3>
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="text-center group animate-fade-in" style={{animationDelay: '100ms'}}>
+                  <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">1</div>
+                  <p className="font-inter text-muted-foreground">Choose your wellness plan</p>
                 </div>
-                <div>
-                  <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-2 text-white font-bold">2</div>
-                  <p className="text-sm text-gray-600">Pay via UPI using our QR code</p>
+                <div className="text-center group animate-fade-in" style={{animationDelay: '200ms'}}>
+                  <div className="w-16 h-16 bg-gradient-to-br from-success to-success/80 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">2</div>
+                  <p className="font-inter text-muted-foreground">Pay via UPI using our QR code</p>
                 </div>
-                <div>
-                  <div className="w-12 h-12 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-2 text-white font-bold">3</div>
-                  <p className="text-sm text-gray-600">Upload screenshot to confirm</p>
+                <div className="text-center group animate-fade-in" style={{animationDelay: '300ms'}}>
+                  <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">3</div>
+                  <p className="font-inter text-muted-foreground">Upload screenshot to confirm</p>
                 </div>
               </div>
             </div>
-            <Button size="lg" className="bg-teal-600 hover:bg-teal-700 text-white">
+            <Button variant="wellness" size="xl" className="font-inter font-semibold">
               Get Payment Details
             </Button>
           </div>

@@ -31,9 +31,7 @@ const Index = () => {
               </div>
               <h1 className="font-playfair text-responsive-5xl font-bold mb-4 md:mb-6 text-white leading-tight tracking-tight">
                 Transform Your <br />
-                <span className="text-primary-glow animate-shimmer bg-gradient-to-r from-white via-primary-glow to-white bg-clip-text text-transparent bg-[length:200%_100%]">
-                  Wellness Journey
-                </span>
+                Wellness Journey
               </h1>
               <p className="font-inter text-responsive-xl mb-3 md:mb-4 font-medium opacity-95">
                 Empowering women with evidence-based, holistic health solutions
@@ -45,9 +43,9 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
                 <Link to="/consultations">
                   <Button 
-                    variant="premium" 
+                    variant="soft" 
                     size="xl" 
-                    className="group relative overflow-hidden w-full sm:w-auto"
+                    className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20 group w-full sm:w-auto"
                     aria-label="Book a consultation with Dr. Pravina Kale"
                   >
                     <Heart className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
@@ -126,46 +124,31 @@ const Index = () => {
       {/* Founder Message */}
       <section className="py-24 bg-gradient-secondary">
         <div className="container mx-auto px-6">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div className="order-2 lg:order-1 animate-fade-in-up">
-                <div className="space-y-8">
-                  <h2 className="font-playfair text-4xl font-bold text-foreground leading-tight">Dr. Pravina Kale, Founder & CEO</h2>
-                  <blockquote className="relative bg-white p-10 rounded-2xl shadow-xl border border-border">
-                    <div className="absolute -top-4 -left-4 w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-                      <span className="text-2xl text-white font-bold">"</span>
-                    </div>
-                    <p className="font-inter text-lg text-foreground leading-relaxed italic">
-                      As a lifestyle medicine physician and pathologist, I've spent years understanding disease—but what truly lights me up is helping women prevent it and reclaim their power through lifestyle.
-                    </p>
-                    <p className="font-inter text-lg text-foreground leading-relaxed italic mt-6">
-                      So many women suffer silently—irregular periods, weight struggles, fertility challenges, postpartum blues—and they don't need just prescriptions.
-                    </p>
-                    <p className="font-inter text-lg text-foreground leading-relaxed italic mt-6">
-                      They need education, guidance, and hand-holding.
-                    </p>
-                    <p className="font-inter text-lg text-foreground leading-relaxed italic mt-6">
-                      That's why I created Path'o'Life—where science meets support. Where women are not told what to do, but empowered to choose what works for their phase of life.
-                    </p>
-                  </blockquote>
-                  <Link to="/about">
-                    <Button variant="default" size="lg" className="font-inter font-semibold">
-                      Learn More About Dr. Pravina
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-              <div className="order-1 lg:order-2 animate-scale-in">
-                <div className="relative flex justify-center">
-                  <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-pulse-glow"></div>
-                  <img 
-                    src="/lovable-uploads/b6aeaa4f-b346-4225-81f7-15c3c238960f.png" 
-                    alt="Dr. Pravina Kale, Founder & CEO" 
-                    className="relative w-96 h-96 object-cover rounded-full shadow-2xl border-8 border-white"
-                  />
-                </div>
-              </div>
+          <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
+            <div className="relative flex justify-center mb-12">
+              <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-pulse-glow"></div>
+              <img 
+                src="/lovable-uploads/b6aeaa4f-b346-4225-81f7-15c3c238960f.png" 
+                alt="Dr. Pravina Kale, Founder & CEO" 
+                className="relative w-48 h-48 object-cover rounded-full shadow-2xl border-4 border-white"
+              />
             </div>
+            
+            <blockquote className="mb-8">
+              <p className="font-playfair text-3xl md:text-4xl font-bold text-foreground leading-relaxed">
+                "A woman empowered with the right lifestyle becomes unstoppable – not just for her own life, but for generations ahead."
+              </p>
+            </blockquote>
+            
+            <p className="font-inter text-lg text-muted-foreground mb-10">
+              — Dr. Pravina Kale Shegokar, Founder
+            </p>
+            
+            <Link to="/about">
+              <Button variant="wellness" size="lg" className="font-inter font-semibold">
+                Learn More About Dr. Pravina
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

@@ -7,81 +7,89 @@ import { Mail, Phone, MessageCircle, Clock, MapPin } from "lucide-react";
 
 const Contact = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-green-50 to-emerald-50">
+    <div className="min-h-screen bg-gradient-bg">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-r from-teal-600 to-green-600 text-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6">Get in Touch</h1>
-            <p className="text-xl mb-8">We're here to support your wellness journey every step of the way</p>
+      <section className="relative py-24 bg-gradient-hero text-white overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full animate-float"></div>
+        <div className="absolute bottom-20 right-20 w-16 h-16 bg-white/10 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
+        
+        <div className="relative container mx-auto px-6">
+          <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
+            <h1 className="font-playfair text-6xl md:text-7xl font-bold mb-6 leading-tight">Get in Touch</h1>
+            <p className="font-inter text-xl md:text-2xl mb-10 opacity-90">We're here to support your wellness journey every step of the way</p>
+            <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20">
+              <MessageCircle className="mr-3 h-5 w-5" />
+              Contact Us
+            </Button>
           </div>
         </div>
       </section>
 
       {/* Contact Information */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
+      <section className="py-24">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">Contact Information</h2>
+            <p className="font-inter text-xl text-muted-foreground">Multiple ways to reach us for your wellness needs</p>
+          </div>
           <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Contact Details */}
-            <div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-8">Contact Information</h2>
+            <div className="space-y-8">
+              <div className="flex items-start space-x-6 group animate-fade-in" style={{animationDelay: '100ms'}}>
+                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                  <Mail className="h-8 w-8 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-playfair text-xl font-bold text-foreground mb-2">Email</h3>
+                  <p className="font-inter text-muted-foreground">drpravina.patholife@gmail.com</p>
+                  <p className="font-inter text-sm text-muted-foreground">We typically respond within 24 hours</p>
+                </div>
+              </div>
               
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-teal-600 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Mail className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-800 mb-1">Email</h3>
-                    <p className="text-gray-600">drpravina.patholife@gmail.com</p>
-                    <p className="text-sm text-gray-500">We typically respond within 24 hours</p>
-                  </div>
+              <div className="flex items-start space-x-6 group animate-fade-in" style={{animationDelay: '200ms'}}>
+                <div className="w-16 h-16 bg-gradient-to-br from-success to-success/80 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                  <Phone className="h-8 w-8 text-white" />
                 </div>
-                
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Phone className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-800 mb-1">Phone</h3>
-                    <p className="text-gray-600">+91 9421829899</p>
-                    <p className="text-sm text-gray-500">Available Monday to Friday, 9 AM - 6 PM</p>
-                  </div>
+                <div>
+                  <h3 className="font-playfair text-xl font-bold text-foreground mb-2">Phone</h3>
+                  <p className="font-inter text-muted-foreground">+91 9421829899</p>
+                  <p className="font-inter text-sm text-muted-foreground">Available Monday to Friday, 9 AM - 6 PM</p>
                 </div>
-                
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-teal-600 rounded-full flex items-center justify-center flex-shrink-0">
-                    <MessageCircle className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-800 mb-1">WhatsApp</h3>
-                    <p className="text-gray-600">+91 9421829899</p>
-                    <p className="text-sm text-gray-500">Quick questions and community updates</p>
-                  </div>
+              </div>
+              
+              <div className="flex items-start space-x-6 group animate-fade-in" style={{animationDelay: '300ms'}}>
+                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                  <MessageCircle className="h-8 w-8 text-white" />
                 </div>
-                
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Clock className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-800 mb-1">Office Hours</h3>
-                    <p className="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM</p>
-                    <p className="text-gray-600">Saturday: 9:00 AM - 2:00 PM</p>
-                    <p className="text-gray-600">Sunday: Closed</p>
-                  </div>
+                <div>
+                  <h3 className="font-playfair text-xl font-bold text-foreground mb-2">WhatsApp</h3>
+                  <p className="font-inter text-muted-foreground">+91 9421829899</p>
+                  <p className="font-inter text-sm text-muted-foreground">Quick questions and community updates</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-6 group animate-fade-in" style={{animationDelay: '400ms'}}>
+                <div className="w-16 h-16 bg-gradient-to-br from-success to-success/80 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                  <Clock className="h-8 w-8 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-playfair text-xl font-bold text-foreground mb-2">Office Hours</h3>
+                  <p className="font-inter text-muted-foreground">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                  <p className="font-inter text-muted-foreground">Saturday: 9:00 AM - 2:00 PM</p>
+                  <p className="font-inter text-muted-foreground">Sunday: Closed</p>
                 </div>
               </div>
 
               <div className="mt-8">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Quick Actions</h3>
-                <div className="flex flex-col space-y-3">
-                  <Button className="bg-teal-600 hover:bg-teal-700 text-white justify-start">
-                    <MessageCircle className="mr-2 h-4 w-4" />
+                <h3 className="font-playfair text-2xl font-bold text-foreground mb-6">Quick Actions</h3>
+                <div className="flex flex-col space-y-4">
+                  <Button variant="wellness" size="lg" className="justify-start font-inter font-semibold">
+                    <MessageCircle className="mr-3 h-5 w-5" />
                     Join WhatsApp Community
                   </Button>
-                  <Button variant="outline" className="justify-start text-teal-600 border-teal-600 hover:bg-teal-50 hover:text-teal-800">
-                    <Phone className="mr-2 h-4 w-4" />
+                  <Button variant="outline" size="lg" className="justify-start font-inter font-semibold">
+                    <Phone className="mr-3 h-5 w-5" />
                     Book a Consultation
                   </Button>
                 </div>
@@ -90,45 +98,45 @@ const Contact = () => {
 
             {/* Contact Form */}
             <div>
-              <Card className="shadow-xl">
-                <CardContent className="p-8">
-                  <h2 className="text-2xl font-bold text-gray-800 mb-6">Send us a Message</h2>
+              <Card className="shadow-elevated hover:shadow-glow transition-all duration-300">
+                <CardContent className="p-10">
+                  <h2 className="font-playfair text-3xl font-bold text-foreground mb-8">Send us a Message</h2>
                   <form className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                        <label className="block font-inter text-sm font-medium text-foreground mb-2">First Name</label>
                         <Input placeholder="Your first name" />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                        <label className="block font-inter text-sm font-medium text-foreground mb-2">Last Name</label>
                         <Input placeholder="Your last name" />
                       </div>
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                      <label className="block font-inter text-sm font-medium text-foreground mb-2">Email</label>
                       <Input type="email" placeholder="your.email@example.com" />
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                      <label className="block font-inter text-sm font-medium text-foreground mb-2">Phone Number</label>
                       <Input type="tel" placeholder="+91 XXXXX XXXXX" />
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                      <label className="block font-inter text-sm font-medium text-foreground mb-2">Subject</label>
                       <Input placeholder="What's this about?" />
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                      <label className="block font-inter text-sm font-medium text-foreground mb-2">Message</label>
                       <Textarea 
                         placeholder="Tell us how we can help you..." 
                         rows={5}
                       />
                     </div>
                     
-                    <Button className="w-full bg-teal-600 hover:bg-teal-700 text-white">
+                    <Button variant="wellness" size="lg" className="w-full font-inter font-semibold">
                       Send Message
                     </Button>
                   </form>
@@ -140,35 +148,38 @@ const Contact = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">Frequently Asked Questions</h2>
-          <div className="max-w-4xl mx-auto space-y-6">
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-bold text-gray-800 mb-2">How quickly can I expect a response?</h3>
-                <p className="text-gray-600">We typically respond to emails within 24 hours during business days. For urgent matters, please call or WhatsApp us directly.</p>
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">Frequently Asked Questions</h2>
+            <p className="font-inter text-xl text-muted-foreground">Common questions about our services and processes</p>
+          </div>
+          <div className="max-w-5xl mx-auto space-y-6">
+            <Card className="group hover:shadow-elevated transition-all duration-300 animate-fade-in" style={{animationDelay: '100ms'}}>
+              <CardContent className="p-8">
+                <h3 className="font-playfair text-xl font-bold text-foreground mb-3">How quickly can I expect a response?</h3>
+                <p className="font-inter text-muted-foreground">We typically respond to emails within 24 hours during business days. For urgent matters, please call or WhatsApp us directly.</p>
               </CardContent>
             </Card>
             
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-bold text-gray-800 mb-2">Do you offer consultations in languages other than English?</h3>
-                <p className="text-gray-600">Yes! Our sessions are conducted in an English-Marathi mix, and Dr. Pravina is comfortable communicating in both languages.</p>
+            <Card className="group hover:shadow-elevated transition-all duration-300 animate-fade-in" style={{animationDelay: '200ms'}}>
+              <CardContent className="p-8">
+                <h3 className="font-playfair text-xl font-bold text-foreground mb-3">Do you offer consultations in languages other than English?</h3>
+                <p className="font-inter text-muted-foreground">Yes! Our sessions are conducted in an English-Marathi mix, and Dr. Pravina is comfortable communicating in both languages.</p>
               </CardContent>
             </Card>
             
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-bold text-gray-800 mb-2">Can I get a refund if I'm not satisfied?</h3>
-                <p className="text-gray-600">We stand behind our services. If you're not satisfied within the first week of any program, please contact us to discuss your concerns.</p>
+            <Card className="group hover:shadow-elevated transition-all duration-300 animate-fade-in" style={{animationDelay: '300ms'}}>
+              <CardContent className="p-8">
+                <h3 className="font-playfair text-xl font-bold text-foreground mb-3">Can I get a refund if I'm not satisfied?</h3>
+                <p className="font-inter text-muted-foreground">We stand behind our services. If you're not satisfied within the first week of any program, please contact us to discuss your concerns.</p>
               </CardContent>
             </Card>
             
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-bold text-gray-800 mb-2">Are your services covered by insurance?</h3>
-                <p className="text-gray-600">Currently, our lifestyle medicine services are not covered by insurance. However, we offer flexible payment options and affordable plans.</p>
+            <Card className="group hover:shadow-elevated transition-all duration-300 animate-fade-in" style={{animationDelay: '400ms'}}>
+              <CardContent className="p-8">
+                <h3 className="font-playfair text-xl font-bold text-foreground mb-3">Are your services covered by insurance?</h3>
+                <p className="font-inter text-muted-foreground">Currently, our lifestyle medicine services are not covered by insurance. However, we offer flexible payment options and affordable plans.</p>
               </CardContent>
             </Card>
           </div>
@@ -176,19 +187,19 @@ const Contact = () => {
       </section>
 
       {/* Location Section */}
-      <section className="py-20 bg-gradient-to-r from-teal-100 to-green-100">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">Our Practice</h2>
-            <div className="flex items-center justify-center space-x-2 mb-6">
-              <MapPin className="h-6 w-6 text-teal-600" />
-              <p className="text-lg text-gray-600">Serving women across India through online consultations</p>
+      <section className="py-24 bg-gradient-secondary">
+        <div className="container mx-auto px-6">
+          <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
+            <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mb-6">Our Practice</h2>
+            <div className="flex items-center justify-center space-x-3 mb-6">
+              <MapPin className="h-8 w-8 text-primary" />
+              <p className="font-inter text-xl text-muted-foreground">Serving women across India through online consultations</p>
             </div>
-            <p className="text-gray-600 mb-8">
+            <p className="font-inter text-lg text-muted-foreground mb-10 max-w-3xl mx-auto">
               While our consultations are conducted online, our impact reaches women across India. 
               We believe that quality healthcare should be accessible regardless of location.
             </p>
-            <Button className="bg-teal-600 hover:bg-teal-700 text-white">
+            <Button variant="wellness" size="xl" className="font-inter font-semibold">
               Schedule Your Online Consultation
             </Button>
           </div>
