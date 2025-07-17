@@ -5,9 +5,9 @@ import { Star, Award, Heart, BookOpen } from "lucide-react";
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-gradient-bg">
+    <div className="min-h-screen" style={{ backgroundColor: '#F6E7E0' }}>
       {/* Hero Section */}
-      <section className="relative py-24 bg-gradient-hero text-white overflow-hidden">
+      <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#338B81' }}>
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full animate-float"></div>
         <div className="absolute bottom-20 right-20 w-16 h-16 bg-white/10 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
@@ -21,7 +21,7 @@ const About = () => {
       </section>
 
       {/* About Dr. Pravina */}
-      <section className="py-24">
+      <section className="py-24" style={{ backgroundColor: '#F6E7E0' }}>
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
             <div className="order-2 lg:order-1 animate-scale-in">
@@ -82,24 +82,33 @@ const About = () => {
       </section>
 
       {/* Philosophy */}
-      <section className="py-24 bg-gradient-secondary">
+      <section className="py-24" style={{ backgroundColor: '#338B81' }}>
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
-            <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mb-12">Her Philosophy</h2>
-            <blockquote className="relative bg-white p-12 rounded-3xl shadow-elevated hover:shadow-glow transition-all duration-500 hover:-translate-y-1 mb-12 group">
-              <div className="absolute -top-6 -left-6 w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg">
-                <span className="text-3xl text-white font-bold">"</span>
+            <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-16 text-white">Philosophy: Evidence, Empathy, Empowerment</h2>
+            <div className="grid md:grid-cols-3 gap-12">
+              <div className="flex flex-col items-center">
+                <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-6">
+                  <Award className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="font-playfair text-2xl font-bold text-white mb-3">Evidence</h3>
+                <p className="font-inter text-white/90 text-lg text-center">Every recommendation is backed by scientific research and proven medical principles</p>
               </div>
-              <p className="font-inter text-xl md:text-2xl text-foreground italic leading-relaxed group-hover:text-primary transition-colors duration-300">
-                "Every woman deserves to feel powerful in her own body. My mission is not just to treat symptoms, but to educate and empower women to make lifestyle choices that prevent disease and enhance vitality through every phase of life."
-              </p>
-            </blockquote>
-            <p className="font-inter text-lg text-muted-foreground mb-10 leading-relaxed max-w-3xl mx-auto">
-              Dr. Pravina believes in the intersection of science and support—where clinical knowledge meets compassionate guidance, helping women navigate their health journey with confidence and clarity.
-            </p>
-            <Button variant="premium" size="xl" className="font-inter font-semibold">
-              Join Our Community
-            </Button>
+              <div className="flex flex-col items-center">
+                <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-6">
+                  <Heart className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="font-playfair text-2xl font-bold text-white mb-3">Empathy</h3>
+                <p className="font-inter text-white/90 text-lg text-center">Understanding that every woman's journey is unique and deserves compassionate support</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-6">
+                  <BookOpen className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="font-playfair text-2xl font-bold text-white mb-3">Empowerment</h3>
+                <p className="font-inter text-white/90 text-lg text-center">Providing women with knowledge and tools to take control of their health and well-being</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -50,9 +50,9 @@ const Consultations = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-bg">
+    <div className="min-h-screen" style={{ backgroundColor: '#F6E7E0' }}>
       {/* Hero Section */}
-      <section className="relative py-24 bg-gradient-hero text-white overflow-hidden">
+      <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#338B81' }}>
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full animate-float"></div>
         <div className="absolute bottom-20 right-20 w-16 h-16 bg-white/10 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
@@ -101,7 +101,7 @@ const Consultations = () => {
       </section>
 
       {/* Our Experts */}
-      <section className="py-24">
+      <section className="py-24" style={{ backgroundColor: '#F6E7E0' }}>
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">Our Expert Team</h2>
@@ -137,7 +137,7 @@ const Consultations = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-hero text-white">
+      <section className="py-24 text-white" style={{ backgroundColor: '#338B81' }}>
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
             <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 leading-tight">Ready to Get Started?</h2>
@@ -147,7 +147,7 @@ const Consultations = () => {
                 <Calendar className="mr-3 h-5 w-5" />
                 Book Consultation Now
               </Button>
-              <Button variant="outline" size="xl" className="border-2 border-white/50 text-white hover:bg-white hover:text-primary backdrop-blur-sm font-inter font-semibold">
+              <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-primary hover:text-white font-inter font-semibold backdrop-blur-sm border border-white/20">
                 View Our Wellness Plans
               </Button>
             </div>

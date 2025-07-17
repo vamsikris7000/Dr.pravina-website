@@ -12,7 +12,6 @@ const Navbar = () => {
     { name: "Home", path: "/" },
     // Our Services will be handled separately
     { name: "About Dr. Pravina", path: "/about" },
-    { name: "Our Team", path: "/team" },
     { name: "Community", path: "/community" },
     { name: "Contact", path: "/contact" },
   ];
@@ -27,7 +26,7 @@ const Navbar = () => {
   const closeTimeout = useRef<NodeJS.Timeout | null>(null);
 
   return (
-    <nav className="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-border">
+    <nav className="backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-border" style={{ backgroundColor: '#F6E7E0' }}>
       <div className="container mx-auto px-6">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}

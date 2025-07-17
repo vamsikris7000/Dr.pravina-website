@@ -93,7 +93,7 @@ const VoiceChatWidget = () => {
   let buttonContent;
   if (status === 'idle') {
     buttonContent = (
-      <span className="flex items-center gap-2 font-semibold tracking-wide text-white text-base"><Phone className="w-4 h-4" /> VOICE CHAT</span>
+      <span className="flex items-center gap-2 font-semibold tracking-wide text-white text-base"><Phone className="w-4 h-4" /> PHONE CALL</span>
     );
   } else if (status === 'connecting') {
     buttonContent = (
@@ -114,7 +114,7 @@ const VoiceChatWidget = () => {
         style={{ minWidth: '160px', maxWidth: '200px' }}
         onClick={status === 'connected' ? endCall : startCall}
         disabled={status === 'connecting'}
-        aria-label={status === 'connected' ? 'End call' : 'Start voice chat'}
+        aria-label={status === 'connected' ? 'End call' : 'Start phone call'}
       >
         {buttonContent}
       </button>

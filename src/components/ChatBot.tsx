@@ -193,9 +193,9 @@ const ChatBot = () => {
                 onClick={handleSendMessage}
                 disabled={!inputValue.trim() || isLoading}
                 size="icon"
-                className="absolute right-1 top-1/2 transform -translate-y-1/2 h-10 w-10 rounded-full bg-primary hover:bg-primary/90"
+                className="absolute right-1 top-1/2 transform -translate-y-1/2 h-10 w-10 rounded-full bg-white border border-primary shadow"
               >
-                <Send className="h-4 w-4" />
+                <Send className="h-4 w-4" style={{ color: '#338B81' }} />
               </Button>
               </div>
               {/* Inline Voice Chat Widget Button */}

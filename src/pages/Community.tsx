@@ -3,12 +3,31 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { MessageCircle, Heart, Users, BookOpen, Mail, Calendar } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
 
 const Community = () => {
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [postText, setPostText] = useState("");
+  const [sharedPosts, setSharedPosts] = useState<{text: string, tags: string[]}[]>([]);
+
+  const tags = ["Progress Update", "Question", "Success Story"];
+
+  const toggleTag = (tag: string) => {
+    setSelectedTags(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]);
+  };
+
+  const handleShare = () => {
+    if (!postText.trim() || selectedTags.length === 0) return;
+    setSharedPosts([{ text: postText, tags: selectedTags }, ...sharedPosts]);
+    setPostText("");
+    setSelectedTags([]);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-bg">
+    <div className="min-h-screen" style={{ backgroundColor: '#F6E7E0' }}>
       {/* Hero Section */}
-      <section className="relative py-24 bg-gradient-hero text-white overflow-hidden">
+      <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#338B81' }}>
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full animate-float"></div>
         <div className="absolute bottom-20 right-20 w-16 h-16 bg-white/10 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
@@ -25,8 +44,110 @@ const Community = () => {
         </div>
       </section>
 
+      {/* Share Your Journey & Upcoming Events Section */}
+      <section className="py-16" style={{ backgroundColor: '#EAF8F6' }}>
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Share Your Journey (2/3 width) */}
+            <div className="md:col-span-2 space-y-6">
+              <Card className="p-6">
+                <h3 className="font-playfair text-2xl font-bold mb-4 flex items-center gap-2"><span className="text-primary text-3xl font-bold">+</span> Share Your Journey</h3>
+                <Textarea
+                  className="w-full mb-4"
+                  placeholder="Share your progress, ask questions, or celebrate wins with the community..."
+                  rows={3}
+                  value={postText}
+                  onChange={e => setPostText(e.target.value)}
+                />
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {tags.map(tag => (
+                    <button
+                      key={tag}
+                      type="button"
+                      className={`px-5 py-2 rounded-xl border text-base font-semibold transition-all duration-200 focus:outline-none ${selectedTags.includes(tag) ? 'bg-primary text-white border-primary' : 'bg-white text-foreground border-gray-300'}`}
+                      onClick={() => toggleTag(tag)}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex justify-end">
+                  <Button className="bg-primary text-white px-6" onClick={handleShare} disabled={!postText.trim() || selectedTags.length === 0}>Share</Button>
+                </div>
+              </Card>
+              {/* Shared Posts - now scrollable */}
+              <div className="max-h-96 overflow-y-auto space-y-4 pr-2">
+                {sharedPosts.map((post, idx) => (
+                  <Card className="p-6 bg-white" key={idx}>
+                    <div className="flex items-center mb-2">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-blue-400 flex items-center justify-center text-white font-bold text-lg mr-3">U</div>
+                      <div>
+                        <span className="font-inter font-semibold">You</span>
+                        {post.tags.map(tag => (
+                          <span key={tag} className="ml-2 px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full font-medium">{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="mb-4 font-inter text-foreground">{post.text}</div>
+                    {/* Static action bar */}
+                    <div className="flex items-center gap-8 pt-2 text-gray-500">
+                      <div className="flex items-center gap-1">
+                        <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' fill='none' viewBox='0 0 24 24' stroke='currentColor' strokeWidth='1.5'>
+                          <path strokeLinecap='round' strokeLinejoin='round' d='M12 21C12 21 4 13.5 4 8.5C4 5.42 6.42 3 9.5 3C11.24 3 12.91 3.81 14 5.08C15.09 3.81 16.76 3 18.5 3C21.58 3 24 5.42 24 8.5C24 13.5 16 21 16 21H12Z' />
+                        </svg>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' fill='none' viewBox='0 0 24 24' stroke='currentColor' strokeWidth='1.5'>
+                          <path strokeLinecap='round' strokeLinejoin='round' d='M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z' />
+                        </svg>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        {/* Lucide Share2 icon */}
+                        <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' fill='none' viewBox='0 0 24 24' stroke='currentColor' strokeWidth='1.5'>
+                          <circle cx='18' cy='5' r='3'/>
+                          <circle cx='6' cy='12' r='3'/>
+                          <circle cx='18' cy='19' r='3'/>
+                          <path d='M8.59 13.51l6.83 3.98'/>
+                          <path d='M15.41 6.51l-6.82 3.98'/>
+                        </svg>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </div>
+            {/* Upcoming Events (1/3 width) */}
+            <div className="space-y-6">
+              <Card className="p-6">
+                <h3 className="font-playfair text-2xl font-bold mb-4 flex items-center gap-2"><Calendar className="w-6 h-6 text-primary" /> Upcoming Events</h3>
+                <div className="space-y-4">
+                  <div className="p-4 rounded-xl border border-gray-200 bg-white">
+                    <div className="font-inter font-semibold mb-1">Live Q&A: Decoding Your Blood Report</div>
+                    <div className="text-sm text-muted-foreground mb-1 flex items-center gap-2"><Calendar className="w-4 h-4" /> Dec 15, 2024 <span>•</span> 7:00 PM IST</div>
+                    <div className="text-xs text-muted-foreground mb-2">156 attending</div>
+                    <Button size="sm" variant="outline">Join</Button>
+                  </div>
+                  <div className="p-4 rounded-xl border border-gray-200 bg-white">
+                    <div className="font-inter font-semibold mb-1">Community Cook-Along: Anti-Inflammatory Recipes</div>
+                    <div className="text-sm text-muted-foreground mb-1 flex items-center gap-2"><Calendar className="w-4 h-4" /> Dec 18, 2024 <span>•</span> 6:30 PM IST</div>
+                    <div className="text-xs text-muted-foreground mb-2">89 attending</div>
+                    <Button size="sm" variant="outline">Join</Button>
+                  </div>
+                  <div className="p-4 rounded-xl border border-gray-200 bg-white">
+                    <div className="font-inter font-semibold mb-1">Success Stories Sharing Circle</div>
+                    <div className="text-sm text-muted-foreground mb-1 flex items-center gap-2"><Calendar className="w-4 h-4" /> Dec 20, 2024 <span>•</span> 8:00 PM IST</div>
+                    <div className="text-xs text-muted-foreground mb-2">47 attending</div>
+                    <Button size="sm" variant="outline">Join</Button>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Community Benefits */}
-      <section className="py-24">
+      <section className="py-24" style={{ backgroundColor: '#F6E7E0' }}>
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">Why Join Our Community?</h2>
@@ -153,7 +274,7 @@ const Community = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-24 bg-gradient-secondary">
+      <section className="py-24" style={{ backgroundColor: '#F6E7E0' }}>
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
             <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mb-6">Stay Updated with Our Newsletter</h2>
@@ -180,17 +301,17 @@ const Community = () => {
       </section>
 
       {/* Join CTA */}
-      <section className="py-24 bg-gradient-hero text-white">
+      <section className="py-24 text-white" style={{ backgroundColor: '#338B81' }}>
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
             <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 leading-tight">Ready to Join Our Wellness Community?</h2>
             <p className="font-inter text-xl mb-10 opacity-90">Take the first step towards a healthier, happier you with the support of our amazing community</p>
             <div className="flex flex-col lg:flex-row gap-6 justify-center">
-              <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20">
+              <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-primary hover:text-white font-inter font-semibold backdrop-blur-sm border border-white/20">
                 <MessageCircle className="mr-3 h-5 w-5" />
                 Join WhatsApp Community
               </Button>
-              <Button variant="outline" size="xl" className="border-2 border-white/50 text-white hover:bg-white hover:text-primary backdrop-blur-sm font-inter font-semibold">
+              <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-primary hover:text-white font-inter font-semibold backdrop-blur-sm border border-white/20">
                 Subscribe to Newsletter
               </Button>
             </div>

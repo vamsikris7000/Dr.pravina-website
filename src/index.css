@@ -16,51 +16,51 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 13%;
 
-    /* Primary teal green from reference */
-    --primary: 168 46% 33%;
+    /* Primary teal green updated to #338B81 */
+    --primary: 169 44% 38%; /* #338B81 */
     --primary-foreground: 0 0% 100%;
-    --primary-light: 180 100% 94%;
-    --primary-glow: 168 46% 40%;
+    --primary-light: 169 44% 95%;
+    --primary-glow: 169 44% 45%;
 
     /* Secondary light aqua from reference */
     --secondary: 180 100% 94%;
-    --secondary-foreground: 168 46% 33%;
+    --secondary-foreground: 169 44% 38%;
 
     /* Muted tones using reference colors */
     --muted: 180 100% 94%;
     --muted-foreground: 0 0% 33%;
 
-    /* Accent soft teal from reference */
-    --accent: 180 33% 85%;
-    --accent-foreground: 168 46% 33%;
+    /* Accent soft teal updated to #338B81 */
+    --accent: 169 44% 85%;
+    --accent-foreground: 169 44% 38%;
 
     /* Status colors maintaining reference style */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --success: 168 46% 33%;
+    --success: 169 44% 38%;
     --success-foreground: 0 0% 100%;
 
     /* UI elements */
     --border: 220 14% 90%;
     --input: 220 14% 94%;
-    --ring: 168 46% 33%;
+    --ring: 169 44% 38%;
 
-    /* Enhanced gradients using reference colors */
-    --gradient-primary: linear-gradient(135deg, hsl(168 46% 33%), hsl(168 46% 40%));
-    --gradient-primary-hover: linear-gradient(135deg, hsl(168 46% 38%), hsl(168 46% 45%));
-    --gradient-secondary: linear-gradient(135deg, hsl(180 100% 94%), hsl(180 33% 85%));
-    --gradient-hero: linear-gradient(135deg, hsl(168 46% 33%), hsl(168 46% 40%), hsl(180 33% 85%));
+    /* Enhanced gradients using new primary color */
+    --gradient-primary: linear-gradient(135deg, #338B81, #338B81);
+    --gradient-primary-hover: linear-gradient(135deg, #338B81, #338B81);
+    --gradient-secondary: linear-gradient(135deg, hsl(180 100% 94%), hsl(169 44% 85%));
+    --gradient-hero: linear-gradient(135deg, #338B81, #338B81, hsl(169 44% 85%));
     --gradient-bg: linear-gradient(180deg, hsl(220 14% 98%), hsl(220 14% 96%));
     --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(180 100% 96%));
 
-    /* Enhanced shadows using reference colors */
-    --shadow-sm: 0 1px 2px 0 hsl(168 46% 33% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(168 46% 33% / 0.1), 0 2px 4px -1px hsl(168 46% 33% / 0.06);
-    --shadow-lg: 0 10px 15px -3px hsl(168 46% 33% / 0.1), 0 4px 6px -2px hsl(168 46% 33% / 0.05);
-    --shadow-xl: 0 20px 25px -5px hsl(168 46% 33% / 0.1), 0 10px 10px -5px hsl(168 46% 33% / 0.04);
-    --shadow-glow: 0 0 40px hsl(168 46% 40% / 0.3);
-    --shadow-interactive: 0 4px 20px hsl(168 46% 33% / 0.15);
-    --shadow-elevated: 0 8px 30px hsl(168 46% 33% / 0.12);
+    /* Enhanced shadows using new primary color */
+    --shadow-sm: 0 1px 2px 0 #338B81 / 0.05;
+    --shadow-md: 0 4px 6px -1px #338B81 / 0.1, 0 2px 4px -1px #338B81 / 0.06;
+    --shadow-lg: 0 10px 15px -3px #338B81 / 0.1, 0 4px 6px -2px #338B81 / 0.05;
+    --shadow-xl: 0 20px 25px -5px #338B81 / 0.1, 0 10px 10px -5px #338B81 / 0.04;
+    --shadow-glow: 0 0 40px #338B81 / 0.3;
+    --shadow-interactive: 0 4px 20px #338B81 / 0.15;
+    --shadow-elevated: 0 8px 30px #338B81 / 0.12;
 
     /* Typography scale */
     --font-size-xs: 0.75rem;
@@ -90,12 +90,12 @@
     /* Sidebar colors */
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 0 0% 13%;
-    --sidebar-primary: 168 46% 33%;
+    --sidebar-primary: 169 44% 38%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 180 100% 94%;
-    --sidebar-accent-foreground: 168 46% 33%;
+    --sidebar-accent-foreground: 169 44% 38%;
     --sidebar-border: 220 14% 90%;
-    --sidebar-ring: 168 46% 33%;
+    --sidebar-ring: 169 44% 38%;
   }
 
   .dark {
@@ -159,10 +159,8 @@
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    line-height: 1.6;
+  html, body {
+    background-color: #F6E7E0;
   }
 
   /* Smooth scrolling */
