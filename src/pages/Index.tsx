@@ -7,6 +7,38 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Calendar, Mail, BookOpen, Heart, Star, Users, Phone, Instagram, Facebook, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
+import './honeycomb.css'; // (create this file for the honeycomb CSS)
+import Founder from './founder';
+import PathOLife from './patholife';
+
+const advisoryBoardImages = [
+  '/photos/Picture1.png',
+  '/photos/Picture2.png',
+  '/photos/Picture3.png',
+];
+const coreTeamImages = [
+  '/photos/Picture4.png',
+  '/photos/Picture5.png',
+  '/photos/Picture6.png',
+  '/photos/Picture7.png',
+];
+
+function HexFlower({ label, text }) {
+  return (
+    <div style={{ width: 170, height: 150, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{
+        width: 170, height: 150, background: 'white', border: '6px solid #338B81',
+        clipPath: 'polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%)',
+        boxShadow: '0 4px 16px 0 rgba(0,0,0,0.07)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column',
+        margin: '0 auto',
+      }}>
+        <span className="font-playfair text-lg font-bold text-[#338B81] mb-1 text-center">{label}</span>
+        <span className="font-inter text-base font-medium text-[#7a5c1c] text-center leading-snug">{text}</span>
+      </div>
+    </div>
+  );
+}
 
 const Index = () => {
   return (
@@ -15,7 +47,7 @@ const Index = () => {
       <section className="relative overflow-hidden text-white min-h-[90vh] flex items-center" role="banner" data-aos="fade-up" style={{ backgroundColor: '#F6E7E0' }}>
         {/* Background image */}
         <img 
-          src="/lovable-uploads/image.png" 
+          src="/photos/Screenshot 2025-07-24 at 22.30.24.png" 
           alt="Hero Background" 
           className="absolute inset-0 w-full h-full object-cover z-0" 
           style={{ pointerEvents: 'none' }}
@@ -44,7 +76,7 @@ const Index = () => {
                   <Button 
                     variant="soft" 
                     size="xl" 
-                    className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20 group w-full sm:w-auto"
+                    className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20 group w-full sm:w-auto min-w-[320px]"
                     aria-label="Book a consultation with Dr. Pravina Kale"
                   >
                     <Heart className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
@@ -55,11 +87,22 @@ const Index = () => {
                   <Button 
                     variant="soft" 
                     size="xl" 
-                    className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20 group w-full sm:w-auto"
+                    className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20 group w-full sm:w-auto min-w-[320px]"
                     aria-label="Join a wellness workshop"
                   >
                     <Calendar className="mr-3 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" aria-hidden="true" />
                     Join a Workshop
+                  </Button>
+                </Link>
+                <Link to="/wellness-plans">
+                  <Button 
+                    variant="soft" 
+                    size="xl" 
+                    className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20 group w-full sm:w-auto min-w-[320px]"
+                    aria-label="View our wellness plans"
+                  >
+                    <BookOpen className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
+                    Wellness Plans
                   </Button>
                 </Link>
               </div>
@@ -76,7 +119,6 @@ const Index = () => {
             <h2 id="services-heading" className="font-playfair text-responsive-3xl font-bold text-foreground mb-4 md:mb-6" data-aos="fade-up">What We Offer</h2>
             <p className="font-inter text-responsive-xl text-muted-foreground">Workshops • 1:1 Consultations • Wellness Plans</p>
           </div>
-          
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto mb-12 md:mb-16 px-4 sm:px-0">
             <Link to="/workshops" className="group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-2xl transition-all duration-200" aria-label="Learn more about our workshops">
               <Card className="h-full card-hover cursor-pointer border-0 bg-gradient-card overflow-hidden relative" data-aos="fade-up" data-aos-delay="100">
@@ -95,7 +137,6 @@ const Index = () => {
                 </CardContent>
               </Card>
             </Link>
-            
             <Link to="/consultations" className="group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-2xl transition-all duration-200" aria-label="Learn more about our 1:1 consultations">
               <Card className="h-full card-hover cursor-pointer border-0 bg-gradient-card overflow-hidden relative" data-aos="fade-up" data-aos-delay="200">
                 <div className="absolute inset-0 bg-gradient-to-br from-amber-400/5 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></div>
@@ -113,7 +154,6 @@ const Index = () => {
                 </CardContent>
               </Card>
             </Link>
-            
             <Link to="/wellness-plans" className="group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-2xl transition-all duration-200 sm:col-span-2 lg:col-span-1" aria-label="Learn more about our wellness plans">
               <Card className="h-full card-hover cursor-pointer border-0 bg-gradient-card overflow-hidden relative" data-aos="fade-up" data-aos-delay="300">
                 <div className="absolute inset-0 bg-gradient-to-br from-success/5 to-success/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></div>
@@ -132,7 +172,6 @@ const Index = () => {
               </Card>
             </Link>
           </div>
-
         </div>
       </section>
 
@@ -140,7 +179,7 @@ const Index = () => {
       <section className="py-16 relative overflow-hidden" data-aos="fade-up" style={{ backgroundColor: '#F6E7E0' }}>
         {/* Background image */}
         <img 
-          src="/lovable-uploads/image copy.png" 
+          src="/photos/background2.png" 
           alt="Dr. Pravina Kale, Founder & CEO" 
           className="absolute inset-0 w-full h-full object-cover z-0" 
           style={{ pointerEvents: 'none' }}
@@ -153,7 +192,7 @@ const Index = () => {
             <div className="relative flex justify-center mb-8">
               <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-pulse-glow"></div>
               <img 
-                src="/lovable-uploads/b6aeaa4f-b346-4225-81f7-15c3c238960f.png" 
+                src="/photos/founder.png" 
                 alt="Dr. Pravina Kale, Founder & CEO" 
                 className="relative w-32 h-32 object-cover rounded-full shadow-2xl border-4 border-white"
               />
@@ -198,7 +237,7 @@ const Index = () => {
                 >
                   <div className="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow mb-6 bg-gray-100 flex items-center justify-center mx-auto">
                     <img
-                      src="/lovable-uploads/68d9c8ae-c9bc-4365-b332-ec694fda90af.png"
+                      src={advisoryBoardImages[idx]}
                       alt={doctor.name}
                       className="w-full h-full object-cover"
                     />
@@ -227,7 +266,7 @@ const Index = () => {
                 >
                   <div className="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow mb-6 bg-gray-100 flex items-center justify-center mx-auto">
                     <img
-                      src="/lovable-uploads/68d9c8ae-c9bc-4365-b332-ec694fda90af.png"
+                      src={coreTeamImages[idx]}
                       alt={member.name}
                       className="w-full h-full object-cover"
                     />

@@ -3,6 +3,19 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Award, Heart, BookOpen } from "lucide-react";
 
+const carouselImages = [
+  '/photos/carousel1.png',
+  '/photos/carousel2.png',
+  '/photos/carousel3.png',
+  '/photos/carousel4.png',
+  '/photos/carousel5.png',
+  '/photos/carousel6.png',
+  '/photos/carousel7.png',
+  '/photos/carousel8.png',
+  '/photos/carousel9.png',
+  '/photos/carousel10.png',
+];
+
 const About = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F6E7E0' }}>
@@ -28,7 +41,7 @@ const About = () => {
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-pulse-glow"></div>
                 <img 
-                  src="/lovable-uploads/b6aeaa4f-b346-4225-81f7-15c3c238960f.png" 
+                  src="/photos/founder.png" 
                   alt="Dr. Pravina Kale" 
                   className="relative w-full max-w-md mx-auto rounded-2xl shadow-elevated hover:shadow-glow transition-all duration-500 hover:scale-105"
                 />
@@ -48,6 +61,52 @@ const About = () => {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Auto-scrolling image carousel */}
+      <section className="py-8" style={{ backgroundColor: '#F6E7E0' }}>
+        <div className="overflow-hidden mx-auto group" style={{ width: 3 * 400 + 2 * 32 }}>
+          <div className="flex gap-8 animate-carousel group-hover:paused-carousel" style={{ width: 'max-content' }}>
+            {carouselImages.concat(carouselImages).map((src, idx) => (
+              <div
+                key={idx}
+                className="flex-shrink-0 rounded-2xl shadow-md bg-white transition-all duration-300 carousel-photo"
+                style={{ width: 400, height: 420, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}
+              >
+                <img
+                  src={src}
+                  alt="carousel"
+                  className="object-cover w-full h-full rounded-2xl transition-all duration-300"
+                  style={{ display: 'block' }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <style>{`
+          @keyframes carousel {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .animate-carousel {
+            animation: carousel 30s linear infinite;
+          }
+          .group:hover .animate-carousel,
+          .group:focus-within .animate-carousel {
+            animation-play-state: paused;
+          }
+          .carousel-photo:hover,
+          .carousel-photo:focus-within {
+            z-index: 10;
+            width: 600px !important;
+            box-shadow: 0 8px 32px 0 rgba(51,139,129,0.18);
+          }
+          .carousel-photo:hover img,
+          .carousel-photo:focus-within img {
+            border-radius: 2rem;
+            object-fit: contain;
+          }
+        `}</style>
       </section>
 
       {/* Qualifications */}

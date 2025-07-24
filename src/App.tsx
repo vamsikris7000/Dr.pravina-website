@@ -16,6 +16,8 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import ChatBot from "./components/ChatBot";
 import VoiceChatWidget from "@/components/VoiceChatWidget";
+import PathOLife from "./pages/patholife";
+import Founder from "./pages/founder";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +37,8 @@ const App = () => (
           <Route path="/lab2life" element={<Lab2Life />} />
           <Route path="/community" element={<Community />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/patholife" element={<PathOLife />} />
+          <Route path="/founder" element={<Founder />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <ChatBot />

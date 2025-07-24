@@ -22,23 +22,31 @@ const Navbar = () => {
     { name: "Wellness Plans", path: "/wellness-plans" },
   ];
 
+  const aboutDropdown = [
+    { name: "Founder", path: "/about" },
+    { name: "Path'o'Life", path: "/patholife" },
+  ];
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const aboutCloseTimeout = useRef<NodeJS.Timeout | null>(null);
+
   const [servicesOpen, setServicesOpen] = useState(false);
   const closeTimeout = useRef<NodeJS.Timeout | null>(null);
 
   return (
     <nav className="backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-border" style={{ backgroundColor: '#F6E7E0' }}>
       <div className="container mx-auto px-6">
-        <div className="flex justify-between items-center py-4">
+        <div className="flex justify-between items-center py-2.5">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
             <img 
-              src="/lovable-uploads/68d9c8ae-c9bc-4365-b332-ec694fda90af.png" 
+              src="/photos/logo.png" 
               alt="Path'o'Life Logo" 
-              className="w-12 h-12 transition-transform duration-300 group-hover:scale-110"
+              className="h-[36px] w-auto transition-transform duration-300 group-hover:scale-105"
+              style={{ minWidth: 36 }}
             />
-            <div>
-              <h1 className="text-2xl font-bold text-primary font-playfair">Path'o'Life</h1>
-              <p className="text-sm text-muted-foreground font-inter">Women's Wellness by Dr. Pravina</p>
+            <div className="flex flex-col justify-center leading-tight">
+              <h1 className="text-xl font-bold font-playfair mb-0 pb-0" style={{ color: '#85bb65', lineHeight: 1.1 }}>Path'o'Life</h1>
+              <span className="text-base font-serif font-medium mt-0" style={{ color: '#27636a', letterSpacing: '0.01em', lineHeight: 1.1 }}>Periods &bull; Pregnancy &bull; Parenting</span>
             </div>
           </Link>
 
@@ -97,8 +105,47 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-            {/* Other nav items */}
-            {navItems.slice(1).map((item) => (
+            {/* About Dropdown */}
+            <div
+              className="relative group"
+              onMouseEnter={() => {
+                if (aboutCloseTimeout.current) clearTimeout(aboutCloseTimeout.current);
+                setAboutOpen(true);
+              }}
+              onMouseLeave={() => {
+                aboutCloseTimeout.current = setTimeout(() => setAboutOpen(false), 150);
+              }}
+            >
+              <button
+                className={`flex items-center text-sm font-medium font-inter transition-all duration-300 hover:text-primary hover:scale-105 px-2 ${
+                  location.pathname === "/about" ? "text-primary border-b-2 border-primary" : "text-foreground"
+                }`}
+                onClick={() => setAboutOpen((open) => !open)}
+                type="button"
+              >
+                About <ChevronDown className="ml-1 w-4 h-4" />
+              </button>
+              {aboutOpen && (
+                <div
+                  className="absolute left-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-border z-50"
+                >
+                  {aboutDropdown.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.path}
+                      className={`block px-6 py-3 text-sm font-inter font-medium transition-all duration-200 hover:bg-primary/10 hover:text-primary rounded-xl ${
+                        location.pathname === item.path ? "text-primary bg-primary/10" : "text-foreground"
+                      }`}
+                      onClick={() => setAboutOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+            {/* Other nav items (skip About Dr. Pravina) */}
+            {navItems.slice(2).map((item) => (
               <Link
                 key={item.name}
                 to={item.path}
@@ -176,8 +223,42 @@ const Navbar = () => {
                   </div>
                 )}
               </div>
+              {/* About Dropdown (collapsible) */}
+              <div className="">
+                <button
+                  className={`w-full flex items-center justify-between font-inter text-sm font-medium transition-all duration-300 p-3 rounded-xl hover:bg-primary/10 hover:text-primary ${
+                    location.pathname === "/about"
+                      ? "text-primary bg-primary/10 border-l-4 border-primary"
+                      : "text-foreground hover:scale-105"
+                  }`}
+                  onClick={() => setAboutOpen((open) => !open)}
+                  type="button"
+                >
+                  <span>About</span>
+                  <ChevronDown className={`ml-2 w-4 h-4 transition-transform ${aboutOpen ? "rotate-180" : ""}`} />
+                </button>
+                {aboutOpen && (
+                  <div className="pl-4 mt-1 flex flex-col gap-1">
+                    {aboutDropdown.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.path}
+                        className={`block px-4 py-2 text-sm font-inter font-medium transition-all duration-200 rounded-xl hover:bg-primary/10 hover:text-primary ${
+                          location.pathname === item.path ? "text-primary bg-primary/10" : "text-foreground"
+                        }`}
+                        onClick={() => {
+                          setIsOpen(false);
+                          setAboutOpen(false);
+                        }}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
               {/* Other nav items */}
-              {navItems.slice(1).map((item) => (
+              {navItems.slice(2).map((item) => (
                 <Link
                   key={item.name}
                   to={item.path}
