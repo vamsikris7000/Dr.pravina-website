@@ -25,7 +25,7 @@ const Community = () => {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F6E7E0' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
       {/* Hero Section */}
       <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#338B81' }}>
         <div className="absolute inset-0 bg-black/10"></div>
@@ -147,10 +147,14 @@ const Community = () => {
       </section>
 
       {/* Community Benefits */}
-      <section className="py-24" style={{ backgroundColor: '#F6E7E0' }}>
+      <section className="py-24" style={{ backgroundColor: '#e9f5e9' }}>
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-fade-in-up">
-            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">Why Join Our Community?</h2>
+            <div className="flex items-center justify-center mb-6">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-foreground/30"></div>
+            <h2 className="font-playfair text-5xl font-bold text-foreground mx-8">Why Join Our Community?</h2>
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-foreground/30"></div>
+          </div>
             <p className="font-inter text-xl text-muted-foreground">Discover the benefits of being part of our supportive wellness network</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -200,7 +204,11 @@ const Community = () => {
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-fade-in-up">
-            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">What You'll Receive</h2>
+            <div className="flex items-center justify-center mb-6">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-foreground/30"></div>
+            <h2 className="font-playfair text-5xl font-bold text-foreground mx-8">What You'll Receive</h2>
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-foreground/30"></div>
+          </div>
             <p className="font-inter text-xl text-muted-foreground">Comprehensive support and resources for your wellness journey</p>
           </div>
           <div className="max-w-5xl mx-auto">
@@ -274,25 +282,29 @@ const Community = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-24" style={{ backgroundColor: '#F6E7E0' }}>
+      <section className="py-24 bg-foreground text-white">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
-            <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mb-6">Stay Updated with Our Newsletter</h2>
-            <p className="font-inter text-xl text-muted-foreground mb-10">Get weekly wellness tips, healthy recipes, and motivation delivered to your inbox</p>
+            <div className="flex items-center justify-center mb-6">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/30 to-white/30"></div>
+            <h2 className="font-playfair text-4xl md:text-5xl font-bold text-white mx-8">Stay Updated with Our Newsletter</h2>
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent via-white/30 to-white/30"></div>
+          </div>
+            <p className="font-inter text-xl text-gray-300 mb-10">Get weekly wellness tips, healthy recipes, and motivation delivered to your inbox</p>
             
-            <div className="bg-white p-10 rounded-2xl shadow-xl max-w-2xl mx-auto">
+            <div className="bg-white/10 backdrop-blur-sm p-10 rounded-2xl shadow-xl max-w-2xl mx-auto border border-white/20">
               <div className="flex flex-col md:flex-row gap-4">
                 <Input 
                   type="email" 
                   placeholder="Enter your email address" 
-                  className="flex-1"
+                  className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-gray-400"
                 />
                 <Button variant="wellness" size="lg" className="font-inter font-semibold">
                   <Mail className="mr-2 h-4 w-4" />
                   Subscribe
                 </Button>
               </div>
-              <p className="font-inter text-sm text-muted-foreground mt-4">
+              <p className="font-inter text-sm text-gray-400 mt-4">
                 We respect your privacy. Unsubscribe at any time.
               </p>
             </div>
@@ -300,24 +312,7 @@ const Community = () => {
         </div>
       </section>
 
-      {/* Join CTA */}
-      <section className="py-24 text-white" style={{ backgroundColor: '#338B81' }}>
-        <div className="container mx-auto px-6">
-          <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
-            <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 leading-tight">Ready to Join Our Wellness Community?</h2>
-            <p className="font-inter text-xl mb-10 opacity-90">Take the first step towards a healthier, happier you with the support of our amazing community</p>
-            <div className="flex flex-col lg:flex-row gap-6 justify-center">
-              <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-primary hover:text-white font-inter font-semibold backdrop-blur-sm border border-white/20">
-                <MessageCircle className="mr-3 h-5 w-5" />
-                Join WhatsApp Community
-              </Button>
-              <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-primary hover:text-white font-inter font-semibold backdrop-blur-sm border border-white/20">
-                Subscribe to Newsletter
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+
     </div>
   );
 };

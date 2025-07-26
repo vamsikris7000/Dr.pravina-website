@@ -40,15 +40,11 @@ const Workshops = () => {
       subtitle: "Balance & Success",
       description: "Manage career stress, maintain work-life balance, and prioritize health while excelling professionally. Practical strategies for busy working women."
     },
-    {
-      title: "Emotional & Mental Wellness",
-      subtitle: "Mind-Body Connection",
-      description: "Understanding the connection between emotional health and physical wellness. Stress management, mindfulness, and building resilience through life's challenges."
-    }
+
   ];
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F6E7E0' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
       {/* Hero Section */}
       <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#338B81' }}>
         <div className="absolute inset-0 bg-black/10"></div>
@@ -78,27 +74,20 @@ const Workshops = () => {
             <p className="font-inter text-lg mb-10 opacity-90">
               🎓 Includes checklists, toolkits, Q&A | 🎤 English-Marathi mix
             </p>
-            
-            <div className="flex flex-col lg:flex-row gap-6 justify-center items-center">
-              <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20">
-                <Calendar className="mr-3 h-5 w-5" />
-                Register for Workshop
-              </Button>
-              <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20">
-                <Users className="mr-3 h-5 w-5" />
-                Join WhatsApp Community
-              </Button>
+            <div className="max-w-2xl mx-auto mt-10">
+              <p className="font-playfair text-2xl md:text-3xl font-semibold mb-4 text-white">🎯 Ready to take the first step toward healing?</p>
+              <p className="font-inter text-lg mb-8 text-white">Choose your workshop and join us live from the comfort of your home.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Workshops Grid */}
-      <section className="py-24" style={{ backgroundColor: '#F6E7E0' }}>
+      <section className="py-24" style={{ backgroundColor: '#e9f5e9' }}>
         <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             {workshops.map((workshop, index) => (
-              <Card key={index} className="group hover:shadow-elevated hover:-translate-y-1 transition-all duration-500 animate-fade-in" style={{animationDelay: `${index * 100}ms`}}>
+              <Card key={index} className="group hover:shadow-elevated hover:-translate-y-1 transition-all duration-500 animate-fade-in mb-8" style={{animationDelay: `${index * 100}ms`}}>
                 <CardContent className="p-8">
                   <div className="flex items-center mb-6">
                     <div className="w-14 h-14 bg-primary rounded-full flex items-center justify-center mr-4 shadow-lg group-hover:shadow-glow transition-all duration-300">
@@ -124,7 +113,11 @@ const Workshops = () => {
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-fade-in-up">
-            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">How Our Workshops Work</h2>
+            <div className="flex items-center justify-center mb-6">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-foreground/30"></div>
+            <h2 className="font-playfair text-5xl font-bold text-foreground mx-8">How Our Workshops Work</h2>
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-foreground/30"></div>
+          </div>
             <p className="font-inter text-xl text-muted-foreground">Simple steps to transform your wellness journey</p>
           </div>
           <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
@@ -148,11 +141,11 @@ const Workshops = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 text-white" style={{ backgroundColor: '#338B81' }}>
+      <section className="py-24 bg-foreground text-white">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
             <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 leading-tight">Ready to Transform Your Wellness?</h2>
-            <p className="font-inter text-xl mb-10 opacity-90">Register for a workshop today and start your journey with Path'o'Life</p>
+            <p className="font-inter text-xl mb-10 text-gray-300">Register for a workshop today and start your journey with Path'o'Life</p>
             <div className="flex flex-col lg:flex-row gap-6 justify-center">
               <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-primary hover:text-white font-inter font-semibold backdrop-blur-sm border border-white/20">
                 <Calendar className="mr-3 h-5 w-5" />

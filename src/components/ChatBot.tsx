@@ -214,7 +214,7 @@ const ChatBot = () => {
             sm:max-w-full sm:max-h-full sm:p-2"
           style={{ boxShadow: '0 8px 40px 0 rgba(13, 148, 136, 0.10)' }}
         >
-          <DialogHeader className="p-6 border-b border-teal-100 flex-shrink-0 bg-gradient-to-r from-teal-50 to-green-50 rounded-t-3xl">
+          <DialogHeader className="p-6 border-b border-teal-100 flex-shrink-0 rounded-t-3xl" style={{ backgroundColor: '#F2FAF7' }}>
             <DialogTitle className="text-2xl font-playfair font-bold text-teal-700 text-center w-full">
               Questions about Joining? Ask us here.
             </DialogTitle>
@@ -258,7 +258,7 @@ const ChatBot = () => {
           </ScrollArea>
 
           {/* Chat Input Bar inside Dialog */}
-          <div className="p-6 border-t border-teal-100 flex-shrink-0 bg-gradient-to-r from-teal-50 to-green-50">
+          <div className="p-6 border-t border-teal-100 flex-shrink-0" style={{ backgroundColor: '#F2FAF7' }}>
             <div className="relative flex items-center">
               <Input
                 value={inputValue}

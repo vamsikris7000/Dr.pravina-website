@@ -18,7 +18,7 @@ const carouselImages = [
 
 const About = () => {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F6E7E0' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
       {/* Hero Section */}
       <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#338B81' }}>
         <div className="absolute inset-0 bg-black/10"></div>
@@ -34,7 +34,7 @@ const About = () => {
       </section>
 
       {/* About Dr. Pravina */}
-      <section className="py-24" style={{ backgroundColor: '#F6E7E0' }}>
+      <section className="py-24" style={{ backgroundColor: '#e9f5e9' }}>
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
             <div className="order-2 lg:order-1 animate-scale-in">
@@ -48,7 +48,11 @@ const About = () => {
               </div>
             </div>
             <div className="order-1 lg:order-2 animate-fade-in-up">
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mb-8 leading-tight">Her Journey</h2>
+              <div className="flex items-center justify-center mb-8">
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-foreground/30"></div>
+              <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mx-8 leading-tight">Her Journey</h2>
+              <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-foreground/30"></div>
+            </div>
               <p className="font-inter text-lg text-muted-foreground mb-6 leading-relaxed">
                 Dr. Pravina Kale's path from pathology to lifestyle medicine represents a profound shift from treating disease to preventing it. After years of diagnosing ailments under the microscope, she realized the true power lies in empowering women to take control of their health through lifestyle choices.
               </p>
@@ -64,7 +68,7 @@ const About = () => {
       </section>
 
       {/* Auto-scrolling image carousel */}
-      <section className="py-8" style={{ backgroundColor: '#F6E7E0' }}>
+      <section className="py-8" style={{ backgroundColor: '#e9f5e9' }}>
         <div className="overflow-hidden mx-auto group" style={{ width: 3 * 400 + 2 * 32 }}>
           <div className="flex gap-8 animate-carousel group-hover:paused-carousel" style={{ width: 'max-content' }}>
             {carouselImages.concat(carouselImages).map((src, idx) => (
@@ -113,7 +117,11 @@ const About = () => {
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-fade-in-up">
-            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">Qualifications & Expertise</h2>
+            <div className="flex items-center justify-center mb-6">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-foreground/30"></div>
+            <h2 className="font-playfair text-5xl font-bold text-foreground mx-8">Qualifications & Expertise</h2>
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-foreground/30"></div>
+          </div>
             <p className="font-inter text-xl text-muted-foreground">Evidence-based credentials that make a difference</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
@@ -141,7 +149,7 @@ const About = () => {
       </section>
 
       {/* Philosophy */}
-      <section className="py-24" style={{ backgroundColor: '#338B81' }}>
+      <section className="py-24 bg-foreground text-white">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
             <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-16 text-white">Philosophy: Evidence, Empathy, Empowerment</h2>
@@ -151,21 +159,21 @@ const About = () => {
                   <Award className="h-10 w-10 text-white" />
                 </div>
                 <h3 className="font-playfair text-2xl font-bold text-white mb-3">Evidence</h3>
-                <p className="font-inter text-white/90 text-lg text-center">Every recommendation is backed by scientific research and proven medical principles</p>
+                <p className="font-inter text-gray-300 text-lg text-center">Every recommendation is backed by scientific research and proven medical principles</p>
               </div>
               <div className="flex flex-col items-center">
                 <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-6">
                   <Heart className="h-10 w-10 text-white" />
                 </div>
                 <h3 className="font-playfair text-2xl font-bold text-white mb-3">Empathy</h3>
-                <p className="font-inter text-white/90 text-lg text-center">Understanding that every woman's journey is unique and deserves compassionate support</p>
+                <p className="font-inter text-gray-300 text-lg text-center">Understanding that every woman's journey is unique and deserves compassionate support</p>
               </div>
               <div className="flex flex-col items-center">
                 <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-6">
                   <BookOpen className="h-10 w-10 text-white" />
                 </div>
                 <h3 className="font-playfair text-2xl font-bold text-white mb-3">Empowerment</h3>
-                <p className="font-inter text-white/90 text-lg text-center">Providing women with knowledge and tools to take control of their health and well-being</p>
+                <p className="font-inter text-gray-300 text-lg text-center">Providing women with knowledge and tools to take control of their health and well-being</p>
               </div>
             </div>
           </div>

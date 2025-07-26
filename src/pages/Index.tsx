@@ -5,7 +5,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Calendar, Mail, BookOpen, Heart, Star, Users, Phone, Instagram, Facebook, Linkedin } from "lucide-react";
+import { Calendar, Mail, BookOpen, Heart, Star, Users, Phone, Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import './honeycomb.css'; // (create this file for the honeycomb CSS)
 import Founder from './founder';
@@ -42,15 +43,15 @@ function HexFlower({ label, text }) {
 
 const Index = () => {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F6E7E0' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
       {/* Hero Section */}
-      <section className="relative overflow-hidden text-white min-h-[90vh] flex items-center" role="banner" data-aos="fade-up" style={{ backgroundColor: '#F6E7E0' }}>
+              <section className="relative overflow-hidden text-white min-h-[90vh] flex items-center" role="banner" data-aos="fade-up" style={{ backgroundColor: '#e9f5e9' }}>
         {/* Background image */}
         <img 
-          src="/photos/Screenshot 2025-07-24 at 22.30.24.png" 
+          src="/photos/HeroPageBackgorund.jpg" 
           alt="Hero Background" 
           className="absolute inset-0 w-full h-full object-cover z-0" 
-          style={{ pointerEvents: 'none' }}
+          style={{ pointerEvents: 'none', objectPosition: '0% center', transform: 'scale(1.1)' }}
           aria-hidden="true"
         />
         {/* Overlay */}
@@ -60,29 +61,18 @@ const Index = () => {
         <div className="relative container mx-auto py-16 sm:py-20 md:py-24 z-30">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="text-center lg:text-left animate-fade-in-up px-4 sm:px-0 w-full col-span-2">
-              <h1 className="font-playfair text-responsive-5xl font-bold mb-4 md:mb-6 text-white leading-tight tracking-tight" data-aos="fade-up">
+              <h1 className="font-playfair text-responsive-5xl font-bold mb-4 md:mb-6 text-white leading-tight tracking-tight drop-shadow-lg" data-aos="fade-up">
                 Transform Your <br />
-                Wellness Journey
+                Lifestyle Medicine
               </h1>
-              <p className="font-inter text-responsive-xl mb-3 md:mb-4 font-medium opacity-95" data-aos="fade-up" data-aos-delay="100">
+              <p className="font-playfair text-responsive-xl mb-3 md:mb-4 font-semibold text-white/95 italic drop-shadow-md" data-aos="fade-up" data-aos-delay="100">
                 Empowering women with evidence-based, holistic health solutions
               </p>
-              <p className="font-inter text-responsive-base opacity-85 max-w-2xl mx-auto lg:mx-0 leading-relaxed mb-6 md:mb-8" data-aos="fade-up" data-aos-delay="200">
+              <p className="font-inter text-responsive-base text-white/90 max-w-2xl mx-auto lg:mx-0 leading-relaxed mb-6 md:mb-8 drop-shadow-sm" data-aos="fade-up" data-aos-delay="200">
                 From periods to parenting — explore wellness with Dr. Pravina Kale's lifestyle medicine approach
               </p>
               
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
-                <Link to="/consultations">
-                  <Button 
-                    variant="soft" 
-                    size="xl" 
-                    className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20 group w-full sm:w-auto min-w-[320px]"
-                    aria-label="Book a consultation with Dr. Pravina Kale"
-                  >
-                    <Heart className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
-                    Book a Consultation
-                  </Button>
-                </Link>
                 <Link to="/workshops">
                   <Button 
                     variant="soft" 
@@ -91,7 +81,7 @@ const Index = () => {
                     aria-label="Join a wellness workshop"
                   >
                     <Calendar className="mr-3 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" aria-hidden="true" />
-                    Join a Workshop
+                    Live Online Workshops
                   </Button>
                 </Link>
                 <Link to="/wellness-plans">
@@ -99,10 +89,10 @@ const Index = () => {
                     variant="soft" 
                     size="xl" 
                     className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20 group w-full sm:w-auto min-w-[320px]"
-                    aria-label="View our wellness plans"
+                    aria-label="View our lifestyle plans"
                   >
                     <BookOpen className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
-                    Wellness Plans
+                    Explore Our Lifestyle Plans
                   </Button>
                 </Link>
               </div>
@@ -113,10 +103,14 @@ const Index = () => {
       </section>
 
       {/* What We Offer */}
-      <section className="py-16 sm:py-20 md:py-24" role="region" aria-labelledby="services-heading" data-aos="fade-up" style={{ backgroundColor: '#F6E7E0' }}>
+      <section className="py-16 sm:py-20 md:py-24" role="region" aria-labelledby="services-heading" data-aos="fade-up" style={{ backgroundColor: '#e9f5e9' }}>
         <div className="container mx-auto">
           <div className="text-center mb-12 md:mb-16 animate-fade-in-up px-4 sm:px-0">
-            <h2 id="services-heading" className="font-playfair text-responsive-3xl font-bold text-foreground mb-4 md:mb-6" data-aos="fade-up">What We Offer</h2>
+            <div className="flex items-center justify-center mb-6">
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-foreground/30"></div>
+              <h2 id="services-heading" className="font-playfair text-responsive-3xl font-bold text-foreground mx-8" data-aos="fade-up">What We Offer</h2>
+              <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-foreground/30"></div>
+            </div>
             <p className="font-inter text-responsive-xl text-muted-foreground">Workshops • 1:1 Consultations • Wellness Plans</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto mb-12 md:mb-16 px-4 sm:px-0">
@@ -176,7 +170,7 @@ const Index = () => {
       </section>
 
       {/* Founder Message (Moved & Resized) */}
-      <section className="py-16 relative overflow-hidden" data-aos="fade-up" style={{ backgroundColor: '#F6E7E0' }}>
+      <section className="py-16 relative overflow-hidden" data-aos="fade-up" style={{ backgroundColor: '#e9f5e9' }}>
         {/* Background image */}
         <img 
           src="/photos/background2.png" 
@@ -215,11 +209,14 @@ const Index = () => {
       </section>
 
       {/* Meet Our Team Section */}
-      <section className="py-24" data-aos="fade-up" style={{ backgroundColor: '#F6E7E0' }}>
+      <section className="py-24" data-aos="fade-up" style={{ backgroundColor: '#e9f5e9' }}>
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-fade-in-up">
-            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">Meet Our Team</h2>
-            <p className="font-inter text-xl text-muted-foreground">Advisory Board & Core Team</p>
+            <div className="flex items-center justify-center mb-6">
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-foreground/30"></div>
+              <h2 className="font-playfair text-5xl font-bold text-foreground mx-8">Meet Our Team</h2>
+              <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-foreground/30"></div>
+            </div>
           </div>
 
           {/* Advisory Board */}
@@ -235,11 +232,12 @@ const Index = () => {
                   key={doctor.name}
                   className="flex flex-col items-center text-center bg-transparent shadow-none p-0 h-full justify-start"
                 >
-                  <div className="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow mb-6 bg-gray-100 flex items-center justify-center mx-auto">
+                  <div className="w-72 h-72 rounded-full overflow-hidden border-4 border-white shadow mb-6 bg-gray-100 flex items-center justify-center mx-auto">
                     <img
                       src={advisoryBoardImages[idx]}
                       alt={doctor.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-top"
+                      style={{ objectPosition: 'center 30%' }}
                     />
                   </div>
                   <h3 className="font-playfair text-xl font-bold text-foreground mb-1">{doctor.name}</h3>
@@ -264,11 +262,15 @@ const Index = () => {
                   key={member.name}
                   className="flex flex-col items-center text-center bg-transparent shadow-none p-0 h-full justify-start"
                 >
-                  <div className="w-44 h-44 rounded-full overflow-hidden border-4 border-white shadow mb-6 bg-gray-100 flex items-center justify-center mx-auto">
+                  <div className="w-64 h-64 rounded-full overflow-hidden border-4 border-white shadow mb-6 bg-gray-100 flex items-center justify-center mx-auto">
                     <img
                       src={coreTeamImages[idx]}
                       alt={member.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-top"
+                      style={{ 
+                        objectPosition: member.name === "Dr. Kalyani Gade" || member.name === "Dr. Sonal Deshmukh" || member.name === "Dr. Pratibha Kale" ? 'center 20%' : 'center 30%',
+                        transform: member.name === "Dr. Pratibha Kale" ? 'scale(1.6)' : 'scale(1)'
+                      }}
                     />
                   </div>
                   <h3 className="font-playfair text-xl font-bold text-foreground mb-1">{member.name}</h3>
@@ -369,78 +371,130 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-foreground text-white py-20">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-4 gap-12 mb-16">
-            <div className="lg:col-span-2">
-              <h3 className="font-playfair text-3xl font-bold mb-6 text-primary-glow">Path'o'Life</h3>
-              <p className="font-inter text-lg text-gray-300 mb-6 leading-relaxed">
-                Empowering women through evidence-based lifestyle medicine
-              </p>
-              <div className="flex space-x-4">
-                <div className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">
-                  <Instagram className="h-6 w-6 text-primary group-hover:text-white" />
+      <footer className="bg-foreground text-white">
+        {/* Hero Section */}
+        <section className="relative py-16 text-white overflow-hidden" style={{ backgroundColor: '#338B81' }}>
+          <div className="absolute inset-0 bg-black/10"></div>
+          <div className="relative container mx-auto px-6">
+            <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
+              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 leading-tight">Connect With Us</h2>
+              <p className="font-inter text-xl md:text-2xl mb-8 opacity-90">Stay connected for wellness tips, updates, and support</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Main Footer Content */}
+        <section className="py-16 bg-foreground text-white">
+          <div className="container mx-auto px-6">
+            <div className="grid lg:grid-cols-2 gap-16 items-start max-w-7xl mx-auto">
+              {/* Left Column - Brand & Social */}
+              <div className="animate-fade-in-up">
+                <div className="flex items-center mb-8">
+                  <div className="bg-white rounded-full p-3 shadow-sm mr-4">
+                    <img 
+                      src="/photos/logo.png" 
+                      alt="Path'o'Life Logo" 
+                      className="h-8 w-auto"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-playfair text-2xl font-bold text-white">Path'o'Life</h3>
+                    <p className="font-inter text-sm text-gray-300">PERIODS • PREGNANCY • PARENTING</p>
+                  </div>
                 </div>
-                <div className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">
-                  <Facebook className="h-6 w-6 text-primary group-hover:text-white" />
+                <p className="font-inter text-lg text-gray-300 mb-8 leading-relaxed">
+                  Empowering women through evidence-based lifestyle medicine. Join our community for personalized health guidance and support.
+                </p>
+                <div className="flex space-x-4 mb-8">
+                  <a href="https://www.instagram.com/path.o.life?igsh=bHF1b2ZkbW43bnZo" target="_blank" rel="noopener noreferrer" className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">
+                    <Instagram className="h-6 w-6 text-primary group-hover:text-white" />
+                  </a>
+                  <a href="https://www.facebook.com/share/1Zui5tjBi9/" target="_blank" rel="noopener noreferrer" className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">
+                    <Facebook className="h-6 w-6 text-primary group-hover:text-white" />
+                  </a>
+                  <a href="https://www.linkedin.com/in/dr-pravina-kale-6226b31b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">
+                    <Linkedin className="h-6 w-6 text-primary group-hover:text-white" />
+                  </a>
+                  <a href="https://youtube.com/@patholife?si=gyNQBsKA4yvk0VhI" target="_blank" rel="noopener noreferrer" className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">
+                    <Youtube className="h-6 w-6 text-primary group-hover:text-white" />
+                  </a>
                 </div>
-                <div className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">
-                  <Linkedin className="h-6 w-6 text-primary group-hover:text-white" />
+              </div>
+
+              {/* Right Column - Links & Newsletter */}
+              <div className="animate-fade-in-up">
+                <div className="grid md:grid-cols-2 gap-8">
+                  {/* Quick Links */}
+                  <div>
+                    <h4 className="font-inter text-xl font-semibold mb-6 text-white">Quick Links</h4>
+                    <div className="space-y-4 font-inter text-gray-300">
+                      <Link to="/about" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">About Dr. Pravina</Link>
+                      <Link to="/workshops" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Workshops</Link>
+                      <Link to="/consultations" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Consultations</Link>
+                      <Link to="/wellness-plans" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Lifestyle Plans</Link>
+                      <Link to="/community" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Community</Link>
+                    </div>
+                  </div>
+
+                  {/* Contact Info */}
+                  <div>
+                    <h4 className="font-inter text-xl font-semibold mb-6 text-white">Contact</h4>
+                    <div className="space-y-4 font-inter text-gray-300">
+                      <p className="flex items-center hover:text-primary-glow transition-colors">
+                        <Mail className="h-5 w-5 mr-3 text-primary" /> 
+                        drpravina.patholife@gmail.com
+                      </p>
+                      <p className="flex items-center hover:text-primary-glow transition-colors">
+                        <Phone className="h-5 w-5 mr-3 text-primary" /> 
+                        9421829899
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Newsletter Section */}
+                <div className="mt-8">
+                  <h4 className="font-inter text-xl font-semibold mb-4 text-white">Stay Updated</h4>
+                  <p className="font-inter text-gray-300 mb-4">Get weekly wellness tips, healthy recipes, and motivation delivered to your inbox</p>
+                  <div className="space-y-4">
+                    <Input 
+                      type="email" 
+                      placeholder="Enter your email address" 
+                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                    />
+                    <Button variant="wellness" size="lg" className="font-inter font-semibold w-full">
+                      <Mail className="mr-2 h-4 w-4" />
+                      Subscribe
+                    </Button>
+                  </div>
+                  <p className="font-inter text-xs text-gray-400 mt-2">
+                    We respect your privacy. Unsubscribe at any time.
+                  </p>
                 </div>
               </div>
             </div>
-            
-            <div>
-              <h4 className="font-inter text-xl font-semibold mb-6 text-white">Quick Links</h4>
-              <div className="space-y-4 font-inter text-gray-300">
-                <Link to="/about" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">About Dr. Pravina</Link>
-                <Link to="/workshops" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Workshops</Link>
-                <Link to="/consultations" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Consultations</Link>
-                <Link to="/wellness-plans" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Wellness Plans</Link>
-              </div>
-            </div>
-            
-            <div>
-              <h4 className="font-inter text-xl font-semibold mb-6 text-white">Contact</h4>
-              <div className="space-y-4 font-inter text-gray-300">
-                <p className="flex items-center hover:text-primary-glow transition-colors">
-                  <Mail className="h-5 w-5 mr-3 text-primary" /> 
-                  drpravina.patholife@gmail.com
-                </p>
-                <p className="flex items-center hover:text-primary-glow transition-colors">
-                  <Phone className="h-5 w-5 mr-3 text-primary" /> 
-                  9421829899
-                </p>
-              </div>
-              <div className="mt-8">
-                <Link to="/community">
-                  <Button variant="wellness" size="lg" className="font-inter font-semibold w-full">
-                    Join Newsletter
-                  </Button>
-                </Link>
+
+            {/* Bottom Section */}
+            <div className="border-t border-gray-700 pt-12 mt-16">
+              <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
+                <div className="text-center lg:text-left">
+                  <p className="font-inter text-xl text-primary-glow italic mb-3 leading-relaxed max-w-2xl">
+                    "A woman empowered with the right lifestyle becomes unstoppable – not just for her own life, but for generations ahead."
+                  </p>
+                  <p className="font-inter text-gray-400">— Dr. Pravina Kale</p>
+                </div>
+                <div className="text-center lg:text-right">
+                  <p className="font-inter text-gray-400 text-sm">
+                    © 2024 Path'o'Life. All rights reserved.
+                  </p>
+                  <p className="font-inter text-gray-500 text-xs mt-1">
+                    Designed with wellness in mind
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-          
-          <div className="border-t border-gray-700 pt-12">
-            <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
-              <div className="text-center lg:text-left">
-                <p className="font-inter text-xl text-primary-glow italic mb-3 leading-relaxed max-w-2xl">
-                  "A woman empowered with the right lifestyle becomes unstoppable – not just for her own life, but for generations ahead."
-                </p>
-                <p className="font-inter text-gray-400">— Dr. Pravina Kale</p>
-              </div>
-              <div className="text-center lg:text-right">
-                <p className="font-inter text-gray-400 text-sm">
-                  © 2024 Path'o'Life. All rights reserved.
-                </p>
-                <p className="font-inter text-gray-500 text-xs mt-1">
-                  Designed with wellness in mind
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        </section>
       </footer>
     </div>
   );

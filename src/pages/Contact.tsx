@@ -7,7 +7,7 @@ import { Mail, Phone, MessageCircle, Clock, MapPin } from "lucide-react";
 
 const Contact = () => {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F6E7E0' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
       {/* Hero Section */}
       <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#338B81' }}>
         <div className="absolute inset-0 bg-black/10"></div>
@@ -18,10 +18,6 @@ const Contact = () => {
           <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
             <h1 className="font-playfair text-6xl md:text-7xl font-bold mb-6 leading-tight">Get in Touch</h1>
             <p className="font-inter text-xl md:text-2xl mb-10 opacity-90">We're here to support your wellness journey every step of the way</p>
-            <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20">
-              <MessageCircle className="mr-3 h-5 w-5" />
-              Contact Us
-            </Button>
           </div>
         </div>
       </section>
@@ -30,7 +26,11 @@ const Contact = () => {
       <section className="py-24">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-fade-in-up">
-            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">Contact Information</h2>
+            <div className="flex items-center justify-center mb-6">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-foreground/30"></div>
+            <h2 className="font-playfair text-5xl font-bold text-foreground mx-8">Contact Information</h2>
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-foreground/30"></div>
+          </div>
             <p className="font-inter text-xl text-muted-foreground">Multiple ways to reach us for your wellness needs</p>
           </div>
           <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
@@ -151,7 +151,11 @@ const Contact = () => {
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-fade-in-up">
-            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">Frequently Asked Questions</h2>
+            <div className="flex items-center justify-center mb-6">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-foreground/30"></div>
+            <h2 className="font-playfair text-5xl font-bold text-foreground mx-8">Frequently Asked Questions</h2>
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-foreground/30"></div>
+          </div>
             <p className="font-inter text-xl text-muted-foreground">Common questions about our services and processes</p>
           </div>
           <div className="max-w-5xl mx-auto space-y-6">
@@ -187,26 +191,18 @@ const Contact = () => {
       </section>
 
       {/* Location Section */}
-      <section className="py-24 text-white" style={{ backgroundColor: '#338B81' }}>
+      <section className="py-24 bg-foreground text-white">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
             <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 leading-tight">Our Practice</h2>
             <div className="flex items-center justify-center space-x-3 mb-6">
               <MapPin className="h-8 w-8 text-white" />
-              <p className="font-inter text-xl opacity-90">Serving women across India through online consultations</p>
+              <p className="font-inter text-xl text-gray-300">Serving women across India through online consultations</p>
             </div>
-            <p className="font-inter text-lg mb-10 max-w-3xl mx-auto opacity-90">
+            <p className="font-inter text-lg mb-10 max-w-3xl mx-auto text-gray-300">
               While our consultations are conducted online, our impact reaches women across India. 
               We believe that quality healthcare should be accessible regardless of location.
             </p>
-            <div className="flex flex-col lg:flex-row gap-6 justify-center">
-              <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-primary hover:text-white font-inter font-semibold backdrop-blur-sm border border-white/20">
-                Schedule Your Online Consultation
-              </Button>
-              <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-primary hover:text-white font-inter font-semibold backdrop-blur-sm border border-white/20">
-                View All Wellness Plans
-              </Button>
-            </div>
           </div>
         </div>
       </section>

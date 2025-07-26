@@ -1,56 +1,56 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, Calendar, Heart, Baby, Stethoscope } from "lucide-react";
+import { Users, Calendar, Heart, Baby, Stethoscope, User, Users2 } from "lucide-react";
 
 const Consultations = () => {
   const experts = [
     {
-      name: "Dr. Pravina Kale",
-      specialty: "PCOS, Weight & Lifestyle Medicine",
-      description: "Founder & Lifestyle Medicine Physician specializing in hormonal health, weight management, and evidence-based lifestyle interventions.",
+      name: "PCOS, Weight Management, Pre-Pregnancy and Pregnancy Lifestyle",
+      specialty: "👩‍⚕️ Dr. Pravina Kale",
+      description: "Root-cause PCOS and hormone balancing • Natural weight and metabolism support • Lifestyle prep for fertility and conception",
       icon: Heart,
       areas: ["PCOS Management", "Weight Loss", "Lifestyle Medicine", "Preventive Health"]
     },
     {
-      name: "Dr. Pratibha Kale",
-      specialty: "Pediatrics & Lactation",
-      description: "Pediatrician, Neonatologist, Psychologist & Lactation Expert providing comprehensive maternal and child care.",
+      name: "Breastfeeding & Lactation Support",
+      specialty: "👩‍⚕️ Dr. Pratibha Kale – Pediatrician, Neonatologist & Lactation Expert",
+      description: "Latching, milk supply, feeding schedule • Nipple pain, blocked ducts, postnatal nutrition • Mental wellness during lactation",
       icon: Baby,
       areas: ["Lactation Support", "Child Nutrition", "Pediatric Care", "Maternal Psychology"]
     },
     {
-      name: "Dr. Sonal Deshmukh",
-      specialty: "Infertility & ObGyn",
-      description: "Specialized in fertility treatments, reproductive health, and comprehensive gynecological care for women.",
+      name: "Child Nutrition & Immunity",
+      specialty: "👩‍⚕️ Dr. Pratibha Kale / Dr. Apurva Kale",
+      description: "Weaning, toddler nutrition, immunity building • Gut health, picky eating • Growth tracking and feeding routine",
+      icon: Baby,
+      areas: ["Newborn Care", "Child Development", "Pediatric Health", "Neonatal Care"]
+    },
+    {
+      name: "Fertility & Infertility Consultations",
+      specialty: "👩‍⚕️ Dr. Sonal Deshmukh / Dr. Kalyani Kale – Infertility & ObGyn Experts",
+      description: "Infertility evaluation & treatment options • Lifestyle, hormones, and menstrual cycle mapping • Fertility planning with or without medications",
       icon: Stethoscope,
       areas: ["Infertility Treatment", "Reproductive Health", "Gynecological Care", "Fertility Planning"]
     },
     {
-      name: "Dr. Kalyani Gade",
-      specialty: "Infertility & ObGyn",
-      description: "Expert in fertility management, pregnancy care, and women's reproductive health across all life stages.",
-      icon: Stethoscope,
-      areas: ["Fertility Management", "Pregnancy Care", "Reproductive Health", "Women's Wellness"]
-    },
-    {
-      name: "Dr. Pushpa Junghare",
-      specialty: "Senior ObGyn",
-      description: "Senior Obstetrician & Gynecologist with extensive experience in high-risk pregnancies and maternal care.",
-      icon: Users,
+      name: "Senior Obstetrics & Gynaecology Consultations",
+      specialty: "👩‍⚕️ Dr. Pushpa Junghare / Dr. Sandhya Kale",
+      description: "Second opinions, high-risk cases • Medical guidance beyond lifestyle changes • Trusted senior guidance from 30+ years experience",
+      icon: Users2,
       areas: ["High-Risk Pregnancy", "Maternal Care", "Obstetrics", "Gynecology"]
     },
     {
-      name: "Dr. Apurva Kale",
-      specialty: "Pediatrics & Neonatology",
-      description: "Pediatrician & Neonatologist specializing in newborn care, child development, and pediatric health.",
-      icon: Baby,
-      areas: ["Newborn Care", "Child Development", "Pediatric Health", "Neonatal Care"]
+      name: "Corporate Lifestyle Consults for Women",
+      specialty: "👩‍⚕️ Dr. Pravina Kale",
+      description: "Managing stress, burnout, and work-life balance • Hormone-friendly lifestyle for working women • Simple tools for busy routines",
+      icon: User,
+      areas: ["PCOS Management", "Weight Loss", "Lifestyle Medicine", "Preventive Health"]
     }
   ];
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F6E7E0' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
       {/* Hero Section */}
       <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#338B81' }}>
         <div className="absolute inset-0 bg-black/10"></div>
@@ -72,7 +72,11 @@ const Consultations = () => {
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-fade-in-up">
-            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">How It Works</h2>
+            <div className="flex items-center justify-center mb-6">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-foreground/30"></div>
+            <h2 className="font-playfair text-5xl font-bold text-foreground mx-8">How It Works</h2>
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-foreground/30"></div>
+          </div>
             <p className="font-inter text-xl text-muted-foreground">Simple steps to get personalized care</p>
           </div>
           <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
@@ -101,10 +105,14 @@ const Consultations = () => {
       </section>
 
       {/* Our Experts */}
-      <section className="py-24" style={{ backgroundColor: '#F6E7E0' }}>
+      <section className="py-24" style={{ backgroundColor: '#e9f5e9' }}>
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-fade-in-up">
-            <h2 className="font-playfair text-5xl font-bold text-foreground mb-6">Our Expert Team</h2>
+            <div className="flex items-center justify-center mb-6">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-foreground/30"></div>
+            <h2 className="font-playfair text-5xl font-bold text-foreground mx-8">Our Expert Team</h2>
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-foreground/30"></div>
+          </div>
             <p className="font-inter text-xl text-muted-foreground">Specialized care from experienced women's health professionals</p>
           </div>
           
@@ -112,11 +120,11 @@ const Consultations = () => {
             {experts.map((expert, index) => (
               <Card key={index} className="group hover:shadow-elevated hover:-translate-y-1 transition-all duration-500 animate-fade-in" style={{animationDelay: `${index * 100}ms`}}>
                 <CardContent className="p-8">
-                  <div className="flex items-center mb-6">
-                    <div className="w-14 h-14 bg-gradient-primary rounded-full flex items-center justify-center mr-4 shadow-lg group-hover:shadow-glow transition-all duration-300">
+                  <div className="flex items-start mb-6">
+                    <div className="w-14 h-14 bg-gradient-primary rounded-full flex items-center justify-center mr-4 shadow-lg group-hover:shadow-glow transition-all duration-300 flex-shrink-0">
                       <expert.icon className="h-7 w-7 text-white" />
                     </div>
-                    <div>
+                    <div className="flex-1 min-w-0">
                       <h3 className="font-playfair text-xl font-bold text-foreground">{expert.name}</h3>
                       <p className="font-inter text-primary font-semibold">{expert.specialty}</p>
                     </div>
@@ -137,11 +145,11 @@ const Consultations = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 text-white" style={{ backgroundColor: '#338B81' }}>
+      <section className="py-24 bg-foreground text-white">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
             <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 leading-tight">Ready to Get Started?</h2>
-            <p className="font-inter text-xl mb-10 opacity-90">Book your personalized consultation today and take the first step towards better health</p>
+            <p className="font-inter text-xl mb-10 text-gray-300">Book your personalized consultation today and take the first step towards better health</p>
             <div className="flex flex-col lg:flex-row gap-6 justify-center">
               <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20">
                 <Calendar className="mr-3 h-5 w-5" />
