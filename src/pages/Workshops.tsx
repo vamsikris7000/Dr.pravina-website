@@ -17,6 +17,71 @@ const Workshops = () => {
         "PCOS-friendly food & movement",
         "Cycle syncing & stress hacks"
       ]
+    },
+    {
+      title: "👫🏻 Pre-Pregnancy Power Couple",
+      subtitle: "Plan Parenthood with Purpose",
+      audience: "For Couples Planning Pregnancy",
+      features: [
+        "Fertility nutrition for both partners",
+        "Cycle tracking & fertile window basics",
+        "Lifestyle shifts to boost conception",
+        "Detox, stress & sleep prep",
+        "Emotional alignment & partner mindset",
+        "Myths vs science of getting pregnant"
+      ]
+    },
+    {
+      title: "🤰🏻 Pregnancy Wellness Workshop",
+      subtitle: "Feel Nourished, Calm & Connected",
+      audience: "For Expecting Mothers (All Trimesters)",
+      features: [
+        "Trimester-wise nutrition & cravings",
+        "Safe movement & breathing practices",
+        "Sleep, stress & mental wellness",
+        "Gut health & immunity boosters",
+        "Indian wisdom meets modern care",
+        "Rituals for bonding & body trust"
+      ]
+    },
+    {
+      title: "🤱🏻 Confident Breastfeeding & Postpartum Healing",
+      subtitle: "Nurture Your Baby. Reclaim Your Body.",
+      audience: "For New & Expecting Moms",
+      features: [
+        "Lactation techniques & myths",
+        "Latch, supply, positions & pumping",
+        "Recovery after birth for body, mind, sleep",
+        "Postpartum nutrition & emotional support",
+        "Indian rituals & modern healing practices",
+        "Space for real talk, not just survival"
+      ]
+    },
+    {
+      title: "🍲 First Foods & Beyond",
+      subtitle: "Foundations of Child Nutrition & Lifestyle",
+      audience: "For Moms with Children (6 Months to 5 Years)",
+      features: [
+        "When & how to start solids",
+        "Daily feeding plans & schedules",
+        "Immunity-boosting foods & habits",
+        "Gut health, picky eating & meal battles",
+        "Holistic child lifestyle routines (food, sleep, screen, play)",
+        "Indian food wisdom with modern evidence"
+      ]
+    },
+    {
+      title: "👩🏻‍⚕️ The Weight Reset for Women",
+      subtitle: "Not Just Weight Loss, A Full Body Reset",
+      audience: "For All Women 18+",
+      features: [
+        "Understand your hormones & weight connection",
+        "Tackle belly fat, cravings & low energy",
+        "Anti-inflammatory nutrition made practical",
+        "Smart movement & strength strategies",
+        "Stress, sleep & metabolism mastery",
+        "Build habits that last, not bounce back"
+      ]
     }
   ];
 
@@ -82,7 +147,7 @@ const Workshops = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             {workshops.map((workshop, index) => (
-              <Card key={index} className="group hover:shadow-elevated hover:-translate-y-1 transition-all duration-500 animate-fade-in mb-8" style={{animationDelay: `${index * 100}ms`}}>
+              <Card key={index} className="group hover:shadow-elevated hover:-translate-y-1 transition-all duration-500 animate-fade-in mb-8 overflow-hidden" style={{animationDelay: `${index * 100}ms`}}>
                 <CardContent className="p-8">
                   <div className="flex items-center mb-6">
                     <div className="w-14 h-14 bg-primary rounded-full flex items-center justify-center mr-4 shadow-lg group-hover:shadow-glow transition-all duration-300">
@@ -95,7 +160,7 @@ const Workshops = () => {
                     </div>
                   </div>
                   
-                  <div className="space-y-3 mb-6">
+                  <div className="space-y-3 mb-6 max-h-0 group-hover:max-h-96 transition-all duration-500 overflow-hidden">
                     {workshop.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-start space-x-3">
                         <span className="text-primary mt-1">•</span>
