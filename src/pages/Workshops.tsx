@@ -6,41 +6,18 @@ import { Calendar, Clock, Users, BookOpen } from "lucide-react";
 const Workshops = () => {
   const workshops = [
     {
-      title: "PCOS Lifestyle",
-      subtitle: "Empower Your Hormones",
-      description: "Comprehensive lifestyle strategies for managing PCOS, hormone balance, and improving fertility naturally through evidence-based nutrition and wellness practices."
-    },
-    {
-      title: "Weight Management for Women",
-      subtitle: "Science-Based Approach",
-      description: "Understanding female metabolism, hormonal influences on weight, and sustainable lifestyle changes that work with your body's natural rhythms."
-    },
-    {
-      title: "Fertility & Pre-Pregnancy",
-      subtitle: "Prepare Your Body",
-      description: "Optimize your fertility through nutrition, lifestyle modifications, and stress management techniques. Prepare your body for healthy conception and pregnancy."
-    },
-    {
-      title: "Pregnancy Wellness",
-      subtitle: "Nurture & Thrive",
-      description: "Navigate pregnancy with confidence through proper nutrition, safe exercise, and lifestyle practices that support both mother and baby's health."
-    },
-    {
-      title: "Lactation & Postpartum",
-      subtitle: "Recovery & Bonding",
-      description: "Support your postpartum recovery with nutrition for breastfeeding, managing postpartum changes, and establishing healthy routines with your baby."
-    },
-    {
-      title: "Child Nutrition & Immunity",
-      subtitle: "Foundation for Life",
-      description: "Build strong immunity and healthy eating habits in children through age-appropriate nutrition, meal planning, and lifestyle practices for growing families."
-    },
-    {
-      title: "Corporate Wellness for Working Women",
-      subtitle: "Balance & Success",
-      description: "Manage career stress, maintain work-life balance, and prioritize health while excelling professionally. Practical strategies for busy working women."
-    },
-
+      title: "🌸 PCOS Unplugged",
+      subtitle: "Your Hormones, Hair, Skin & Sanity",
+      audience: "For Teens & Young Women",
+      features: [
+        "Decode your hormones & cycle",
+        "Period problems & PCOS types", 
+        "Skin, hair, mood & weight tips",
+        "Menstrual cup basics & hygiene",
+        "PCOS-friendly food & movement",
+        "Cycle syncing & stress hacks"
+      ]
+    }
   ];
 
   return (
@@ -53,37 +30,55 @@ const Workshops = () => {
         
         <div className="relative container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
-            <h1 className="font-playfair text-6xl md:text-7xl font-bold mb-6 leading-tight">Path'o'Life Signature Workshops</h1>
-            <p className="font-inter text-xl md:text-2xl mb-10 opacity-90">Live, interactive 3-hour transformative sessions</p>
+            <h1 className="font-playfair text-6xl md:text-7xl font-bold mb-6 leading-tight">✨ Path'o'Life Signature Workshops</h1>
+            <p className="font-inter text-xl md:text-2xl mb-8 opacity-90">Live • Interactive • Transformational Sessions for Every Phase of Womanhood</p>
             
-            <div className="grid md:grid-cols-3 gap-8 mb-10 max-w-3xl mx-auto">
-              <div className="flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-all duration-300">
-                <Calendar className="h-6 w-6" />
-                <span className="font-inter font-medium">Every Tuesday & Friday</span>
-              </div>
-              <div className="flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-all duration-300">
+            <div className="grid md:grid-cols-3 gap-8 mb-8 max-w-5xl mx-auto">
+              <div className="flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 min-h-[80px]">
                 <Clock className="h-6 w-6" />
-                <span className="font-inter font-medium">5:30 – 8:30 PM</span>
+                <span className="font-inter font-medium">🕒 2-hour deep-dive workshops</span>
               </div>
-              <div className="flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-all duration-300">
+              <div className="flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 min-h-[80px]">
                 <Users className="h-6 w-6" />
-                <span className="font-inter font-medium">Google Meet</span>
+                <span className="font-inter font-medium">📍 Live on Google Meet | 🗓️ Flexible slots</span>
+              </div>
+              <div className="flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 min-h-[80px]">
+                <Calendar className="h-6 w-6" />
+                <span className="font-inter font-medium">🗣️ Available in English • Hindi • Marathi</span>
               </div>
             </div>
 
-            <p className="font-inter text-lg mb-10 opacity-90">
-              🎓 Includes checklists, toolkits, Q&A | 🎤 English-Marathi mix
-            </p>
-            <div className="max-w-2xl mx-auto mt-10">
-              <p className="font-playfair text-2xl md:text-3xl font-semibold mb-4 text-white">🎯 Ready to take the first step toward healing?</p>
-              <p className="font-inter text-lg mb-8 text-white">Choose your workshop and join us live from the comfort of your home.</p>
+            <div className="max-w-2xl mx-auto">
+              <p className="font-inter text-lg text-white/90">
+                🎁 Includes: • Downloadable checklists & lifestyle toolkits
+              </p>
+              <p className="font-inter text-lg text-white/90 ml-8">
+                • Expert Q&A
+              </p>
+              <p className="font-inter text-lg text-white/90 ml-8">
+                • Free resources you'll actually use
+              </p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Call to Action Section */}
+      <section className="py-12" style={{ backgroundColor: '#e9f5e9' }}>
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="font-playfair text-3xl md:text-4xl font-semibold mb-4 text-foreground">
+              💫 Your journey to healing starts here.
+            </p>
+            <p className="font-inter text-lg text-muted-foreground">
+              Choose your workshop and join us live from the comfort of your home.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Workshops Grid */}
-      <section className="py-24" style={{ backgroundColor: '#e9f5e9' }}>
+      <section className="pt-8 pb-24" style={{ backgroundColor: '#e9f5e9' }}>
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             {workshops.map((workshop, index) => (
@@ -96,9 +91,18 @@ const Workshops = () => {
                     <div>
                       <h3 className="font-playfair text-xl font-bold text-foreground">{workshop.title}</h3>
                       <p className="font-inter text-primary font-semibold">{workshop.subtitle}</p>
+                      <p className="font-inter text-sm text-muted-foreground mt-1">{workshop.audience}</p>
                     </div>
                   </div>
-                  <p className="font-inter text-muted-foreground mb-6 leading-relaxed">{workshop.description}</p>
+                  
+                  <div className="space-y-3 mb-6">
+                    {workshop.features.map((feature, featureIndex) => (
+                      <div key={featureIndex} className="flex items-start space-x-3">
+                        <span className="text-primary mt-1">•</span>
+                        <span className="font-inter text-muted-foreground leading-relaxed">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
                   <Button variant="soft" size="lg" className="w-full bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-primary/20">
                     Register for This Workshop
                   </Button>
@@ -163,3 +167,4 @@ const Workshops = () => {
 };
 
 export default Workshops;
+

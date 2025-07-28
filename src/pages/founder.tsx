@@ -1,6 +1,65 @@
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Award, GraduationCap, Heart, Users, BookOpen, Microscope, PenTool, Brain } from "lucide-react";
 
 const Founder = () => {
+  const professionalHighlights = [
+    {
+      icon: GraduationCap,
+      title: "MBBS MD (Pathology)",
+      description: "Medical expertise in disease diagnosis",
+      color: "from-orange-400 to-orange-600"
+    },
+    {
+      icon: Award,
+      title: "Diplomate, International Board of Lifestyle Medicine (USA)",
+      description: "Evidence-based wellness approach",
+      color: "from-purple-400 to-purple-600"
+    },
+    {
+      icon: Award,
+      title: "Certified in Lifestyle Medicine from Harvard University",
+      description: "World-class medical education",
+      color: "from-blue-400 to-blue-600"
+    },
+    {
+      icon: Award,
+      title: "Certified in Lifestyle & Health from British Nutrition Foundation",
+      description: "Nutrition and wellness expertise",
+      color: "from-green-400 to-green-600"
+    },
+    {
+      icon: Microscope,
+      title: "Certified in Dermatopathology",
+      description: "Specialized skin pathology expertise",
+      color: "from-pink-400 to-pink-600"
+    },
+    {
+      icon: Users,
+      title: "Chairperson Clinical Services, Indian Society of Lifestyle Medicine (ISLM)",
+      description: "Leadership in lifestyle medicine",
+      color: "from-indigo-400 to-indigo-600"
+    },
+    {
+      icon: Heart,
+      title: "Expert in Women's Health, Hormones, Fertility, Pregnancy, Postpartum, Lactation & Child Health",
+      description: "Comprehensive women's healthcare",
+      color: "from-red-400 to-red-600"
+    },
+    {
+      icon: PenTool,
+      title: "Medical Writer at Physicians Association for Nutrition (PAN) India",
+      description: "Medical communication expertise",
+      color: "from-teal-400 to-teal-600"
+    },
+    {
+      icon: Brain,
+      title: "Research & Artificial Intelligence in Healthcare",
+      description: "Innovation in medical technology",
+      color: "from-cyan-400 to-cyan-600"
+    }
+  ];
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
       <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#1a5f57' }}>
@@ -45,30 +104,74 @@ const Founder = () => {
           </div>
         </div>
       </section>
-      <section className="py-24 bg-foreground text-white">
+
+      {/* Professional Highlights Carousel */}
+      <section className="py-24 bg-foreground text-white overflow-hidden">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
-            <div className="order-2 lg:order-1 animate-scale-in">
-              <div className="relative">
-                <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-pulse-glow"></div>
-                <img 
-                  src="/photos/founder.png" 
-                  alt="Founder" 
-                  className="relative w-full max-w-md mx-auto rounded-2xl shadow-elevated hover:shadow-glow transition-all duration-500 hover:scale-105"
-                />
-              </div>
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center mb-6">
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+              <h2 className="font-playfair text-4xl md:text-5xl font-bold text-white mx-8">Professional Highlights</h2>
+              <div className="flex-1 h-px bg-gradient-to-l from-transparent via-white/30 to-transparent"></div>
             </div>
-            <div className="order-1 lg:order-2 animate-fade-in-up">
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">About the Founder</h2>
-              <p className="font-inter text-lg text-gray-300 mb-6 leading-relaxed">
-                This is a placeholder for the founder's story and credentials. You can update this content later.
-              </p>
-              <Button variant="wellness" size="lg" className="font-inter font-semibold">
-                Book a Consultation
-              </Button>
+            <p className="font-inter text-xl text-gray-300">Evidence-based credentials that make a difference</p>
+          </div>
+          
+          <div className="relative">
+            <div className="overflow-hidden">
+              <div className="flex group" style={{ animation: 'scroll-left 60s linear infinite' }}>
+                {/* First set of cards */}
+                {professionalHighlights.map((highlight, index) => (
+                  <div key={`first-${index}`} className="flex-shrink-0 w-80 mx-4">
+                    <Card className="h-full bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105 group-hover:pause">
+                      <CardContent className="p-6 text-center">
+                        <div className={`w-16 h-16 bg-gradient-to-br ${highlight.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
+                          <highlight.icon className="h-8 w-8 text-white" />
+                        </div>
+                        <h3 className="font-playfair text-lg font-bold text-white mb-3 leading-tight">
+                          {highlight.title}
+                        </h3>
+                        <p className="font-inter text-sm text-gray-300 leading-relaxed">
+                          {highlight.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                ))}
+                
+                {/* Duplicate set for seamless loop */}
+                {professionalHighlights.map((highlight, index) => (
+                  <div key={`second-${index}`} className="flex-shrink-0 w-80 mx-4">
+                    <Card className="h-full bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105 group-hover:pause">
+                      <CardContent className="p-6 text-center">
+                        <div className={`w-16 h-16 bg-gradient-to-br ${highlight.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
+                          <highlight.icon className="h-8 w-8 text-white" />
+                        </div>
+                        <h3 className="font-playfair text-lg font-bold text-white mb-3 leading-tight">
+                          {highlight.title}
+                        </h3>
+                        <p className="font-inter text-sm text-gray-300 leading-relaxed">
+                          {highlight.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
+        
+        <style>{`
+          @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          
+          .group:hover .group {
+            animation-play-state: paused;
+          }
+        `}</style>
       </section>
     </div>
   );

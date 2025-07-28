@@ -1,11 +1,66 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, Award, Heart, BookOpen } from "lucide-react";
-
-
+import { Star, Award, Heart, BookOpen, GraduationCap, Users, Microscope, PenTool, Brain } from "lucide-react";
 
 const About = () => {
+  const professionalHighlights = [
+    {
+      icon: GraduationCap,
+      title: "MBBS MD (Pathology)",
+      description: "Medical expertise in disease diagnosis",
+      color: "from-orange-400 to-orange-600"
+    },
+    {
+      icon: Award,
+      title: "Diplomate, International Board of Lifestyle Medicine (USA)",
+      description: "Evidence-based wellness approach",
+      color: "from-purple-400 to-purple-600"
+    },
+    {
+      icon: Award,
+      title: "Certified in Lifestyle Medicine from Harvard University",
+      description: "World-class medical education",
+      color: "from-blue-400 to-blue-600"
+    },
+    {
+      icon: Award,
+      title: "Certified in Lifestyle & Health from British Nutrition Foundation",
+      description: "Nutrition and wellness expertise",
+      color: "from-green-400 to-green-600"
+    },
+    {
+      icon: Microscope,
+      title: "Certified in Dermatopathology",
+      description: "Specialized skin pathology expertise",
+      color: "from-pink-400 to-pink-600"
+    },
+    {
+      icon: Users,
+      title: "Chairperson Clinical Services, Indian Society of Lifestyle Medicine (ISLM)",
+      description: "Leadership in lifestyle medicine",
+      color: "from-indigo-400 to-indigo-600"
+    },
+    {
+      icon: Heart,
+      title: "Expert in Women's Health, Hormones, Fertility, Pregnancy, Postpartum, Lactation & Child Health",
+      description: "Comprehensive women's healthcare",
+      color: "from-red-400 to-red-600"
+    },
+    {
+      icon: PenTool,
+      title: "Medical Writer at Physicians Association for Nutrition (PAN) India",
+      description: "Medical communication expertise",
+      color: "from-teal-400 to-teal-600"
+    },
+    {
+      icon: Brain,
+      title: "Research & Artificial Intelligence in Healthcare",
+      description: "Innovation in medical technology",
+      color: "from-cyan-400 to-cyan-600"
+    }
+  ];
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
       {/* Hero Section */}
@@ -58,40 +113,69 @@ const About = () => {
       {/* About Dr. Pravina */}
       <section className="py-24" style={{ backgroundColor: '#e9f5e9' }}>
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
-            <div className="order-2 lg:order-1 animate-scale-in">
-              <div className="relative">
-                <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-pulse-glow"></div>
-                <img 
-                  src="/photos/founder.png" 
-                  alt="Dr. Pravina Kale" 
-                  className="relative w-full max-w-md mx-auto rounded-2xl shadow-elevated hover:shadow-glow transition-all duration-500 hover:scale-105"
-                />
+          <div className="max-w-6xl mx-auto">
+            <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mb-8 leading-tight text-center">Her Journey</h2>
+            
+            <div className="relative">
+              <div className="float-left mr-8 mb-6 animate-scale-in">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-pulse-glow"></div>
+                  <img 
+                    src="/photos/founder1.png" 
+                    alt="Dr. Pravina Kale" 
+                    className="relative w-80 h-auto rounded-2xl shadow-elevated hover:shadow-glow transition-all duration-500 hover:scale-105"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="order-1 lg:order-2 animate-fade-in-up">
-              <div className="flex items-center justify-center mb-8">
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-foreground/30"></div>
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mx-8 leading-tight">Her Journey</h2>
-              <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-foreground/30"></div>
-            </div>
-              <p className="font-inter text-lg text-muted-foreground mb-6 leading-relaxed">
-                Dr. Pravina Kale's path from pathology to lifestyle medicine represents a profound shift from treating disease to preventing it. After years of diagnosing ailments under the microscope, she realized the true power lies in empowering women to take control of their health through lifestyle choices.
-              </p>
-              <p className="font-inter text-lg text-muted-foreground mb-8 leading-relaxed">
-                As a certified Lifestyle Medicine physician and pathologist, Dr. Pravina combines clinical expertise with evidence-based wellness strategies, making complex medical knowledge accessible and actionable for every woman.
-              </p>
-              <Button variant="wellness" size="lg" className="font-inter font-semibold">
-                Book a Consultation
-              </Button>
+              
+              <div className="space-y-4 text-muted-foreground">
+                <p className="font-inter text-base leading-relaxed">
+                  I once dreamt of becoming a <span className="font-semibold text-foreground">Pediatrician & Neonatologist</span> to hold tiny lives in my hands. I wanted to be an <span className="font-semibold text-foreground">OBGYN</span> to empower women during their most transformative phases. But my own body taught me a deeper lesson.
+                </p>
+                
+                <p className="font-inter text-base leading-relaxed">
+                  As a pathologist and lifestyle medicine physician, I've spent years understanding disease under the microscope. But what truly lights me up is helping women <span className="font-semibold text-foreground">prevent disease, reclaim their health, and rediscover their power</span> through lifestyle.
+                </p>
+                
+                <p className="font-inter text-base leading-relaxed">
+                  So many women suffer silently from irregular periods, fertility struggles, weight battles, postpartum challenges, or simply the exhaustion of doing it all alone. What they often need isn't just a prescription. They need <span className="font-semibold text-foreground">education, guidance, and hand-holding</span>.
+                </p>
+                
+                <p className="font-inter text-base leading-relaxed">
+                  That's why I created <span className="font-playfair font-bold text-primary">Path'o'Life</span> - a safe, supportive space where science meets real life solutions. Where women aren't told what to do, but are empowered to make choices aligned with their unique phase of life.
+                </p>
+                
+                <p className="font-inter text-base leading-relaxed">
+                  Through my workshops, consultations, and programs, my goal is to be:
+                </p>
+                
+                <div className="space-y-2 ml-6 mb-4">
+                  <div className="flex items-center space-x-3">
+                    <span className="text-xl">🩺</span>
+                    <span className="font-inter text-base font-medium">A guiding hand</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <span className="text-xl">🩺</span>
+                    <span className="font-inter text-base font-medium">A voice of reason</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <span className="text-xl">🩺</span>
+                    <span className="font-inter text-base font-medium">A doctor who reminds you ... you are not alone.</span>
+                  </div>
+                </div>
+                
+                <p className="font-inter text-base leading-relaxed">
+                  I believe women don't just need medicines. They need <span className="font-semibold text-foreground">clarity, connection, and care</span>. Because science should empower, not overwhelm. And small, meaningful lifestyle changes have the power to transform a woman's hormones, health, and happiness and through her, generations to come.
+                </p>
+              </div>
+              
+
             </div>
           </div>
         </div>
       </section>
 
-
-
-      {/* Qualifications */}
+      {/* Professional Highlights Carousel */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-fade-in-up">
@@ -102,28 +186,62 @@ const About = () => {
           </div>
             <p className="font-inter text-xl text-muted-foreground">Evidence-based credentials that make a difference</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {[
-              { icon: Award, title: "MD Pathology", desc: "Medical expertise in disease diagnosis", color: "from-amber-400 to-orange-500" },
-              { icon: Star, title: "Lifestyle Medicine Certified", desc: "Evidence-based wellness approach", color: "from-purple-400 to-purple-600" },
-              { icon: Heart, title: "Women's Health Specialist", desc: "PCOS, fertility, pregnancy care", color: "from-pink-400 to-rose-500" },
-              { icon: BookOpen, title: "Corporate Wellness Expert", desc: "Stress management for working women", color: "from-blue-400 to-blue-600" }
-            ].map((qual, index) => (
-              <Card key={index} className="text-center group hover:shadow-elevated hover:-translate-y-2 transition-all duration-500 animate-fade-in" style={{animationDelay: `${index * 100}ms`}}>
-                <CardContent className="p-8">
-                  <div className="relative mb-6">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${qual.color} rounded-2xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-glow transition-all duration-300`}>
-                      <qual.icon className="h-8 w-8 text-white" />
-                    </div>
-                    <div className="absolute inset-0 bg-primary/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          
+          <div className="relative">
+            <div className="overflow-hidden">
+              <div className="flex group" style={{ animation: 'scroll-left 20s linear infinite' }}>
+                {/* First set of cards */}
+                {professionalHighlights.map((highlight, index) => (
+                  <div key={`first-${index}`} className="flex-shrink-0 w-80 mx-4">
+                    <Card className="h-full bg-white shadow-lg border-gray-200 hover:shadow-xl transition-all duration-300 hover:scale-105 group-hover:pause">
+                      <CardContent className="p-6 text-center">
+                        <div className={`w-16 h-16 bg-gradient-to-br ${highlight.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
+                          <highlight.icon className="h-8 w-8 text-white" />
+                        </div>
+                        <h3 className="font-playfair text-lg font-bold text-foreground mb-3 leading-tight">
+                          {highlight.title}
+                        </h3>
+                        <p className="font-inter text-sm text-muted-foreground leading-relaxed">
+                          {highlight.description}
+                        </p>
+                      </CardContent>
+                    </Card>
                   </div>
-                  <h3 className="font-playfair text-xl font-bold text-foreground mb-3">{qual.title}</h3>
-                  <p className="font-inter text-muted-foreground">{qual.desc}</p>
-                </CardContent>
-              </Card>
-            ))}
+                ))}
+                
+                {/* Duplicate set for seamless loop */}
+                {professionalHighlights.map((highlight, index) => (
+                  <div key={`second-${index}`} className="flex-shrink-0 w-80 mx-4">
+                    <Card className="h-full bg-white shadow-lg border-gray-200 hover:shadow-xl transition-all duration-300 hover:scale-105 group-hover:pause">
+                      <CardContent className="p-6 text-center">
+                        <div className={`w-16 h-16 bg-gradient-to-br ${highlight.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
+                          <highlight.icon className="h-8 w-8 text-white" />
+                        </div>
+                        <h3 className="font-playfair text-lg font-bold text-foreground mb-3 leading-tight">
+                          {highlight.title}
+                        </h3>
+                        <p className="font-inter text-sm text-muted-foreground leading-relaxed">
+                          {highlight.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
+        
+        <style>{`
+          @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          
+          .group:hover .group {
+            animation-play-state: paused;
+          }
+        `}</style>
       </section>
 
       {/* Philosophy */}
