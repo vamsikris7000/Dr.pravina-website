@@ -95,13 +95,11 @@ const Workshops = () => {
                     </div>
                   </div>
                   
-                  <div className="space-y-2 mb-6">
+                  <div className="space-y-3 mb-6">
                     {workshop.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="group/feature cursor-pointer overflow-hidden">
-                        <div className="flex items-start space-x-3 transition-all duration-300 group-hover/feature:translate-y-0 translate-y-[-4px] group-hover/feature:opacity-100 opacity-70 group-hover/feature:scale-100 scale-95">
-                          <span className="text-primary mt-1 transition-all duration-300 group-hover/feature:scale-110">•</span>
-                          <span className="font-inter text-muted-foreground leading-relaxed transition-all duration-300 group-hover/feature:text-foreground">{feature}</span>
-                        </div>
+                      <div key={featureIndex} className="flex items-start space-x-3">
+                        <span className="text-primary mt-1">•</span>
+                        <span className="font-inter text-muted-foreground leading-relaxed">{feature}</span>
                       </div>
                     ))}
                   </div>
