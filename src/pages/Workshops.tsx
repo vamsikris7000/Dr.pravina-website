@@ -46,7 +46,7 @@ const Workshops = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
       {/* Hero Section */}
-      <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#338B81' }}>
+      <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#1a5f57' }}>
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full animate-float"></div>
         <div className="absolute bottom-20 right-20 w-16 h-16 bg-white/10 rounded-full animate-float" style={{animationDelay: '2s'}}></div>

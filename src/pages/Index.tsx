@@ -51,7 +51,7 @@ const Index = () => {
           src="/photos/HeroPageBackgorund.jpg" 
           alt="Hero Background" 
           className="absolute inset-0 w-full h-full object-cover z-0" 
-          style={{ pointerEvents: 'none', objectPosition: '0% center', transform: 'scale(1.1)' }}
+          style={{ pointerEvents: 'none' }}
           aria-hidden="true"
         />
         {/* Overlay */}
@@ -62,14 +62,14 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="text-center lg:text-left animate-fade-in-up px-4 sm:px-0 w-full col-span-2">
               <h1 className="font-playfair text-responsive-5xl font-bold mb-4 md:mb-6 text-white leading-tight tracking-tight drop-shadow-lg" data-aos="fade-up">
-                Transform Your <br />
+                Empowering Women with <br />
                 Lifestyle Medicine
               </h1>
-              <p className="font-playfair text-responsive-xl mb-3 md:mb-4 font-semibold text-white/95 italic drop-shadow-md" data-aos="fade-up" data-aos-delay="100">
-                Empowering women with evidence-based, holistic health solutions
+              <p className="font-inter text-responsive-lg mb-4 md:mb-5 font-medium text-white/90 drop-shadow-md tracking-wide" data-aos="fade-up" data-aos-delay="100">
+                Periods • Pregnancy • Postpartum & Lactation • Parenting • Weight Reset
               </p>
-              <p className="font-inter text-responsive-base text-white/90 max-w-2xl mx-auto lg:mx-0 leading-relaxed mb-6 md:mb-8 drop-shadow-sm" data-aos="fade-up" data-aos-delay="200">
-                From periods to parenting — explore wellness with Dr. Pravina Kale's lifestyle medicine approach
+              <p className="font-inter text-responsive-xl text-white/95 max-w-2xl mx-auto lg:mx-0 leading-relaxed mb-6 md:mb-8 drop-shadow-sm font-semibold" data-aos="fade-up" data-aos-delay="200">
+                Explore Your Wellness Journey with Path'o'Life
               </p>
               
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
@@ -111,7 +111,7 @@ const Index = () => {
               <h2 id="services-heading" className="font-playfair text-responsive-3xl font-bold text-foreground mx-8" data-aos="fade-up">What We Offer</h2>
               <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-foreground/30"></div>
             </div>
-            <p className="font-inter text-responsive-xl text-muted-foreground">Workshops • 1:1 Consultations • Wellness Plans</p>
+            <p className="font-inter text-responsive-xl text-muted-foreground">Workshops • 1:1 Consultations • Lifestyle Plans</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto mb-12 md:mb-16 px-4 sm:px-0">
             <Link to="/workshops" className="group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-2xl transition-all duration-200" aria-label="Learn more about our workshops">
@@ -124,9 +124,10 @@ const Index = () => {
                     </div>
                     <div className="absolute inset-0 bg-primary/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></div>
                   </div>
-                  <h3 className="font-playfair text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 group-hover:text-primary transition-colors duration-300">Workshops</h3>
-                  <p className="font-inter text-base md:text-lg text-muted-foreground mb-2 md:mb-3 group-hover:text-foreground transition-colors duration-300">Learn, Interact, Transform</p>
-                  <p className="font-inter text-sm text-muted-foreground mt-auto opacity-80 group-hover:opacity-100 transition-opacity duration-300">Live 3-hour sessions every Tuesday & Friday</p>
+                  <h3 className="font-playfair text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 group-hover:text-primary transition-colors duration-300">Live Online Workshops</h3>
+                  <p className="font-inter text-base md:text-lg text-muted-foreground mb-2 md:mb-3 group-hover:text-foreground transition-colors duration-300 font-semibold">Real Women. Real Phases. Real Transformation.</p>
+                  <p className="font-inter text-sm text-muted-foreground mb-3 opacity-80 group-hover:opacity-100 transition-opacity duration-300 leading-relaxed">Whether you're 16 or 36, preparing for motherhood or craving a weight reset, these life-stage workshops help you understand your body, heal your hormones, and build lifelong health habits with science, Lifestyle Medicine and Indian wisdom.</p>
+                  <p className="font-inter text-sm text-primary font-medium mt-auto opacity-90 group-hover:opacity-100 transition-opacity duration-300">Live, interactive sessions</p>
                   <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" aria-hidden="true"></div>
                 </CardContent>
               </Card>
@@ -142,8 +143,9 @@ const Index = () => {
                     <div className="absolute inset-0 bg-amber-400/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></div>
                   </div>
                   <h3 className="font-playfair text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 group-hover:text-primary transition-colors duration-300">1:1 Consultations</h3>
-                  <p className="font-inter text-base md:text-lg text-muted-foreground mb-2 md:mb-3 group-hover:text-foreground transition-colors duration-300">Personal guidance, video calls</p>
-                  <p className="font-inter text-sm text-muted-foreground mt-auto opacity-80 group-hover:opacity-100 transition-opacity duration-300">Matched with the right expert</p>
+                  <p className="font-inter text-base md:text-lg text-muted-foreground mb-2 md:mb-3 group-hover:text-foreground transition-colors duration-300 font-semibold">Deeply Personal. Powerfully Transformative.</p>
+                  <p className="font-inter text-sm text-muted-foreground mb-3 opacity-80 group-hover:opacity-100 transition-opacity duration-300 leading-relaxed">Tailored video calls for painful periods, weight reset, postpartum healing & lactation or child nutrition.</p>
+                  <p className="font-inter text-sm text-primary font-medium mt-auto opacity-90 group-hover:opacity-100 transition-opacity duration-300">Matched with the right expert</p>
                   <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" aria-hidden="true"></div>
                 </CardContent>
               </Card>
@@ -158,9 +160,10 @@ const Index = () => {
                     </div>
                     <div className="absolute inset-0 bg-success/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></div>
                   </div>
-                  <h3 className="font-playfair text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 group-hover:text-amber-600 transition-colors duration-300">Wellness Plans</h3>
-                  <p className="font-inter text-base md:text-lg text-muted-foreground mb-2 md:mb-3 group-hover:text-foreground transition-colors duration-300">1, 3, 6-month lifestyle plans</p>
-                  <p className="font-inter text-sm text-muted-foreground mt-auto opacity-80 group-hover:opacity-100 transition-opacity duration-300">Personalized coaching by Dr. Pravina</p>
+                  <h3 className="font-playfair text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 group-hover:text-amber-600 transition-colors duration-300">Lifestyle Plans</h3>
+                  <p className="font-inter text-base md:text-lg text-muted-foreground mb-2 md:mb-3 group-hover:text-foreground transition-colors duration-300 font-semibold">1, 3 to 6 Month Lifestyle Programs</p>
+                  <p className="font-inter text-sm text-muted-foreground mb-3 opacity-80 group-hover:opacity-100 transition-opacity duration-300 leading-relaxed">Personalized coaching & Hand Holding by Dr. Pravina & Team to heal your hormones, reset your weight & elevate your life.</p>
+                  <p className="font-inter text-sm text-primary font-medium mt-auto opacity-90 group-hover:opacity-100 transition-opacity duration-300">Includes trackers, plans, check-ins, and more.</p>
                   <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" aria-hidden="true"></div>
                 </CardContent>
               </Card>
@@ -173,10 +176,10 @@ const Index = () => {
       <section className="py-16 relative overflow-hidden" data-aos="fade-up" style={{ backgroundColor: '#e9f5e9' }}>
         {/* Background image */}
         <img 
-          src="/photos/background2.png" 
+          src="/photos/image.png" 
           alt="Dr. Pravina Kale, Founder & CEO" 
           className="absolute inset-0 w-full h-full object-cover z-0" 
-          style={{ pointerEvents: 'none' }}
+          style={{ pointerEvents: 'none', objectPosition: 'center 80%' }}
           aria-hidden="true"
         />
         {/* Overlay */}
@@ -224,25 +227,30 @@ const Index = () => {
             <h3 className="font-playfair text-3xl font-bold text-foreground mb-10 text-center">Advisory Board</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-6xl mx-auto items-start">
               {[
-                { name: "Dr. Sandhya Kale", title: "Senior Obstetrician & Gynecologist", description: "Expert in women's reproductive health with over 25 years of experience in obstetrics and gynecology. Specializes in high-risk pregnancies and comprehensive women's healthcare." },
-                { name: "Dr. Pushpa Junghare", title: "Senior Obstetrician & Gynecologist", description: "Specializing in high-risk pregnancies and maternal care with extensive experience in complex obstetric cases and women's health management." },
-                { name: "Dr. Pratibha Kale", title: "Pediatrician, Neonatologist, Psychologist & Lactation Expert", description: "Comprehensive child and maternal care specialist providing integrated care from birth through early childhood, including psychological support and lactation expertise." }
+                { name: "Dr. Sandhya Kale", title: "Senior Obstetrician & Gynecologist", description: "Expert in women's reproductive health with over 25 years of experience in obstetrics and gynecology. Specializes in high-risk pregnancies and comprehensive women's healthcare.", color: "#338B81" },
+                { name: "Dr. Pushpa Junghare", title: "Senior Obstetrician & Gynecologist", description: "Specializing in high-risk pregnancies and maternal care with extensive experience in complex obstetric cases and women's health management.", color: "#0d9488" },
+                { name: "Dr. Pratibha Kale", title: "Pediatrician, Neonatologist, Psychologist & Lactation Expert", description: "Comprehensive child and maternal care specialist providing integrated care from birth through early childhood, including psychological support and lactation expertise.", color: "#059669" }
               ].map((doctor, idx) => (
                 <div
                   key={doctor.name}
-                  className="flex flex-col items-center text-center bg-transparent shadow-none p-0 h-full justify-start"
+                  className="group flex flex-col items-center text-center bg-white/80 backdrop-blur-sm rounded-3xl p-8 h-full justify-start cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:bg-white/95 border border-gray-200/50 hover:border-gray-300"
                 >
-                  <div className="w-72 h-72 rounded-full overflow-hidden border-4 border-white shadow mb-6 bg-gray-100 flex items-center justify-center mx-auto">
-                    <img
-                      src={advisoryBoardImages[idx]}
-                      alt={doctor.name}
-                      className="w-full h-full object-cover object-top"
-                      style={{ objectPosition: 'center 30%' }}
-                    />
+                  <div className="relative mb-6">
+                    <div className="w-72 h-72 rounded-full overflow-hidden border-4 border-white shadow-lg bg-gray-100 flex items-center justify-center mx-auto transition-all duration-500 group-hover:shadow-2xl group-hover:scale-105" style={{ borderColor: doctor.color }}>
+                      <img
+                        src={advisoryBoardImages[idx]}
+                        alt={doctor.name}
+                        className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                        style={{ objectPosition: 'center 30%' }}
+                      />
+                    </div>
+                    <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110" style={{ backgroundColor: doctor.color }}>
+                      <div className="w-4 h-4 bg-white rounded-full"></div>
+                    </div>
                   </div>
-                  <h3 className="font-playfair text-xl font-bold text-foreground mb-1">{doctor.name}</h3>
-                  <p className="font-inter text-sm text-muted-foreground italic mb-3">{doctor.title}</p>
-                  <p className="font-inter text-sm text-foreground mb-0 leading-normal">{doctor.description}</p>
+                  <h3 className="font-playfair text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors duration-300">{doctor.name}</h3>
+                  <p className="font-inter text-sm text-muted-foreground italic mb-3 group-hover:text-primary/80 transition-colors duration-300">{doctor.title}</p>
+                  <p className="font-inter text-sm text-foreground mb-0 leading-normal group-hover:text-foreground/90 transition-colors duration-300">{doctor.description}</p>
                 </div>
               ))}
             </div>
@@ -253,29 +261,34 @@ const Index = () => {
             <h3 className="font-playfair text-3xl font-bold text-foreground mb-10 text-center">Core Team</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-4xl mx-auto items-start">
               {[
-                { name: "Dr. Pravina Kale", title: "Founder, Lifestyle & Pathology Expert", description: "Certified Lifestyle Medicine Physician and Pathologist dedicated to preventing disease through evidence-based lifestyle interventions." },
-                { name: "Dr. Sonal Deshmukh", title: "Infertility & ObGyn", description: "Specialized in fertility treatments and reproductive health, helping couples achieve their dream of parenthood through comprehensive care." },
-                { name: "Dr. Kalyani Gade", title: "Infertility & ObGyn", description: "Expert in fertility management and women's reproductive health with a focus on personalized treatment approaches." },
-                { name: "Dr. Apurva Kale", title: "Pediatrician & Neonatologist", description: "Dedicated to providing exceptional care for newborns and children, ensuring healthy development and growth." }
+                { name: "Dr. Pravina Kale", title: "Founder, Lifestyle & Pathology Expert", description: "Certified Lifestyle Medicine Physician and Pathologist dedicated to preventing disease through evidence-based lifestyle interventions.", color: "#338B81" },
+                { name: "Dr. Sonal Deshmukh", title: "Infertility & ObGyn", description: "Specialized in fertility treatments and reproductive health, helping couples achieve their dream of parenthood through comprehensive care.", color: "#0d9488" },
+                { name: "Dr. Kalyani Gade", title: "Infertility & ObGyn", description: "Expert in fertility management and women's reproductive health with a focus on personalized treatment approaches.", color: "#059669" },
+                { name: "Dr. Apurva Kale", title: "Pediatrician & Neonatologist", description: "Dedicated to providing exceptional care for newborns and children, ensuring healthy development and growth.", color: "#047857" }
               ].map((member, idx) => (
                 <div
                   key={member.name}
-                  className="flex flex-col items-center text-center bg-transparent shadow-none p-0 h-full justify-start"
+                  className="group flex flex-col items-center text-center bg-white/80 backdrop-blur-sm rounded-3xl p-8 h-full justify-start cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:bg-white/95 border border-gray-200/50 hover:border-gray-300"
                 >
-                  <div className="w-64 h-64 rounded-full overflow-hidden border-4 border-white shadow mb-6 bg-gray-100 flex items-center justify-center mx-auto">
-                    <img
-                      src={coreTeamImages[idx]}
-                      alt={member.name}
-                      className="w-full h-full object-cover object-top"
-                      style={{ 
-                        objectPosition: member.name === "Dr. Kalyani Gade" || member.name === "Dr. Sonal Deshmukh" || member.name === "Dr. Pratibha Kale" ? 'center 20%' : 'center 30%',
-                        transform: member.name === "Dr. Pratibha Kale" ? 'scale(1.6)' : 'scale(1)'
-                      }}
-                    />
+                  <div className="relative mb-6">
+                    <div className="w-64 h-64 rounded-full overflow-hidden border-4 border-white shadow-lg bg-gray-100 flex items-center justify-center mx-auto transition-all duration-500 group-hover:shadow-2xl group-hover:scale-105" style={{ borderColor: member.color }}>
+                      <img
+                        src={coreTeamImages[idx]}
+                        alt={member.name}
+                        className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                        style={{ 
+                          objectPosition: member.name === "Dr. Kalyani Gade" || member.name === "Dr. Sonal Deshmukh" || member.name === "Dr. Pratibha Kale" ? 'center 20%' : 'center 30%',
+                          transform: member.name === "Dr. Pratibha Kale" ? 'scale(1.6)' : 'scale(1)'
+                        }}
+                      />
+                    </div>
+                    <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110" style={{ backgroundColor: member.color }}>
+                      <div className="w-4 h-4 bg-white rounded-full"></div>
+                    </div>
                   </div>
-                  <h3 className="font-playfair text-xl font-bold text-foreground mb-1">{member.name}</h3>
-                  <p className="font-inter text-sm text-muted-foreground italic mb-3">{member.title}</p>
-                  <p className="font-inter text-sm text-foreground mb-0 leading-normal">{member.description}</p>
+                  <h3 className="font-playfair text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors duration-300">{member.name}</h3>
+                  <p className="font-inter text-sm text-muted-foreground italic mb-3 group-hover:text-primary/80 transition-colors duration-300">{member.title}</p>
+                  <p className="font-inter text-sm text-foreground mb-0 leading-normal group-hover:text-foreground/90 transition-colors duration-300">{member.description}</p>
                 </div>
               ))}
             </div>
@@ -283,8 +296,26 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Let's Walk the Path Together */}
+      <section className="py-12 relative overflow-hidden" data-aos="fade-up" style={{ backgroundColor: '#e9f5e9' }}>
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="mb-6">
+              <div className="flex items-center justify-center mb-4">
+                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+                <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mx-8">Let's walk the Path Together</h2>
+                <div className="flex-1 h-px bg-gradient-to-l from-transparent via-primary/30 to-transparent"></div>
+              </div>
+            </div>
+            <p className="font-inter text-xl md:text-2xl text-foreground/80 leading-relaxed max-w-3xl mx-auto">
+              You've taken the first step towards transforming your health. Whether you're exploring hormones, preparing for motherhood, or just craving clarity - we're here for you.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
-      <section className="py-24 relative overflow-hidden" data-aos="fade-up" style={{ backgroundColor: '#338B81' }}>
+      <section className="py-24 relative overflow-hidden" data-aos="fade-up" style={{ backgroundColor: '#1a5f57' }}>
         <div className="relative z-20">
           <div className="text-center mb-6 animate-fade-in-up">
             <h2 className="font-playfair text-4xl font-bold text-foreground mb-2">What Our Community Says</h2>
@@ -371,130 +402,76 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-foreground text-white">
-        {/* Hero Section */}
-        <section className="relative py-16 text-white overflow-hidden" style={{ backgroundColor: '#338B81' }}>
-          <div className="absolute inset-0 bg-black/10"></div>
-          <div className="relative container mx-auto px-6">
-            <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 leading-tight">Connect With Us</h2>
-              <p className="font-inter text-xl md:text-2xl mb-8 opacity-90">Stay connected for wellness tips, updates, and support</p>
+      <footer className="bg-foreground text-white py-20">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-4 gap-12 mb-16">
+            <div className="lg:col-span-2">
+              <h3 className="font-playfair text-3xl font-bold mb-6 text-primary-glow">Path'o'Life</h3>
+              <p className="font-inter text-lg text-gray-300 mb-6 leading-relaxed">
+                Empowering women through evidence-based lifestyle medicine
+              </p>
+              <div className="flex space-x-4">
+                <a href="https://www.instagram.com/path.o.life?igsh=bHF1b2ZkbW43bnZo" target="_blank" rel="noopener noreferrer" className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">
+                  <Instagram className="h-6 w-6 text-primary group-hover:text-white" />
+                </a>
+                <a href="https://www.facebook.com/share/1Zui5tjBi9/" target="_blank" rel="noopener noreferrer" className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">
+                  <Facebook className="h-6 w-6 text-primary group-hover:text-white" />
+                </a>
+                <a href="https://www.linkedin.com/in/dr-pravina-kale-6226b31b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">
+                  <Linkedin className="h-6 w-6 text-primary group-hover:text-white" />
+                </a>
+                <a href="https://youtube.com/@patholife?si=gyNQBsKA4yvk0VhI" target="_blank" rel="noopener noreferrer" className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">
+                  <Youtube className="h-6 w-6 text-primary group-hover:text-white" />
+                </a>
+              </div>
             </div>
-          </div>
-        </section>
-
-        {/* Main Footer Content */}
-        <section className="py-16 bg-foreground text-white">
-          <div className="container mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-16 items-start max-w-7xl mx-auto">
-              {/* Left Column - Brand & Social */}
-              <div className="animate-fade-in-up">
-                <div className="flex items-center mb-8">
-                  <div className="bg-white rounded-full p-3 shadow-sm mr-4">
-                    <img 
-                      src="/photos/logo.png" 
-                      alt="Path'o'Life Logo" 
-                      className="h-8 w-auto"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-playfair text-2xl font-bold text-white">Path'o'Life</h3>
-                    <p className="font-inter text-sm text-gray-300">PERIODS • PREGNANCY • PARENTING</p>
-                  </div>
-                </div>
-                <p className="font-inter text-lg text-gray-300 mb-8 leading-relaxed">
-                  Empowering women through evidence-based lifestyle medicine. Join our community for personalized health guidance and support.
+            
+            <div>
+              <h4 className="font-inter text-xl font-semibold mb-6 text-white">Quick Links</h4>
+              <div className="space-y-4 font-inter text-gray-300">
+                <Link to="/about" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">About Dr. Pravina</Link>
+                <Link to="/workshops" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Workshops</Link>
+                <Link to="/consultations" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Consultations</Link>
+                <Link to="/wellness-plans" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Wellness Plans</Link>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="font-inter text-xl font-semibold mb-6 text-white">Contact</h4>
+              <div className="space-y-4 font-inter text-gray-300">
+                <p className="flex items-center hover:text-primary-glow transition-colors">
+                  <Mail className="h-5 w-5 mr-3 text-primary" /> 
+                  drpravina.patholife@gmail.com
                 </p>
-                <div className="flex space-x-4 mb-8">
-                  <a href="https://www.instagram.com/path.o.life?igsh=bHF1b2ZkbW43bnZo" target="_blank" rel="noopener noreferrer" className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">
-                    <Instagram className="h-6 w-6 text-primary group-hover:text-white" />
-                  </a>
-                  <a href="https://www.facebook.com/share/1Zui5tjBi9/" target="_blank" rel="noopener noreferrer" className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">
-                    <Facebook className="h-6 w-6 text-primary group-hover:text-white" />
-                  </a>
-                  <a href="https://www.linkedin.com/in/dr-pravina-kale-6226b31b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">
-                    <Linkedin className="h-6 w-6 text-primary group-hover:text-white" />
-                  </a>
-                  <a href="https://youtube.com/@patholife?si=gyNQBsKA4yvk0VhI" target="_blank" rel="noopener noreferrer" className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">
-                    <Youtube className="h-6 w-6 text-primary group-hover:text-white" />
-                  </a>
-                </div>
-              </div>
-
-              {/* Right Column - Links & Newsletter */}
-              <div className="animate-fade-in-up">
-                <div className="grid md:grid-cols-2 gap-8">
-                  {/* Quick Links */}
-                  <div>
-                    <h4 className="font-inter text-xl font-semibold mb-6 text-white">Quick Links</h4>
-                    <div className="space-y-4 font-inter text-gray-300">
-                      <Link to="/about" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">About Dr. Pravina</Link>
-                      <Link to="/workshops" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Workshops</Link>
-                      <Link to="/consultations" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Consultations</Link>
-                      <Link to="/wellness-plans" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Lifestyle Plans</Link>
-                      <Link to="/community" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Community</Link>
-                    </div>
-                  </div>
-
-                  {/* Contact Info */}
-                  <div>
-                    <h4 className="font-inter text-xl font-semibold mb-6 text-white">Contact</h4>
-                    <div className="space-y-4 font-inter text-gray-300">
-                      <p className="flex items-center hover:text-primary-glow transition-colors">
-                        <Mail className="h-5 w-5 mr-3 text-primary" /> 
-                        drpravina.patholife@gmail.com
-                      </p>
-                      <p className="flex items-center hover:text-primary-glow transition-colors">
-                        <Phone className="h-5 w-5 mr-3 text-primary" /> 
-                        9421829899
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Newsletter Section */}
-                <div className="mt-8">
-                  <h4 className="font-inter text-xl font-semibold mb-4 text-white">Stay Updated</h4>
-                  <p className="font-inter text-gray-300 mb-4">Get weekly wellness tips, healthy recipes, and motivation delivered to your inbox</p>
-                  <div className="space-y-4">
-                    <Input 
-                      type="email" 
-                      placeholder="Enter your email address" 
-                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                    />
-                    <Button variant="wellness" size="lg" className="font-inter font-semibold w-full">
-                      <Mail className="mr-2 h-4 w-4" />
-                      Subscribe
-                    </Button>
-                  </div>
-                  <p className="font-inter text-xs text-gray-400 mt-2">
-                    We respect your privacy. Unsubscribe at any time.
-                  </p>
-                </div>
+                <p className="flex items-center hover:text-primary-glow transition-colors">
+                  <Phone className="h-5 w-5 mr-3 text-primary" /> 
+                  9421829899
+                </p>
               </div>
             </div>
 
-            {/* Bottom Section */}
-            <div className="border-t border-gray-700 pt-12 mt-16">
-              <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
-                <div className="text-center lg:text-left">
-                  <p className="font-inter text-xl text-primary-glow italic mb-3 leading-relaxed max-w-2xl">
-                    "A woman empowered with the right lifestyle becomes unstoppable – not just for her own life, but for generations ahead."
-                  </p>
-                  <p className="font-inter text-gray-400">— Dr. Pravina Kale</p>
-                </div>
-                <div className="text-center lg:text-right">
-                  <p className="font-inter text-gray-400 text-sm">
-                    © 2024 Path'o'Life. All rights reserved.
-                  </p>
-                  <p className="font-inter text-gray-500 text-xs mt-1">
-                    Designed with wellness in mind
-                  </p>
-                </div>
+
+          </div>
+          
+          <div className="border-t border-gray-700 pt-12">
+            <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
+              <div className="text-center lg:text-left">
+                <p className="font-inter text-xl text-primary-glow italic mb-3 leading-relaxed max-w-2xl">
+                  "Path'o'Life was born from science, shaped by experience, and guided by wisdom to help every woman heal, thrive, and rewrite her health story through Lifestyle Medicine with grace and power."
+                </p>
+                <p className="font-inter text-gray-400">— Dr. Pravina Kale</p>
+              </div>
+              <div className="text-center lg:text-right">
+                <p className="font-inter text-gray-400 text-sm">
+                  © 2024 Path'o'Life. All rights reserved.
+                </p>
+                <p className="font-inter text-gray-500 text-xs mt-1">
+                  Designed with wellness in mind
+                </p>
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </footer>
     </div>
   );

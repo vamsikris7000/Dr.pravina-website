@@ -3,12 +3,45 @@ import { Button } from "@/components/ui/button";
 const Founder = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
-      <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#338B81' }}>
+      <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#1a5f57' }}>
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
-            <h1 className="font-playfair text-6xl md:text-7xl font-bold mb-6 leading-tight">Founder</h1>
-            <p className="font-inter text-xl md:text-2xl mb-8 opacity-90">This is the Founder page. Content coming soon.</p>
+          <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
+            <h1 className="font-playfair text-6xl md:text-7xl font-bold mb-8 leading-tight">Meet the Founder</h1>
+            
+            <div className="space-y-6 mb-10">
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold text-white mb-4">
+                Dr. Pravina Kale Shegokar
+              </h2>
+              
+              <p className="font-inter text-xl md:text-2xl text-white/95 mb-6">
+                MBBS, MD (Pathology), DipIBLM (USA)
+              </p>
+              
+              <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-4xl mx-auto">
+                <span className="px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full text-white font-inter text-sm md:text-base font-medium border border-white/20">
+                  Pathologist
+                </span>
+                <span className="px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full text-white font-inter text-sm md:text-base font-medium border border-white/20">
+                  Dermatopathologist
+                </span>
+                <span className="px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full text-white font-inter text-sm md:text-base font-medium border border-white/20">
+                  Lifestyle Medicine Physician
+                </span>
+                <span className="px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full text-white font-inter text-sm md:text-base font-medium border border-white/20">
+                  Researcher
+                </span>
+                <span className="px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full text-white font-inter text-sm md:text-base font-medium border border-white/20">
+                  Medical Writer
+                </span>
+                <span className="px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full text-white font-inter text-sm md:text-base font-medium border border-white/20">
+                  National Athlete
+                </span>
+                <span className="px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full text-white font-inter text-sm md:text-base font-medium border border-white/20">
+                  Musician
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>

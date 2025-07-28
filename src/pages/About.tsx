@@ -3,32 +3,54 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Award, Heart, BookOpen } from "lucide-react";
 
-const carouselImages = [
-  '/photos/carousel1.png',
-  '/photos/carousel2.png',
-  '/photos/carousel3.png',
-  '/photos/carousel4.png',
-  '/photos/carousel5.png',
-  '/photos/carousel6.png',
-  '/photos/carousel7.png',
-  '/photos/carousel8.png',
-  '/photos/carousel9.png',
-  '/photos/carousel10.png',
-];
+
 
 const About = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
       {/* Hero Section */}
-      <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#338B81' }}>
+      <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#1a5f57' }}>
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full animate-float"></div>
         <div className="absolute bottom-20 right-20 w-16 h-16 bg-white/10 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
         
         <div className="relative container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
-            <h1 className="font-playfair text-6xl md:text-7xl font-bold mb-6 leading-tight">Meet Dr. Pravina Kale</h1>
-            <p className="font-inter text-xl md:text-2xl mb-8 opacity-90">Lifestyle Medicine Physician, Pathologist & Women's Wellness Expert</p>
+          <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
+            <h1 className="font-playfair text-6xl md:text-7xl font-bold mb-8 leading-tight">Meet the Founder</h1>
+            
+            <div className="space-y-6 mb-10">
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold text-white mb-4">
+                Dr. Pravina Kale Shegokar
+              </h2>
+              
+              <p className="font-inter text-xl md:text-2xl text-white/95 mb-6">
+                MBBS, MD (Pathology), DipIBLM (USA)
+              </p>
+              
+              <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-4xl mx-auto">
+                <span className="px-5 py-3 bg-gradient-to-r from-white/25 to-white/15 backdrop-blur-md rounded-full text-white font-inter text-sm md:text-base font-semibold border border-white/30 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                  Pathologist
+                </span>
+                <span className="px-5 py-3 bg-gradient-to-r from-white/25 to-white/15 backdrop-blur-md rounded-full text-white font-inter text-sm md:text-base font-semibold border border-white/30 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                  Dermatopathologist
+                </span>
+                <span className="px-5 py-3 bg-gradient-to-r from-white/25 to-white/15 backdrop-blur-md rounded-full text-white font-inter text-sm md:text-base font-semibold border border-white/30 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                  Lifestyle Medicine Physician
+                </span>
+                <span className="px-5 py-3 bg-gradient-to-r from-white/25 to-white/15 backdrop-blur-md rounded-full text-white font-inter text-sm md:text-base font-semibold border border-white/30 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                  Researcher
+                </span>
+                <span className="px-5 py-3 bg-gradient-to-r from-white/25 to-white/15 backdrop-blur-md rounded-full text-white font-inter text-sm md:text-base font-semibold border border-white/30 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                  Medical Writer
+                </span>
+                <span className="px-5 py-3 bg-gradient-to-r from-white/25 to-white/15 backdrop-blur-md rounded-full text-white font-inter text-sm md:text-base font-semibold border border-white/30 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                  National Athlete
+                </span>
+                <span className="px-5 py-3 bg-gradient-to-r from-white/25 to-white/15 backdrop-blur-md rounded-full text-white font-inter text-sm md:text-base font-semibold border border-white/30 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                  Musician
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -67,51 +89,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Auto-scrolling image carousel */}
-      <section className="py-8" style={{ backgroundColor: '#e9f5e9' }}>
-        <div className="overflow-hidden mx-auto group" style={{ width: 3 * 400 + 2 * 32 }}>
-          <div className="flex gap-8 animate-carousel group-hover:paused-carousel" style={{ width: 'max-content' }}>
-            {carouselImages.concat(carouselImages).map((src, idx) => (
-              <div
-                key={idx}
-                className="flex-shrink-0 rounded-2xl shadow-md bg-white transition-all duration-300 carousel-photo"
-                style={{ width: 400, height: 420, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}
-              >
-                <img
-                  src={src}
-                  alt="carousel"
-                  className="object-cover w-full h-full rounded-2xl transition-all duration-300"
-                  style={{ display: 'block' }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-        <style>{`
-          @keyframes carousel {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          .animate-carousel {
-            animation: carousel 30s linear infinite;
-          }
-          .group:hover .animate-carousel,
-          .group:focus-within .animate-carousel {
-            animation-play-state: paused;
-          }
-          .carousel-photo:hover,
-          .carousel-photo:focus-within {
-            z-index: 10;
-            width: 600px !important;
-            box-shadow: 0 8px 32px 0 rgba(51,139,129,0.18);
-          }
-          .carousel-photo:hover img,
-          .carousel-photo:focus-within img {
-            border-radius: 2rem;
-            object-fit: contain;
-          }
-        `}</style>
-      </section>
+
 
       {/* Qualifications */}
       <section className="py-24 bg-white">

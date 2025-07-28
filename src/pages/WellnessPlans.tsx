@@ -6,7 +6,7 @@ import { Heart, CheckCircle, Phone, MessageCircle } from "lucide-react";
 const WellnessPlans = () => {
   const plans = [
     {
-      name: "One Month Wellness Reset",
+      name: "Wellness Reset",
       price: "₹4999",
       duration: "1 Month",
       color: "from-green-400 to-green-600",
@@ -20,7 +20,7 @@ const WellnessPlans = () => {
       ideal: "Best for Quick direction, light hand-holding, or mild symptoms"
     },
     {
-      name: "3 Months Healing Plan",
+      name: "Healing Plan",
       price: "₹11999",
       duration: "3 Months",
       color: "from-teal-400 to-green-500",
@@ -36,7 +36,7 @@ const WellnessPlans = () => {
       ideal: "Best for PCOS, fertility, postpartum, or weight loss"
     },
     {
-      name: "6 Months Lifestyle Transformation",
+      name: "Lifestyle Transformation",
       price: "₹19999",
       duration: "6 Months",
       color: "from-teal-400 to-teal-600",
@@ -54,16 +54,29 @@ const WellnessPlans = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
       {/* Hero Section */}
-      <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#338B81' }}>
+      <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#1a5f57' }}>
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full animate-float"></div>
         <div className="absolute bottom-20 right-20 w-16 h-16 bg-white/10 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
         
         <div className="relative container mx-auto px-6">
-          <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
-            <h1 className="font-playfair text-6xl md:text-7xl font-bold mb-6 leading-tight">Lifestyle Plans</h1>
-            <p className="font-inter text-xl md:text-2xl mb-10 opacity-90">Personalized Women's Coaching by Dr. Pravina</p>
-            <p className="font-inter text-lg mb-10 opacity-90">Transform your health with evidence-based lifestyle medicine tailored to your unique needs</p>
+          <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
+            <h1 className="font-playfair text-6xl md:text-7xl font-bold mb-8 leading-tight">Lifestyle Plans</h1>
+            
+            <div className="space-y-6 mb-10">
+              <p className="font-inter text-xl md:text-2xl opacity-95 leading-relaxed max-w-3xl mx-auto">
+                If you're looking for more than just a consultation - deeper support, guidance, and habit change - our wellness plans are for you.
+              </p>
+              
+              <p className="font-inter text-lg md:text-xl opacity-90 leading-relaxed max-w-2xl mx-auto">
+                Dr. Pravina & Team personally guides you through sustainable lifestyle changes, customized for your unique phase of womanhood.
+              </p>
+              
+              <p className="font-inter text-lg opacity-90 leading-relaxed max-w-2xl mx-auto">
+                Whether you're dealing with PCOS, preparing for pregnancy, navigating postpartum, or balancing work and health - these plans give you the hand-holding you need.
+              </p>
+            </div>
+            
             <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20">
               <Heart className="mr-3 h-5 w-5" />
               Choose Your Plan
@@ -81,7 +94,7 @@ const WellnessPlans = () => {
           </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {plans.map((plan, index) => (
-              <Card key={index} className={`group hover:shadow-elevated hover:-translate-y-2 transition-all duration-500 animate-fade-in relative ${plan.popular ? 'ring-4 ring-primary/20' : ''}`} style={{animationDelay: `${index * 100}ms`}}>
+              <Card key={index} className={`group hover:shadow-elevated hover:-translate-y-2 transition-all duration-500 animate-fade-in relative h-full flex flex-col ${plan.popular ? 'ring-4 ring-primary/20' : ''}`} style={{animationDelay: `${index * 100}ms`}}>
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold font-inter">
@@ -89,24 +102,27 @@ const WellnessPlans = () => {
                     </span>
                   </div>
                 )}
-                <CardContent className="p-10">
+                <CardContent className="p-10 flex flex-col h-full">
 
-                  <h3 className="font-playfair text-2xl md:text-3xl font-bold text-foreground mb-3 text-center">{plan.name}</h3>
-                  <p className="font-inter text-primary font-semibold mb-4 text-center">{plan.duration}</p>
                   <div className="text-center mb-6">
-                    {plan.name === "One Month Wellness Reset" && (
+                    <h3 className="font-playfair text-2xl md:text-3xl font-bold text-foreground mb-3">{plan.name}</h3>
+                    <p className="font-inter text-primary font-semibold">{plan.duration}</p>
+                  </div>
+                  
+                  <div className="text-center mb-6">
+                    {plan.name === "Wellness Reset" && (
                       <>
                         <p className="font-playfair text-2xl font-bold text-muted-foreground line-through">₹9999</p>
                         <p className="font-playfair text-4xl font-bold text-primary">{plan.price}</p>
                       </>
                     )}
-                    {plan.name === "3 Months Healing Plan" && (
+                    {plan.name === "Healing Plan" && (
                       <>
                         <p className="font-playfair text-2xl font-bold text-muted-foreground line-through">₹18999</p>
                         <p className="font-playfair text-4xl font-bold text-primary">{plan.price}</p>
                       </>
                     )}
-                    {plan.name === "6 Months Lifestyle Transformation" && (
+                    {plan.name === "Lifestyle Transformation" && (
                       <>
                         <p className="font-playfair text-2xl font-bold text-muted-foreground line-through">₹29999</p>
                         <p className="font-playfair text-4xl font-bold text-primary">{plan.price}</p>
@@ -114,20 +130,22 @@ const WellnessPlans = () => {
                     )}
                   </div>
                   
-                  <p className="font-inter text-sm text-muted-foreground mb-8 text-center italic">{plan.ideal}</p>
+                  <p className="font-inter text-sm text-muted-foreground mb-6 text-center italic">{plan.ideal}</p>
                   
-                  <div className="space-y-4 mb-8">
+                  <div className="space-y-4 mb-8 flex-grow">
                     {plan.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-start space-x-3">
                         <CheckCircle className="h-5 w-5 text-success flex-shrink-0 mt-0.5" />
-                        <span className="font-inter text-muted-foreground text-sm">{feature}</span>
+                        <span className="font-inter text-muted-foreground text-sm leading-relaxed">{feature}</span>
                       </div>
                     ))}
                   </div>
                   
-                  <Button variant="wellness" size="lg" className="w-full font-inter font-semibold">
-                    BUY NOW
-                  </Button>
+                  <div className="mt-auto">
+                    <Button variant="wellness" size="lg" className="w-full font-inter font-semibold">
+                      BUY NOW
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ))}

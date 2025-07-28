@@ -4,7 +4,7 @@ const PathOLife = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
       {/* Hero Section */}
-      <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#338B81' }}>
+      <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#1a5f57' }}>
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center animate-fade-in-up">

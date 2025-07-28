@@ -48,7 +48,7 @@ const Navbar = () => {
             </div>
             <div className="flex flex-col justify-center leading-tight">
               <h1 className="text-2xl font-bold font-playfair mb-0 pb-0" style={{ color: '#338B81', lineHeight: 1.1 }}>Path'o'Life</h1>
-              <span className="text-[11px] font-semibold mt-0 uppercase tracking-wider" style={{ color: '#85bb65', lineHeight: 1.2, fontFamily: 'Inter, sans-serif' }}>Periods • Pregnancy • Parenting</span>
+              <span className="text-[11px] font-medium mt-0 tracking-wide" style={{ color: '#338B81', lineHeight: 1.2, fontFamily: 'Playfair Display, serif' }}>Periods • Pregnancy • Parenting</span>
             </div>
           </Link>
 
@@ -160,9 +160,6 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            <Button variant="wellness" size="lg" className="font-inter font-semibold">
-              Book Consultation
-            </Button>
           </div>
 
           {/* Mobile menu button */}
