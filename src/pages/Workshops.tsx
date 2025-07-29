@@ -2,8 +2,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Clock, Users, BookOpen } from "lucide-react";
+import { chatbotEvents } from "@/lib/chatbot-events";
 
 const Workshops = () => {
+  const handleWorkshopRegistration = (workshopTitle: string) => {
+    const message = `Hi, I want to register for the ${workshopTitle} workshop`;
+    chatbotEvents.openChat(message);
+  };
+
   const workshops = [
     {
       title: "🌸 PCOS Unplugged",
@@ -105,7 +111,7 @@ const Workshops = () => {
               </div>
               <div className="flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 min-h-[80px]">
                 <Users className="h-6 w-6" />
-                <span className="font-inter font-medium">📍 Live on Google Meet | 🗓️ Flexible slots</span>
+                <span className="font-inter font-medium">📍 Live on Google Meet</span>
               </div>
               <div className="flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 min-h-[80px]">
                 <Calendar className="h-6 w-6" />
@@ -150,11 +156,11 @@ const Workshops = () => {
               <Card key={index} className="group hover:shadow-elevated hover:-translate-y-1 transition-all duration-500 animate-fade-in mb-8 overflow-hidden" style={{animationDelay: `${index * 100}ms`}}>
                 <CardContent className="p-8">
                   <div className="flex items-center mb-6">
-                    <div className="w-14 h-14 bg-primary rounded-full flex items-center justify-center mr-4 shadow-lg group-hover:shadow-glow transition-all duration-300">
-                      <BookOpen className="h-7 w-7 text-white" />
+                    <div className="mr-4">
+                      <span className="text-4xl">{workshop.title.split(' ')[0]}</span>
                     </div>
                     <div>
-                      <h3 className="font-playfair text-xl font-bold text-foreground">{workshop.title}</h3>
+                      <h3 className="font-playfair text-xl font-bold text-foreground">{workshop.title.split(' ').slice(1).join(' ')}</h3>
                       <p className="font-inter text-primary font-semibold">{workshop.subtitle}</p>
                       <p className="font-inter text-sm text-muted-foreground mt-1">{workshop.audience}</p>
                     </div>
@@ -168,7 +174,12 @@ const Workshops = () => {
                       </div>
                     ))}
                   </div>
-                  <Button variant="soft" size="lg" className="w-full bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-primary/20">
+                  <Button 
+                    variant="soft" 
+                    size="lg" 
+                    className="w-full bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-primary/20"
+                    onClick={() => handleWorkshopRegistration(workshop.title)}
+                  >
                     Register for This Workshop
                   </Button>
                 </CardContent>
@@ -215,15 +226,7 @@ const Workshops = () => {
           <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
             <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6 leading-tight">Ready to Transform Your Wellness?</h2>
             <p className="font-inter text-xl mb-10 text-gray-300">Register for a workshop today and start your journey with Path'o'Life</p>
-            <div className="flex flex-col lg:flex-row gap-6 justify-center">
-              <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-primary hover:text-white font-inter font-semibold backdrop-blur-sm border border-white/20">
-                <Calendar className="mr-3 h-5 w-5" />
-                Register for Workshop
-              </Button>
-              <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-primary hover:text-white font-inter font-semibold backdrop-blur-sm border border-white/20">
-                View All Wellness Plans
-              </Button>
-            </div>
+
           </div>
         </div>
       </section>

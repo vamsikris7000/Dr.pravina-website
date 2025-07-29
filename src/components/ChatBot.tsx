@@ -5,6 +5,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Send, X } from "lucide-react";
 import VoiceChatWidget from "@/components/VoiceChatWidget";
+import { chatbotEvents } from "@/lib/chatbot-events";
 
 interface Message {
   id: string;
@@ -41,6 +42,44 @@ const ChatBot = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Listen to external chatbot events
+  useEffect(() => {
+    const unsubscribe = chatbotEvents.subscribe((event) => {
+      if (event.type === 'OPEN_CHAT') {
+        setIsDialogOpen(true);
+        if (event.message) {
+          // Add the message to chat and send it
+          const userMessage = {
+            id: `user-${Date.now()}`,
+            text: event.message,
+            isUser: true,
+            timestamp: new Date(),
+          };
+          setMessages(prev => [...prev, userMessage]);
+          // Send the message after a short delay to ensure the chat is open
+          setTimeout(() => {
+            sendMessageToChatbot(event.message);
+            // Clear the input field after sending
+            setInputValue("");
+          }, 100);
+        }
+      } else if (event.type === 'SEND_MESSAGE' && event.message) {
+        const userMessage = {
+          id: `user-${Date.now()}`,
+          text: event.message,
+          isUser: true,
+          timestamp: new Date(),
+        };
+        setMessages(prev => [...prev, userMessage]);
+        sendMessageToChatbot(event.message);
+        // Clear the input field after sending
+        setInputValue("");
+      }
+    });
+
+    return unsubscribe;
+  }, []);
 
   const sendMessageToChatbot = async (userMessage: string) => {
     const apiKey = 'app-AZ5VwFvWHU9DD9M3zZG4wcic';

@@ -2,8 +2,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, CheckCircle, Phone, MessageCircle } from "lucide-react";
+import { chatbotEvents } from "@/lib/chatbot-events";
 
-const WellnessPlans = () => {
+const LifestylePlans = () => {
+  const handlePlanPurchase = (planName: string, planPrice: string) => {
+    const message = `Hi, I'm interested in buying the ${planName} plan for ${planPrice}`;
+    chatbotEvents.openChat(message);
+  };
+
   const plans = [
     {
       name: "Wellness Reset",
@@ -67,17 +73,14 @@ const WellnessPlans = () => {
               <p className="font-inter text-xl md:text-2xl opacity-95 leading-relaxed max-w-3xl mx-auto">
                 If you're looking for more than just a consultation - deeper support, guidance, and habit change - our wellness plans are for you.
               </p>
-              
-              <p className="font-inter text-lg md:text-xl opacity-90 leading-relaxed max-w-2xl mx-auto">
-                Dr. Pravina & Team personally guides you through sustainable lifestyle changes, customized for your unique phase of womanhood.
-              </p>
-              
-              <p className="font-inter text-lg opacity-90 leading-relaxed max-w-2xl mx-auto">
-                Whether you're dealing with PCOS, preparing for pregnancy, navigating postpartum, or balancing work and health - these plans give you the hand-holding you need.
-              </p>
             </div>
             
-            <Button variant="soft" size="xl" className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20">
+            <Button 
+              variant="soft" 
+              size="xl" 
+              className="bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-white/20"
+              onClick={() => chatbotEvents.openChat("Hi, I want to learn more about the lifestyle plans")}
+            >
               <Heart className="mr-3 h-5 w-5" />
               Choose Your Plan
             </Button>
@@ -142,7 +145,12 @@ const WellnessPlans = () => {
                   </div>
                   
                   <div className="mt-auto">
-                    <Button variant="wellness" size="lg" className="w-full font-inter font-semibold">
+                    <Button 
+                      variant="wellness" 
+                      size="lg" 
+                      className="w-full font-inter font-semibold"
+                      onClick={() => handlePlanPurchase(plan.name, plan.price)}
+                    >
                       BUY NOW
                     </Button>
                   </div>
@@ -218,7 +226,12 @@ const WellnessPlans = () => {
                 </div>
               </div>
             </div>
-            <Button variant="wellness" size="xl" className="font-inter font-semibold">
+            <Button 
+              variant="wellness" 
+              size="xl" 
+              className="font-inter font-semibold"
+              onClick={() => chatbotEvents.openChat("Hi, I need payment details for the lifestyle plans")}
+            >
               Get Payment Details
             </Button>
           </div>
@@ -228,4 +241,4 @@ const WellnessPlans = () => {
   );
 };
 
-export default WellnessPlans;
+export default LifestylePlans;

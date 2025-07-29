@@ -10,14 +10,11 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", path: "/" },
-    // Our Services will be handled separately
-    { name: "About Dr. Pravina", path: "/about" },
-    { name: "Community", path: "/community" },
+    { name: "Live Workshops", path: "/workshops" },
     { name: "Contact", path: "/contact" },
   ];
 
   const services = [
-    { name: "Live Online Workshops", path: "/workshops" },
     { name: "1:1 Consultations", path: "/consultations" },
     { name: "Lifestyle Plans", path: "/wellness-plans" },
   ];
@@ -66,6 +63,18 @@ const Navbar = () => {
             >
               Home
             </Link>
+            {/* Live Workshops */}
+            <Link
+              key="Live Workshops"
+              to="/workshops"
+              className={`text-sm font-medium transition-all duration-300 font-inter hover:text-primary hover:scale-105 ${
+                location.pathname === "/workshops"
+                  ? "text-primary border-b-2 border-primary"
+                  : "text-foreground"
+              }`}
+            >
+              Live Workshops
+            </Link>
             {/* Our Services Dropdown */}
             <div
               className="relative group"
@@ -86,7 +95,7 @@ const Navbar = () => {
                 onClick={() => setServicesOpen((open) => !open)}
                 type="button"
               >
-                Our Services <ChevronDown className="ml-1 w-4 h-4" />
+                Other Services <ChevronDown className="ml-1 w-4 h-4" />
               </button>
               {servicesOpen && (
                 <div
@@ -146,20 +155,18 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-            {/* Other nav items (skip About Dr. Pravina) */}
-            {navItems.slice(2).map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`text-sm font-medium transition-all duration-300 font-inter hover:text-primary hover:scale-105 ${
-                  location.pathname === item.path
-                    ? "text-primary border-b-2 border-primary"
-                    : "text-foreground"
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {/* Contact */}
+            <Link
+              key="Contact"
+              to="/contact"
+              className={`text-sm font-medium transition-all duration-300 font-inter hover:text-primary hover:scale-105 ${
+                location.pathname === "/contact"
+                  ? "text-primary border-b-2 border-primary"
+                  : "text-foreground"
+              }`}
+            >
+              Contact
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -199,7 +206,7 @@ const Navbar = () => {
                   onClick={() => setServicesOpen((open) => !open)}
                   type="button"
                 >
-                  <span>Our Services</span>
+                  <span>Other Services</span>
                   <ChevronDown className={`ml-2 w-4 h-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
                 </button>
                 {servicesOpen && (

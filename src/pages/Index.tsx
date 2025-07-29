@@ -8,7 +8,6 @@ import 'swiper/css/pagination';
 import { Calendar, Mail, BookOpen, Heart, Star, Users, Phone, Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
-import './honeycomb.css'; // (create this file for the honeycomb CSS)
 import Founder from './founder';
 import PathOLife from './patholife';
 
@@ -44,6 +43,28 @@ function HexFlower({ label, text }) {
 const Index = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
+      <style>
+        {`
+          .advisory-card .advisory-description {
+            max-height: 0 !important;
+            overflow: hidden !important;
+            opacity: 0 !important;
+            transform: translateY(-10px) !important;
+            transition: all 0.5s ease !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            pointer-events: none !important;
+          }
+          .advisory-container:hover .advisory-card .advisory-description {
+            max-height: 400px !important;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            padding: 0.75rem 0 !important;
+            margin: 0.75rem 0 !important;
+            pointer-events: auto !important;
+          }
+        `}
+      </style>
       {/* Hero Section */}
               <section className="relative overflow-hidden text-white min-h-[90vh] flex items-center" role="banner" data-aos="fade-up" style={{ backgroundColor: '#e9f5e9' }}>
         {/* Background image */}
@@ -225,32 +246,49 @@ const Index = () => {
           {/* Advisory Board */}
           <div className="mb-20">
             <h3 className="font-playfair text-3xl font-bold text-foreground mb-10 text-center">Advisory Board</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-6xl mx-auto items-start">
+            <div className="advisory-container grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-6xl mx-auto items-start">
               {[
-                { name: "Dr. Sandhya Kale", title: "Senior Obstetrician & Gynecologist", description: "Expert in women's reproductive health with over 25 years of experience in obstetrics and gynecology. Specializes in high-risk pregnancies and comprehensive women's healthcare.", color: "#338B81" },
-                { name: "Dr. Pushpa Junghare", title: "Senior Obstetrician & Gynecologist", description: "Specializing in high-risk pregnancies and maternal care with extensive experience in complex obstetric cases and women's health management.", color: "#0d9488" },
-                { name: "Dr. Pratibha Kale", title: "Pediatrician, Neonatologist, Psychologist & Lactation Expert", description: "Comprehensive child and maternal care specialist providing integrated care from birth through early childhood, including psychological support and lactation expertise.", color: "#059669" }
+                { 
+                  name: "Dr. Sandhya Kale", 
+                  title: "MBBS DGO (OBGY) • Consultant Obstetrician & Gynecologist • Kale Nursing Home, Amravati", 
+                  description: "With over four decades of dedicated service in women's health, Dr. Sandhya Kale is a respected name in Amravati's medical landscape. A seasoned obstetrician and gynecologist, she has successfully managed countless high-risk pregnancies and complex gynecological cases with clinical excellence and deep compassion. Her commitment to providing quality care to both urban and rural populations reflects her belief that every woman deserves dignified, accessible, and personalized healthcare.", 
+                  color: "#338B81" 
+                },
+                { 
+                  name: "Dr. Pushpa Junghare", 
+                  title: "MBBS MD (OBGY) • Head of Department, Obstetrics & Gynecology • Dr. Panjabrao Alias Bhausaheb Deshmukh Memorial Medical College, Amravati", 
+                  description: "With over 40 years of unparalleled experience in women's health, Dr. Pushpa Junghare is one of the most respected and senior obstetricians and gynecologists in Amravati. As the Head of the Department of OBGY, she has mentored generations of doctors while handling most of the complex cases in high-risk pregnancies, maternal care, and women's health management. Her wisdom, clinical excellence, and compassionate approach continue to inspire our work at Path'o'Life.", 
+                  color: "#0d9488" 
+                },
+                { 
+                  name: "Dr. Pratibha Kale", 
+                  title: "MBBS DCH DNB (Pediatrics) BA (Psychology) • Head of Department, Pediatrics • Dr. Panjabrao Alias Bhausaheb Deshmukh Memorial Medical College, Amravati", 
+                  description: "Dr. Pratibha Kale, a pediatrician, neonatologist, psychologist, and lactation expert with 25+ years of experience, is a leading voice in maternal and child health. She specializes in neonatal care, pediatric wellness, and breastfeeding support, including induced lactation for adoptive mothers. As Head of the Human Milk Bank and Lactation Centre, she has shaped key breastfeeding protocols. Her psychology training enhances her holistic approach to mother-child care.", 
+                  color: "#059669" 
+                }
               ].map((doctor, idx) => (
                 <div
                   key={doctor.name}
-                  className="group flex flex-col items-center text-center bg-white/80 backdrop-blur-sm rounded-3xl p-8 h-full justify-start cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:bg-white/95 border border-gray-200/50 hover:border-gray-300"
+                  className={`advisory-card advisory-card-${idx} flex flex-col items-center text-center bg-white/80 backdrop-blur-sm rounded-3xl p-8 h-full justify-start cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:bg-white/95 border border-gray-200/50 hover:border-gray-300`}
                 >
                   <div className="relative mb-6">
-                    <div className="w-72 h-72 rounded-full overflow-hidden border-4 border-white shadow-lg bg-gray-100 flex items-center justify-center mx-auto transition-all duration-500 group-hover:shadow-2xl group-hover:scale-105" style={{ borderColor: doctor.color }}>
+                    <div className="w-72 h-72 rounded-full overflow-hidden border-4 border-white shadow-lg bg-gray-100 flex items-center justify-center mx-auto transition-all duration-500 hover:shadow-2xl hover:scale-105" style={{ borderColor: doctor.color }}>
                       <img
                         src={advisoryBoardImages[idx]}
                         alt={doctor.name}
-                        className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                        className="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110"
                         style={{ objectPosition: 'center 30%' }}
                       />
                     </div>
-                    <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110" style={{ backgroundColor: doctor.color }}>
+                    <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110" style={{ backgroundColor: doctor.color }}>
                       <div className="w-4 h-4 bg-white rounded-full"></div>
                     </div>
                   </div>
-                  <h3 className="font-playfair text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors duration-300">{doctor.name}</h3>
-                  <p className="font-inter text-sm text-muted-foreground italic mb-3 group-hover:text-primary/80 transition-colors duration-300">{doctor.title}</p>
-                  <p className="font-inter text-sm text-foreground mb-0 leading-normal group-hover:text-foreground/90 transition-colors duration-300">{doctor.description}</p>
+                  <h3 className="font-playfair text-xl font-bold text-foreground mb-1 hover:text-primary transition-colors duration-300">{doctor.name}</h3>
+                  <p className="font-inter text-sm text-muted-foreground italic mb-3 hover:text-primary/80 transition-colors duration-300">{doctor.title}</p>
+                  <div className="advisory-description space-y-3 mb-0">
+                    <p className="font-inter text-sm text-foreground leading-normal">{doctor.description}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -261,10 +299,30 @@ const Index = () => {
             <h3 className="font-playfair text-3xl font-bold text-foreground mb-10 text-center">Core Team</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-4xl mx-auto items-start">
               {[
-                { name: "Dr. Pravina Kale", title: "Founder, Lifestyle & Pathology Expert", description: "Certified Lifestyle Medicine Physician and Pathologist dedicated to preventing disease through evidence-based lifestyle interventions.", color: "#338B81" },
-                { name: "Dr. Sonal Deshmukh", title: "Infertility & ObGyn", description: "Specialized in fertility treatments and reproductive health, helping couples achieve their dream of parenthood through comprehensive care.", color: "#0d9488" },
-                { name: "Dr. Kalyani Gade", title: "Infertility & ObGyn", description: "Expert in fertility management and women's reproductive health with a focus on personalized treatment approaches.", color: "#059669" },
-                { name: "Dr. Apurva Kale", title: "Pediatrician & Neonatologist", description: "Dedicated to providing exceptional care for newborns and children, ensuring healthy development and growth.", color: "#047857" }
+                { 
+                  name: "Dr. Pravina Kale", 
+                  title: "MBBS MD (Pathology) • DipIBLM (American College of Lifestyle Medicine) • Lifestyle Medicine Physician • Pathologist & Dermatopathologist", 
+                  description: "Certified Lifestyle Medicine Physician and Pathologist dedicated to preventing disease through evidence-based lifestyle interventions.", 
+                  color: "#338B81" 
+                },
+                { 
+                  name: "Dr. Sonal Deshmukh", 
+                  title: "MBBS DGO • ICOG Fellowship in Reproductive Medicine • OBGY & Infertility expert", 
+                  description: "Specialized in fertility treatments and reproductive health, helping couples achieve their dream of parenthood through comprehensive care.", 
+                  color: "#0d9488" 
+                },
+                { 
+                  name: "Dr. Kalyani Gade", 
+                  title: "MBBS MS (Obstetrics & Gynaecology) • DNB, DFP, FMAS, MNAMS • Fellowship in Reproductive Medicine, Pune • OBGY & Infertility expert", 
+                  description: "Expert in fertility management and women's reproductive health with a focus on personalized treatment approaches.", 
+                  color: "#059669" 
+                },
+                { 
+                  name: "Dr. Apurva Kale", 
+                  title: "MBBS MD (Pediatrics) • Pediatrician, Neonatologist & Pediatric Intensivist", 
+                  description: "Dedicated to providing exceptional care for newborns and children, ensuring healthy development and growth.", 
+                  color: "#047857" 
+                }
               ].map((member, idx) => (
                 <div
                   key={member.name}

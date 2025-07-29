@@ -1,0 +1,79 @@
+PATH'O'LIFE LIFESTYLE PLANS INFORMATION FOR CHATBOT
+
+LIFESTYLE PLANS OVERVIEW:
+If you're looking for more than just a consultation - deeper support, guidance, and habit change - our wellness plans are for you.
+
+REGISTRATION PROCESS: 
+1. Choose your wellness plan
+2. Pay via UPI using our QR code
+3. Upload screenshot to confirm
+
+WHAT ALL PLANS INCLUDE:
+- Personal Consultations with Dr. Pravina for personalized guidance
+- Custom Plans with tailored nutrition and lifestyle recommendations  
+- WhatsApp Support with regular check-ins and support
+- Progress Tracking to monitor your journey with regular assessments
+
+LIFESTYLE PLAN DETAILS:
+
+1. WELLNESS RESET - ₹4999 (Originally ₹9999)
+   Duration: 1 Month
+   Target: Quick direction, light hand-holding, or mild symptoms
+   What you'll get:
+   - 2 sessions with Dr. Pravina (start + follow-up)
+   - Lifestyle action plan (food, sleep, movement, stress)
+   - WhatsApp support (1/week check-in)
+   - PDF guides or worksheets tailored to concern
+   - Option to upgrade to a longer plan
+
+2. HEALING PLAN - ₹11999 (Originally ₹18999)
+   Duration: 3 Months
+   Target: PCOS, fertility, postpartum, or weight loss
+   What you'll get:
+   - 6 sessions with Dr. Pravina (biweekly)
+   - Fully customized routines and strategies
+   - WhatsApp follow-ups (2x/month)
+   - Adjustments made as per progress
+   - Access to expert advice if needed
+   - Focus on deep root-cause healing
+
+3. LIFESTYLE TRANSFORMATION - ₹19999 (Originally ₹29999)
+   Duration: 6 Months
+   Target: PCOS + weight management + fertility combo
+   What you'll get:
+   - 12 sessions with Dr. Pravina (every 2 weeks)
+   - Deep lifestyle coaching + emotional support
+   - Regular monitoring, plan upgrades & accountability
+   - Support with hormonal, fertility, weight or chronic concerns
+   - Integration with ObGyn or pediatric team if needed
+
+CHATBOT RESPONSE TEMPLATES:
+
+When someone asks about lifestyle plan registration:
+"Thank you for your interest in the [PLAN NAME] plan! This [DURATION] program is perfect for [TARGET AUDIENCE]. You'll get [KEY FEATURES]. The plan costs [PRICE] (originally [ORIGINAL PRICE]) and provides [LEVEL OF SUPPORT]. Would you like me to help you with the registration process?"
+
+When someone asks about plan pricing:
+"Our lifestyle plans are priced at: Wellness Reset (1 month) - ₹4999, Healing Plan (3 months) - ₹11999, and Lifestyle Transformation (6 months) - ₹19999. All plans include personalized sessions, customized strategies, and ongoing support."
+
+When someone asks about registration process:
+"To register for any lifestyle plan, visit our website and click on the 'BUY NOW' button for your chosen plan. You'll need to pay via UPI and upload the payment screenshot to confirm your enrollment."
+
+When someone asks about plan list:
+"We offer 3 lifestyle plans: 1) Wellness Reset (1 month - ₹4999) for quick direction and mild symptoms, 2) Healing Plan (3 months - ₹11999) for PCOS, fertility, postpartum, or weight loss, and 3) Lifestyle Transformation (6 months - ₹19999) for PCOS + weight management + fertility combo. Each plan includes personalized sessions with Dr. Pravina, customized strategies, and ongoing support."
+
+When someone asks about what's included:
+"All lifestyle plans include: Personal consultations with Dr. Pravina, customized nutrition and lifestyle recommendations, WhatsApp support with regular check-ins, and progress tracking with regular assessments."
+
+When someone asks about the process:
+"The registration process is simple: 1) Choose your wellness plan, 2) Pay via UPI using our QR code, 3) Upload screenshot to confirm your enrollment."
+
+SPECIFIC PLAN RESPONSES:
+
+Wellness Reset Registration:
+"Thank you for your interest in the Wellness Reset plan! This 1-month program is perfect for those seeking quick direction and light hand-holding for mild symptoms. You'll get 2 sessions with Dr. Pravina (start + follow-up), a personalized lifestyle action plan covering food, sleep, movement, and stress, weekly WhatsApp support, customized PDF guides, and the option to upgrade to longer plans. The plan costs ₹4999 (originally ₹9999) and is designed for quick wellness guidance. Would you like me to help you with the registration process?"
+
+Healing Plan Registration:
+"Thank you for your interest in the Healing Plan! This 3-month comprehensive program is designed for PCOS, fertility, postpartum, or weight loss concerns. You'll receive 6 sessions with Dr. Pravina (biweekly), fully customized routines and strategies, monthly WhatsApp follow-ups, progress-based adjustments, access to expert advice, and focus on deep root-cause healing. The plan costs ₹11999 (originally ₹18999) and provides comprehensive support for complex health concerns. Would you like me to help you with the registration process?"
+
+Lifestyle Transformation Registration:
+"Thank you for your interest in the Lifestyle Transformation plan! This 6-month comprehensive program is ideal for PCOS + weight management + fertility combo. You'll receive 12 sessions with Dr. Pravina (every 2 weeks), deep lifestyle coaching with emotional support, regular monitoring and plan upgrades, accountability support, comprehensive support for hormonal, fertility, weight, and chronic concerns, and integration with ObGyn or pediatric teams if needed. The plan costs ₹19999 (originally ₹29999) and provides the most comprehensive support for complex health transformations. Would you like me to help you with the registration process?" 
