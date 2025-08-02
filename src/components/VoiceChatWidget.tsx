@@ -200,37 +200,56 @@ const VoiceChatWidget = () => {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
-      {/* Agent selection dropdown */}
-      {status === 'idle' && agents.length > 0 && (
-        <select
-          className="mb-2 rounded-md border px-3 py-2 text-base bg-white text-gray-700 shadow"
-          value={selectedAgent}
-          onChange={e => setSelectedAgent(e.target.value)}
+    <>
+      {/* Desktop version - full button */}
+      <div className="hidden lg:flex fixed bottom-6 right-6 z-50 flex-col items-end gap-2">
+        {/* Agent selection dropdown */}
+        {status === 'idle' && agents.length > 0 && (
+          <select
+            className="mb-2 rounded-md border px-3 py-2 text-base bg-white text-gray-700 shadow"
+            value={selectedAgent}
+            onChange={e => setSelectedAgent(e.target.value)}
+          >
+            {agents.map((agent: any) => (
+              <option key={agent.name || agent.agent_name} value={agent.name || agent.agent_name}>
+                {agent.name || agent.agent_name}
+              </option>
+            ))}
+          </select>
+        )}
+        
+        <button
+          className="flex items-center justify-center rounded-full px-6 h-12 transition-all shadow-lg focus:outline-none text-white font-semibold hover:scale-105"
+          style={{ 
+            minWidth: (status === 'connected' || status === 'connecting') ? '180px' : '160px', 
+            maxWidth: (status === 'connected' || status === 'connecting') ? '220px' : '200px',
+            backgroundColor: status === 'connected' ? '#ef4444' : '#0d9488',
+            border: status === 'connected' ? '1px solid #ef4444' : '1px solid #0d9488'
+          }}
+          onClick={status === 'connected' ? endCall : startCall}
+          disabled={status === 'connecting'}
+          aria-label={status === 'connected' ? 'End call' : 'Start phone call'}
         >
-          {agents.map((agent: any) => (
-            <option key={agent.name || agent.agent_name} value={agent.name || agent.agent_name}>
-              {agent.name || agent.agent_name}
-            </option>
-          ))}
-        </select>
-      )}
-      
-      <button
-        className="flex items-center justify-center rounded-full px-6 h-12 transition-all shadow-lg focus:outline-none text-white font-semibold hover:scale-105"
-        style={{ 
-          minWidth: (status === 'connected' || status === 'connecting') ? '180px' : '160px', 
-          maxWidth: (status === 'connected' || status === 'connecting') ? '220px' : '200px',
-          backgroundColor: status === 'connected' ? '#ef4444' : '#0d9488',
-          border: status === 'connected' ? '1px solid #ef4444' : '1px solid #0d9488'
-        }}
-        onClick={status === 'connected' ? endCall : startCall}
-        disabled={status === 'connecting'}
-        aria-label={status === 'connected' ? 'End call' : 'Start phone call'}
-      >
-        {buttonContent}
-      </button>
-    </div>
+          {buttonContent}
+        </button>
+      </div>
+
+      {/* Mobile version - just the phone icon */}
+      <div className="lg:hidden">
+        <button
+          className="flex items-center justify-center rounded-full w-10 h-10 transition-all shadow-lg focus:outline-none text-white font-semibold hover:scale-105"
+          style={{ 
+            backgroundColor: status === 'connected' ? '#ef4444' : '#0d9488',
+            border: status === 'connected' ? '1px solid #ef4444' : '1px solid #0d9488'
+          }}
+          onClick={status === 'connected' ? endCall : startCall}
+          disabled={status === 'connecting'}
+          aria-label={status === 'connected' ? 'End call' : 'Start phone call'}
+        >
+          {status === 'connected' ? <PhoneOff className="w-5 h-5" /> : <Phone className="w-5 h-5" />}
+        </button>
+      </div>
+    </>
   );
 };
 

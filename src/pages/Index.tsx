@@ -1,4 +1,5 @@
 
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -41,6 +42,14 @@ function HexFlower({ label, text }) {
 }
 
 const Index = () => {
+  // Scroll to top only on page refresh, not on navigation
+  useEffect(() => {
+    // Only scroll to top if this is a page refresh (not navigation)
+    if (window.performance && window.performance.navigation.type === 1) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
       <style>
@@ -66,7 +75,7 @@ const Index = () => {
         `}
       </style>
       {/* Hero Section */}
-              <section className="relative overflow-hidden text-white min-h-[90vh] flex items-center" role="banner" data-aos="fade-up" style={{ backgroundColor: '#e9f5e9' }}>
+              <section className="relative overflow-hidden text-white min-h-screen flex items-center" role="banner" data-aos="fade-up" style={{ backgroundColor: '#e9f5e9' }}>
         {/* Background image */}
         <img 
           src="/photos/HeroPageBackgorund.jpg" 
@@ -166,7 +175,7 @@ const Index = () => {
                   <h3 className="font-playfair text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4 group-hover:text-primary transition-colors duration-300">1:1 Consultations</h3>
                   <p className="font-inter text-base md:text-lg text-muted-foreground mb-2 md:mb-3 group-hover:text-foreground transition-colors duration-300 font-semibold">Deeply Personal. Powerfully Transformative.</p>
                   <p className="font-inter text-sm text-muted-foreground mb-3 opacity-80 group-hover:opacity-100 transition-opacity duration-300 leading-relaxed">Tailored video calls for painful periods, weight reset, postpartum healing & lactation or child nutrition.</p>
-                  <p className="font-inter text-sm text-primary font-medium mt-auto opacity-90 group-hover:opacity-100 transition-opacity duration-300">Matched with the right expert</p>
+                  <p className="font-inter text-sm text-primary font-medium mt-auto opacity-90 group-hover:opacity-100 transition-opacity duration-300">Book a consultation</p>
                   <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" aria-hidden="true"></div>
                 </CardContent>
               </Card>
@@ -285,7 +294,11 @@ const Index = () => {
                     </div>
                   </div>
                   <h3 className="font-playfair text-xl font-bold text-foreground mb-1 hover:text-primary transition-colors duration-300">{doctor.name}</h3>
-                  <p className="font-inter text-sm text-muted-foreground italic mb-3 hover:text-primary/80 transition-colors duration-300">{doctor.title}</p>
+                  <div className="font-inter text-sm text-muted-foreground italic mb-3 hover:text-primary/80 transition-colors duration-300">
+                    {doctor.title.split(' • ').map((qualification, index) => (
+                      <p key={index} className="mb-1">{qualification}</p>
+                    ))}
+                  </div>
                   <div className="advisory-description space-y-3 mb-0">
                     <p className="font-inter text-sm text-foreground leading-normal">{doctor.description}</p>
                   </div>
@@ -345,7 +358,11 @@ const Index = () => {
                     </div>
                   </div>
                   <h3 className="font-playfair text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors duration-300">{member.name}</h3>
-                  <p className="font-inter text-sm text-muted-foreground italic mb-3 group-hover:text-primary/80 transition-colors duration-300">{member.title}</p>
+                  <div className="font-inter text-sm text-muted-foreground italic mb-3 group-hover:text-primary/80 transition-colors duration-300">
+                    {member.title.split(' • ').map((qualification, index) => (
+                      <p key={index} className="mb-1">{qualification}</p>
+                    ))}
+                  </div>
                   <p className="font-inter text-sm text-foreground mb-0 leading-normal group-hover:text-foreground/90 transition-colors duration-300">{member.description}</p>
                 </div>
               ))}
@@ -354,26 +371,10 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Let's Walk the Path Together */}
-      <section className="py-12 relative overflow-hidden" data-aos="fade-up" style={{ backgroundColor: '#e9f5e9' }}>
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="mb-6">
-              <div className="flex items-center justify-center mb-4">
-                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
-                <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mx-8">Let's walk the Path Together</h2>
-                <div className="flex-1 h-px bg-gradient-to-l from-transparent via-primary/30 to-transparent"></div>
-              </div>
-            </div>
-            <p className="font-inter text-xl md:text-2xl text-foreground/80 leading-relaxed max-w-3xl mx-auto">
-              You've taken the first step towards transforming your health. Whether you're exploring hormones, preparing for motherhood, or just craving clarity - we're here for you.
-            </p>
-          </div>
-        </div>
-      </section>
+
 
       {/* Testimonials Section */}
-      <section className="py-24 relative overflow-hidden" data-aos="fade-up" style={{ backgroundColor: '#1a5f57' }}>
+      <section className="py-16 relative overflow-hidden" data-aos="fade-up" style={{ backgroundColor: '#1a5f57' }}>
         <div className="relative z-20">
           <div className="text-center mb-6 animate-fade-in-up">
             <h2 className="font-playfair text-4xl font-bold text-foreground mb-2">What Our Community Says</h2>
@@ -455,6 +456,43 @@ const Index = () => {
                 </Card>
               </SwiperSlide>
             </Swiper>
+          </div>
+        </div>
+      </section>
+
+      {/* Let's Walk the Path Together */}
+      <section className="py-12 relative overflow-hidden" data-aos="fade-up" style={{ backgroundColor: '#1a5f57' }}>
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 w-20 h-20 border border-white/20 rounded-full"></div>
+          <div className="absolute bottom-20 right-16 w-16 h-16 border border-white/20 rounded-full"></div>
+          <div className="absolute top-1/2 left-1/4 w-12 h-12 border border-white/20 transform rotate-45"></div>
+        </div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-5xl mx-auto text-center">
+            {/* Enhanced title with better spacing and effects */}
+            <div className="mb-12">
+              <div className="flex items-center justify-center mb-8">
+                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/40 to-white/40"></div>
+                <h2 className="font-playfair text-3xl md:text-4xl font-bold text-white mx-8 leading-tight tracking-tight drop-shadow-lg">
+                  Let's walk the Path Together
+                </h2>
+                <div className="flex-1 h-px bg-gradient-to-l from-transparent via-white/40 to-white/40"></div>
+              </div>
+            </div>
+            
+            {/* Enhanced description with better typography */}
+            <div className="relative">
+                             <p className="font-inter text-lg md:text-xl text-white/95 leading-relaxed max-w-4xl mx-auto font-medium tracking-wide drop-shadow-sm">
+                You've taken the first step towards transforming your health. Whether you're exploring hormones, preparing for motherhood, or just craving clarity - we're here for you.
+              </p>
+              
+              {/* Decorative accent */}
+              <div className="mt-8 flex justify-center">
+                <div className="w-16 h-1 bg-gradient-to-r from-transparent via-white/60 to-transparent rounded-full"></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

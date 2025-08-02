@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Calendar, Clock, Users, BookOpen } from "lucide-react";
+import { Calendar, Clock, Users, BookOpen, CheckCircle } from "lucide-react";
 import { chatbotEvents } from "@/lib/chatbot-events";
 
 const Workshops = () => {
@@ -11,6 +11,19 @@ const Workshops = () => {
   };
 
   const workshops = [
+    {
+      title: "👩🏻‍⚕️ Weight Reset & Hormonal Balance",
+      subtitle: "Not Just Weight Loss, A Full Body Reset",
+      audience: "For All Women 18+",
+      features: [
+        "Understand your hormones & weight connection",
+        "Tackle belly fat, cravings & low energy",
+        "Anti-inflammatory nutrition made practical",
+        "Smart movement & strength strategies",
+        "Stress, sleep & metabolism mastery",
+        "Build habits that last, not bounce back"
+      ]
+    },
     {
       title: "🌸 PCOS Unplugged",
       subtitle: "Your Hormones, Hair, Skin & Sanity",
@@ -75,19 +88,6 @@ const Workshops = () => {
         "Holistic child lifestyle routines (food, sleep, screen, play)",
         "Indian food wisdom with modern evidence"
       ]
-    },
-    {
-      title: "👩🏻‍⚕️ The Weight Reset for Women",
-      subtitle: "Not Just Weight Loss, A Full Body Reset",
-      audience: "For All Women 18+",
-      features: [
-        "Understand your hormones & weight connection",
-        "Tackle belly fat, cravings & low energy",
-        "Anti-inflammatory nutrition made practical",
-        "Smart movement & strength strategies",
-        "Stress, sleep & metabolism mastery",
-        "Build habits that last, not bounce back"
-      ]
     }
   ];
 
@@ -104,7 +104,7 @@ const Workshops = () => {
             <h1 className="font-playfair text-6xl md:text-7xl font-bold mb-6 leading-tight">✨ Path'o'Life Signature Workshops</h1>
             <p className="font-inter text-xl md:text-2xl mb-8 opacity-90">Live • Interactive • Transformational Sessions for Every Phase of Womanhood</p>
             
-            <div className="grid md:grid-cols-3 gap-8 mb-8 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8 mb-8 max-w-4xl mx-auto">
               <div className="flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 min-h-[80px]">
                 <Clock className="h-6 w-6" />
                 <span className="font-inter font-medium">🕒 2-hour deep-dive workshops</span>
@@ -113,21 +113,18 @@ const Workshops = () => {
                 <Users className="h-6 w-6" />
                 <span className="font-inter font-medium">📍 Live on Google Meet</span>
               </div>
-              <div className="flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 min-h-[80px]">
-                <Calendar className="h-6 w-6" />
-                <span className="font-inter font-medium">🗣️ Available in English • Hindi • Marathi</span>
-              </div>
+
             </div>
 
-            <div className="max-w-2xl mx-auto">
+            <div className="max-w-2xl mx-auto text-center">
               <p className="font-inter text-lg text-white/90">
-                🎁 Includes: • Downloadable checklists & lifestyle toolkits
+                🎁 Includes: Downloadable checklists & lifestyle toolkits
               </p>
-              <p className="font-inter text-lg text-white/90 ml-8">
-                • Expert Q&A
+              <p className="font-inter text-lg text-white/90">
+                Q&A's
               </p>
-              <p className="font-inter text-lg text-white/90 ml-8">
-                • Free resources you'll actually use
+              <p className="font-inter text-lg text-white/90">
+                Free resources you'll actually use
               </p>
             </div>
           </div>
@@ -153,23 +150,27 @@ const Workshops = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             {workshops.map((workshop, index) => (
-              <Card key={index} className="group hover:shadow-elevated hover:-translate-y-1 transition-all duration-500 animate-fade-in mb-8 overflow-hidden" style={{animationDelay: `${index * 100}ms`}}>
-                <CardContent className="p-8">
-                  <div className="flex items-center mb-6">
-                    <div className="mr-4">
-                      <span className="text-4xl">{workshop.title.split(' ')[0]}</span>
+              <Card key={index} className="group hover:shadow-elevated hover:-translate-y-2 transition-all duration-500 animate-fade-in mb-8 overflow-hidden border-0 shadow-lg" style={{animationDelay: `${index * 100}ms`}}>
+                <CardContent className="p-8 bg-gradient-to-br from-white to-gray-50/50">
+                  <div className="flex items-start mb-8">
+                    <div className="mr-6 flex-shrink-0">
+                      <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-primary/20 rounded-full flex items-center justify-center shadow-sm">
+                        <span className="text-3xl">{workshop.title.split(' ')[0]}</span>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-playfair text-xl font-bold text-foreground">{workshop.title.split(' ').slice(1).join(' ')}</h3>
-                      <p className="font-inter text-primary font-semibold">{workshop.subtitle}</p>
-                      <p className="font-inter text-sm text-muted-foreground mt-1">{workshop.audience}</p>
+                    <div className="flex-1">
+                      <h3 className="font-playfair text-2xl font-bold text-foreground mb-2">{workshop.title.split(' ').slice(1).join(' ')}</h3>
+                      <p className="font-inter text-primary font-semibold text-lg mb-2">{workshop.subtitle}</p>
+                      <div className="inline-flex items-center px-3 py-1 bg-primary/10 rounded-full">
+                        <span className="text-primary text-sm font-medium">{workshop.audience}</span>
+                      </div>
                     </div>
                   </div>
                   
                   <div className="space-y-3 mb-6 max-h-0 group-hover:max-h-96 transition-all duration-500 overflow-hidden">
                     {workshop.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-start space-x-3">
-                        <span className="text-primary mt-1">•</span>
+                        <CheckCircle className="h-5 w-5 text-primary stroke-2 flex-shrink-0 mt-0.5" />
                         <span className="font-inter text-muted-foreground leading-relaxed">{feature}</span>
                       </div>
                     ))}
@@ -177,7 +178,7 @@ const Workshops = () => {
                   <Button 
                     variant="soft" 
                     size="lg" 
-                    className="w-full bg-white/95 text-primary hover:bg-white hover:text-primary font-inter font-semibold backdrop-blur-sm border border-primary/20"
+                    className="w-full bg-gradient-to-r from-primary to-primary/90 text-white hover:from-primary/90 hover:to-primary font-inter font-semibold shadow-lg hover:shadow-xl transition-all duration-300 border-0"
                     onClick={() => handleWorkshopRegistration(workshop.title)}
                   >
                     Register for This Workshop

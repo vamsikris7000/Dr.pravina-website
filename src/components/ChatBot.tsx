@@ -82,8 +82,8 @@ const ChatBot = () => {
   }, []);
 
   const sendMessageToChatbot = async (userMessage: string) => {
-    const apiKey = 'app-AZ5VwFvWHU9DD9M3zZG4wcic';
-    const apiUrl = 'https://dtxbmbumrjys5.cloudfront.net/v1/chat-messages';
+    const apiKey = 'app-dStnyyOE9dNP6CZb0lPg3kKF';
+    const apiUrl = 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages';
 
     try {
       const response = await fetch(apiUrl, {
@@ -97,14 +97,7 @@ const ChatBot = () => {
           query: userMessage,
           response_mode: 'streaming',
           conversation_id: '',
-          user: 'abc-123',
-          files: [
-            {
-              type: 'image',
-              transfer_method: 'remote_url',
-              url: 'https://cloud.dify.ai/logo/logo-site.png',
-            },
-          ],
+          user: 'abc-123'
         }),
       });
 
@@ -212,7 +205,7 @@ const ChatBot = () => {
       {!isDialogOpen && (
         <div className="fixed bottom-2 left-0 right-0 z-50 p-4">
           <div className="max-w-4xl mx-auto">
-            <div className="flex flex-row items-center justify-between gap-2 mb+2">
+            <div className="flex flex-row items-center justify-between gap-2">
               <div className="relative flex-1">
               <Input
                 value={inputValue}
@@ -228,19 +221,23 @@ const ChatBot = () => {
                   👋 Hello there! How can we assist you?
                 </div>
               )}
-              <Button
-                onClick={handleSendMessage}
-                disabled={!inputValue.trim() || isLoading}
-                size="icon"
-                className="absolute right-1 top-1/2 transform -translate-y-1/2 h-10 w-10 rounded-full bg-white border border-primary shadow"
-              >
-                <Send className="h-4 w-4" style={{ color: '#338B81' }} />
-              </Button>
+              <div className="absolute right-1 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
+                {/* Mobile phone call button */}
+                <div className="lg:hidden">
+                  <VoiceChatWidget />
+                </div>
+                {/* Send button */}
+                <Button
+                  onClick={handleSendMessage}
+                  disabled={!inputValue.trim() || isLoading}
+                  size="icon"
+                  className="h-10 w-10 rounded-full bg-white border border-primary shadow"
+                >
+                  <Send className="h-4 w-4" style={{ color: '#338B81' }} />
+                </Button>
               </div>
-              {/* Inline Voice Chat Widget Button */}
-              <div className="ml-2 flex-shrink-0">
-                <VoiceChatWidget />
               </div>
+
             </div>
           </div>
         </div>

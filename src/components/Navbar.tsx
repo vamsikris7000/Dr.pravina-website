@@ -32,20 +32,20 @@ const Navbar = () => {
   return (
     <nav className="backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-border" style={{ backgroundColor: '#e9f5e9' }}>
       <div className="container mx-auto px-6">
-        <div className="flex justify-between items-center py-2.5">
+        <div className="flex justify-between items-center py-1.5">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="bg-white rounded-full p-2 shadow-sm">
             <img 
               src="/photos/logo.png" 
               alt="Path'o'Life Logo" 
-              className="h-[36px] w-auto transition-transform duration-300 group-hover:scale-105"
-              style={{ minWidth: 36 }}
+              className="h-[32px] w-auto transition-transform duration-300 group-hover:scale-105"
+              style={{ minWidth: 32 }}
             />
             </div>
             <div className="flex flex-col justify-center leading-tight">
-              <h1 className="text-2xl font-bold font-playfair mb-0 pb-0" style={{ color: '#338B81', lineHeight: 1.1 }}>Path'o'Life</h1>
-              <span className="text-[11px] font-medium mt-0 tracking-wide" style={{ color: '#338B81', lineHeight: 1.2, fontFamily: 'Playfair Display, serif' }}>Periods • Pregnancy • Parenting</span>
+              <h1 className="text-xl font-bold mb-0 pb-0" style={{ color: '#338B81', lineHeight: 1.1, fontFamily: 'sans-serif' }}>Path'o'Life</h1>
+              <span className="text-sm font-normal mt-0 tracking-wide" style={{ color: '#6B7280', lineHeight: 1.2, fontFamily: 'sans-serif' }}>Periods • Pregnancy • Parenting</span>
             </div>
           </Link>
 
