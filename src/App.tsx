@@ -18,6 +18,8 @@ import ChatBot from "./components/ChatBot";
 import VoiceChatWidget from "@/components/VoiceChatWidget";
 import PathOLife from "./pages/patholife";
 import Founder from "./pages/founder";
+import AdminDashboard from "./pages/AdminDashboard";
+import { WorkshopProvider } from "./contexts/WorkshopContext";
 
 const queryClient = new QueryClient();
 
@@ -26,24 +28,28 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/workshops" element={<Workshops />} />
-          <Route path="/consultations" element={<Consultations />} />
-          <Route path="/wellness-plans" element={<LifestylePlans />} />
-          <Route path="/lab2life" element={<Lab2Life />} />
+      <WorkshopProvider>
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/workshops" element={<Workshops />} />
+            <Route path="/consultations" element={<Consultations />} />
+            <Route path="/wellness-plans" element={<LifestylePlans />} />
+            <Route path="/lab2life" element={<Lab2Life />} />
 
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/patholife" element={<PathOLife />} />
-          <Route path="/founder" element={<Founder />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <ChatBot />
-        <VoiceChatWidget />
-      </BrowserRouter>
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/patholife" element={<PathOLife />} />
+            <Route path="/founder" element={<Founder />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/doctor-panel" element={<AdminDashboard />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <ChatBot />
+          <VoiceChatWidget />
+        </BrowserRouter>
+      </WorkshopProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

@@ -1,0 +1,126 @@
+const API_BASE_URL = 'http://localhost:5001/api';
+
+// Get token from localStorage
+const getToken = () => localStorage.getItem('adminToken');
+
+// API headers with authentication
+const getHeaders = () => ({
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${getToken()}`
+});
+
+// Auth API
+export const loginAdmin = async (email, password) => {
+  const response = await fetch(`${API_BASE_URL}/auth/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  });
+  return response.json();
+};
+
+// Patients API
+export const fetchPatients = async () => {
+  const response = await fetch(`${API_BASE_URL}/patients`, {
+    headers: getHeaders(),
+  });
+  return response.json();
+};
+
+export const createPatient = async (patientData) => {
+  const response = await fetch(`${API_BASE_URL}/patients`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(patientData),
+  });
+  return response.json();
+};
+
+export const updatePatientStatus = async (id, status) => {
+  const response = await fetch(`${API_BASE_URL}/patients/${id}`, {
+    method: 'PATCH',
+    headers: getHeaders(),
+    body: JSON.stringify({ status }),
+  });
+  return response.json();
+};
+
+export const deletePatient = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/patients/${id}`, {
+    method: 'DELETE',
+    headers: getHeaders(),
+  });
+  return response.json();
+};
+
+// Appointments API
+export const fetchAppointments = async () => {
+  const response = await fetch(`${API_BASE_URL}/appointments`, {
+    headers: getHeaders(),
+  });
+  return response.json();
+};
+
+export const createAppointment = async (appointmentData) => {
+  const response = await fetch(`${API_BASE_URL}/appointments`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(appointmentData),
+  });
+  return response.json();
+};
+
+export const updateAppointmentStatus = async (id, status) => {
+  const response = await fetch(`${API_BASE_URL}/appointments/${id}`, {
+    method: 'PATCH',
+    headers: getHeaders(),
+    body: JSON.stringify({ status }),
+  });
+  return response.json();
+};
+
+export const deleteAppointment = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/appointments/${id}`, {
+    method: 'DELETE',
+    headers: getHeaders(),
+  });
+  return response.json();
+};
+
+// Messages API
+export const fetchMessages = async () => {
+  const response = await fetch(`${API_BASE_URL}/messages`, {
+    headers: getHeaders(),
+  });
+  return response.json();
+};
+
+export const createMessage = async (messageData) => {
+  const response = await fetch(`${API_BASE_URL}/messages`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(messageData),
+  });
+  return response.json();
+};
+
+export const updateMessageStatus = async (id, status) => {
+  const response = await fetch(`${API_BASE_URL}/messages/${id}`, {
+    method: 'PATCH',
+    headers: getHeaders(),
+    body: JSON.stringify({ status }),
+  });
+  return response.json();
+};
+
+export const deleteMessage = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/messages/${id}`, {
+    method: 'DELETE',
+    headers: getHeaders(),
+  });
+  return response.json();
+}; 

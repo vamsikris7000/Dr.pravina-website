@@ -3,93 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Clock, Users, BookOpen, CheckCircle } from "lucide-react";
 import { chatbotEvents } from "@/lib/chatbot-events";
+import { useWorkshops } from "@/contexts/WorkshopContext";
 
 const Workshops = () => {
+  const { workshops } = useWorkshops();
+  
   const handleWorkshopRegistration = (workshopTitle: string) => {
     const message = `Hi, I want to register for the ${workshopTitle} workshop`;
     chatbotEvents.openChat(message);
   };
-
-  const workshops = [
-    {
-      title: "👩🏻‍⚕️ Weight Reset & Hormonal Balance",
-      subtitle: "Not Just Weight Loss, A Full Body Reset",
-      audience: "For All Women 18+",
-      features: [
-        "Understand your hormones & weight connection",
-        "Tackle belly fat, cravings & low energy",
-        "Anti-inflammatory nutrition made practical",
-        "Smart movement & strength strategies",
-        "Stress, sleep & metabolism mastery",
-        "Build habits that last, not bounce back"
-      ]
-    },
-    {
-      title: "🌸 PCOS Unplugged",
-      subtitle: "Your Hormones, Hair, Skin & Sanity",
-      audience: "For Teens & Young Women",
-      features: [
-        "Decode your hormones & cycle",
-        "Period problems & PCOS types", 
-        "Skin, hair, mood & weight tips",
-        "Menstrual cup basics & hygiene",
-        "PCOS-friendly food & movement",
-        "Cycle syncing & stress hacks"
-      ]
-    },
-    {
-      title: "👫🏻 Pre-Pregnancy Power Couple",
-      subtitle: "Plan Parenthood with Purpose",
-      audience: "For Couples Planning Pregnancy",
-      features: [
-        "Fertility nutrition for both partners",
-        "Cycle tracking & fertile window basics",
-        "Lifestyle shifts to boost conception",
-        "Detox, stress & sleep prep",
-        "Emotional alignment & partner mindset",
-        "Myths vs science of getting pregnant"
-      ]
-    },
-    {
-      title: "🤰🏻 Pregnancy Wellness Workshop",
-      subtitle: "Feel Nourished, Calm & Connected",
-      audience: "For Expecting Mothers (All Trimesters)",
-      features: [
-        "Trimester-wise nutrition & cravings",
-        "Safe movement & breathing practices",
-        "Sleep, stress & mental wellness",
-        "Gut health & immunity boosters",
-        "Indian wisdom meets modern care",
-        "Rituals for bonding & body trust"
-      ]
-    },
-    {
-      title: "🤱🏻 Confident Breastfeeding & Postpartum Healing",
-      subtitle: "Nurture Your Baby. Reclaim Your Body.",
-      audience: "For New & Expecting Moms",
-      features: [
-        "Lactation techniques & myths",
-        "Latch, supply, positions & pumping",
-        "Recovery after birth for body, mind, sleep",
-        "Postpartum nutrition & emotional support",
-        "Indian rituals & modern healing practices",
-        "Space for real talk, not just survival"
-      ]
-    },
-    {
-      title: "🍲 First Foods & Beyond",
-      subtitle: "Foundations of Child Nutrition & Lifestyle",
-      audience: "For Moms with Children (6 Months to 5 Years)",
-      features: [
-        "When & how to start solids",
-        "Daily feeding plans & schedules",
-        "Immunity-boosting foods & habits",
-        "Gut health, picky eating & meal battles",
-        "Holistic child lifestyle routines (food, sleep, screen, play)",
-        "Indian food wisdom with modern evidence"
-      ]
-    }
-  ];
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
@@ -155,14 +77,27 @@ const Workshops = () => {
                   <div className="flex items-start mb-8">
                     <div className="mr-6 flex-shrink-0">
                       <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-primary/20 rounded-full flex items-center justify-center shadow-sm">
-                        <span className="text-3xl">{workshop.title.split(' ')[0]}</span>
+                        <span className="text-3xl">{workshop.emoji}</span>
                       </div>
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-playfair text-2xl font-bold text-foreground mb-2">{workshop.title.split(' ').slice(1).join(' ')}</h3>
+                      <h3 className="font-playfair text-2xl font-bold text-foreground mb-2">{workshop.title}</h3>
                       <p className="font-inter text-primary font-semibold text-lg mb-2">{workshop.subtitle}</p>
                       <div className="inline-flex items-center px-3 py-1 bg-primary/10 rounded-full">
                         <span className="text-primary text-sm font-medium">{workshop.audience}</span>
+                      </div>
+                    </div>
+                    {/* Timing Information - Right Side */}
+                    <div className="ml-6 flex-shrink-0 text-right">
+                      <div className="bg-primary/5 rounded-lg p-4 border border-primary/10">
+                        <div className="flex items-center justify-center mb-2">
+                          <Calendar className="h-4 w-4 text-primary mr-2" />
+                          <span className="font-inter text-sm font-semibold text-primary">{workshop.day}</span>
+                        </div>
+                        <div className="flex items-center justify-center">
+                          <Clock className="h-4 w-4 text-primary mr-2" />
+                          <span className="font-inter text-sm font-semibold text-primary">{workshop.time}</span>
+                        </div>
                       </div>
                     </div>
                   </div>

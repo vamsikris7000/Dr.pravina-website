@@ -28,6 +28,7 @@ const ChatBot = () => {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const [conversationId, setConversationId] = useState<string>('');
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -96,7 +97,7 @@ const ChatBot = () => {
           inputs: {},
           query: userMessage,
           response_mode: 'streaming',
-          conversation_id: '',
+          conversation_id: conversationId,
           user: 'abc-123'
         }),
       });
@@ -129,6 +130,12 @@ const ChatBot = () => {
           try {
             const cleanLine = line.startsWith('data: ') ? line.slice(6) : line;
             const data = JSON.parse(cleanLine);
+            
+            // Extract conversation ID if present and not already set
+            if (data.conversation_id && !conversationId) {
+              setConversationId(data.conversation_id);
+              console.log('New conversation ID:', data.conversation_id);
+            }
             
             if (data.event === 'agent_message' && data.answer) {
               fullMessage += data.answer;

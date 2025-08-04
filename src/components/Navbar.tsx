@@ -1,5 +1,5 @@
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
@@ -29,6 +29,19 @@ const Navbar = () => {
   const [servicesOpen, setServicesOpen] = useState(false);
   const closeTimeout = useRef<NodeJS.Timeout | null>(null);
 
+  // Prevent body scroll when dropdowns are open
+  useEffect(() => {
+    if (servicesOpen || aboutOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [servicesOpen, aboutOpen]);
+
   return (
     <nav className="backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-border" style={{ backgroundColor: '#e9f5e9' }}>
       <div className="container mx-auto px-6">
@@ -44,7 +57,7 @@ const Navbar = () => {
             />
             </div>
             <div className="flex flex-col justify-center leading-tight">
-              <h1 className="text-xl font-bold mb-0 pb-0" style={{ color: '#338B81', lineHeight: 1.1, fontFamily: 'sans-serif' }}>Path'o'Life</h1>
+              <h1 className="text-xl font-bold mb-0 pb-0" style={{ color: '#338B81', lineHeight: 1.1, fontFamily: 'Cardo, serif' }}>Path'o'Life</h1>
               <span className="text-sm font-normal mt-0 tracking-wide" style={{ color: '#6B7280', lineHeight: 1.2, fontFamily: 'sans-serif' }}>Periods • Pregnancy • Parenting</span>
             </div>
           </Link>
@@ -99,7 +112,8 @@ const Navbar = () => {
               </button>
               {servicesOpen && (
                 <div
-                  className="absolute left-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-border z-50"
+                  className="absolute left-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-border z-50 overflow-hidden"
+                  style={{ maxHeight: '200px' }}
                 >
                   {services.map((service) => (
                     <Link
@@ -138,7 +152,8 @@ const Navbar = () => {
               </button>
               {aboutOpen && (
                 <div
-                  className="absolute left-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-border z-50"
+                  className="absolute left-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-border z-50 overflow-hidden"
+                  style={{ maxHeight: '200px' }}
                 >
                   {aboutDropdown.map((item) => (
                     <Link
