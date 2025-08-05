@@ -3,10 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Users, BookOpen, Microscope, PenTool, Brain, Award, GraduationCap, Instagram, Facebook, Linkedin, Youtube, Mail, Phone, CheckCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
   import { useState, useEffect } from "react";
-  
-  const PathOLife = () => {
+
+const PathOLife = () => {
     console.log('PathOLife component loaded');
-    const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
     // Remove scrollbar completely to prevent layout shift
     useEffect(() => {
@@ -39,57 +38,6 @@ import { Link } from "react-router-dom";
         document.head.removeChild(style);
       };
     }, []);
-  
-  const testimonials = [
-    {
-      name: "Neha Janokar",
-      location: "Pune",
-      photo: "/photos/Testimonials1.png",
-      message: "When I met Dr. Pravina, I was overwhelmed with conflicting fertility advice. Her calm, science-backed, and deeply personal approach gave me the clarity and confidence I needed. From nutrition to stress management, she guided me step-by-step. I feel so much more in tune with my body now and ready for this next phase of life."
-    },
-    {
-      name: "Tejashree Vidhale",
-      location: "Bangalore",
-      photo: "/photos/Testimonials2.png",
-      message: "I had tried everything for weight loss, but nothing felt sustainable until I met Dr. Pravina. She didn't just give me a diet; she gave me a lifestyle. I've lost over 9kg and gained back my self-worth. Also, I'm one size down. Her compassion, her methods, and her personal follow-ups kept me going when I wanted to quit. I'm lighter, healthier, and happier inside out."
-    },
-    {
-      name: "Amruta Bharsakale",
-      location: "Gurgaon",
-      photo: "/photos/Testimonials3.jpeg",
-      message: "PCOS had affected everything from my skin to my confidence. Dr. Pravina simplified things for me. Her structured, yet gentle method helped me stay consistent. My cravings reduced, I lost inches, and I even started enjoying movement again. She made me feel seen, heard, and empowered."
-    },
-    {
-      name: "Monika Bahurupi",
-      location: "Munich, Germany",
-      photo: "/photos/Testimonials4.jpeg",
-      message: "Working with Pravina through Path'o'Life has been a deeply healing experience. As a pathologist, she brings medical knowledge and holistic wisdom that made me feel truly seen. During challenging times, Pravina was my calm, reassuring presence. She helped me become more mindful of my eating habits with compassion and practical advice. The yoga and mental wellness practices she introduced became my anchors for inner peace. What makes Pravina special is her supportive nature and how sincerely she cares. She listens deeply, encourages without pressure, and walks with you through every step. I'm deeply grateful – she helped me not only feel better, but reconnect with myself."
-    },
-    {
-      name: "Dr. Kshitija Pawade",
-      location: "Amravati",
-      photo: "/photos/Testimonials5.jpeg",
-      message: "Being a doctor myself, I had tried many options for PCOS. But nothing felt as personalized and effective as Dr. Pravina's approach. My cycles became regular, I lost excess weight, and I felt more centered than I had in years. She brought the missing 'lifestyle' piece into my healing puzzle."
-    },
-    {
-      name: "Dipali Tidke",
-      location: "Pune",
-      photo: "/photos/Testimonials6.png",
-      message: "When I conceived, I was nervous about doing everything 'right'. Dr. Pravina's pregnancy guidance helped me focus on what truly matters... nourishing my body, bonding with my baby, and enjoying this sacred time. My energy stayed high throughout and my baby thrived. She was more than a doctor...she was my health coach and emotional anchor."
-    },
-    {
-      name: "Divyata Shegokar",
-      location: "Akola",
-      photo: "/photos/Testimonials7.png",
-      message: "From pregnancy to postpartum healing and my baby's nutrition, Dr. Pravina was with me at every step. Her practical tools, emotional support, and timely nudges made me feel prepared and powerful. My recovery was smooth, my breastfeeding journey was joyful, and my baby's diet is now rooted in wholesome traditions. I'm so grateful!"
-    },
-    {
-      name: "Madhura Pawade",
-      location: "Amravati",
-      photo: "/photos/Testimonials8.jpeg",
-      message: "I struggled with PCOS for years acne, hair fall, irregular periods, and stubborn weight. Dr. Pravina's customized lifestyle plan helped me lose 7 kgs, regulate my periods, and sleep peacefully again. She didn't just guide me she believed in me when I didn't."
-    }
-  ];
 
   const pathOLifeHighlights = [
     {
@@ -293,82 +241,7 @@ import { Link } from "react-router-dom";
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-16" style={{ backgroundColor: '#e9f5e9' }}>
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center mb-4">
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent"></div>
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mx-8">Testimonials</h2>
-              <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-transparent"></div>
-            </div>
-          </div>
-          
-          <div className="max-w-7xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 relative min-h-[600px]">
-              {/* Navigation Buttons */}
-              <button
-                onClick={() => setCurrentTestimonial((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1))}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-10"
-              >
-                <ChevronLeft className="h-6 w-6 text-primary" />
-              </button>
-              
-              <button
-                onClick={() => setCurrentTestimonial((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1))}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-10"
-              >
-                <ChevronRight className="h-6 w-6 text-primary" />
-              </button>
-              
-              {/* Testimonial Content - Side by Side Layout */}
-              <div className="flex flex-col lg:flex-row items-stretch h-full">
-                {/* Photo Section - Left Side (35% of widget - reduced by 30%) */}
-                <div className="w-full lg:w-[35%] h-full">
-                  <div className="w-full h-full rounded-2xl overflow-hidden bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg">
-                    <img 
-                      src={testimonials[currentTestimonial].photo} 
-                      alt={`${testimonials[currentTestimonial].name}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-                
-                {/* Text Content - Right Side (65% of widget) */}
-                <div className="w-full lg:w-[65%] text-left flex flex-col justify-center p-8">
-                  <div className="mb-8">
-                    <h3 className="font-playfair text-3xl font-bold text-foreground mb-3">
-                      {testimonials[currentTestimonial].name}
-                    </h3>
-                    <p className="font-inter text-xl text-primary">
-                      {testimonials[currentTestimonial].location}
-                    </p>
-                  </div>
-                  
-                  <blockquote className="font-inter text-lg md:text-xl text-muted-foreground leading-relaxed italic">
-                    "{testimonials[currentTestimonial].message}"
-                  </blockquote>
-                </div>
-              </div>
-              
-              {/* Dots Indicator */}
-              <div className="flex justify-center space-x-2 mt-8">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentTestimonial(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentTestimonial 
-                        ? 'bg-primary scale-125' 
-                        : 'bg-gray-300 hover:bg-primary/50'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Why the Name Path'o'Life Section */}
       <section className="py-16" style={{ backgroundColor: '#e9f5e9' }}>

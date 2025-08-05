@@ -238,8 +238,8 @@ const AdminDashboard = () => {
     setEditingWorkshops(prev => ({ ...prev, [id]: true }));
   };
 
-  const handleWorkshopSave = (id: number, newDay: string, newTime: string) => {
-    updateWorkshop(id, { day: newDay, time: newTime });
+  const handleWorkshopSave = (id: number, newDay: string, newDate: string, newTime: string) => {
+    updateWorkshop(id, { day: newDay, date: newDate, time: newTime });
     setEditingWorkshops(prev => ({ ...prev, [id]: false }));
   };
 
@@ -629,13 +629,22 @@ const AdminDashboard = () => {
 
                       {editingWorkshops[workshop.id] ? (
                         <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
-                          <div className="grid grid-cols-2 gap-4">
+                          <div className="grid grid-cols-3 gap-4">
                             <div>
                               <Label htmlFor={`day-${workshop.id}`}>Day</Label>
                               <Input
                                 id={`day-${workshop.id}`}
                                 defaultValue={workshop.day}
                                 className="mt-1"
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor={`date-${workshop.id}`}>Date</Label>
+                              <Input
+                                id={`date-${workshop.id}`}
+                                defaultValue={workshop.date}
+                                className="mt-1"
+                                placeholder="e.g., 8th Aug"
                               />
                             </div>
                             <div>
@@ -653,8 +662,9 @@ const AdminDashboard = () => {
                               size="sm"
                               onClick={() => {
                                 const dayInput = document.getElementById(`day-${workshop.id}`) as HTMLInputElement;
+                                const dateInput = document.getElementById(`date-${workshop.id}`) as HTMLInputElement;
                                 const timeInput = document.getElementById(`time-${workshop.id}`) as HTMLInputElement;
-                                handleWorkshopSave(workshop.id, dayInput.value, timeInput.value);
+                                handleWorkshopSave(workshop.id, dayInput.value, dateInput.value, timeInput.value);
                               }}
                             >
                               <Save className="h-4 w-4 mr-2" />
@@ -674,7 +684,7 @@ const AdminDashboard = () => {
                         <div className="flex items-center gap-4 text-sm">
                           <span className="flex items-center gap-1">
                             <Calendar className="h-4 w-4" />
-                            {workshop.day}
+                            {workshop.day}, {workshop.date}
                           </span>
                           <span className="flex items-center gap-1">
                             <Clock className="h-4 w-4" />

@@ -7,6 +7,7 @@ export interface Workshop {
   audience: string;
   emoji: string;
   day: string;
+  date: string;
   time: string;
   features: string[];
 }
@@ -41,6 +42,7 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
       audience: "For All Women 18+",
       emoji: "👩🏻‍⚕️",
       day: "Sunday",
+      date: "8th Aug",
       time: "4:50 PM - 8:00 PM",
       features: [
         "Understand your hormones & weight connection",
@@ -58,6 +60,7 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
       audience: "For Teens & Young Women",
       emoji: "🌸",
       day: "Saturday",
+      date: "9th Aug",
       time: "3:00 PM - 6:30 PM",
       features: [
         "Decode your hormones & cycle",
@@ -75,6 +78,7 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
       audience: "For Women Planning Pregnancy",
       emoji: "🤱",
       day: "Friday",
+      date: "10th Aug",
       time: "5:00 PM - 8:30 PM",
       features: [
         "Fertility nutrition for both partners",
@@ -92,6 +96,7 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
       audience: "For New Mothers",
       emoji: "🍼",
       day: "Thursday",
+      date: "11th Aug",
       time: "4:00 PM - 7:30 PM",
       features: [
         "Lactation techniques & myths",
@@ -109,6 +114,7 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
       audience: "For Parents & Caregivers",
       emoji: "👶",
       day: "Wednesday",
+      date: "12th Aug",
       time: "6:00 PM - 9:30 PM",
       features: [
         "When & how to start solids",
@@ -126,6 +132,7 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
       audience: "For All Women",
       emoji: "⚖️",
       day: "Tuesday",
+      date: "13th Aug",
       time: "5:30 PM - 9:00 PM",
       features: [
         "Comprehensive hormone understanding",

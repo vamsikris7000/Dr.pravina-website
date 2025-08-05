@@ -1,9 +1,20 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, Award, Heart, BookOpen, GraduationCap, Users, Microscope, PenTool, Brain } from "lucide-react";
+import { Star, Award, Heart, BookOpen, GraduationCap, Users, Microscope, PenTool, Brain, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 
 const About = () => {
+  const [currentPhoto, setCurrentPhoto] = useState(0);
+  
+  const journeyPhotos = [
+    "/photos/her1.jpg",
+    "/photos/her2.jpg", 
+    "/photos/her3.jpg",
+    "/photos/her4.jpg",
+    "/photos/her.png"
+  ];
+
   const professionalHighlights = [
     {
       icon: GraduationCap,
@@ -120,11 +131,47 @@ const About = () => {
               <div className="float-left mr-6 mb-4 animate-scale-in">
                 <div className="relative">
                   <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-pulse-glow"></div>
-                  <img 
-                    src="/photos/founder1.png" 
-                    alt="Dr. Pravina Kale" 
-                    className="relative w-80 h-auto rounded-2xl shadow-elevated hover:shadow-glow transition-all duration-500 hover:scale-105"
-                  />
+                  
+                  {/* Photo Carousel */}
+                  <div className="relative w-80 h-96 rounded-2xl shadow-elevated overflow-hidden">
+                    <img 
+                      src={journeyPhotos[currentPhoto]} 
+                      alt={`Dr. Pravina Kale - Journey Photo ${currentPhoto + 1}`} 
+                      className="w-full h-full object-cover rounded-2xl transition-all duration-500 hover:scale-105"
+                    />
+                    
+                    {/* Navigation Arrows - Fixed Position */}
+                    <button
+                      onClick={() => setCurrentPhoto((prev) => (prev === 0 ? journeyPhotos.length - 1 : prev - 1))}
+                      className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg hover:bg-white hover:scale-110 transition-all duration-300 z-10"
+                      style={{ top: '50%' }}
+                    >
+                      <ChevronLeft className="h-5 w-5 text-primary" />
+                    </button>
+                    
+                    <button
+                      onClick={() => setCurrentPhoto((prev) => (prev === journeyPhotos.length - 1 ? 0 : prev + 1))}
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg hover:bg-white hover:scale-110 transition-all duration-300 z-10"
+                      style={{ top: '50%' }}
+                    >
+                      <ChevronRight className="h-5 w-5 text-primary" />
+                    </button>
+                    
+                    {/* Photo Indicators - Fixed Position */}
+                    <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1">
+                      {journeyPhotos.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentPhoto(index)}
+                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                            index === currentPhoto
+                              ? 'bg-white scale-125'
+                              : 'bg-white/50 hover:bg-white/75'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
               

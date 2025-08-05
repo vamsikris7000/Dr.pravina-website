@@ -20,6 +20,12 @@ const Contact = () => {
     message: ''
   });
   const [loading, setLoading] = useState(false);
+  
+  // Journey sharing state
+  const [journeyMessage, setJourneyMessage] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [journeyPosts, setJourneyPosts] = useState([]);
+  const [sharingLoading, setSharingLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -56,6 +62,40 @@ const Contact = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleJourneyShare = () => {
+    if (!journeyMessage.trim()) {
+      toast({
+        title: "Please enter a message",
+        description: "Share your journey with the community.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setSharingLoading(true);
+    
+    // Simulate API call delay
+    setTimeout(() => {
+      const newPost = {
+        id: Date.now(),
+        message: journeyMessage,
+        category: selectedCategory || 'General',
+        timestamp: new Date().toLocaleString(),
+        author: 'Anonymous' // In real app, this would be the logged-in user
+      };
+      
+      setJourneyPosts(prev => [newPost, ...prev]);
+      setJourneyMessage('');
+      setSelectedCategory('');
+      setSharingLoading(false);
+      
+      toast({
+        title: "Journey shared successfully!",
+        description: "Your story has been shared with the community.",
+      });
+    }, 1000);
   };
 
   return (
@@ -215,35 +255,83 @@ const Contact = () => {
                       <span className="text-primary mr-3">+</span>
                       Share Your Journey
                     </h2>
-                    <div className="space-y-6">
+                    <div className="space-y-4">
                       <div>
                         <Textarea 
                           placeholder="Share your progress, ask questions, or celebrate wins with the community..." 
-                          rows={6}
+                          rows={4}
                           className="resize-none"
+                          value={journeyMessage}
+                          onChange={(e) => setJourneyMessage(e.target.value)}
                         />
                       </div>
                       
                       <div className="flex flex-wrap gap-3">
-                        <Button variant="outline" size="sm" className="font-inter font-medium">
+                        <Button 
+                          variant={selectedCategory === 'Progress Update' ? 'default' : 'outline'} 
+                          size="sm" 
+                          className="font-inter font-medium"
+                          onClick={() => setSelectedCategory('Progress Update')}
+                        >
                           Progress Update
                         </Button>
-                        <Button variant="outline" size="sm" className="font-inter font-medium">
+                        <Button 
+                          variant={selectedCategory === 'Question' ? 'default' : 'outline'} 
+                          size="sm" 
+                          className="font-inter font-medium"
+                          onClick={() => setSelectedCategory('Question')}
+                        >
                           Question
                         </Button>
-                        <Button variant="outline" size="sm" className="font-inter font-medium">
+                        <Button 
+                          variant={selectedCategory === 'Success Story' ? 'default' : 'outline'} 
+                          size="sm" 
+                          className="font-inter font-medium"
+                          onClick={() => setSelectedCategory('Success Story')}
+                        >
                           Success Story
                         </Button>
                       </div>
                       
                       <div className="flex justify-end">
-                        <Button variant="wellness" size="lg" className="font-inter font-semibold">
-                          Share
+                        <Button 
+                          variant="wellness" 
+                          size="lg" 
+                          className="font-inter font-semibold"
+                          onClick={handleJourneyShare}
+                          disabled={sharingLoading}
+                        >
+                          {sharingLoading ? "Sharing..." : "Share"}
                         </Button>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
+                
+                {/* Journey Posts Display */}
+                {journeyPosts.length > 0 && (
+                  <Card className="mt-6 shadow-elevated hover:shadow-glow transition-all duration-300">
+                    <CardContent className="p-6">
+                      <h3 className="font-playfair text-xl font-bold text-foreground mb-4">Community Journey</h3>
+                      <div className="h-60 overflow-y-auto space-y-4 pr-2">
+                        {journeyPosts.map((post) => (
+                          <div key={post.id} className="border-l-4 border-primary/20 pl-4 py-3 bg-gray-50 rounded-r-lg">
+                            <div className="flex items-start justify-between mb-2">
+                              <span className="inline-block px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
+                                {post.category}
+                              </span>
+                              <span className="text-xs text-gray-500">{post.timestamp}</span>
+                            </div>
+                            <p className="font-inter text-sm text-gray-700 leading-relaxed mb-2">
+                              {post.message}
+                            </p>
+                            <p className="text-xs text-gray-500">- {post.author}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
               </div>
             </div>
           </div>
