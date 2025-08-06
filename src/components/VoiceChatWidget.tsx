@@ -14,39 +14,67 @@ const VoiceChatWidget = () => {
     async function fetchAgents() {
       try {
         console.log("Fetching agents...");
-        const response = await fetch("https://live.xpectrum-ai.com/agents/all", {
+        // Use proxy to avoid CORS issues in both development and production
+        const baseUrl = '/api/voice-integration';
+        
+        const response = await fetch(`${baseUrl}/agents/all`, {
           method: "GET",
-          headers: { "X-API-Key": "xpectrum-ai@123" },
+          headers: { 
+            "X-API-Key": "xpectrum-ai@123"
+          },
         });
+        
+        console.log("Agents response status:", response.status);
+        console.log("Agents response headers:", response.headers);
+        
         if (!response.ok) {
-          console.error("Failed to fetch agents:", response.status, response.statusText);
-          throw new Error(`Failed to fetch agents: ${response.status}`);
+          const errorText = await response.text();
+          console.error("Failed to fetch agents:", response.status, response.statusText, errorText);
+          throw new Error(`Failed to fetch agents: ${response.status} - ${errorText}`);
         }
+        
         const data = await response.json();
         console.log("Agents fetched:", data);
-        setAgents(data);
-        if (data.length > 0) setSelectedAgent(data[0].name || data[0].agent_name || "");
+        
+        // Parse the agents from the response format
+        if (data.status === "success" && data.agents) {
+          const agentList = Object.keys(data.agents).map(agentName => ({
+            name: agentName,
+            agent_name: agentName
+          }));
+          setAgents(agentList);
+          if (agentList.length > 0) setSelectedAgent(agentList[0].name);
+        } else {
+          // Fallback to agent1 if parsing fails
+          setAgents([{ name: "agent1", agent_name: "agent1" }]);
+          setSelectedAgent("agent1");
+        }
       } catch (e) {
         console.error("Error fetching agents:", e);
-        setAgents([]);
+        // Set default agents if API fails
+        setAgents([
+          { name: "agent1", agent_name: "agent1" }
+        ]);
+        setSelectedAgent("agent1");
       }
     }
     fetchAgents();
   }, []);
 
-  async function fetchLivekitToken(agentName = 'agent2') {
+  async function fetchLivekitToken(agentName = 'agent1') {
     try {
       console.log("Fetching token for agent:", agentName);
       
-      // Use proxy in development to avoid CORS
-      const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-      const baseUrl = isDevelopment ? '/api/livekit' : 'https://multiagents.livekit.xpectrum-ai.com';
+      // Use proxy to avoid CORS issues in both development and production
+      const baseUrl = '/api/voice-integration';
       
-      // Try different endpoint structures
+      // Use the exact format from the working curl command
       const endpoints = [
-        `${baseUrl}/tokens/generate?agent_name=${agentName}`,
-        `${baseUrl}/api/tokens/generate?agent_name=${agentName}`,
-        `${baseUrl}/proxy/tokens/generate?agent_name=${agentName}`
+        {
+          url: `${baseUrl}/tokens/generate?agent_name=${agentName}`,
+          method: 'POST',
+          body: null
+        }
       ];
       
       let response;
@@ -54,25 +82,32 @@ const VoiceChatWidget = () => {
       
       for (const endpoint of endpoints) {
         try {
-          console.log("Trying endpoint:", endpoint);
-          response = await fetch(endpoint, {
-            method: 'POST',
+          console.log("Trying endpoint:", endpoint.url, "with method:", endpoint.method);
+          
+          const requestOptions = {
+            method: endpoint.method,
             headers: { 
-              'Content-Type': 'application/json',
               'X-API-Key': 'xpectrum-ai@123'
             },
-          });
+            ...(endpoint.body && { body: endpoint.body })
+          };
+          
+          response = await fetch(endpoint.url, requestOptions);
+          
+          console.log("Response status:", response.status);
+          console.log("Response headers:", response.headers);
           
           if (response.ok) {
             const data = await response.json();
             console.log("Token received:", data);
             return { token: data.token, livekitUrl: data.livekit_url || 'wss://agent-364qtybd.livekit.cloud' };
           } else {
-            console.error(`Endpoint ${endpoint} failed:`, response.status, response.statusText);
-            lastError = `HTTP ${response.status}: ${response.statusText}`;
+            const errorText = await response.text();
+            console.error(`Endpoint ${endpoint.url} failed:`, response.status, response.statusText, errorText);
+            lastError = `HTTP ${response.status}: ${response.statusText} - ${errorText}`;
           }
         } catch (e) {
-          console.error(`Endpoint ${endpoint} error:`, e);
+          console.error(`Endpoint ${endpoint.url} error:`, e);
           lastError = e.message;
         }
       }
@@ -85,6 +120,8 @@ const VoiceChatWidget = () => {
           headers: { 'X-API-Key': 'xpectrum-ai@123' },
         });
         console.log("Basic connectivity test:", testResponse.status);
+        const testText = await testResponse.text();
+        console.log("Basic connectivity response:", testText);
       } catch (e) {
         console.error("Basic connectivity test failed:", e);
       }
@@ -203,21 +240,6 @@ const VoiceChatWidget = () => {
     <>
       {/* Desktop version - full button */}
       <div className="hidden lg:flex fixed bottom-6 right-6 z-50 flex-col items-end gap-2">
-        {/* Agent selection dropdown */}
-        {status === 'idle' && agents.length > 0 && (
-          <select
-            className="mb-2 rounded-md border px-3 py-2 text-base bg-white text-gray-700 shadow"
-            value={selectedAgent}
-            onChange={e => setSelectedAgent(e.target.value)}
-          >
-            {agents.map((agent: any) => (
-              <option key={agent.name || agent.agent_name} value={agent.name || agent.agent_name}>
-                {agent.name || agent.agent_name}
-              </option>
-            ))}
-          </select>
-        )}
-        
         <button
           className="flex items-center justify-center rounded-full px-6 h-12 transition-all shadow-lg focus:outline-none text-white font-semibold hover:scale-105"
           style={{ 

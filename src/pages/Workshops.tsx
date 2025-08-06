@@ -25,24 +25,24 @@ const Workshops = () => {
         
         <div className="relative container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
-            <h1 className="font-playfair text-6xl md:text-7xl font-bold mb-6 leading-tight">✨ Path'o'Life Signature Workshops</h1>
+            <h1 className="font-playfair text-6xl md:text-7xl font-bold mb-6 leading-tight">Path'o'Life Signature Workshops</h1>
             <p className="font-inter text-xl md:text-2xl mb-8 opacity-90">Live • Interactive • Transformational Sessions for Every Phase of Womanhood</p>
             
             <div className="grid md:grid-cols-2 gap-8 mb-8 max-w-4xl mx-auto">
               <div className="flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 min-h-[80px]">
                 <Clock className="h-6 w-6" />
-                <span className="font-inter font-medium">🕒 2-hour deep-dive workshops</span>
+                <span className="font-inter font-medium">2-hour deep-dive workshops</span>
               </div>
               <div className="flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 min-h-[80px]">
                 <Users className="h-6 w-6" />
-                <span className="font-inter font-medium">📍 Live on Google Meet</span>
+                <span className="font-inter font-medium">Live on Google Meet</span>
               </div>
 
             </div>
 
             <div className="max-w-2xl mx-auto text-center">
               <p className="font-inter text-lg text-white/90">
-                🎁 Includes: Downloadable checklists & lifestyle toolkits
+                Includes: Downloadable checklists & lifestyle toolkits
               </p>
               <p className="font-inter text-lg text-white/90">
                 Q&A's

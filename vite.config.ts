@@ -9,10 +9,10 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
     proxy: {
-      '/api/livekit': {
-        target: 'https://multiagents.livekit.xpectrum-ai.com',
+      '/api/voice-integration': {
+        target: 'https://d1fs86umxjjz67.cloudfront.net',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/livekit/, ''),
+        rewrite: (path) => path.replace(/^\/api\/voice-integration/, ''),
         configure: (proxy, options) => {
           proxy.on('error', (err, req, res) => {
             console.log('proxy error', err);

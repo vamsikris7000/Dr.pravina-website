@@ -4,6 +4,37 @@
 export const workshopRAGData = {
   workshops: [
     {
+      name: "The Weight Reset for Women",
+      fullName: "👩🏻‍⚕️ The Weight Reset for Women",
+      subtitle: "Not Just Weight Loss, A Full Body Reset",
+      audience: "For All Women 18+",
+      price: "₹999",
+      duration: "3-hour live session",
+      features: [
+        "Understand your hormones & weight connection",
+        "Tackle belly fat, cravings & low energy",
+        "Anti-inflammatory nutrition made practical",
+        "Smart movement & strength strategies",
+        "Stress, sleep & metabolism mastery",
+        "Build habits that last, not bounce back"
+      ],
+      registrationInfo: {
+        process: "Register online through our website",
+        platform: "Live on Google Meet",
+        languages: "Available in English, Hindi, and Marathi",
+        includes: [
+          "Downloadable checklists & lifestyle toolkits",
+          "Expert Q&A session",
+          "Free resources you'll actually use"
+        ],
+        payment: "Pay securely via UPI and upload payment screenshot to confirm enrollment"
+      },
+      chatbotResponses: {
+        registration: "Thank you for your interest in the 👩🏻‍⚕️ The Weight Reset for Women workshop! This 3-hour live session is designed for all women 18+. You'll learn about the connection between hormones and weight, tackling belly fat and cravings, managing low energy, practical anti-inflammatory nutrition, smart movement and strength strategies, stress and sleep management for better metabolism, and building sustainable habits that last. The workshop costs ₹999 and includes downloadable resources, expert Q&A, and practical toolkits. Would you like me to help you with the registration process?",
+        details: "The Weight Reset for Women workshop covers: hormone-weight connection, belly fat and craving management, anti-inflammatory nutrition, movement strategies, stress and sleep optimization, and sustainable habit building."
+      }
+    },
+    {
       name: "PCOS Unplugged",
       fullName: "🌸 PCOS Unplugged",
       subtitle: "Your Hormones, Hair, Skin & Sanity",
@@ -30,7 +61,7 @@ export const workshopRAGData = {
         payment: "Pay securely via UPI and upload payment screenshot to confirm enrollment"
       },
       chatbotResponses: {
-        registration: "Thank you for your interest in the 🌸 PCOS Unplugged workshop! This 3-hour live session is perfect for teens and young women dealing with PCOS. You'll learn about hormone decoding, period problems, skin/hair/mood tips, menstrual cup basics, PCOS-friendly nutrition, and stress management. The workshop costs ₹499 and includes downloadable resources, expert Q&A, and practical toolkits. Would you like me to help you with the registration process?",
+        registration: "Thank you for your interest in the 🌸 PCOS Unplugged workshop! This 3-hour live session is perfect for teens and young women dealing with PCOS. You'll learn about hormone decoding, period problems, skin/hair/mood tips, menstrual cup basics, PCOS-friendly nutrition, and stress management. The workshop costs ₹999 and includes downloadable resources, expert Q&A, and practical toolkits. Would you like me to help you with the registration process?",
         details: "The PCOS Unplugged workshop covers: hormone decoding, cycle understanding, PCOS types, skin/hair/mood management, menstrual cup basics, PCOS-friendly nutrition, movement tips, and stress hacks. It's designed specifically for teens and young women."
       }
     },
@@ -61,7 +92,7 @@ export const workshopRAGData = {
         payment: "Pay securely via UPI and upload payment screenshot to confirm enrollment"
       },
       chatbotResponses: {
-        registration: "Thank you for your interest in the 👫🏻 Pre-Pregnancy Power Couple workshop! This 3-hour live session is designed for couples planning pregnancy. You'll learn about fertility nutrition for both partners, cycle tracking, fertile window basics, lifestyle shifts to boost conception, detox and stress management, emotional alignment, and debunking pregnancy myths. The workshop costs ₹499 and includes downloadable resources, expert Q&A, and practical toolkits. Would you like me to help you with the registration process?",
+        registration: "Thank you for your interest in the 👫🏻 Pre-Pregnancy Power Couple workshop! This 3-hour live session is designed for couples planning pregnancy. You'll learn about fertility nutrition for both partners, cycle tracking, fertile window basics, lifestyle shifts to boost conception, detox and stress management, emotional alignment, and debunking pregnancy myths. The workshop costs ₹999 and includes downloadable resources, expert Q&A, and practical toolkits. Would you like me to help you with the registration process?",
         details: "The Pre-Pregnancy Power Couple workshop covers: fertility nutrition for both partners, cycle tracking, fertile window basics, lifestyle optimization, detox and stress management, emotional alignment, partner mindset, and separating myths from science about conception."
       }
     },
@@ -92,7 +123,7 @@ export const workshopRAGData = {
         payment: "Pay securely via UPI and upload payment screenshot to confirm enrollment"
       },
       chatbotResponses: {
-        registration: "Thank you for your interest in the 🤰🏻 Pregnancy Wellness Workshop! This 3-hour live session is perfect for expecting mothers in all trimesters. You'll learn about trimester-wise nutrition, managing cravings, safe movement and breathing practices, sleep and stress management, gut health, immunity boosters, Indian wisdom combined with modern care, and rituals for bonding with your baby. The workshop costs ₹499 and includes downloadable resources, expert Q&A, and practical toolkits. Would you like me to help you with the registration process?",
+        registration: "Thank you for your interest in the 🤰🏻 Pregnancy Wellness Workshop! This 3-hour live session is perfect for expecting mothers in all trimesters. You'll learn about trimester-wise nutrition, managing cravings, safe movement and breathing practices, sleep and stress management, gut health, immunity boosters, Indian wisdom combined with modern care, and rituals for bonding with your baby. The workshop costs ₹999 and includes downloadable resources, expert Q&A, and practical toolkits. Would you like me to help you with the registration process?",
         details: "The Pregnancy Wellness Workshop covers: trimester-wise nutrition, craving management, safe movement and breathing, sleep and stress management, gut health, immunity boosters, Indian wisdom with modern care, and bonding rituals."
       }
     },
@@ -123,7 +154,7 @@ export const workshopRAGData = {
         payment: "Pay securely via UPI and upload payment screenshot to confirm enrollment"
       },
       chatbotResponses: {
-        registration: "Thank you for your interest in the 🤱🏻 Confident Breastfeeding & Postpartum Healing workshop! This 3-hour live session is designed for new and expecting moms. You'll learn about lactation techniques, debunking breastfeeding myths, proper latch and positioning, supply management, pumping, postpartum recovery for body and mind, nutrition support, emotional wellness, Indian rituals combined with modern healing practices, and real talk about motherhood beyond just survival. The workshop costs ₹499 and includes downloadable resources, expert Q&A, and practical toolkits. Would you like me to help you with the registration process?",
+        registration: "Thank you for your interest in the 🤱🏻 Confident Breastfeeding & Postpartum Healing workshop! This 3-hour live session is designed for new and expecting moms. You'll learn about lactation techniques, debunking breastfeeding myths, proper latch and positioning, supply management, pumping, postpartum recovery for body and mind, nutrition support, emotional wellness, Indian rituals combined with modern healing practices, and real talk about motherhood beyond just survival. The workshop costs ₹999 and includes downloadable resources, expert Q&A, and practical toolkits. Would you like me to help you with the registration process?",
         details: "The Confident Breastfeeding & Postpartum Healing workshop covers: lactation techniques, breastfeeding myths, latch and positioning, supply management, pumping, postpartum recovery, nutrition, emotional support, Indian rituals, modern healing practices, and real motherhood discussions."
       }
     },
@@ -154,41 +185,10 @@ export const workshopRAGData = {
         payment: "Pay securely via UPI and upload payment screenshot to confirm enrollment"
       },
       chatbotResponses: {
-        registration: "Thank you for your interest in the 🍲 First Foods & Beyond workshop! This 3-hour live session is perfect for moms with children aged 6 months to 5 years. You'll learn about when and how to start solids, daily feeding plans and schedules, immunity-boosting foods and habits, gut health management, dealing with picky eating and meal battles, holistic child lifestyle routines covering food, sleep, screen time, and play, and Indian food wisdom combined with modern evidence. The workshop costs ₹499 and includes downloadable resources, expert Q&A, and practical toolkits. Would you like me to help you with the registration process?",
+        registration: "Thank you for your interest in the 🍲 First Foods & Beyond workshop! This 3-hour live session is perfect for moms with children aged 6 months to 5 years. You'll learn about when and how to start solids, daily feeding plans and schedules, immunity-boosting foods and habits, gut health management, dealing with picky eating and meal battles, holistic child lifestyle routines covering food, sleep, screen time, and play, and Indian food wisdom combined with modern evidence. The workshop costs ₹999 and includes downloadable resources, expert Q&A, and practical toolkits. Would you like me to help you with the registration process?",
         details: "The First Foods & Beyond workshop covers: starting solids, feeding schedules, immunity-boosting foods, gut health, picky eating management, holistic lifestyle routines, and Indian food wisdom with modern evidence."
       }
-    },
-    {
-      name: "The Weight Reset for Women",
-      fullName: "👩🏻‍⚕️ The Weight Reset for Women",
-      subtitle: "Not Just Weight Loss, A Full Body Reset",
-      audience: "For All Women 18+",
-      price: "₹999",
-      duration: "3-hour live session",
-      features: [
-        "Understand your hormones & weight connection",
-        "Tackle belly fat, cravings & low energy",
-        "Anti-inflammatory nutrition made practical",
-        "Smart movement & strength strategies",
-        "Stress, sleep & metabolism mastery",
-        "Build habits that last, not bounce back"
-      ],
-      registrationInfo: {
-        process: "Register online through our website",
-        platform: "Live on Google Meet",
-        languages: "Available in English, Hindi, and Marathi",
-        includes: [
-          "Downloadable checklists & lifestyle toolkits",
-          "Expert Q&A session",
-          "Free resources you'll actually use"
-        ],
-        payment: "Pay securely via UPI and upload payment screenshot to confirm enrollment"
-      },
-      chatbotResponses: {
-        registration: "Thank you for your interest in the 👩🏻‍⚕️ The Weight Reset for Women workshop! This 3-hour live session is designed for all women 18+. You'll learn about the connection between hormones and weight, tackling belly fat and cravings, managing low energy, practical anti-inflammatory nutrition, smart movement and strength strategies, stress and sleep management for better metabolism, and building sustainable habits that last. The workshop costs ₹499 and includes downloadable resources, expert Q&A, and practical toolkits. Would you like me to help you with the registration process?",
-        details: "The Weight Reset for Women workshop covers: hormone-weight connection, belly fat and craving management, anti-inflammatory nutrition, movement strategies, stress and sleep optimization, and sustainable habit building."
-      }
-    }
+
   ],
   
   // General workshop information
@@ -211,9 +211,9 @@ export const workshopRAGData = {
   
   // Common chatbot responses
   commonResponses: {
-    workshopList: "We offer 6 signature workshops: 1) 🌸 PCOS Unplugged for teens & young women, 2) 👫🏻 Pre-Pregnancy Power Couple for couples planning pregnancy, 3) 🤰🏻 Pregnancy Wellness Workshop for expecting mothers, 4) 🤱🏻 Confident Breastfeeding & Postpartum Healing for new moms, 5) 🍲 First Foods & Beyond for moms with children 6 months to 5 years, and 6) 👩🏻‍⚕️ The Weight Reset for Women for all women 18+. Each workshop costs ₹499 and includes downloadable resources, expert Q&A, and practical toolkits.",
-    pricing: "All our workshops are priced at ₹499 each. This includes the 3-hour live session, downloadable resources, expert Q&A, and practical toolkits.",
-    registration: "To register for any workshop, visit our website and click on the 'Register for This Workshop' button. You'll need to pay ₹499 via UPI and upload the payment screenshot to confirm your enrollment.",
+    workshopList: "We offer 6 signature workshops: 1) 👩🏻‍⚕️ The Weight Reset for Women for all women 18+, 2) 🌸 PCOS Unplugged for teens & young women, 3) 👫🏻 Pre-Pregnancy Power Couple for couples planning pregnancy, 4) 🤰🏻 Pregnancy Wellness Workshop for expecting mothers, 5) 🤱🏻 Confident Breastfeeding & Postpartum Healing for new moms, and 6) 🍲 First Foods & Beyond for moms with children 6 months to 5 years. Each workshop costs ₹999 and includes downloadable resources, expert Q&A, and practical toolkits.",
+    pricing: "All our workshops are priced at ₹999 each. This includes the 3-hour live session, downloadable resources, expert Q&A, and practical toolkits.",
+    registration: "To register for any workshop, visit our website and click on the 'Register for This Workshop' button. You'll need to pay ₹999 via UPI and upload the payment screenshot to confirm your enrollment.",
     languages: "All workshops are available in English, Hindi, and Marathi to ensure accessibility for everyone.",
     platform: "All workshops are conducted live on Google Meet, allowing for interactive sessions with real-time Q&A."
   }

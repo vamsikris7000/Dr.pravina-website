@@ -87,12 +87,7 @@ const Index = () => {
       photo: "/photos/Testimonials7.png",
       message: "From pregnancy to postpartum healing and my baby's nutrition, Dr. Pravina was with me at every step. Her practical tools, emotional support, and timely nudges made me feel prepared and powerful. My recovery was smooth, my breastfeeding journey was joyful, and my baby's diet is now rooted in wholesome traditions. I'm so grateful!"
     },
-    {
-      name: "Madhura Pawade",
-      location: "Amravati",
-      photo: "/photos/Testimonials8.jpeg",
-      message: "I struggled with PCOS for years acne, hair fall, irregular periods, and stubborn weight. Dr. Pravina's customized lifestyle plan helped me lose 7 kgs, regulate my periods, and sleep peacefully again. She didn't just guide me she believed in me when I didn't."
-    }
+
   ];
 
   // Scroll to top only on page refresh, not on navigation

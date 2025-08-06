@@ -31,6 +31,31 @@ const ChatBot = () => {
   const [conversationId, setConversationId] = useState<string>('');
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
+  // Pre-warm the chatbot connection
+  const preWarmChatbot = async () => {
+    try {
+      const apiKey = 'app-dStnyyOE9dNP6CZb0lPg3kKF';
+      const apiUrl = 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages';
+      
+      await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          inputs: {},
+          query: 'Hello',
+          response_mode: 'streaming',
+          user: 'abc-123'
+        }),
+      });
+    } catch (error) {
+      // Silently fail pre-warm
+      console.log('Pre-warm failed, continuing normally');
+    }
+  };
+
   const scrollToBottom = () => {
     if (scrollAreaRef.current) {
       const scrollContainer = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]');
@@ -43,6 +68,11 @@ const ChatBot = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Pre-warm chatbot connection on mount
+  useEffect(() => {
+    preWarmChatbot();
+  }, []);
 
   // Listen to external chatbot events
   useEffect(() => {
@@ -58,12 +88,17 @@ const ChatBot = () => {
             timestamp: new Date(),
           };
           setMessages(prev => [...prev, userMessage]);
-          // Send the message after a short delay to ensure the chat is open
-          setTimeout(() => {
-            sendMessageToChatbot(event.message);
+          // Send the message immediately to reduce delay
+          (async () => {
+            setIsLoading(true);
+            try {
+              await sendMessageToChatbot(event.message);
+            } finally {
+              setIsLoading(false);
+            }
             // Clear the input field after sending
             setInputValue("");
-          }, 100);
+          })();
         }
       } else if (event.type === 'SEND_MESSAGE' && event.message) {
         const userMessage = {
@@ -73,7 +108,10 @@ const ChatBot = () => {
           timestamp: new Date(),
         };
         setMessages(prev => [...prev, userMessage]);
-        sendMessageToChatbot(event.message);
+        setIsLoading(true);
+        sendMessageToChatbot(event.message).finally(() => {
+          setIsLoading(false);
+        });
         // Clear the input field after sending
         setInputValue("");
       }
@@ -97,7 +135,7 @@ const ChatBot = () => {
           inputs: {},
           query: userMessage,
           response_mode: 'streaming',
-          conversation_id: conversationId,
+          conversation_id: conversationId || undefined, // Only send if exists
           user: 'abc-123'
         }),
       });
@@ -225,7 +263,7 @@ const ChatBot = () => {
                 disabled={isLoading}
               />
               {!isFocused && !inputValue && (
-                <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground pointer-events-none select-none">
+                <div className="absolute left-4 top-1/2 transform -translate-y-1/2 pointer-events-none select-none" style={{ color: '#368079' }}>
                   👋 Hello there! How can we assist you?
                 </div>
               )}

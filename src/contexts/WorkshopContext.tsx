@@ -37,7 +37,7 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
   const defaultWorkshops: Workshop[] = [
     {
       id: 1,
-      title: "Weight Reset & Hormonal Balance",
+      title: "The Weight Reset for Women",
       subtitle: "Not Just Weight Loss, A Full Body Reset",
       audience: "For All Women 18+",
       emoji: "👩🏻‍⚕️",
@@ -73,10 +73,10 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
     },
     {
       id: 3,
-      title: "Pregnancy Prep & Fertility",
-      subtitle: "Optimize Your Body for Conception",
-      audience: "For Women Planning Pregnancy",
-      emoji: "🤱",
+      title: "Pre-Pregnancy Power Couple",
+      subtitle: "Plan Parenthood with Purpose",
+      audience: "For Couples Planning Pregnancy",
+      emoji: "👫🏻",
       day: "Friday",
       date: "10th Aug",
       time: "5:00 PM - 8:30 PM",
@@ -91,13 +91,31 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
     },
     {
       id: 4,
-      title: "Postpartum Recovery & Lactation",
-      subtitle: "Heal Your Body, Nourish Your Baby",
-      audience: "For New Mothers",
-      emoji: "🍼",
+      title: "Pregnancy Wellness Workshop",
+      subtitle: "Feel Nourished, Calm & Connected",
+      audience: "For Expecting Mothers (All Trimesters)",
+      emoji: "🤰🏻",
       day: "Thursday",
       date: "11th Aug",
       time: "4:00 PM - 7:30 PM",
+      features: [
+        "Trimester-wise nutrition & cravings",
+        "Safe movement & breathing practices",
+        "Sleep, stress & mental wellness",
+        "Gut health & immunity boosters",
+        "Indian wisdom meets modern care",
+        "Rituals for bonding & body trust"
+      ]
+    },
+    {
+      id: 5,
+      title: "Confident Breastfeeding & Postpartum Healing",
+      subtitle: "Nurture Your Baby. Reclaim Your Body.",
+      audience: "For New & Expecting Moms",
+      emoji: "🤱🏻",
+      day: "Wednesday",
+      date: "12th Aug",
+      time: "6:00 PM - 9:30 PM",
       features: [
         "Lactation techniques & myths",
         "Latch, supply, positions & pumping",
@@ -108,14 +126,14 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
       ]
     },
     {
-      id: 5,
-      title: "Child Nutrition & Parenting",
-      subtitle: "Raise Healthy, Happy Children",
-      audience: "For Parents & Caregivers",
-      emoji: "👶",
-      day: "Wednesday",
-      date: "12th Aug",
-      time: "6:00 PM - 9:30 PM",
+      id: 6,
+      title: "First Foods & Beyond",
+      subtitle: "Foundations of Child Nutrition & Lifestyle",
+      audience: "For Moms with Children (6 Months to 5 Years)",
+      emoji: "🍲",
+      day: "Tuesday",
+      date: "13th Aug",
+      time: "5:30 PM - 9:00 PM",
       features: [
         "When & how to start solids",
         "Daily feeding plans & schedules",
@@ -123,24 +141,6 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
         "Gut health, picky eating & meal battles",
         "Holistic child lifestyle routines (food, sleep, screen, play)",
         "Indian food wisdom with modern evidence"
-      ]
-    },
-    {
-      id: 6,
-      title: "Hormonal Health Masterclass",
-      subtitle: "Understanding Your Body's Rhythms",
-      audience: "For All Women",
-      emoji: "⚖️",
-      day: "Tuesday",
-      date: "13th Aug",
-      time: "5:30 PM - 9:00 PM",
-      features: [
-        "Comprehensive hormone understanding",
-        "Cycle tracking and analysis",
-        "Lifestyle optimization strategies",
-        "Stress management techniques",
-        "Nutrition for hormonal balance",
-        "Long-term wellness planning"
       ]
     }
   ];
