@@ -1,5 +1,7 @@
 export default async function handler(req, res) {
-  const targetUrl = 'https://d1fs86umxjjz67.cloudfront.net/tokens/generate';
+  // Build target URL with query parameters
+  const queryParams = new URLSearchParams(req.query).toString();
+  const targetUrl = `https://d1fs86umxjjz67.cloudfront.net/tokens/generate${queryParams ? `?${queryParams}` : ''}`;
   
   console.log('Token generation API called:', req.method, req.url);
   console.log('Query params:', req.query);
