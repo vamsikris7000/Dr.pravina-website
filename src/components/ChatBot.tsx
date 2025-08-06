@@ -220,7 +220,8 @@ const ChatBot = () => {
                 onKeyPress={handleKeyPress}
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
-                className="w-full h-12 pr-12 rounded-full border-muted focus:border-primary bg-card shadow-lg"
+                className="w-full h-12 pr-12 rounded-full bg-card shadow-lg"
+                style={{ borderColor: '#368079', borderWidth: '1px', borderStyle: 'solid' }}
                 disabled={isLoading}
               />
               {!isFocused && !inputValue && (
@@ -238,9 +239,10 @@ const ChatBot = () => {
                   onClick={handleSendMessage}
                   disabled={!inputValue.trim() || isLoading}
                   size="icon"
-                  className="h-10 w-10 rounded-full bg-white border border-primary shadow"
+                  className="h-10 w-10 rounded-full bg-white shadow"
+                  style={{ borderColor: '#368079', borderWidth: '1px', borderStyle: 'solid' }}
                 >
-                  <Send className="h-4 w-4" style={{ color: '#338B81' }} />
+                  <Send className="h-4 w-4" style={{ color: '#368079' }} />
                 </Button>
               </div>
               </div>
