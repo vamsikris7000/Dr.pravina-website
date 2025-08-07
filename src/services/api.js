@@ -123,4 +123,49 @@ export const deleteMessage = async (id) => {
     headers: getHeaders(),
   });
   return response.json();
+};
+
+// Workshops API
+export const fetchWorkshops = async () => {
+  const response = await fetch(`${API_BASE_URL}/workshops`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  return response.json();
+};
+
+export const fetchAllWorkshops = async () => {
+  const response = await fetch(`${API_BASE_URL}/workshops/all`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  return response.json();
+};
+
+export const createWorkshop = async (workshopData) => {
+  const response = await fetch(`${API_BASE_URL}/workshops`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(workshopData),
+  });
+  return response.json();
+};
+
+export const updateWorkshop = async (id, workshopData) => {
+  const response = await fetch(`${API_BASE_URL}/workshops/${id}`, {
+    method: 'PUT',
+    headers: getHeaders(),
+    body: JSON.stringify(workshopData),
+  });
+  return response.json();
+};
+
+export const deleteWorkshop = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/workshops/${id}`, {
+    method: 'DELETE',
+    headers: getHeaders(),
+  });
+  return response.json();
 }; 

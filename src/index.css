@@ -315,6 +315,25 @@
     @apply bg-primary;
   }
 
+  /* Custom scrollbar for textarea */
+  textarea::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  textarea::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 3px;
+  }
+
+  textarea::-webkit-scrollbar-thumb {
+    background: hsl(169 44% 60%);
+    border-radius: 3px;
+  }
+
+  textarea::-webkit-scrollbar-thumb:hover {
+    background: hsl(169 44% 45%);
+  }
+
   /* Container spacing system */
   .container {
     @apply px-4 sm:px-6 lg:px-8;

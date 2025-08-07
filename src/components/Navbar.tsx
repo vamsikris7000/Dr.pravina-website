@@ -278,6 +278,19 @@ const Navbar = () => {
                   </div>
                 )}
               </div>
+              {/* Live Workshops */}
+              <Link
+                key="Live Workshops"
+                to="/workshops"
+                className={`font-inter text-sm font-medium transition-all duration-300 p-3 rounded-xl hover:bg-primary/10 hover:text-primary ${
+                  location.pathname === "/workshops"
+                    ? "text-primary bg-primary/10 border-l-4 border-primary"
+                    : "text-foreground hover:scale-105"
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                Live Workshops
+              </Link>
               {/* Other nav items */}
               {navItems.slice(2).map((item) => (
                 <Link

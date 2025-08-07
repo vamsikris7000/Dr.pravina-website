@@ -43,6 +43,7 @@ function HexFlower({ label, text }) {
 
 const Index = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   const testimonials = [
     {
@@ -89,6 +90,30 @@ const Index = () => {
     },
 
   ];
+
+  // Preload all testimonial images
+  useEffect(() => {
+    const preloadImages = async () => {
+      const imagePromises = testimonials.map((testimonial) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = testimonial.photo;
+        });
+      });
+
+      try {
+        await Promise.all(imagePromises);
+        setImagesLoaded(true);
+      } catch (error) {
+        console.error('Error preloading images:', error);
+        setImagesLoaded(true); // Continue anyway
+      }
+    };
+
+    preloadImages();
+  }, []);
 
   // Scroll to top only on page refresh, not on navigation
   useEffect(() => {
@@ -160,7 +185,7 @@ const Index = () => {
                         </svg>
                       </div>
                       <h3 className="font-playfair text-lg md:text-xl font-bold text-primary text-center group-hover:text-primary">
-                        Upcoming Live Workshops
+                        Upcoming Workshops
                       </h3>
                     </div>
                   </div>
@@ -425,7 +450,7 @@ const Index = () => {
           </div>
           
           <div className="max-w-7xl mx-auto px-6">
-            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 relative min-h-[600px]">
+            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 relative min-h-[600px] md:min-h-[500px]">
               {/* Navigation Buttons */}
               <button
                 onClick={() => setCurrentTestimonial((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1))}
@@ -444,18 +469,26 @@ const Index = () => {
               {/* Testimonial Content - Side by Side Layout */}
               <div className="flex flex-col lg:flex-row items-stretch h-full">
                 {/* Photo Section - Left Side (35% of widget) */}
-                <div className="w-full lg:w-[35%] h-full">
-                  <div className="w-full h-full rounded-2xl overflow-hidden bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg">
-                    <img 
-                      src={testimonials[currentTestimonial].photo} 
-                      alt={`${testimonials[currentTestimonial].name}`}
-                      className="w-full h-full object-cover"
-                    />
+                <div className="w-full lg:w-[35%] h-full mb-6 lg:mb-0">
+                  <div className="w-full h-64 lg:h-full rounded-2xl overflow-hidden bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg relative">
+                    {!imagesLoaded ? (
+                      <div className="w-full h-full bg-gray-200 animate-pulse flex items-center justify-center">
+                        <div className="w-16 h-16 bg-gray-300 rounded-full animate-pulse"></div>
+                      </div>
+                    ) : (
+                      <img 
+                        src={testimonials[currentTestimonial].photo} 
+                        alt={`${testimonials[currentTestimonial].name}`}
+                        className="w-full h-full object-cover transition-opacity duration-300"
+                        style={{ minHeight: '250px' }}
+                        loading="eager"
+                      />
+                    )}
                   </div>
                 </div>
                 
                 {/* Text Content - Right Side (65% of widget) */}
-                <div className="w-full lg:w-[65%] text-left flex flex-col justify-center p-8">
+                <div className="w-full lg:w-[65%] text-left flex flex-col justify-center p-4 lg:p-8">
                   <div className="mb-8">
                     <h3 className="font-playfair text-3xl font-bold text-foreground mb-3">
                       {testimonials[currentTestimonial].name}

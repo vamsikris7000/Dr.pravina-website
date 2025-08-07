@@ -9,6 +9,7 @@ export interface Workshop {
   day: string;
   date: string;
   time: string;
+  price: number;
   features: string[];
 }
 
@@ -43,7 +44,8 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
       emoji: "👩🏻‍⚕️",
       day: "Sunday",
       date: "8th Aug",
-      time: "4:50 PM - 8:00 PM",
+      time: "4:50 PM - 7:00 PM",
+      price: 499,
       features: [
         "Understand your hormones & weight connection",
         "Tackle belly fat, cravings & low energy",
@@ -60,8 +62,9 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
       audience: "For Teens & Young Women",
       emoji: "🌸",
       day: "Saturday",
-      date: "9th Aug",
+      date: "10th Aug",
       time: "3:00 PM - 6:30 PM",
+      price: 499,
       features: [
         "Decode your hormones & cycle",
         "Period problems & PCOS types", 
@@ -78,8 +81,9 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
       audience: "For Couples Planning Pregnancy",
       emoji: "👫🏻",
       day: "Friday",
-      date: "10th Aug",
+      date: "15th Aug",
       time: "5:00 PM - 8:30 PM",
+      price: 499,
       features: [
         "Fertility nutrition for both partners",
         "Cycle tracking & fertile window basics",
@@ -95,9 +99,10 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
       subtitle: "Feel Nourished, Calm & Connected",
       audience: "For Expecting Mothers (All Trimesters)",
       emoji: "🤰🏻",
-      day: "Thursday",
-      date: "11th Aug",
-      time: "4:00 PM - 7:30 PM",
+      day: "Wednesday",
+      date: "20th Aug",
+      time: "6:00 PM - 9:30 PM",
+      price: 499,
       features: [
         "Trimester-wise nutrition & cravings",
         "Safe movement & breathing practices",
@@ -113,9 +118,10 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
       subtitle: "Nurture Your Baby. Reclaim Your Body.",
       audience: "For New & Expecting Moms",
       emoji: "🤱🏻",
-      day: "Wednesday",
-      date: "12th Aug",
-      time: "6:00 PM - 9:30 PM",
+      day: "Tuesday",
+      date: "25th Aug",
+      time: "5:30 PM - 9:00 PM",
+      price: 499,
       features: [
         "Lactation techniques & myths",
         "Latch, supply, positions & pumping",
@@ -131,9 +137,10 @@ export const WorkshopProvider: React.FC<WorkshopProviderProps> = ({ children }) 
       subtitle: "Foundations of Child Nutrition & Lifestyle",
       audience: "For Moms with Children (6 Months to 5 Years)",
       emoji: "🍲",
-      day: "Tuesday",
-      date: "13th Aug",
-      time: "5:30 PM - 9:00 PM",
+      day: "Thursday",
+      date: "30th Aug",
+      time: "4:00 PM - 7:30 PM",
+      price: 499,
       features: [
         "When & how to start solids",
         "Daily feeding plans & schedules",

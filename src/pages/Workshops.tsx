@@ -1,14 +1,65 @@
 
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Clock, Users, BookOpen, CheckCircle, Mail } from "lucide-react";
 import { chatbotEvents } from "@/lib/chatbot-events";
-import { useWorkshops } from "@/contexts/WorkshopContext";
 import { Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 
+interface Workshop {
+  _id: string;
+  title: string;
+  subtitle: string;
+  audience: string;
+  icon: string;
+  day: string;
+  date: string;
+  time: string;
+  price: number;
+  features: string[];
+  description: string;
+  isActive: boolean;
+  order: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 const Workshops = () => {
-  const { workshops } = useWorkshops();
+  const [workshops, setWorkshops] = useState<Workshop[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const fetchWorkshops = async () => {
+    try {
+      const response = await fetch('http://localhost:5001/api/workshops');
+      if (response.ok) {
+        const data = await response.json();
+        setWorkshops(data);
+      } else {
+        console.error('Failed to fetch workshops');
+      }
+    } catch (error) {
+      console.error('Error fetching workshops:', error);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await fetchWorkshops();
+  };
+
+  useEffect(() => {
+    fetchWorkshops();
+
+    // Set up polling to refresh workshops every 30 seconds
+    const interval = setInterval(fetchWorkshops, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
   
   const handleWorkshopRegistration = (workshopTitle: string) => {
     const message = `Hi, I want to register for the ${workshopTitle} workshop`;
@@ -73,13 +124,78 @@ const Workshops = () => {
       <section className="pt-8 pb-24" style={{ backgroundColor: '#e9f5e9' }}>
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
-            {workshops.map((workshop, index) => (
-              <Card key={index} className="group hover:shadow-elevated hover:-translate-y-2 transition-all duration-500 animate-fade-in mb-8 overflow-hidden border-0 shadow-lg" style={{animationDelay: `${index * 100}ms`}}>
-                <CardContent className="p-8 bg-gradient-to-br from-white to-gray-50/50">
-                  <div className="flex items-start mb-8">
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="font-playfair text-3xl font-bold text-foreground">Available Workshops</h2>
+              <Button 
+                onClick={handleRefresh} 
+                disabled={refreshing}
+                variant="outline"
+                className="flex items-center gap-2"
+              >
+                {refreshing ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
+                    Refreshing...
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    Refresh
+                  </>
+                )}
+              </Button>
+            </div>
+            {loading ? (
+              <div className="text-center py-12">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+                <p className="mt-4 text-muted-foreground">Loading workshops...</p>
+              </div>
+            ) : (
+                            workshops.filter(workshop => workshop.isActive).map((workshop, index) => (
+                <Card key={workshop._id} className="group hover:shadow-elevated hover:-translate-y-2 transition-all duration-500 animate-fade-in mb-8 overflow-hidden border-0 shadow-lg" style={{animationDelay: `${index * 100}ms`}}>
+                <CardContent className="p-6 md:p-8 bg-gradient-to-br from-white to-gray-50/50">
+                  {/* Mobile Layout */}
+                  <div className="md:hidden">
+                    <div className="flex items-start mb-4">
+                      <div className="mr-4 flex-shrink-0">
+                        <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-primary/20 rounded-full flex items-center justify-center shadow-sm">
+                          <span className="text-2xl">{workshop.icon}</span>
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-playfair text-lg font-bold text-foreground mb-1">{workshop.title}</h3>
+                        <p className="font-inter text-primary font-semibold text-sm mb-2">{workshop.subtitle}</p>
+                        <div className="inline-flex items-center px-2 py-1 bg-primary/10 rounded-full">
+                          <span className="text-primary text-xs font-medium">{workshop.audience}</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Mobile Timing Information */}
+                    <div className="bg-primary/5 rounded-lg p-3 border border-primary/10 mb-4">
+                      <div className="grid grid-cols-2 gap-2 text-center">
+                        <div className="flex flex-col items-center">
+                          <Calendar className="h-4 w-4 text-primary mb-1" />
+                          <span className="font-inter text-xs font-semibold text-primary">{workshop.day}, {workshop.date}</span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <Clock className="h-4 w-4 text-primary mb-1" />
+                          <span className="font-inter text-xs font-semibold text-primary">{workshop.time}</span>
+                        </div>
+                      </div>
+                      <div className="text-center mt-2 pt-2 border-t border-primary/20">
+                        <span className="font-inter text-lg font-bold text-green-600">₹{workshop.price}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Desktop Layout */}
+                  <div className="hidden md:flex items-start mb-8">
                     <div className="mr-6 flex-shrink-0">
                       <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-primary/20 rounded-full flex items-center justify-center shadow-sm">
-                        <span className="text-3xl">{workshop.emoji}</span>
+                        <span className="text-3xl">{workshop.icon}</span>
                       </div>
                     </div>
                     <div className="flex-1">
@@ -96,21 +212,31 @@ const Workshops = () => {
                           <Calendar className="h-4 w-4 text-primary mr-2" />
                           <span className="font-inter text-sm font-semibold text-primary">{workshop.day}, {workshop.date}</span>
                         </div>
-                        <div className="flex items-center justify-center">
+                        <div className="flex items-center justify-center mb-2">
                           <Clock className="h-4 w-4 text-primary mr-2" />
                           <span className="font-inter text-sm font-semibold text-primary">{workshop.time}</span>
+                        </div>
+                        <div className="flex items-center justify-center">
+                          <span className="font-inter text-lg font-bold text-green-600">₹{workshop.price}</span>
                         </div>
                       </div>
                     </div>
                   </div>
                   
                   <div className="space-y-3 mb-6 max-h-0 group-hover:max-h-96 transition-all duration-500 overflow-hidden">
-                    {workshop.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-start space-x-3">
+                    {workshop.features && workshop.features.length > 0 ? (
+                      workshop.features.map((feature, featureIndex) => (
+                        <div key={featureIndex} className="flex items-start space-x-3">
+                          <CheckCircle className="h-5 w-5 text-primary stroke-2 flex-shrink-0 mt-0.5" />
+                          <span className="font-inter text-muted-foreground leading-relaxed">{feature}</span>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="flex items-start space-x-3">
                         <CheckCircle className="h-5 w-5 text-primary stroke-2 flex-shrink-0 mt-0.5" />
-                        <span className="font-inter text-muted-foreground leading-relaxed">{feature}</span>
+                        <span className="font-inter text-muted-foreground leading-relaxed">Comprehensive workshop content</span>
                       </div>
-                    ))}
+                    )}
                   </div>
                   <Button 
                     variant="soft" 
@@ -122,7 +248,8 @@ const Workshops = () => {
                   </Button>
                 </CardContent>
               </Card>
-            ))}
+            ))
+            )}
           </div>
         </div>
       </section>

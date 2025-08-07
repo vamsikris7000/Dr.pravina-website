@@ -22,18 +22,20 @@ import {
   ChevronDown,
   ChevronUp
 } from "lucide-react";
-import { useWorkshops } from "@/contexts/WorkshopContext";
 import AdminLogin from "@/components/AdminLogin";
 import { 
   fetchPatients, 
   fetchAppointments, 
   fetchMessages,
+  fetchAllWorkshops,
   updatePatientStatus, 
   updateAppointmentStatus,
   updateMessageStatus,
+  updateWorkshop,
   deletePatient,
   deleteAppointment,
-  deleteMessage
+  deleteMessage,
+  deleteWorkshop
 } from "@/services/api";
 
 interface Patient {
@@ -74,18 +76,37 @@ interface Message {
   createdAt: string;
 }
 
+interface Workshop {
+  _id: string;
+  title: string;
+  subtitle: string;
+  audience: string;
+  icon: string;
+  day: string;
+  date: string;
+  time: string;
+  price: number;
+  features: string[];
+  description: string;
+  isActive: boolean;
+  order: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 const AdminDashboard = () => {
-  const { workshops, updateWorkshop, resetWorkshops } = useWorkshops();
-  const [editingWorkshops, setEditingWorkshops] = useState<{[key: number]: boolean}>({});
+  const [editingWorkshops, setEditingWorkshops] = useState<{[key: string]: boolean}>({});
   
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [patients, setPatients] = useState<Patient[]>([]);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
+  const [workshops, setWorkshops] = useState<Workshop[]>([]);
   const [patientsLoading, setPatientsLoading] = useState(false);
   const [appointmentsLoading, setAppointmentsLoading] = useState(false);
   const [messagesLoading, setMessagesLoading] = useState(false);
+  const [workshopsLoading, setWorkshopsLoading] = useState(false);
   const [showAllMessages, setShowAllMessages] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
   const [isMessageDialogOpen, setIsMessageDialogOpen] = useState(false);
@@ -112,28 +133,36 @@ const AdminDashboard = () => {
     setPatientsLoading(true);
     setAppointmentsLoading(true);
     setMessagesLoading(true);
+    setWorkshopsLoading(true);
     
     try {
-      const [patientsData, appointmentsData, messagesData] = await Promise.all([
+      const [patientsData, appointmentsData, messagesData, workshopsData] = await Promise.all([
         fetchPatients(),
         fetchAppointments(),
-        fetchMessages()
+        fetchMessages(),
+        fetchAllWorkshops()
       ]);
       
       // Check if responses are arrays (success) or error objects
       setPatients(Array.isArray(patientsData) ? patientsData : []);
       setAppointments(Array.isArray(appointmentsData) ? appointmentsData : []);
       setMessages(Array.isArray(messagesData) ? messagesData : []);
+      console.log('Workshops data received:', workshopsData);
+      const workshopsArray = Array.isArray(workshopsData) ? workshopsData : [];
+      console.log('Setting workshops:', workshopsArray.length, 'workshops');
+      setWorkshops(workshopsArray);
     } catch (error) {
       console.error('Error loading data:', error);
       // Set empty arrays on error to prevent crashes
       setPatients([]);
       setAppointments([]);
       setMessages([]);
+      setWorkshops([]);
     } finally {
       setPatientsLoading(false);
       setAppointmentsLoading(false);
       setMessagesLoading(false);
+      setWorkshopsLoading(false);
       setLoading(false);
     }
   };
@@ -234,17 +263,39 @@ const AdminDashboard = () => {
     });
   };
 
-  const handleWorkshopEdit = (id: number) => {
+  const handleWorkshopEdit = (id: string) => {
     setEditingWorkshops(prev => ({ ...prev, [id]: true }));
   };
 
-  const handleWorkshopSave = (id: number, newDay: string, newDate: string, newTime: string) => {
-    updateWorkshop(id, { day: newDay, date: newDate, time: newTime });
+  const handleWorkshopSave = async (id: string, newDay: string, newDate: string, newTime: string) => {
+    try {
+      await updateWorkshop(id, { day: newDay, date: newDate, time: newTime });
+      setWorkshops(prev => prev.map(w => 
+        w._id === id ? { ...w, day: newDay, date: newDate, time: newTime } : w
+      ));
+      setEditingWorkshops(prev => ({ ...prev, [id]: false }));
+      
+      // Show success message
+      alert('Workshop updated successfully! The changes will be reflected on the website.');
+    } catch (error) {
+      console.error('Error updating workshop:', error);
+      alert('Failed to update workshop. Please try again.');
+    }
+  };
+
+  const handleWorkshopCancel = (id: string) => {
     setEditingWorkshops(prev => ({ ...prev, [id]: false }));
   };
 
-  const handleWorkshopCancel = (id: number) => {
-    setEditingWorkshops(prev => ({ ...prev, [id]: false }));
+  const handleWorkshopDelete = async (id: string) => {
+    if (window.confirm('Are you sure you want to delete this workshop?')) {
+      try {
+        await deleteWorkshop(id);
+        setWorkshops(prev => prev.filter(w => w._id !== id));
+      } catch (error) {
+        console.error('Error deleting workshop:', error);
+      }
+    }
   };
 
   if (loading) {
@@ -277,7 +328,7 @@ const AdminDashboard = () => {
         </div>
 
         <Tabs defaultValue="dashboard" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-8">
+          <TabsList className="grid w-full grid-cols-5 mb-8">
             <TabsTrigger value="dashboard" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
               Dashboard
@@ -290,9 +341,13 @@ const AdminDashboard = () => {
               <Calendar className="h-4 w-4" />
               Appointments ({appointments.length})
             </TabsTrigger>
+            <TabsTrigger value="messages" className="flex items-center gap-2">
+              <MessageSquare className="h-4 w-4" />
+              Messages ({messages.length})
+            </TabsTrigger>
             <TabsTrigger value="workshops" className="flex items-center gap-2">
               <BookOpen className="h-4 w-4" />
-              Workshops
+              Workshops ({workshops.length})
             </TabsTrigger>
           </TabsList>
 
@@ -370,69 +425,7 @@ const AdminDashboard = () => {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Messages from Website</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {messagesLoading ? (
-                  <div className="text-center py-4">
-                    <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2" />
-                    <p className="text-sm">Loading messages...</p>
-                  </div>
-                ) : !Array.isArray(messages) || messages.length === 0 ? (
-                  <div className="text-center py-4">
-                    <MessageSquare className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                    <p className="text-sm text-gray-500">No messages yet</p>
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    {Array.isArray(messages) ? (
-                      <div className="max-h-80 overflow-y-auto border rounded-lg bg-gray-50">
-                        <div className="space-y-2 p-3">
-                          {messages.map((message, index) => (
-                            <div 
-                              key={message._id} 
-                              className="flex items-center justify-between p-3 border rounded-lg bg-white hover:bg-gray-50 cursor-pointer transition-colors shadow-sm"
-                              onClick={() => handleMessageClick(message)}
-                            >
-                              <div className="flex items-center gap-2">
-                                <span className="text-xs text-gray-400 font-mono">#{index + 1}</span>
-                                <div>
-                                  <h4 className="font-semibold text-sm">{message.firstName} {message.lastName}</h4>
-                                  <p className="text-xs text-gray-600">{message.subject}</p>
-                                  <p className="text-xs text-gray-500">{message.email}</p>
-                                </div>
-                              </div>
-                              <div className="text-right">
-                                <p className="text-xs text-gray-600">
-                                  {new Date(message.createdAt).toLocaleDateString()}
-                                </p>
-                                <span className={`px-2 py-1 rounded-full text-xs ${
-                                  message.status === 'new' ? 'bg-blue-100 text-blue-800' : 
-                                  message.status === 'read' ? 'bg-yellow-100 text-yellow-800' : 
-                                  'bg-green-100 text-green-800'
-                                }`}>
-                                  {message.status}
-                                </span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="text-center py-4">
-                        <p className="text-sm text-gray-500">No messages data available</p>
-                      </div>
-                    )}
-                    
-                    <div className="text-center pt-2 text-xs text-gray-500 mb-2">
-                      Showing {Array.isArray(messages) ? messages.length : 0} of {Array.isArray(messages) ? messages.length : 0} messages
-                    </div>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+
           </TabsContent>
 
           {/* Patients Tab */}
@@ -598,103 +591,195 @@ const AdminDashboard = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={resetWorkshops}
-                  className="text-red-600 hover:text-red-700"
+                  onClick={() => window.location.reload()}
+                  className="text-blue-600 hover:text-blue-700"
                 >
-                  Reset to Default
+                  <RefreshCw className="h-4 w-4 mr-2" />
+                  Refresh
                 </Button>
               </CardHeader>
               <CardContent>
-                <div className="space-y-6">
-                  {workshops.map((workshop) => (
-                    <div key={workshop.id} className="border rounded-lg p-6">
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex items-center gap-3">
-                          <div className="text-3xl">{workshop.emoji}</div>
-                          <div>
-                            <h4 className="font-semibold text-lg">{workshop.title}</h4>
-                            <p className="text-sm text-gray-600">{workshop.subtitle}</p>
-                            <p className="text-xs text-gray-500">{workshop.audience}</p>
-                          </div>
-                        </div>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleWorkshopEdit(workshop.id)}
-                        >
-                          <Edit className="h-4 w-4 mr-2" />
-                          Edit
-                        </Button>
-                      </div>
-
-                      {editingWorkshops[workshop.id] ? (
-                        <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
-                          <div className="grid grid-cols-3 gap-4">
+                {workshopsLoading ? (
+                  <div className="flex items-center justify-center py-8">
+                    <RefreshCw className="h-6 w-6 animate-spin mr-2" />
+                    <span>Loading workshops...</span>
+                  </div>
+                ) : (
+                  <div className="space-y-6">
+                    {workshops.map((workshop) => (
+                      <div key={workshop._id} className="border rounded-lg p-6">
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="flex items-center gap-3">
+                            <div className="text-3xl">{workshop.icon}</div>
                             <div>
-                              <Label htmlFor={`day-${workshop.id}`}>Day</Label>
-                              <Input
-                                id={`day-${workshop.id}`}
-                                defaultValue={workshop.day}
-                                className="mt-1"
-                              />
-                            </div>
-                            <div>
-                              <Label htmlFor={`date-${workshop.id}`}>Date</Label>
-                              <Input
-                                id={`date-${workshop.id}`}
-                                defaultValue={workshop.date}
-                                className="mt-1"
-                                placeholder="e.g., 8th Aug"
-                              />
-                            </div>
-                            <div>
-                              <Label htmlFor={`time-${workshop.id}`}>Time</Label>
-                              <Input
-                                id={`time-${workshop.id}`}
-                                defaultValue={workshop.time}
-                                className="mt-1"
-                                placeholder="e.g., 4:50 PM - 8:00 PM"
-                              />
+                              <h4 className="font-semibold text-lg">{workshop.title}</h4>
+                              <p className="text-sm text-gray-600">{workshop.subtitle}</p>
+                              <p className="text-xs text-gray-500">{workshop.audience}</p>
                             </div>
                           </div>
                           <div className="flex gap-2">
                             <Button
+                              variant="outline"
                               size="sm"
-                              onClick={() => {
-                                const dayInput = document.getElementById(`day-${workshop.id}`) as HTMLInputElement;
-                                const dateInput = document.getElementById(`date-${workshop.id}`) as HTMLInputElement;
-                                const timeInput = document.getElementById(`time-${workshop.id}`) as HTMLInputElement;
-                                handleWorkshopSave(workshop.id, dayInput.value, dateInput.value, timeInput.value);
-                              }}
+                              onClick={() => handleWorkshopEdit(workshop._id)}
                             >
-                              <Save className="h-4 w-4 mr-2" />
-                              Save
+                              <Edit className="h-4 w-4 mr-2" />
+                              Edit
                             </Button>
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => handleWorkshopCancel(workshop.id)}
+                              onClick={() => handleWorkshopDelete(workshop._id)}
+                              className="text-red-600 hover:text-red-700"
                             >
-                              <X className="h-4 w-4 mr-2" />
-                              Cancel
+                              Delete
                             </Button>
                           </div>
                         </div>
-                      ) : (
-                        <div className="flex items-center gap-4 text-sm">
-                          <span className="flex items-center gap-1">
-                            <Calendar className="h-4 w-4" />
-                            {workshop.day}, {workshop.date}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Clock className="h-4 w-4" />
-                            {workshop.time}
-                          </span>
+
+                        {editingWorkshops[workshop._id] ? (
+                          <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
+                            <div className="grid grid-cols-3 gap-4">
+                              <div>
+                                <Label htmlFor={`day-${workshop._id}`}>Day</Label>
+                                <Input
+                                  id={`day-${workshop._id}`}
+                                  defaultValue={workshop.day}
+                                  className="mt-1"
+                                />
+                              </div>
+                              <div>
+                                <Label htmlFor={`date-${workshop._id}`}>Date</Label>
+                                <Input
+                                  id={`date-${workshop._id}`}
+                                  defaultValue={workshop.date}
+                                  className="mt-1"
+                                  placeholder="e.g., 8th Aug"
+                                />
+                              </div>
+                              <div>
+                                <Label htmlFor={`time-${workshop._id}`}>Time</Label>
+                                <Input
+                                  id={`time-${workshop._id}`}
+                                  defaultValue={workshop.time}
+                                  className="mt-1"
+                                  placeholder="e.g., 4:50 PM - 8:00 PM"
+                                />
+                              </div>
+                            </div>
+                            <div className="flex gap-2">
+                              <Button
+                                size="sm"
+                                onClick={() => {
+                                  const dayInput = document.getElementById(`day-${workshop._id}`) as HTMLInputElement;
+                                  const dateInput = document.getElementById(`date-${workshop._id}`) as HTMLInputElement;
+                                  const timeInput = document.getElementById(`time-${workshop._id}`) as HTMLInputElement;
+                                  handleWorkshopSave(workshop._id, dayInput.value, dateInput.value, timeInput.value);
+                                }}
+                              >
+                                <Save className="h-4 w-4 mr-2" />
+                                Save
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleWorkshopCancel(workshop._id)}
+                              >
+                                <X className="h-4 w-4 mr-2" />
+                                Cancel
+                              </Button>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-4 text-sm">
+                            <span className="flex items-center gap-1">
+                              <Calendar className="h-4 w-4" />
+                              {workshop.day}, {workshop.date}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Clock className="h-4 w-4" />
+                              {workshop.time}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <span className="text-green-600 font-medium">₹{workshop.price}</span>
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Messages Tab */}
+          <TabsContent value="messages" className="space-y-6">
+            <Card>
+              <CardHeader className="flex justify-between items-center">
+                <CardTitle>Messages from Website</CardTitle>
+                <Button variant="outline" size="sm" onClick={loadData}>
+                  <RefreshCw className="h-4 w-4 mr-2" />
+                  Refresh
+                </Button>
+              </CardHeader>
+              <CardContent>
+                {messagesLoading ? (
+                  <div className="text-center py-8">
+                    <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-4" />
+                    <p>Loading messages...</p>
+                  </div>
+                ) : !Array.isArray(messages) || messages.length === 0 ? (
+                  <div className="text-center py-8">
+                    <MessageSquare className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                    <p className="text-sm text-gray-500">No messages yet</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {Array.isArray(messages) ? (
+                      <div className="max-h-96 overflow-y-auto border rounded-lg bg-gray-50">
+                        <div className="space-y-2 p-3">
+                          {messages.map((message, index) => (
+                            <div 
+                              key={message._id} 
+                              className="flex items-center justify-between p-3 border rounded-lg bg-white hover:bg-gray-50 cursor-pointer transition-colors shadow-sm"
+                              onClick={() => handleMessageClick(message)}
+                            >
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs text-gray-400 font-mono">#{index + 1}</span>
+                                <div>
+                                  <h4 className="font-semibold text-sm">{message.firstName} {message.lastName}</h4>
+                                  <p className="text-xs text-gray-600">{message.subject}</p>
+                                  <p className="text-xs text-gray-500">{message.email}</p>
+                                </div>
+                              </div>
+                              <div className="text-right">
+                                <p className="text-xs text-gray-600">
+                                  {new Date(message.createdAt).toLocaleDateString()}
+                                </p>
+                                <span className={`px-2 py-1 rounded-full text-xs ${
+                                  message.status === 'new' ? 'bg-blue-100 text-blue-800' : 
+                                  message.status === 'read' ? 'bg-yellow-100 text-yellow-800' : 
+                                  'bg-green-100 text-green-800'
+                                }`}>
+                                  {message.status}
+                                </span>
+                              </div>
+                            </div>
+                          ))}
                         </div>
-                      )}
+                      </div>
+                    ) : (
+                      <div className="text-center py-4">
+                        <p className="text-sm text-gray-500">No messages data available</p>
+                      </div>
+                    )}
+                    
+                    <div className="text-center pt-2 text-xs text-gray-500 mb-2">
+                      Showing {Array.isArray(messages) ? messages.length : 0} of {Array.isArray(messages) ? messages.length : 0} messages
                     </div>
-                  ))}
-                </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>

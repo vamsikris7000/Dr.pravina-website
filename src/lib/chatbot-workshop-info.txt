@@ -1,6 +1,6 @@
 PATH'O'LIFE WORKSHOP INFORMATION FOR CHATBOT
 
-WORKSHOP PRICING: All workshops cost ₹999 each
+WORKSHOP PRICING: All workshops cost ₹499 each
 
 WORKSHOP FORMAT: 3-hour live sessions on Google Meet
 LANGUAGES: Available in English, Hindi, and Marathi
@@ -13,7 +13,7 @@ REGISTRATION PROCESS:
 
 WORKSHOP DETAILS:
 
-1. 👩🏻‍⚕️ THE WEIGHT RESET FOR WOMEN - ₹999
+1. 👩🏻‍⚕️ THE WEIGHT RESET FOR WOMEN - ₹499
    Target: All Women 18+
    Subtitle: Not Just Weight Loss, A Full Body Reset
    What you'll learn:
@@ -24,7 +24,7 @@ WORKSHOP DETAILS:
    - Stress, sleep & metabolism mastery
    - Build habits that last, not bounce back
 
-2. 🌸 PCOS UNPLUGGED - ₹999
+2. 🌸 PCOS UNPLUGGED - ₹499
    Target: Teens & Young Women
    Subtitle: Your Hormones, Hair, Skin & Sanity
    What you'll learn:
@@ -35,7 +35,7 @@ WORKSHOP DETAILS:
    - PCOS-friendly food & movement
    - Cycle syncing & stress hacks
 
-3. 👫🏻 PRE-PREGNANCY POWER COUPLE - ₹999
+3. 👫🏻 PRE-PREGNANCY POWER COUPLE - ₹499
    Target: Couples Planning Pregnancy
    Subtitle: Plan Parenthood with Purpose
    What you'll learn:
@@ -46,7 +46,7 @@ WORKSHOP DETAILS:
    - Emotional alignment & partner mindset
    - Myths vs science of getting pregnant
 
-4. 🤰🏻 PREGNANCY WELLNESS WORKSHOP - ₹999
+4. 🤰🏻 PREGNANCY WELLNESS WORKSHOP - ₹499
    Target: Expecting Mothers (All Trimesters)
    Subtitle: Feel Nourished, Calm & Connected
    What you'll learn:
@@ -57,7 +57,7 @@ WORKSHOP DETAILS:
    - Indian wisdom meets modern care
    - Rituals for bonding & body trust
 
-5. 🤱🏻 CONFIDENT BREASTFEEDING & POSTPARTUM HEALING - ₹999
+5. 🤱🏻 CONFIDENT BREASTFEEDING & POSTPARTUM HEALING - ₹499
    Target: New & Expecting Moms
    Subtitle: Nurture Your Baby. Reclaim Your Body.
    What you'll learn:
@@ -68,7 +68,7 @@ WORKSHOP DETAILS:
    - Indian rituals & modern healing practices
    - Space for real talk, not just survival
 
-6. 🍲 FIRST FOODS & BEYOND - ₹999
+6. 🍲 FIRST FOODS & BEYOND - ₹499
    Target: Moms with Children (6 Months to 5 Years)
    Subtitle: Foundations of Child Nutrition & Lifestyle
    What you'll learn:
@@ -82,16 +82,16 @@ WORKSHOP DETAILS:
 CHATBOT RESPONSE TEMPLATES:
 
 When someone asks about workshop registration:
-"Thank you for your interest in the [WORKSHOP NAME] workshop! This 3-hour live session is perfect for [TARGET AUDIENCE]. You'll learn about [KEY TOPICS]. The workshop costs ₹999 and includes downloadable resources, expert Q&A, and practical toolkits. Would you like me to help you with the registration process?"
+"Thank you for your interest in the [WORKSHOP NAME] workshop! This 3-hour live session is perfect for [TARGET AUDIENCE]. You'll learn about [KEY TOPICS]. The workshop costs ₹499 and includes downloadable resources, expert Q&A, and practical toolkits. Would you like me to help you with the registration process?"
 
 When someone asks about pricing:
-"All our workshops are priced at ₹999 each. This includes the 3-hour live session, downloadable resources, expert Q&A, and practical toolkits."
+"All our workshops are priced at ₹499 each. This includes the 3-hour live session, downloadable resources, expert Q&A, and practical toolkits."
 
 When someone asks about registration process:
-"To register for any workshop, visit our website and click on the 'Register for This Workshop' button. You'll need to pay ₹999 via UPI and upload the payment screenshot to confirm your enrollment."
+"To register for any workshop, visit our website and click on the 'Register for This Workshop' button. You'll need to pay ₹499 via UPI and upload the payment screenshot to confirm your enrollment."
 
 When someone asks about workshop list:
-"We offer 6 signature workshops: 1) 👩🏻‍⚕️ The Weight Reset for Women for all women 18+, 2) 🌸 PCOS Unplugged for teens & young women, 3) 👫🏻 Pre-Pregnancy Power Couple for couples planning pregnancy, 4) 🤰🏻 Pregnancy Wellness Workshop for expecting mothers, 5) 🤱🏻 Confident Breastfeeding & Postpartum Healing for new moms, and 6) 🍲 First Foods & Beyond for moms with children 6 months to 5 years. Each workshop costs ₹999 and includes downloadable resources, expert Q&A, and practical toolkits."
+"We offer 6 signature workshops: 1) 👩🏻‍⚕️ The Weight Reset for Women for all women 18+, 2) 🌸 PCOS Unplugged for teens & young women, 3) 👫🏻 Pre-Pregnancy Power Couple for couples planning pregnancy, 4) 🤰🏻 Pregnancy Wellness Workshop for expecting mothers, 5) 🤱🏻 Confident Breastfeeding & Postpartum Healing for new moms, and 6) 🍲 First Foods & Beyond for moms with children 6 months to 5 years. Each workshop costs ₹499 and includes downloadable resources, expert Q&A, and practical toolkits."
 
 When someone asks about languages:
 "All workshops are available in English, Hindi, and Marathi to ensure accessibility for everyone."
