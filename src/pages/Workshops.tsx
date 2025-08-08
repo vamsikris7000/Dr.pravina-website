@@ -28,29 +28,40 @@ interface Workshop {
 const Workshops = () => {
   const [workshops, setWorkshops] = useState<Workshop[]>([]);
   const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
 
   const fetchWorkshops = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/workshops');
-      if (response.ok) {
-        const data = await response.json();
-        setWorkshops(data);
-      } else {
-        console.error('Failed to fetch workshops');
+      // Try different URLs for different environments
+      const urls = [
+        'http://localhost:5001/api/workshops',
+        '/api/workshops', // For production
+      ];
+      
+      let response;
+      let data;
+      
+      for (const url of urls) {
+        try {
+          response = await fetch(url);
+          
+          if (response.ok) {
+            data = await response.json();
+            setWorkshops(data);
+            return; // Success, exit the loop
+          }
+        } catch (error) {
+          // Silently continue to next URL
+        }
       }
+      
     } catch (error) {
-      console.error('Error fetching workshops:', error);
+      // Handle silently in production
     } finally {
       setLoading(false);
-      setRefreshing(false);
     }
   };
 
-  const handleRefresh = async () => {
-    setRefreshing(true);
-    await fetchWorkshops();
-  };
+
 
   useEffect(() => {
     fetchWorkshops();
@@ -124,36 +135,22 @@ const Workshops = () => {
       <section className="pt-8 pb-24" style={{ backgroundColor: '#e9f5e9' }}>
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
+            <div className="text-center mb-8">
               <h2 className="font-playfair text-3xl font-bold text-foreground">Available Workshops</h2>
-              <Button 
-                onClick={handleRefresh} 
-                disabled={refreshing}
-                variant="outline"
-                className="flex items-center gap-2"
-              >
-                {refreshing ? (
-                  <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
-                    Refreshing...
-                  </>
-                ) : (
-                  <>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
-                    Refresh
-                  </>
-                )}
-              </Button>
             </div>
             {loading ? (
               <div className="text-center py-12">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
                 <p className="mt-4 text-muted-foreground">Loading workshops...</p>
               </div>
+            ) : workshops.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">No workshops available at the moment.</p>
+                <p className="text-sm text-muted-foreground mt-2">Please check back later.</p>
+              </div>
             ) : (
-                            workshops.filter(workshop => workshop.isActive).map((workshop, index) => (
+              <>
+                {workshops.filter(workshop => workshop.isActive).map((workshop, index) => (
                 <Card key={workshop._id} className="group hover:shadow-elevated hover:-translate-y-2 transition-all duration-500 animate-fade-in mb-8 overflow-hidden border-0 shadow-lg" style={{animationDelay: `${index * 100}ms`}}>
                 <CardContent className="p-6 md:p-8 bg-gradient-to-br from-white to-gray-50/50">
                   {/* Mobile Layout */}
@@ -248,7 +245,8 @@ const Workshops = () => {
                   </Button>
                 </CardContent>
               </Card>
-            ))
+            ))}
+              </>
             )}
           </div>
         </div>
@@ -274,7 +272,7 @@ const Workshops = () => {
             <div className="text-center group animate-fade-in" style={{animationDelay: '200ms'}}>
               <div className="w-18 h-18 bg-gradient-to-br from-success to-success/80 rounded-full flex items-center justify-center mx-auto mb-6 text-white font-bold text-xl shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">2</div>
               <h3 className="font-playfair text-xl font-bold text-foreground mb-3">Join Live Session</h3>
-              <p className="font-inter text-muted-foreground">Attend the 3-hour interactive session via Google Meet with Q&A</p>
+              <p className="font-inter text-muted-foreground">Attend the 2-hour interactive session via Google Meet with Q&A</p>
             </div>
             <div className="text-center group animate-fade-in" style={{animationDelay: '300ms'}}>
               <div className="w-18 h-18 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 text-white font-bold text-xl shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">3</div>

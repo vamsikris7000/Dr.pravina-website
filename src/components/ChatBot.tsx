@@ -23,26 +23,62 @@ interface RegistrationData {
   phoneNumber?: string;
   workshopName?: string;
   isComplete: boolean;
+  userName?: string; // Track user's name from conversation
 }
 
 const ChatBot = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "welcome",
-      text: "👋 Hello there! How can we assist you?",
-      isUser: false,
-      timestamp: new Date(),
-    },
-  ]);
+  // Load persistent data from localStorage
+  const loadPersistentData = () => {
+    try {
+      const savedRegistrationData = localStorage.getItem('chatbot_registration_data');
+      const savedConversationId = localStorage.getItem('chatbot_conversation_id');
+      const savedMessages = localStorage.getItem('chatbot_messages');
+      
+      if (savedRegistrationData) {
+        const parsedData = JSON.parse(savedRegistrationData);
+        console.log('Loaded registration data from localStorage:', parsedData);
+        return {
+          registrationData: parsedData,
+          conversationId: savedConversationId || '',
+          messages: savedMessages ? JSON.parse(savedMessages) : [
+            {
+              id: "welcome",
+              text: "👋 Hello there! How can we assist you?",
+              isUser: false,
+              timestamp: new Date(),
+            },
+          ]
+        };
+      }
+    } catch (error) {
+      console.error('Error loading persistent data:', error);
+    }
+    
+    // Return default values if no saved data
+    return {
+      registrationData: { isComplete: false },
+      conversationId: '',
+      messages: [
+        {
+          id: "welcome",
+          text: "👋 Hello there! How can we assist you?",
+          isUser: false,
+          timestamp: new Date(),
+        },
+      ]
+    };
+  };
+  
+  const initialData = loadPersistentData();
+  
+  const [messages, setMessages] = useState<Message[]>(initialData.messages);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
-  const [conversationId, setConversationId] = useState<string>('');
-  const [registrationData, setRegistrationData] = useState<RegistrationData>({
-    isComplete: false
-  });
+  const [conversationId, setConversationId] = useState<string>(initialData.conversationId);
+  const [registrationData, setRegistrationData] = useState<RegistrationData>(initialData.registrationData);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   // Pre-warm the chatbot connection
@@ -82,6 +118,36 @@ const ChatBot = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Detect page refresh and clear conversation if it's a fresh page load
+  useEffect(() => {
+    const isPageRefresh = window.performance && window.performance.navigation.type === 1;
+    const isFirstVisit = !localStorage.getItem('chatbot_session_started');
+    
+    if (isPageRefresh || isFirstVisit) {
+      // Clear all conversation data for fresh start
+      localStorage.removeItem('chatbot_registration_data');
+      localStorage.removeItem('chatbot_conversation_id');
+      localStorage.removeItem('chatbot_messages');
+      
+      // Mark session as started
+      localStorage.setItem('chatbot_session_started', 'true');
+      
+      // Reset to initial state
+      setConversationId('');
+      setRegistrationData({ isComplete: false });
+      setMessages([{
+        id: "welcome",
+        text: "👋 Hello there! How can we assist you?",
+        isUser: false,
+        timestamp: new Date(),
+      }]);
+      
+      console.log('Fresh page load detected - conversation reset');
+    } else {
+      console.log('Returning to existing conversation');
+    }
+  }, []);
 
   // Pre-warm chatbot connection on mount
   useEffect(() => {
@@ -134,12 +200,15 @@ const ChatBot = () => {
     return unsubscribe;
   }, []);
 
-  const sendMessageToChatbot = async (userMessage: string) => {
+  const sendMessageToChatbot = async (userMessage: string, currentRegistrationData?: RegistrationData) => {
     const apiKey = 'app-dStnyyOE9dNP6CZb0lPg3kKF';
     const apiUrl = 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages';
 
+    // Use the passed registration data or fall back to state
+    const regData = currentRegistrationData || registrationData;
+
     // Generate contextual response if available
-    const contextualResponse = generateContextualResponse(userMessage, registrationData);
+    const contextualResponse = generateContextualResponse(userMessage, regData);
     
     try {
       const requestBody = {
@@ -253,13 +322,15 @@ const ChatBot = () => {
     const parsedData = parseRegistrationData(userMessage);
     console.log('Parsed data from user input:', parsedData);
     
-    if (parsedData.firstName || parsedData.lastName || parsedData.phoneNumber || parsedData.workshopName) {
-      const updatedData = {
+    // Update registration data immediately
+    let updatedRegistrationData = registrationData;
+    if (parsedData.firstName || parsedData.lastName || parsedData.phoneNumber || parsedData.workshopName || parsedData.userName) {
+      updatedRegistrationData = {
         ...registrationData,
         ...parsedData
       };
-      setRegistrationData(updatedData);
-      console.log('Updated registration data:', updatedData);
+      setRegistrationData(updatedRegistrationData);
+      console.log('Updated registration data:', updatedRegistrationData);
     }
     
     // Add user message
@@ -288,7 +359,8 @@ const ChatBot = () => {
     setIsDialogOpen(true); // Open dialog when sending message
 
     try {
-      await sendMessageToChatbot(userMessage);
+      // Pass the updated registration data to sendMessageToChatbot
+      await sendMessageToChatbot(userMessage, updatedRegistrationData);
     } finally {
       setIsLoading(false);
     }
@@ -316,15 +388,37 @@ const ChatBot = () => {
     }
   };
 
-  // Reset conversation when dialog is closed
+  // Save data to localStorage
+  const saveToLocalStorage = (data: any, key: string) => {
+    try {
+      localStorage.setItem(key, JSON.stringify(data));
+    } catch (error) {
+      console.error('Error saving to localStorage:', error);
+    }
+  };
+
+  // Save registration data whenever it changes
+  useEffect(() => {
+    saveToLocalStorage(registrationData, 'chatbot_registration_data');
+  }, [registrationData]);
+
+  // Save conversation ID whenever it changes
+  useEffect(() => {
+    if (conversationId) {
+      saveToLocalStorage(conversationId, 'chatbot_conversation_id');
+    }
+  }, [conversationId]);
+
+  // Save messages whenever they change
+  useEffect(() => {
+    saveToLocalStorage(messages, 'chatbot_messages');
+  }, [messages]);
+
+  // Handle dialog close - don't reset conversation, just close dialog
   const handleDialogClose = (open: boolean) => {
     setIsDialogOpen(open);
-    // Only reset conversation when dialog is closing
-    if (!open) {
-      setConversationId('');
-      setRegistrationData({ isComplete: false });
-      console.log('Conversation reset - new chat session will start');
-    }
+    // Don't reset conversation when dialog closes - keep it persistent
+    console.log('Dialog closed, conversation preserved');
   };
 
   // Parse user input for registration data
@@ -340,15 +434,23 @@ const ChatBot = () => {
     
     // Extract names (assuming comma-separated format like "vamsi, krishna, 7032098848")
     const parts = userInput.split(',').map(part => part.trim());
+    console.log('Parsed parts:', parts);
     if (parts.length >= 2) {
       data.firstName = parts[0];
       data.lastName = parts[1];
+      console.log('Extracted names:', data.firstName, data.lastName);
+    }
+    
+    // Extract user name from "my name is" format
+    const nameMatch = userInput.match(/my name is (\w+)/i);
+    if (nameMatch) {
+      data.userName = nameMatch[1];
     }
     
     // Extract workshop name
     const workshopKeywords = [
       'weight reset', 'pcos unplugged', 'pre-pregnancy', 'pregnancy wellness', 
-      'breastfeeding', 'first foods', 'postpartum'
+      'breastfeeding', 'first foods', 'postpartum', 'confident breastfeeding'
     ];
     
     for (const keyword of workshopKeywords) {
@@ -381,12 +483,32 @@ const ChatBot = () => {
   // Generate contextual response based on registration data
   const generateContextualResponse = (userInput: string, regData: RegistrationData): string | null => {
     const input = userInput.toLowerCase();
+    console.log('Generating contextual response for:', userInput);
+    console.log('Current registration data:', regData);
     
-    // Check if user is asking for workshop registration
-    const workshopKeywords = ['register', 'registration', 'sign up', 'join', 'enroll'];
+    // Handle name-related queries
+    if (input.includes('my name') || input.includes('what is my name') || input.includes('tell my name')) {
+      console.log('Name query detected');
+      if (regData.userName) {
+        return `Your name is **${regData.userName}**. How can I assist you today?`;
+      } else if (regData.firstName) {
+        return `Your name is **${regData.firstName} ${regData.lastName || ''}**. How can I assist you today?`;
+      } else {
+        return `I don't have your name on record yet. Could you please tell me your name?`;
+      }
+    }
+    
+    // Check if user is asking for workshop registration or mentioning specific workshops
+    const workshopKeywords = ['register', 'registration', 'sign up', 'join', 'enroll', 'workshop'];
+    const workshopNames = [
+      'weight reset', 'pcos unplugged', 'pre-pregnancy', 'pregnancy wellness', 
+      'breastfeeding', 'first foods', 'postpartum', 'confident breastfeeding'
+    ];
+    
     const isRegistrationRequest = workshopKeywords.some(keyword => input.includes(keyword));
+    const hasWorkshopMention = workshopNames.some(workshop => input.includes(workshop));
     
-    if (isRegistrationRequest) {
+    if (isRegistrationRequest || hasWorkshopMention) {
       // If we have complete registration data, provide payment info
       if (isRegistrationComplete(regData)) {
         return `## ✅ Registration Summary
@@ -488,6 +610,34 @@ Welcome! I'm here to help you register for our workshops.
 **First name, last name, and phone number**
 
 Once I have your details, I'll help you choose the perfect workshop!`;
+    }
+    
+    // If user mentions a specific workshop but we don't have their data yet
+    if (hasWorkshopMention && !regData.firstName) {
+      // Extract the workshop name from their message
+      let mentionedWorkshop = '';
+      if (input.includes('weight reset')) {
+        mentionedWorkshop = 'The Weight Reset for Women';
+      } else if (input.includes('pcos')) {
+        mentionedWorkshop = 'PCOS Unplugged';
+      } else if (input.includes('pre-pregnancy')) {
+        mentionedWorkshop = 'Pre-Pregnancy Power Couple';
+      } else if (input.includes('pregnancy wellness')) {
+        mentionedWorkshop = 'Pregnancy Wellness Workshop';
+      } else if (input.includes('breastfeeding') || input.includes('postpartum')) {
+        mentionedWorkshop = 'Confident Breastfeeding & Postpartum Healing';
+      } else if (input.includes('first foods')) {
+        mentionedWorkshop = 'First Foods & Beyond';
+      }
+      
+      return `## 🎯 Workshop Registration
+
+I see you're interested in **${mentionedWorkshop}**! 
+
+📋 To register, please provide your details:
+**First name, last name, and phone number**
+
+Once I have your details, I'll help you complete the registration for ${mentionedWorkshop}.`;
     }
     
     // Check for consultation requests
@@ -641,7 +791,14 @@ This helps us schedule your session smoothly and provide personalized care.`;
                   variant="outline"
                   size="sm"
                   onClick={() => {
+                    // Clear localStorage
+                    localStorage.removeItem('chatbot_registration_data');
+                    localStorage.removeItem('chatbot_conversation_id');
+                    localStorage.removeItem('chatbot_messages');
+                    localStorage.removeItem('chatbot_session_started');
+                    
                     setConversationId('');
+                    setRegistrationData({ isComplete: false });
                     setMessages([{
                       id: "welcome",
                       text: "👋 Hello there! How can we assist you?",
@@ -659,6 +816,11 @@ This helps us schedule your session smoothly and provide personalized care.`;
             {conversationId && (
               <div className="text-xs text-teal-600 text-center mt-1">
                 💬 Continuing conversation
+              </div>
+            )}
+            {registrationData.userName && (
+              <div className="text-xs text-blue-600 text-center mt-1">
+                👤 Chatting with {registrationData.userName}
               </div>
             )}
             {registrationData.firstName && (

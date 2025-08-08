@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Phone, PhoneOff } from "lucide-react";
 import * as LivekitClient from "livekit-client";
 
@@ -6,60 +6,7 @@ const VoiceChatWidget = () => {
   const [status, setStatus] = useState<'idle' | 'connecting' | 'connected'>('idle');
   const [room, setRoom] = useState<any>(null);
   const [isConnected, setIsConnected] = useState(false);
-  const [agents, setAgents] = useState<any[]>([]);
-  const [selectedAgent, setSelectedAgent] = useState<string>("");
-
-  // Fetch agents on mount
-  useEffect(() => {
-    async function fetchAgents() {
-      try {
-        console.log("Fetching agents...");
-        // Use proxy to avoid CORS issues in both development and production
-        const baseUrl = '/api/voice-integration';
-        
-        const response = await fetch(`${baseUrl}/agents/all`, {
-          method: "GET",
-          headers: { 
-            "X-API-Key": "xpectrum-ai@123"
-          },
-        });
-        
-        console.log("Agents response status:", response.status);
-        console.log("Agents response headers:", response.headers);
-        
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error("Failed to fetch agents:", response.status, response.statusText, errorText);
-          throw new Error(`Failed to fetch agents: ${response.status} - ${errorText}`);
-        }
-        
-        const data = await response.json();
-        console.log("Agents fetched:", data);
-        
-        // Parse the agents from the response format
-        if (data.status === "success" && data.agents) {
-          const agentList = Object.keys(data.agents).map(agentName => ({
-            name: agentName,
-            agent_name: agentName
-          }));
-          setAgents(agentList);
-          if (agentList.length > 0) setSelectedAgent(agentList[0].name);
-        } else {
-          // Fallback to agent1 if parsing fails
-          setAgents([{ name: "agent1", agent_name: "agent1" }]);
-          setSelectedAgent("agent1");
-        }
-      } catch (e) {
-        console.error("Error fetching agents:", e);
-        // Set default agents if API fails
-        setAgents([
-          { name: "agent1", agent_name: "agent1" }
-        ]);
-        setSelectedAgent("agent1");
-      }
-    }
-    fetchAgents();
-  }, []);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   async function fetchLivekitToken(agentName = 'agent1') {
     try {
@@ -141,7 +88,7 @@ const VoiceChatWidget = () => {
     
     let token, livekitUrl;
     try {
-      const agentName = selectedAgent || 'agent2';
+      const agentName = 'agent1'; // Always use agent1
       console.log("Starting call with agent:", agentName);
       
       const tokenData = await fetchLivekitToken(agentName);
