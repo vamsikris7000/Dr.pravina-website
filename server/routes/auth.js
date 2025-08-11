@@ -14,9 +14,7 @@ router.post('/login', async (req, res) => {
     }
 
     // Check if password matches admin password
-    const isValidPassword = await bcrypt.compare(password, await bcrypt.hash(process.env.ADMIN_PASSWORD, 10));
-    
-    if (!isValidPassword) {
+    if (password !== process.env.ADMIN_PASSWORD) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
