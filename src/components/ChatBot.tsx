@@ -84,7 +84,7 @@ const ChatBot = () => {
   // Pre-warm the chatbot connection
   const preWarmChatbot = async () => {
     try {
-      const apiKey = 'app-dStnyyOE9dNP6CZb0lPg3kKF';
+      const apiKey = 'app-SjuVYGo01iqolHNI7nKIsG4t';
       const apiUrl = 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages';
       
       await fetch(apiUrl, {
@@ -201,8 +201,10 @@ const ChatBot = () => {
   }, []);
 
   const sendMessageToChatbot = async (userMessage: string, currentRegistrationData?: RegistrationData) => {
-    const apiKey = 'app-dStnyyOE9dNP6CZb0lPg3kKF';
-    const apiUrl = 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages';
+    const apiKey = 'app-SjuVYGo01iqolHNI7nKIsG4t';
+    const apiUrl = window.location.hostname === 'localhost' 
+      ? 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages'
+      : '/api/chatbot';
 
     // Use the passed registration data or fall back to state
     const regData = currentRegistrationData || registrationData;

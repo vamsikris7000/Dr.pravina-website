@@ -88,6 +88,12 @@ const Index = () => {
       photo: "/photos/Testimonials7.png",
       message: "From pregnancy to postpartum healing and my baby's nutrition, Dr. Pravina was with me at every step. Her practical tools, emotional support, and timely nudges made me feel prepared and powerful. My recovery was smooth, my breastfeeding journey was joyful, and my baby's diet is now rooted in wholesome traditions. I'm so grateful!"
     },
+    {
+      name: "Rupali Bansode",
+      location: "Pune",
+      photo: "/photos/Testimonials8.png",
+      message: "From the first trimester to my baby's weaning stage, Dr. Pravina was my lighthouse. She was there through every doubt, every milestone. I didn't just have a healthy pregnancy - I had a joyful one. Breastfeeding and baby-led weaning felt natural with her support. Her holistic approach gave me the strength and confidence I needed as a new mother."
+    },
 
   ];
 
@@ -563,7 +569,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="bg-foreground text-white py-20">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-4 gap-12 mb-16">
+          <div className="grid lg:grid-cols-5 gap-12 mb-16">
             <div className="lg:col-span-2">
               <h3 className="font-playfair text-3xl font-bold mb-6 text-primary-glow">Path'o'Life</h3>
               <p className="font-inter text-lg text-gray-300 mb-6 leading-relaxed">
@@ -592,6 +598,15 @@ const Index = () => {
                 <Link to="/workshops" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Workshops</Link>
                 <Link to="/consultations" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Consultations</Link>
                 <Link to="/wellness-plans" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Wellness Plans</Link>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="font-inter text-xl font-semibold mb-6 text-white">Legal</h4>
+              <div className="space-y-4 font-inter text-gray-300">
+                <Link to="/privacy-policy" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Privacy Policy</Link>
+                <Link to="/returns-refund-policy" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Returns & Refund Policy</Link>
+                <Link to="/terms-conditions" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Terms & Conditions</Link>
               </div>
             </div>
             

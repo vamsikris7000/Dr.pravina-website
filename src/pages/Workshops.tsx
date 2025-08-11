@@ -6,6 +6,7 @@ import { Calendar, Clock, Users, BookOpen, CheckCircle, Mail } from "lucide-reac
 import { chatbotEvents } from "@/lib/chatbot-events";
 import { Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
+import { fetchWorkshops } from "@/services/api";
 
 interface Workshop {
   _id: string;
@@ -29,33 +30,160 @@ const Workshops = () => {
   const [workshops, setWorkshops] = useState<Workshop[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchWorkshops = async () => {
+  const fetchWorkshopsData = async () => {
     try {
-      // Try different URLs for different environments
-      const urls = [
-        'http://localhost:5001/api/workshops',
-        '/api/workshops', // For production
-      ];
-      
-      let response;
-      let data;
-      
-      for (const url of urls) {
-        try {
-          response = await fetch(url);
-          
-          if (response.ok) {
-            data = await response.json();
-            setWorkshops(data);
-            return; // Success, exit the loop
-          }
-        } catch (error) {
-          // Silently continue to next URL
-        }
-      }
-      
+      const data = await fetchWorkshops();
+      setWorkshops(data);
     } catch (error) {
-      // Handle silently in production
+      console.error('Error fetching workshops:', error);
+      // Fallback to default workshops if backend is not available
+      const fallbackWorkshops = [
+        {
+          _id: "1",
+          title: "The Weight Reset for Women",
+          subtitle: "Not Just Weight Loss, A Full Body Reset",
+          audience: "For All Women 18+",
+          icon: "👩🏻‍⚕️",
+          day: "Sunday",
+          date: "8th Aug",
+          time: "4:50 PM - 7:00 PM",
+          price: 499,
+          features: [
+            "Understand your hormones & weight connection",
+            "Tackle belly fat, cravings & low energy",
+            "Anti-inflammatory nutrition made practical",
+            "Smart movement & strength strategies",
+            "Stress, sleep & metabolism mastery",
+            "Build habits that last, not bounce back"
+          ],
+          description: "Transform your relationship with weight through hormone-aware strategies.",
+          isActive: true,
+          order: 1,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          _id: "2",
+          title: "PCOS Unplugged",
+          subtitle: "Your Hormones, Hair, Skin & Sanity",
+          audience: "For Teens & Young Women",
+          icon: "🌸",
+          day: "Saturday",
+          date: "10th Aug",
+          time: "3:00 PM - 6:30 PM",
+          price: 499,
+          features: [
+            "Decode your hormones & cycle",
+            "Period problems & PCOS types", 
+            "Skin, hair, mood & weight tips",
+            "Menstrual cup basics & hygiene",
+            "PCOS-friendly food & movement",
+            "Cycle syncing & stress hacks"
+          ],
+          description: "Navigate PCOS with confidence through practical lifestyle strategies.",
+          isActive: true,
+          order: 2,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          _id: "3",
+          title: "Pre-Pregnancy Power Couple",
+          subtitle: "Plan Parenthood with Purpose",
+          audience: "For Couples Planning Pregnancy",
+          icon: "👫🏻",
+          day: "Friday",
+          date: "15th Aug",
+          time: "5:00 PM - 8:30 PM",
+          price: 499,
+          features: [
+            "Fertility nutrition for both partners",
+            "Cycle tracking & fertile window basics",
+            "Lifestyle shifts to boost conception",
+            "Detox, stress & sleep prep",
+            "Emotional alignment & partner mindset",
+            "Myths vs science of getting pregnant"
+          ],
+          description: "Prepare for pregnancy with evidence-based strategies for both partners.",
+          isActive: true,
+          order: 3,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          _id: "4",
+          title: "Pregnancy Wellness Workshop",
+          subtitle: "Feel Nourished, Calm & Connected",
+          audience: "For Expecting Mothers (All Trimesters)",
+          icon: "🤱🏻",
+          day: "Wednesday",
+          date: "20th Aug",
+          time: "4:00 PM - 7:30 PM",
+          price: 499,
+          features: [
+            "Pregnancy nutrition & meal planning",
+            "Safe movement & exercise guidelines",
+            "Stress management & mental wellness",
+            "Sleep optimization & comfort tips",
+            "Partner support & relationship dynamics",
+            "Birth preparation & postpartum planning"
+          ],
+          description: "Nurture yourself and your baby through every trimester with confidence.",
+          isActive: true,
+          order: 4,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          _id: "5",
+          title: "Postpartum Recovery & Beyond",
+          subtitle: "Heal, Nourish & Thrive",
+          audience: "For New Mothers (0-12 months postpartum)",
+          icon: "👶🏻",
+          day: "Tuesday",
+          date: "25th Aug",
+          time: "3:30 PM - 7:00 PM",
+          price: 499,
+          features: [
+            "Postpartum healing & recovery timeline",
+            "Nutrition for healing & breastfeeding",
+            "Sleep training & baby care basics",
+            "Mental health & emotional support",
+            "Pelvic floor & core restoration",
+            "Return to exercise & self-care"
+          ],
+          description: "Navigate the postpartum journey with strength and support.",
+          isActive: true,
+          order: 5,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          _id: "6",
+          title: "Parenting with Purpose",
+          subtitle: "Raising Confident, Happy Children",
+          audience: "For Parents of Children 0-12 years",
+          icon: "👨‍👩‍👧‍👦",
+          day: "Monday",
+          date: "30th Aug",
+          time: "4:30 PM - 8:00 PM",
+          price: 499,
+          features: [
+            "Child development milestones & expectations",
+            "Positive discipline & behavior management",
+            "Nutrition for growing children",
+            "Screen time & digital wellness",
+            "Family communication & bonding",
+            "Self-care for parents & work-life balance"
+          ],
+          description: "Build a strong foundation for your family's health and happiness.",
+          isActive: true,
+          order: 6,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        }
+      ];
+      setWorkshops(fallbackWorkshops);
     } finally {
       setLoading(false);
     }
@@ -64,10 +192,10 @@ const Workshops = () => {
 
 
   useEffect(() => {
-    fetchWorkshops();
+    fetchWorkshopsData();
 
     // Set up polling to refresh workshops every 30 seconds
-    const interval = setInterval(fetchWorkshops, 30000);
+    const interval = setInterval(fetchWorkshopsData, 30000);
 
     return () => clearInterval(interval);
   }, []);
@@ -288,7 +416,7 @@ const Workshops = () => {
       {/* Footer */}
       <footer className="bg-foreground text-white py-20">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-4 gap-12 mb-16">
+          <div className="grid lg:grid-cols-5 gap-12 mb-16">
             <div className="lg:col-span-2">
               <h3 className="font-playfair text-3xl font-bold mb-6 text-primary-glow">Path'o'Life</h3>
               <p className="font-inter text-lg text-gray-300 mb-6 leading-relaxed">
@@ -317,6 +445,15 @@ const Workshops = () => {
                 <Link to="/workshops" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Workshops</Link>
                 <Link to="/consultations" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Consultations</Link>
                 <Link to="/wellness-plans" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Wellness Plans</Link>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="font-inter text-xl font-semibold mb-6 text-white">Legal</h4>
+              <div className="space-y-4 font-inter text-gray-300">
+                <Link to="/privacy-policy" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Privacy Policy</Link>
+                <Link to="/returns-refund-policy" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Returns & Refund Policy</Link>
+                <Link to="/terms-conditions" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Terms & Conditions</Link>
               </div>
             </div>
             

@@ -76,7 +76,7 @@ const Consultations = () => {
       {/* Footer */}
       <footer className="bg-foreground text-white py-20">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-4 gap-12 mb-16">
+          <div className="grid lg:grid-cols-5 gap-12 mb-16">
             <div className="lg:col-span-2">
               <h3 className="font-playfair text-3xl font-bold mb-6 text-primary-glow">Path'o'Life</h3>
               <p className="font-inter text-lg text-gray-300 mb-6 leading-relaxed">
@@ -105,6 +105,15 @@ const Consultations = () => {
                 <Link to="/workshops" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Workshops</Link>
                 <Link to="/consultations" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Consultations</Link>
                 <Link to="/wellness-plans" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Wellness Plans</Link>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="font-inter text-xl font-semibold mb-6 text-white">Legal</h4>
+              <div className="space-y-4 font-inter text-gray-300">
+                <Link to="/privacy-policy" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Privacy Policy</Link>
+                <Link to="/returns-refund-policy" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Returns & Refund Policy</Link>
+                <Link to="/terms-conditions" className="block hover:text-primary-glow transition-colors hover:translate-x-1 duration-300">Terms & Conditions</Link>
               </div>
             </div>
             

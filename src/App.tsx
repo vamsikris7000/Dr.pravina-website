@@ -19,6 +19,9 @@ import VoiceChatWidget from "@/components/VoiceChatWidget";
 import PathOLife from "./pages/patholife";
 import Founder from "./pages/founder";
 import AdminDashboard from "./pages/AdminDashboard";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import ReturnsRefundPolicy from "./pages/ReturnsRefundPolicy";
+import TermsConditions from "./pages/TermsConditions";
 import { WorkshopProvider } from "./contexts/WorkshopContext";
 
 const queryClient = new QueryClient();
@@ -42,6 +45,9 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/patholife" element={<PathOLife />} />
             <Route path="/founder" element={<Founder />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/returns-refund-policy" element={<ReturnsRefundPolicy />} />
+            <Route path="/terms-conditions" element={<TermsConditions />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/doctor-panel" element={<AdminDashboard />} />
             <Route path="*" element={<NotFound />} />
