@@ -18,7 +18,7 @@ const VoiceChatWidget = () => {
       // Use the exact format from the working curl command
       const endpoints = [
         {
-          url: `${baseUrl}/tokens/generate?agent_name=${agentName}`,
+          url: `${baseUrl}?path=tokens/generate&agent_name=${agentName}`,
           method: 'POST',
           body: null
         }
