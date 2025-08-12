@@ -154,10 +154,10 @@ const Index = () => {
         `}
       </style>
       {/* Hero Section */}
-              <section className="relative overflow-hidden text-white min-h-screen flex items-center" role="banner" data-aos="fade-up" style={{ backgroundColor: '#e9f5e9' }}>
+              <section className="relative overflow-hidden text-white min-h-[95vh] flex items-center" role="banner" data-aos="fade-up" style={{ backgroundColor: '#e9f5e9' }}>
         {/* Background image */}
         <img 
-          src="/photos/HeroPageBackgorund.jpg" 
+                        src="/photos/Hero.png" 
           alt="Hero Background" 
           className="absolute inset-0 w-full h-full object-cover z-0" 
           style={{ pointerEvents: 'none' }}

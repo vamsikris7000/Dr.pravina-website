@@ -27,6 +27,8 @@ try {
 }
 
 export default async function handler(req, res) {
+  const { id } = req.query;
+
   try {
     // Connect to MongoDB
     if (mongoose.connection.readyState !== 1) {
@@ -37,19 +39,35 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'GET') {
-      // Fetch all appointments
-      const appointments = await Appointment.find({}).sort({ createdAt: -1 });
-      res.status(200).json(appointments);
-    } else if (req.method === 'POST') {
-      // Create new appointment
-      const appointment = new Appointment(req.body);
-      const savedAppointment = await appointment.save();
-      res.status(201).json(savedAppointment);
+      // Get specific appointment
+      const appointment = await Appointment.findById(id);
+      if (!appointment) {
+        return res.status(404).json({ error: 'Appointment not found' });
+      }
+      res.status(200).json(appointment);
+    } else if (req.method === 'PATCH') {
+      // Update appointment status
+      const updatedAppointment = await Appointment.findByIdAndUpdate(
+        id,
+        { ...req.body, updatedAt: new Date() },
+        { new: true, runValidators: true }
+      );
+      if (!updatedAppointment) {
+        return res.status(404).json({ error: 'Appointment not found' });
+      }
+      res.status(200).json(updatedAppointment);
+    } else if (req.method === 'DELETE') {
+      // Delete appointment
+      const deletedAppointment = await Appointment.findByIdAndDelete(id);
+      if (!deletedAppointment) {
+        return res.status(404).json({ error: 'Appointment not found' });
+      }
+      res.status(200).json({ message: 'Appointment deleted successfully' });
     } else {
       res.status(405).json({ error: 'Method not allowed' });
     }
   } catch (error) {
-    console.error('Appointments API error:', error);
+    console.error('Appointment API error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 }

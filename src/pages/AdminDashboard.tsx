@@ -34,8 +34,7 @@ import {
   updateWorkshop,
   deletePatient,
   deleteAppointment,
-  deleteMessage,
-  deleteWorkshop
+  deleteMessage
 } from "@/services/api";
 
 interface Patient {
@@ -90,6 +89,7 @@ interface Workshop {
   description: string;
   isActive: boolean;
   order: number;
+  status: 'live' | 'coming-soon';
   createdAt: string;
   updatedAt: string;
 }
@@ -287,13 +287,19 @@ const AdminDashboard = () => {
     setEditingWorkshops(prev => ({ ...prev, [id]: false }));
   };
 
-  const handleWorkshopDelete = async (id: string) => {
-    if (window.confirm('Are you sure you want to delete this workshop?')) {
+  const handleWorkshopStatusToggle = async (id: string, currentStatus: 'live' | 'coming-soon') => {
+    const newStatus = currentStatus === 'live' ? 'coming-soon' : 'live';
+    const statusText = newStatus === 'live' ? 'Live' : 'Coming Soon';
+    
+    if (window.confirm(`Are you sure you want to change this workshop status to "${statusText}"?`)) {
       try {
-        await deleteWorkshop(id);
-        setWorkshops(prev => prev.filter(w => w._id !== id));
+        await updateWorkshop(id, { status: newStatus });
+        setWorkshops(prev => prev.map(w => 
+          w._id === id ? { ...w, status: newStatus } : w
+        ));
       } catch (error) {
-        console.error('Error deleting workshop:', error);
+        console.error('Error updating workshop status:', error);
+        alert('Failed to update workshop status. Please try again.');
       }
     }
   };
@@ -627,12 +633,15 @@ const AdminDashboard = () => {
                               Edit
                             </Button>
                             <Button
-                              variant="outline"
+                              variant={workshop.status === 'live' ? 'default' : 'outline'}
                               size="sm"
-                              onClick={() => handleWorkshopDelete(workshop._id)}
-                              className="text-red-600 hover:text-red-700"
+                              onClick={() => handleWorkshopStatusToggle(workshop._id, workshop.status)}
+                              className={workshop.status === 'live' 
+                                ? 'bg-green-600 hover:bg-green-700 text-white' 
+                                : 'bg-orange-500 hover:bg-orange-600 text-white'
+                              }
                             >
-                              Delete
+                              {workshop.status === 'live' ? 'Live' : 'Coming Soon'}
                             </Button>
                           </div>
                         </div>

@@ -1,11 +1,13 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, Award, Heart, BookOpen, GraduationCap, Users, Microscope, PenTool, Brain, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, Award, Heart, BookOpen, GraduationCap, Users, Microscope, PenTool, Brain, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useState } from "react";
 
 const About = () => {
   const [currentPhoto, setCurrentPhoto] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentGalleryImage, setCurrentGalleryImage] = useState(0);
   
   const journeyPhotos = [
     "/photos/her1.jpg",
@@ -172,6 +174,23 @@ const About = () => {
                       ))}
                     </div>
                   </div>
+                </div>
+                
+                {/* View More Button */}
+                <div className="text-center mt-8">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="font-inter font-medium text-primary border-primary hover:bg-primary hover:text-white transition-all duration-300"
+                    onClick={() => {
+                      const gallerySection = document.getElementById('more-gallery');
+                      if (gallerySection) {
+                        gallerySection.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                  >
+                    View More
+                  </Button>
                 </div>
               </div>
               
@@ -488,6 +507,42 @@ const About = () => {
         </div>
       </section>
 
+      {/* More Gallery */}
+      <section id="more-gallery" className="py-16 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex items-center justify-center mb-12">
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-foreground/30"></div>
+              <h2 className="font-playfair text-3xl md:text-4xl font-bold text-foreground mx-8 leading-tight">More Gallery</h2>
+              <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-foreground/30"></div>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                <div key={num} className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                  <img 
+                    src={`/photos/pic${num}.jpg`}
+                    alt={`Gallery Image ${num}`}
+                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div 
+                    className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center cursor-pointer"
+                    onClick={() => {
+                      setCurrentGalleryImage(num - 1);
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    <div className="text-white text-center">
+                      <span className="font-inter text-sm font-medium">View</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Philosophy */}
       <section className="py-24 bg-foreground text-white">
         <div className="container mx-auto px-6">
@@ -519,6 +574,52 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      {/* Gallery Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+          <div className="relative max-w-4xl max-h-[90vh] w-full">
+            {/* Close Button */}
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4 z-10 bg-white/20 backdrop-blur-sm rounded-full p-2 hover:bg-white/30 transition-all duration-300"
+            >
+              <X className="h-6 w-6 text-white" />
+            </button>
+
+            {/* Main Image */}
+            <div className="relative">
+              <img 
+                src={`/photos/pic${currentGalleryImage + 1}.jpg`}
+                alt={`Gallery Image ${currentGalleryImage + 1}`}
+                className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
+              />
+            </div>
+
+            {/* Navigation Arrows */}
+            <button
+              onClick={() => setCurrentGalleryImage((prev) => (prev === 0 ? 9 : prev - 1))}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm rounded-full p-3 hover:bg-white/30 transition-all duration-300"
+            >
+              <ChevronLeft className="h-6 w-6 text-white" />
+            </button>
+            
+            <button
+              onClick={() => setCurrentGalleryImage((prev) => (prev === 9 ? 0 : prev + 1))}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm rounded-full p-3 hover:bg-white/30 transition-all duration-300"
+            >
+              <ChevronRight className="h-6 w-6 text-white" />
+            </button>
+
+            {/* Image Counter */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2">
+              <span className="text-white font-inter text-sm">
+                {currentGalleryImage + 1} / 10
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

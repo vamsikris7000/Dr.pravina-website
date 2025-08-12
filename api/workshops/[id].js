@@ -32,6 +32,8 @@ try {
 }
 
 export default async function handler(req, res) {
+  const { id } = req.query;
+
   try {
     // Connect to MongoDB
     if (mongoose.connection.readyState !== 1) {
@@ -42,19 +44,39 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'GET') {
-      // Fetch active workshops from MongoDB
-      const workshops = await Workshop.find({ isActive: true }).sort({ order: 1 });
-      res.status(200).json(workshops);
-    } else if (req.method === 'POST') {
-      // Create new workshop
-      const workshop = new Workshop(req.body);
-      const savedWorkshop = await workshop.save();
-      res.status(201).json(savedWorkshop);
+      // Get specific workshop
+      const workshop = await Workshop.findById(id);
+      if (!workshop) {
+        return res.status(404).json({ error: 'Workshop not found' });
+      }
+      res.status(200).json(workshop);
+    } else if (req.method === 'PUT') {
+      // Update workshop
+      const updatedWorkshop = await Workshop.findByIdAndUpdate(
+        id,
+        { ...req.body, updatedAt: new Date() },
+        { new: true, runValidators: true }
+      );
+      if (!updatedWorkshop) {
+        return res.status(404).json({ error: 'Workshop not found' });
+      }
+      res.status(200).json(updatedWorkshop);
+    } else if (req.method === 'DELETE') {
+      // Soft delete workshop (set isActive to false)
+      const deletedWorkshop = await Workshop.findByIdAndUpdate(
+        id,
+        { isActive: false, updatedAt: new Date() },
+        { new: true }
+      );
+      if (!deletedWorkshop) {
+        return res.status(404).json({ error: 'Workshop not found' });
+      }
+      res.status(200).json({ message: 'Workshop deleted successfully' });
     } else {
       res.status(405).json({ error: 'Method not allowed' });
     }
   } catch (error) {
-    console.error('Workshops API error:', error);
+    console.error('Workshop API error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 }

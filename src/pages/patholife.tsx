@@ -215,96 +215,229 @@ const PathOLife = () => {
         `}</style>
       </section>
 
-      {/* Our Story & Philosophy Section */}
+      {/* Welcome to Path'o'Life Section */}
       <section className="py-16" style={{ backgroundColor: '#e9f5e9' }}>
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
-            {/* Text Content */}
             <div className="animate-fade-in-up">
               <div className="flex items-center justify-center mb-6">
                 <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent"></div>
-                <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mx-8 leading-tight drop-shadow-lg">Our Story & Philosophy</h2>
+                <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mx-8 leading-tight drop-shadow-lg">Welcome to Path'o'Life</h2>
                 <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-transparent"></div>
               </div>
-              <p className="font-inter text-lg text-muted-foreground mb-4 leading-relaxed">
-                At <span className="text-primary font-semibold">Path'o'Life</span>, we believe that true healthcare goes beyond just treating symptoms. Women deserve education, guidance, and personalized lifestyle solutions that support them through every changing phase of life.
-              </p>
-              <p className="font-inter text-lg text-muted-foreground mb-4 leading-relaxed">
-                We are here to help women navigate the complexities of hormonal health, fertility, pregnancy, postpartum recovery, lactation, and parenting through the power of lifestyle medicine, delivered with compassion and care.
-              </p>
-              <p className="font-inter text-lg text-muted-foreground mb-0 leading-relaxed">
-                Whether you are struggling with PCOS, preparing for pregnancy, healing after birth, or simply looking to feel like yourself again, Path'o'Life is here to guide you with clarity, confidence, and practical support.
-              </p>
-
+              
+              <div className="space-y-6 text-lg text-muted-foreground font-inter leading-relaxed">
+                <p>
+                  Hello and Congratulations on taking a step towards a healthier, stronger, and more vibrant "you."
+                </p>
+                
+                <p>
+                  At <span className="text-primary font-semibold">Path'o'Life</span>, we believe that true health is not built by pills alone, it's shaped by your daily choices, mindset, and habits.
+                </p>
+                
+                <p>
+                  In today's world, many health issues - from PCOS, infertility, and pregnancy complications to diabetes, weight gain, and burnout have roots in the way we live. Medicines can manage symptoms, but lasting change happens only when you address the root causes.
+                </p>
+                
+                <p>
+                  We understand the unique pressures women face... the expectations, the multitasking, the silent battles with their bodies. That's why our mission is to walk beside you, guiding you with science-backed lifestyle medicine, the wisdom of our traditions, and practical tools you can actually use.
+                </p>
+                
+                <p>
+                  Here, we ask you to keep an open mind, be ready to unlearn what no longer serves you, and embrace habits that match the needs of today's world while honoring the essence of our roots.
+                </p>
+                
+                <p>
+                  Step by step, we'll help you build a life where your body feels energetic, your mind feels calm, and your heart feels supported.
+                </p>
+                
+                <p className="font-semibold text-foreground">
+                  At the core of Path'o'Life are 7 timeless, evidence-based pillars, the habits that shape your body, mind, and future at every stage of womanhood.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-
-
-      {/* Why the Name Path'o'Life Section */}
+      {/* 7 Pillars of Health */}
+      
+      {/* 1. Nutrition */}
       <section className="py-16" style={{ backgroundColor: '#e9f5e9' }}>
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
-            <div className="animate-fade-in-up">
-              <div className="flex items-center justify-center mb-6">
-                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent"></div>
-                <h3 className="font-inter text-2xl font-bold text-foreground mx-8">Why the Name Path'o'Life?</h3>
-                <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-transparent"></div>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="order-2 md:order-1">
+                <img 
+                  src="/photos/pillar1.png"
+                  alt="Nutrition - What You Eat Heals You"
+                  className="w-full h-96 object-cover rounded-2xl shadow-lg"
+                />
               </div>
-              <p className="font-inter text-lg text-muted-foreground mb-4 leading-relaxed">
-                Every woman walks her own unique path through life. From girlhood to womanhood, through periods, pregnancy, postpartum, and beyond, health is not a destination. It is a journey shaped by the daily choices we make.
-              </p>
-              <p className="font-inter text-lg text-muted-foreground mb-6 leading-relaxed">
-                The name <span className="text-primary font-semibold">Path'o'Life</span> reflects our purpose. We walk beside you on this path through personalized guidance, support, and science-backed lifestyle medicine. Our goal is to help you move through each life stage feeling informed, empowered, and cared for.
-              </p>
-              <ul className="mb-0 text-lg text-muted-foreground font-inter leading-relaxed list-disc pl-6">
-                <li className="mb-2">We do not simply tell you what to do. We help you understand your body, so you can make choices that align with your goals, your health, and your life stage.</li>
-                <li className="mb-0">When your lifestyle supports the natural path of your life, health, happiness, and healing become natural outcomes.</li>
-              </ul>
+              <div className="order-1 md:order-2">
+                <h3 className="font-playfair text-3xl md:text-4xl font-bold text-foreground mb-2">Nutrition</h3>
+                <p className="font-inter text-lg text-primary font-semibold mb-6">What You Eat Heals You</p>
+                <div className="space-y-4 text-muted-foreground font-inter leading-relaxed">
+                  <p>Your plate is your most powerful prescription. The right foods can balance your hormones, improve your fertility, protect your heart, boost your mood, and support every cell in your body.</p>
+                  <p>At <span className="text-primary font-semibold">Path'o'Life</span>, we focus on whole, minimally processed, plant-rich, and seasonal foods. You'll learn how to create delicious, practical meals, from traditional Indian recipes to modern healthy bowls that nourish rather than just fill you.</p>
+                  <p className="font-semibold text-foreground">No fad diets, no starvation, only food as medicine.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Our Core Philosophy Section */}
+      {/* 2. Movement */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h3 className="font-playfair text-3xl md:text-4xl font-bold text-foreground mb-2">Movement</h3>
+                <p className="font-inter text-lg text-primary font-semibold mb-6">Move for Strength, Hormones, and Health</p>
+                <div className="space-y-4 text-muted-foreground font-inter leading-relaxed">
+                  <p>Movement is not just about burning calories, it's about building strength, improving metabolism, balancing hormones, and protecting your bones.</p>
+                  <p>We guide you to combine strength training, cardio, flexibility, and mindful movement like yoga into your week, in ways that fit your life.</p>
+                  <p className="font-semibold text-foreground">Even small, consistent changes from morning stretches to mindful walks create big results over time.</p>
+                </div>
+              </div>
+              <div>
+                <img 
+                  src="/photos/pillar2.png"
+                  alt="Movement – Move for Strength, Hormones, and Health"
+                  className="w-full h-96 object-cover rounded-2xl shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Sleep */}
       <section className="py-16" style={{ backgroundColor: '#e9f5e9' }}>
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
-            {/* Text Content */}
-            <div className="animate-fade-in-up">
-              <div className="flex items-center justify-center mb-6">
-                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent"></div>
-                <h3 className="font-inter text-2xl font-bold text-foreground mx-8">Our Core Philosophy</h3>
-                <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-transparent"></div>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="order-2 md:order-1">
+                <img 
+                  src="/photos/pillar3.png"
+                  alt="Sleep – Rest to Heal, Reset, and Recharge"
+                  className="w-full h-96 object-cover rounded-2xl shadow-lg"
+                />
               </div>
-              <ul className="mb-6 text-lg text-muted-foreground font-inter leading-relaxed list-none pl-0 space-y-3">
-                <li className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-primary mt-0.5 mr-3 flex-shrink-0" />
-                  <span>A lifestyle prescription comes before a medical prescription</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-primary mt-0.5 mr-3 flex-shrink-0" />
-                  <span>Women deserve personalized, practical, and compassionate care</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-primary mt-0.5 mr-3 flex-shrink-0" />
-                  <span>Health is more than the absence of disease. It's energy, confidence, and joy</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-primary mt-0.5 mr-3 flex-shrink-0" />
-                  <span>When a woman heals, a family thrives, and generations change</span>
-                </li>
-              </ul>
-              <div className="flex items-center justify-center mb-6">
-                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent"></div>
-                <h3 className="font-inter text-2xl font-bold text-foreground mx-8">Our Mission and Vision</h3>
-                <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-transparent"></div>
+              <div className="order-1 md:order-2">
+                <h3 className="font-playfair text-3xl md:text-4xl font-bold text-foreground mb-2">Sleep</h3>
+                <p className="font-inter text-lg text-primary font-semibold mb-6">Rest to Heal, Reset, and Recharge</p>
+                <div className="space-y-4 text-muted-foreground font-inter leading-relaxed">
+                  <p>Sleep is your body's repair mode, the time when your hormones reset, immunity strengthens, and brain detox happens.</p>
+                  <p className="font-semibold text-foreground">Without quality sleep, no diet or exercise can fully work.</p>
+                  <p>We help you identify root causes of poor sleep - stress, screen use, late-night eating, caffeine and teach practical, science-backed ways to improve both sleep quality and quantity.</p>
+                </div>
               </div>
-              <p className="font-inter text-lg text-muted-foreground leading-relaxed">
-                To guide women through periods, pregnancy, postpartum, and parenting with evidence-based lifestyle medicine rooted in science, compassion, and care. Through education, consultations, and long term support, we help women reclaim their health, balance their hormones, and restore their energy so they can live with clarity and confidence. To create a space where every woman feels empowered, informed, and supported through every phase of her health journey.
-              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Sexual Health */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h3 className="font-playfair text-3xl md:text-4xl font-bold text-foreground mb-2">Sexual Health</h3>
+                <p className="font-inter text-lg text-primary font-semibold mb-6">Knowledge, Confidence, and Comfort</p>
+                <div className="space-y-4 text-muted-foreground font-inter leading-relaxed">
+                  <p>In India, sexual health is often shrouded in silence, myths, and misinformation. Many women grow up without the knowledge to enjoy intimacy, maintain reproductive health, or seek help for common issues like pain, low desire, or discomfort.</p>
+                  <p>We create a safe, respectful space to talk openly, learn the science of sexual health, and build confidence in your body and relationships.</p>
+                  <p className="font-semibold text-foreground">Whether you're single, planning a pregnancy, or navigating menopause, sexual well-being matters at every stage.</p>
+                </div>
+              </div>
+              <div>
+                <img 
+                  src="/photos/pillar4.png"
+                  alt="Sexual Health – Knowledge, Confidence, and Comfort"
+                  className="w-full h-96 object-cover rounded-2xl shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Stress Management */}
+      <section className="py-16" style={{ backgroundColor: '#e9f5e9' }}>
+        <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="order-2 md:order-1">
+                <img 
+                  src="/photos/pillar5.png"
+                  alt="Stress Management – Calm is a Superpower"
+                  className="w-full h-96 object-cover rounded-2xl shadow-lg"
+                />
+              </div>
+              <div className="order-1 md:order-2">
+                <h3 className="font-playfair text-3xl md:text-4xl font-bold text-foreground mb-2">Stress Management</h3>
+                <p className="font-inter text-lg text-primary font-semibold mb-6">Calm is a Superpower</p>
+                <div className="space-y-4 text-muted-foreground font-inter leading-relaxed">
+                  <p>Stress is unavoidable, but how you respond to it can transform your health. Chronic stress can trigger hormonal imbalance, inflammation, digestive issues, anxiety, and more.</p>
+                  <p>We use breathing practices, mindfulness, journaling, and practical daily rituals to help you shift from "fight or flight" to "rest and heal" mode. Your calm mind becomes your strongest health shield.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Social Connection */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h3 className="font-playfair text-3xl md:text-4xl font-bold text-foreground mb-2">Social Connection</h3>
+                <p className="font-inter text-lg text-primary font-semibold mb-6">Healing Happens in Community</p>
+                <div className="space-y-4 text-muted-foreground font-inter leading-relaxed">
+                  <p>Loneliness is as harmful as smoking 15 cigarettes a day. Yes, science says so.</p>
+                  <p>Your relationships and sense of belonging directly influence your mental and physical health.</p>
+                  <p>At <span className="text-primary font-semibold">Path'o'Life</span>, we encourage building supportive, uplifting connections, whether it's through family, friends, spiritual groups, or women's circles.</p>
+                  <p className="font-semibold text-foreground">You'll see that when you heal together, you heal better.</p>
+                </div>
+              </div>
+              <div>
+                <img 
+                  src="/photos/pillar6.png"
+                  alt="Social Connection – Healing Happens in Community"
+                  className="w-full h-96 object-cover rounded-2xl shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Avoiding Risky Substances */}
+      <section className="py-16" style={{ backgroundColor: '#e9f5e9' }}>
+        <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="order-2 md:order-1">
+                <img 
+                  src="/photos/pillar7.png"
+                  alt="Avoiding Risky Substances – Protect Your Body, Protect Your Future"
+                  className="w-full h-96 object-cover rounded-2xl shadow-lg"
+                />
+              </div>
+              <div className="order-1 md:order-2">
+                <h3 className="font-playfair text-3xl md:text-4xl font-bold text-foreground mb-2">Avoiding Risky Substances</h3>
+                <p className="font-inter text-lg text-primary font-semibold mb-6">Protect Your Body, Protect Your Future</p>
+                <div className="space-y-4 text-muted-foreground font-inter leading-relaxed">
+                  <p>Alcohol, tobacco, recreational drugs, and even excessive caffeine can silently damage your hormones, fertility, immunity, and long-term health.</p>
+                  <p>We help you understand the science of harm, explore healthier coping mechanisms, and make informed choices that protect your future, without judgment or fear-based tactics.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -22,6 +22,7 @@ interface Workshop {
   description: string;
   isActive: boolean;
   order: number;
+  status?: 'live' | 'coming-soon';
   createdAt: string;
   updatedAt: string;
 }
@@ -59,6 +60,7 @@ const Workshops = () => {
           description: "Transform your relationship with weight through hormone-aware strategies.",
           isActive: true,
           order: 1,
+          status: 'live' as const,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
         },
@@ -83,6 +85,7 @@ const Workshops = () => {
           description: "Navigate PCOS with confidence through practical lifestyle strategies.",
           isActive: true,
           order: 2,
+          status: 'live' as const,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
         },
@@ -107,6 +110,7 @@ const Workshops = () => {
           description: "Prepare for pregnancy with evidence-based strategies for both partners.",
           isActive: true,
           order: 3,
+          status: 'live' as const,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
         },
@@ -131,6 +135,7 @@ const Workshops = () => {
           description: "Nurture yourself and your baby through every trimester with confidence.",
           isActive: true,
           order: 4,
+          status: 'live' as const,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
         },
@@ -155,6 +160,7 @@ const Workshops = () => {
           description: "Navigate the postpartum journey with strength and support.",
           isActive: true,
           order: 5,
+          status: 'live' as const,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
         },
@@ -179,6 +185,7 @@ const Workshops = () => {
           description: "Build a strong foundation for your family's health and happiness.",
           isActive: true,
           order: 6,
+          status: 'live' as const,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
         }
@@ -279,8 +286,19 @@ const Workshops = () => {
             ) : (
               <>
                 {workshops.filter(workshop => workshop.isActive).map((workshop, index) => (
-                <Card key={workshop._id} className="group hover:shadow-elevated hover:-translate-y-2 transition-all duration-500 animate-fade-in mb-8 overflow-hidden border-0 shadow-lg" style={{animationDelay: `${index * 100}ms`}}>
-                <CardContent className="p-6 md:p-8 bg-gradient-to-br from-white to-gray-50/50">
+                <Card key={workshop._id} className="group hover:shadow-elevated hover:-translate-y-2 transition-all duration-500 animate-fade-in mb-8 overflow-hidden border-0 shadow-lg relative" style={{animationDelay: `${index * 100}ms`}}>
+                  {/* Background Image Container */}
+                  <div className="absolute inset-0">
+                    <img 
+                      src={`/photos/WS${index + 1}.png`}
+                      alt={`Workshop ${index + 1} Background`} 
+                      className="w-full h-full object-cover object-center"
+                      style={{ filter: 'brightness(0.5)' }}
+                    />
+                  </div>
+                  {/* Black Filter Overlay */}
+                  <div className="absolute inset-0 bg-black/10"></div>
+                <CardContent className="p-6 md:p-8 bg-gradient-to-br from-white/40 to-gray-10/10 relative z-10">
                   {/* Mobile Layout */}
                   <div className="md:hidden">
                     <div className="flex items-start mb-4">
@@ -290,29 +308,40 @@ const Workshops = () => {
                         </div>
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-playfair text-lg font-bold text-foreground mb-1">{workshop.title}</h3>
-                        <p className="font-inter text-primary font-semibold text-sm mb-2">{workshop.subtitle}</p>
-                        <div className="inline-flex items-center px-2 py-1 bg-primary/10 rounded-full">
-                          <span className="text-primary text-xs font-medium">{workshop.audience}</span>
+                        <h3 className="font-playfair text-lg font-bold text-white mb-1">{workshop.title}</h3>
+                        <p className="font-inter text-yellow-300 font-semibold text-sm mb-2">{workshop.subtitle}</p>
+                        <div className="inline-flex items-center px-2 py-1 bg-white/20 rounded-full">
+                          <span className="text-white text-xs font-medium">{workshop.audience}</span>
                         </div>
                       </div>
                     </div>
                     
                     {/* Mobile Timing Information */}
-                    <div className="bg-primary/5 rounded-lg p-3 border border-primary/10 mb-4">
-                      <div className="grid grid-cols-2 gap-2 text-center">
-                        <div className="flex flex-col items-center">
-                          <Calendar className="h-4 w-4 text-primary mb-1" />
-                          <span className="font-inter text-xs font-semibold text-primary">{workshop.day}, {workshop.date}</span>
-                        </div>
-                        <div className="flex flex-col items-center">
-                          <Clock className="h-4 w-4 text-primary mb-1" />
-                          <span className="font-inter text-xs font-semibold text-primary">{workshop.time}</span>
-                        </div>
-                      </div>
-                      <div className="text-center mt-2 pt-2 border-t border-primary/20">
-                        <span className="font-inter text-lg font-bold text-green-600">₹{workshop.price}</span>
-                      </div>
+                                <div className="bg-primary/5 rounded-lg p-3 border border-primary/10 mb-4">
+              {workshop.status === 'coming-soon' ? (
+                <div className="text-center">
+                  <div className="flex flex-col items-center">
+                    <Clock className="h-4 w-4 text-orange-500 mb-1" />
+                    <span className="font-inter text-sm font-semibold text-orange-600">Coming Soon</span>
+                  </div>
+                </div>
+              ) : (
+                        <>
+                          <div className="grid grid-cols-2 gap-2 text-center">
+                            <div className="flex flex-col items-center">
+                              <Calendar className="h-4 w-4 text-primary mb-1" />
+                              <span className="font-inter text-xs font-semibold text-primary">{workshop.day}, {workshop.date}</span>
+                            </div>
+                            <div className="flex flex-col items-center">
+                              <Clock className="h-4 w-4 text-primary mb-1" />
+                              <span className="font-inter text-xs font-semibold text-primary">{workshop.time}</span>
+                            </div>
+                          </div>
+                          <div className="text-center mt-2 pt-2 border-t border-primary/20">
+                            <span className="font-inter text-lg font-bold text-yellow-300">₹{workshop.price}</span>
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
 
@@ -324,26 +353,35 @@ const Workshops = () => {
                       </div>
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-playfair text-2xl font-bold text-foreground mb-2">{workshop.title}</h3>
-                      <p className="font-inter text-primary font-semibold text-lg mb-2">{workshop.subtitle}</p>
-                      <div className="inline-flex items-center px-3 py-1 bg-primary/10 rounded-full">
-                        <span className="text-primary text-sm font-medium">{workshop.audience}</span>
+                      <h3 className="font-playfair text-2xl font-bold text-white mb-2">{workshop.title}</h3>
+                      <p className="font-inter text-yellow-300 font-semibold text-lg mb-2">{workshop.subtitle}</p>
+                      <div className="inline-flex items-center px-3 py-1 bg-white/20 rounded-full">
+                        <span className="text-white text-sm font-medium">{workshop.audience}</span>
                       </div>
                     </div>
                     {/* Timing Information - Right Side */}
                     <div className="ml-6 flex-shrink-0 text-right">
                       <div className="bg-primary/5 rounded-lg p-4 border border-primary/10">
+                                  {workshop.status === 'coming-soon' ? (
+                    <div className="flex items-center justify-center">
+                      <Clock className="h-4 w-4 text-yellow-400 mr-2" />
+                      <span className="font-inter text-sm font-semibold text-yellow-300">Coming Soon</span>
+                    </div>
+                  ) : (
+                          <>
+                            <div className="flex items-center justify-center mb-2">
+                              <Calendar className="h-4 w-4 text-white mr-2" />
+                              <span className="font-inter text-sm font-semibold text-white">{workshop.day}, {workshop.date}</span>
+                            </div>
                         <div className="flex items-center justify-center mb-2">
-                          <Calendar className="h-4 w-4 text-primary mr-2" />
-                          <span className="font-inter text-sm font-semibold text-primary">{workshop.day}, {workshop.date}</span>
-                        </div>
-                        <div className="flex items-center justify-center mb-2">
-                          <Clock className="h-4 w-4 text-primary mr-2" />
-                          <span className="font-inter text-sm font-semibold text-primary">{workshop.time}</span>
+                              <Clock className="h-4 w-4 text-white mr-2" />
+                              <span className="font-inter text-sm font-semibold text-white">{workshop.time}</span>
                         </div>
                         <div className="flex items-center justify-center">
-                          <span className="font-inter text-lg font-bold text-green-600">₹{workshop.price}</span>
+                              <span className="font-inter text-lg font-bold text-yellow-300">₹{workshop.price}</span>
                         </div>
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -351,26 +389,28 @@ const Workshops = () => {
                   <div className="space-y-3 mb-6 max-h-0 group-hover:max-h-96 transition-all duration-500 overflow-hidden">
                     {workshop.features && workshop.features.length > 0 ? (
                       workshop.features.map((feature, featureIndex) => (
-                        <div key={featureIndex} className="flex items-start space-x-3">
-                          <CheckCircle className="h-5 w-5 text-primary stroke-2 flex-shrink-0 mt-0.5" />
-                          <span className="font-inter text-muted-foreground leading-relaxed">{feature}</span>
+                      <div key={featureIndex} className="flex items-start space-x-3">
+                          <CheckCircle className="h-5 w-5 text-yellow-300 stroke-2 flex-shrink-0 mt-0.5" />
+                          <span className="font-inter text-white leading-relaxed">{feature}</span>
                         </div>
                       ))
                     ) : (
                       <div className="flex items-start space-x-3">
-                        <CheckCircle className="h-5 w-5 text-primary stroke-2 flex-shrink-0 mt-0.5" />
-                        <span className="font-inter text-muted-foreground leading-relaxed">Comprehensive workshop content</span>
+                        <CheckCircle className="h-5 w-5 text-yellow-300 stroke-2 flex-shrink-0 mt-0.5" />
+                        <span className="font-inter text-white leading-relaxed">Comprehensive workshop content</span>
                       </div>
                     )}
                   </div>
+                              {workshop.status !== 'coming-soon' && (
                   <Button 
                     variant="soft" 
                     size="lg" 
-                    className="w-full bg-gradient-to-r from-primary to-primary/90 text-white hover:from-primary/90 hover:to-primary font-inter font-semibold shadow-lg hover:shadow-xl transition-all duration-300 border-0"
+                className="w-full font-inter font-semibold shadow-lg hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-r from-primary to-primary/90 text-white hover:from-primary/90 hover:to-primary"
                     onClick={() => handleWorkshopRegistration(workshop.title)}
                   >
                     Register for This Workshop
                   </Button>
+            )}
                 </CardContent>
               </Card>
             ))}

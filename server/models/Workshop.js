@@ -50,6 +50,11 @@ const workshopSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  status: {
+    type: String,
+    enum: ['live', 'coming-soon'],
+    default: 'coming-soon'
+  },
   createdAt: {
     type: Date,
     default: Date.now

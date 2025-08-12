@@ -25,6 +25,8 @@ try {
 }
 
 export default async function handler(req, res) {
+  const { id } = req.query;
+
   try {
     // Connect to MongoDB
     if (mongoose.connection.readyState !== 1) {
@@ -35,19 +37,35 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'GET') {
-      // Fetch all messages
-      const messages = await Message.find({}).sort({ createdAt: -1 });
-      res.status(200).json(messages);
-    } else if (req.method === 'POST') {
-      // Create new message
-      const message = new Message(req.body);
-      const savedMessage = await message.save();
-      res.status(201).json(savedMessage);
+      // Get specific message
+      const message = await Message.findById(id);
+      if (!message) {
+        return res.status(404).json({ error: 'Message not found' });
+      }
+      res.status(200).json(message);
+    } else if (req.method === 'PATCH') {
+      // Update message status
+      const updatedMessage = await Message.findByIdAndUpdate(
+        id,
+        { ...req.body, updatedAt: new Date() },
+        { new: true, runValidators: true }
+      );
+      if (!updatedMessage) {
+        return res.status(404).json({ error: 'Message not found' });
+      }
+      res.status(200).json(updatedMessage);
+    } else if (req.method === 'DELETE') {
+      // Delete message
+      const deletedMessage = await Message.findByIdAndDelete(id);
+      if (!deletedMessage) {
+        return res.status(404).json({ error: 'Message not found' });
+      }
+      res.status(200).json({ message: 'Message deleted successfully' });
     } else {
       res.status(405).json({ error: 'Method not allowed' });
     }
   } catch (error) {
-    console.error('Messages API error:', error);
+    console.error('Message API error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 }

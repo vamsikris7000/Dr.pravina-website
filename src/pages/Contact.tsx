@@ -21,11 +21,7 @@ const Contact = () => {
   });
   const [loading, setLoading] = useState(false);
   
-  // Journey sharing state
-  const [journeyMessage, setJourneyMessage] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [journeyPosts, setJourneyPosts] = useState([]);
-  const [sharingLoading, setSharingLoading] = useState(false);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -64,39 +60,7 @@ const Contact = () => {
     }
   };
 
-  const handleJourneyShare = () => {
-    if (!journeyMessage.trim()) {
-      toast({
-        title: "Please enter a message",
-        description: "Share your journey with the community.",
-        variant: "destructive",
-      });
-      return;
-    }
 
-    setSharingLoading(true);
-    
-    // Simulate API call delay
-    setTimeout(() => {
-      const newPost = {
-        id: Date.now(),
-        message: journeyMessage,
-        category: selectedCategory || 'General',
-        timestamp: new Date().toLocaleString(),
-        author: 'Anonymous' // In real app, this would be the logged-in user
-      };
-      
-      setJourneyPosts(prev => [newPost, ...prev]);
-      setJourneyMessage('');
-      setSelectedCategory('');
-      setSharingLoading(false);
-      
-      toast({
-        title: "Journey shared successfully!",
-        description: "Your story has been shared with the community.",
-      });
-    }, 1000);
-  };
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
@@ -114,54 +78,53 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Information */}
-      <section className="py-24">
+      {/* Contact Section */}
+      <section className="py-24" style={{ backgroundColor: '#e9f5e9' }}>
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16 animate-fade-in-up">
-            <div className="flex items-center justify-center mb-6">
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-foreground/30"></div>
-            <h2 className="font-playfair text-5xl font-bold text-foreground mx-8">Contact Information</h2>
-            <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-foreground/30"></div>
-          </div>
-            <p className="font-inter text-xl text-muted-foreground">Multiple ways to reach us for your wellness needs</p>
-          </div>
-          {/* Contact Details */}
-          <div className="max-w-4xl mx-auto mb-16">
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="flex items-start space-x-6 group animate-fade-in" style={{animationDelay: '100ms'}}>
-                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
-                  <Mail className="h-8 w-8 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-playfair text-xl font-bold text-foreground mb-2">Email</h3>
-                  <p className="font-inter text-muted-foreground">drpravina.patholife@gmail.com</p>
-                  <p className="font-inter text-sm text-muted-foreground">We typically respond within 24 hours</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start space-x-6 group animate-fade-in" style={{animationDelay: '300ms'}}>
-                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
-                  <svg className="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-playfair text-xl font-bold text-foreground mb-2">WhatsApp</h3>
-                  <p className="font-inter text-muted-foreground">+91 9421829899</p>
-                  <p className="font-inter text-sm text-muted-foreground">Quick questions and community updates</p>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          {/* Forms Section */}
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12">
+          
+          <div className="max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              {/* Contact Details */}
+              <div className="space-y-8">
+                <div className="text-center mb-8 animate-fade-in-up">
+                  <h2 className="font-playfair text-3xl md:text-4xl font-bold text-foreground mb-4">Contact Information</h2>
+                  <p className="font-inter text-lg text-muted-foreground">Multiple ways to reach us for your wellness needs</p>
+                </div>
+                <div className="flex items-start space-x-6 group animate-fade-in" style={{animationDelay: '100ms'}}>
+                  <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                    <Mail className="h-8 w-8 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-playfair text-xl font-bold text-foreground mb-2">Email</h3>
+                    <p className="font-inter text-muted-foreground">drpravina.patholife@gmail.com</p>
+                    <p className="font-inter text-sm text-muted-foreground">We typically respond within 24 hours</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-6 group animate-fade-in" style={{animationDelay: '300ms'}}>
+                  <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                    <svg className="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-playfair text-xl font-bold text-foreground mb-2">WhatsApp</h3>
+                    <p className="font-inter text-muted-foreground">+91 9421829899</p>
+                    <p className="font-inter text-sm text-muted-foreground">Quick questions and community updates</p>
+                  </div>
+                </div>
+              </div>
+
               {/* Contact Form */}
               <div>
+                <div className="text-center mb-8">
+                  <h3 className="font-playfair text-2xl md:text-3xl font-bold text-foreground mb-2">Send us a Message</h3>
+                  <p className="font-inter text-muted-foreground">We'd love to hear from you and help with your wellness journey</p>
+                </div>
+                
                 <Card className="shadow-elevated hover:shadow-glow transition-all duration-300">
-                  <CardContent className="p-10">
-                    <h2 className="font-playfair text-3xl font-bold text-foreground mb-8">Send us a Message</h2>
+                  <CardContent className="p-8">
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="grid md:grid-cols-2 gap-4">
                         <div>
@@ -245,93 +208,6 @@ const Contact = () => {
                     </form>
                   </CardContent>
                 </Card>
-              </div>
-
-              {/* Share Your Journey */}
-              <div>
-                <Card className="shadow-elevated hover:shadow-glow transition-all duration-300">
-                  <CardContent className="p-10">
-                    <h2 className="font-playfair text-3xl font-bold text-foreground mb-8 flex items-center">
-                      <span className="text-primary mr-3">+</span>
-                      Share Your Journey
-                    </h2>
-                    <div className="space-y-4">
-                      <div>
-                        <Textarea 
-                          placeholder="Share your progress, ask questions, or celebrate wins with the community..." 
-                          rows={4}
-                          className="resize-none"
-                          value={journeyMessage}
-                          onChange={(e) => setJourneyMessage(e.target.value)}
-                        />
-                      </div>
-                      
-                      <div className="flex flex-wrap gap-3">
-                        <Button 
-                          variant={selectedCategory === 'Progress Update' ? 'default' : 'outline'} 
-                          size="sm" 
-                          className="font-inter font-medium"
-                          onClick={() => setSelectedCategory('Progress Update')}
-                        >
-                          Progress Update
-                        </Button>
-                        <Button 
-                          variant={selectedCategory === 'Question' ? 'default' : 'outline'} 
-                          size="sm" 
-                          className="font-inter font-medium"
-                          onClick={() => setSelectedCategory('Question')}
-                        >
-                          Question
-                        </Button>
-                        <Button 
-                          variant={selectedCategory === 'Success Story' ? 'default' : 'outline'} 
-                          size="sm" 
-                          className="font-inter font-medium"
-                          onClick={() => setSelectedCategory('Success Story')}
-                        >
-                          Success Story
-                        </Button>
-                      </div>
-                      
-                      <div className="flex justify-end">
-                        <Button 
-                          variant="wellness" 
-                          size="lg" 
-                          className="font-inter font-semibold"
-                          onClick={handleJourneyShare}
-                          disabled={sharingLoading}
-                        >
-                          {sharingLoading ? "Sharing..." : "Share"}
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-                
-                {/* Journey Posts Display */}
-                {journeyPosts.length > 0 && (
-                  <Card className="mt-6 shadow-elevated hover:shadow-glow transition-all duration-300">
-                    <CardContent className="p-6">
-                      <h3 className="font-playfair text-xl font-bold text-foreground mb-4">Community Journey</h3>
-                      <div className="h-60 overflow-y-auto space-y-4 pr-2">
-                        {journeyPosts.map((post) => (
-                          <div key={post.id} className="border-l-4 border-primary/20 pl-4 py-3 bg-gray-50 rounded-r-lg">
-                            <div className="flex items-start justify-between mb-2">
-                              <span className="inline-block px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
-                                {post.category}
-                              </span>
-                              <span className="text-xs text-gray-500">{post.timestamp}</span>
-                            </div>
-                            <p className="font-inter text-sm text-gray-700 leading-relaxed mb-2">
-                              {post.message}
-                            </p>
-                            <p className="text-xs text-gray-500">- {post.author}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                )}
               </div>
             </div>
           </div>
