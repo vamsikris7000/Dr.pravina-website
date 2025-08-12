@@ -157,7 +157,7 @@ const Index = () => {
               <section className="relative overflow-hidden text-white min-h-[95vh] flex items-center" role="banner" data-aos="fade-up" style={{ backgroundColor: '#e9f5e9' }}>
         {/* Background image */}
         <img 
-                        src="/photos/Hero.png" 
+          src="/photos/HeroPageBackgorund.jpg" 
           alt="Hero Background" 
           className="absolute inset-0 w-full h-full object-cover z-0" 
           style={{ pointerEvents: 'none' }}
