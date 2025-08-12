@@ -47,7 +47,7 @@ const VoiceChatWidget = () => {
           if (response.ok) {
             const data = await response.json();
             console.log("Token received:", data);
-            return { token: data.token, livekitUrl: data.livekit_url || 'wss://agent-364qtybd.livekit.cloud' };
+            return { token: data.token, livekitUrl: data.livekit_url || 'wss://agent-364qtybd.livekit.cloud', room_name: data.room_name };
           } else {
             const errorText = await response.text();
             console.error(`Endpoint ${endpoint.url} failed:`, response.status, response.statusText, errorText);
@@ -110,6 +110,9 @@ const VoiceChatWidget = () => {
       
       await publishMicrophone(roomInstance);
       
+      // Trigger agent to join the room
+      await triggerAgentJoin(agentName, tokenData.room_name);
+      
       // @ts-ignore
       roomInstance.on(LivekitClient.RoomEvent.TrackSubscribed, handleTrackSubscribed);
       // @ts-ignore
@@ -131,6 +134,35 @@ const VoiceChatWidget = () => {
       console.log("Microphone published");
     } catch (e) {
       console.error("Error publishing microphone:", e);
+    }
+  }
+
+  async function triggerAgentJoin(agentName: string, roomName: string) {
+    try {
+      console.log("Triggering agent to join room:", roomName);
+      
+      const baseUrl = '/api/voice-integration';
+      const response = await fetch(`${baseUrl}?path=agents/join`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-Key': 'xpectrum-ai@123'
+        },
+        body: JSON.stringify({
+          agent_name: agentName,
+          room_name: roomName,
+          action: 'join_call'
+        })
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Agent join triggered:", data);
+      } else {
+        console.error("Failed to trigger agent join:", response.status);
+      }
+    } catch (error) {
+      console.error("Error triggering agent join:", error);
     }
   }
 

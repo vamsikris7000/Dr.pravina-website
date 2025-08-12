@@ -9,7 +9,8 @@ export default async function handler(req, res) {
         version: "1.0.0",
         endpoints: [
           "/tokens/generate?agent_name=agent1",
-          "/agents/all"
+          "/agents/all",
+          "/agents/join"
         ]
       });
       return;
@@ -34,6 +35,34 @@ export default async function handler(req, res) {
       const data = await response.json();
       
       console.log(`Token generation response: ${response.status}`, data);
+      
+      if (response.ok) {
+        res.status(200).json(data);
+      } else {
+        res.status(response.status).json(data);
+      }
+      return;
+    }
+    
+    // Handle agent join request
+    if (path === 'agents/join') {
+      const apiKey = 'xpectrum-ai@123';
+      const backendUrl = 'https://d1fs86umxjjz67.cloudfront.net';
+      
+      console.log('Agent join request:', req.body);
+      
+      const response = await fetch(`${backendUrl}/agents/join`, {
+        method: 'POST',
+        headers: {
+          'x-api-key': apiKey,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(req.body)
+      });
+
+      const data = await response.json();
+      
+      console.log(`Agent join response: ${response.status}`, data);
       
       if (response.ok) {
         res.status(200).json(data);
