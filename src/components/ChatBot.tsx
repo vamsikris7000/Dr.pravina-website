@@ -84,8 +84,11 @@ const ChatBot = () => {
   // Pre-warm the chatbot connection
   const preWarmChatbot = async () => {
     try {
+      const apiUrl = window.location.hostname === 'localhost' 
+        ? 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages'
+        : '/api/chatbot';
+      
       const apiKey = 'app-SjuVYGo01iqolHNI7nKIsG4t';
-      const apiUrl = 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages';
       
       await fetch(apiUrl, {
         method: 'POST',
@@ -213,7 +216,7 @@ const ChatBot = () => {
     const contextualResponse = generateContextualResponse(userMessage, regData);
     
     try {
-      const requestBody = {
+      const requestBody: any = {
         inputs: {},
         query: userMessage,
         response_mode: 'streaming',
