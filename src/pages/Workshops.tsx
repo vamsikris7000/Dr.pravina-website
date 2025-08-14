@@ -460,7 +460,7 @@ const Workshops = () => {
             <div className="lg:col-span-2">
               <h3 className="font-playfair text-3xl font-bold mb-6 text-primary-glow">Path'o'Life</h3>
               <p className="font-inter text-lg text-gray-300 mb-6 leading-relaxed">
-                Empowering women through evidence-based lifestyle medicine
+                Ready to Feel Your Best? Start Your Wellness Transformation
               </p>
               <div className="flex space-x-4">
                 <a href="https://www.instagram.com/path.o.life?igsh=bHF1b2ZkbW43bnZo" target="_blank" rel="noopener noreferrer" className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">

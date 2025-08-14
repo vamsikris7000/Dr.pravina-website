@@ -171,8 +171,8 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="text-center lg:text-left animate-fade-in-up px-4 sm:px-0 w-full col-span-2">
               <h1 className="font-playfair text-responsive-5xl font-bold mb-4 md:mb-6 text-white leading-tight tracking-tight drop-shadow-lg" data-aos="fade-up">
-                Empowering Women with <br />
-                Lifestyle Medicine
+                Ready to Feel Your Best? <br />
+                Start Your Wellness Transformation
               </h1>
               <p className="font-inter text-responsive-lg mb-4 md:mb-5 font-medium text-white/90 drop-shadow-md tracking-wide" data-aos="fade-up" data-aos-delay="100">
                 Periods • Pregnancy • Postpartum & Lactation • Parenting • Weight Reset
@@ -573,7 +573,7 @@ const Index = () => {
             <div className="lg:col-span-2">
               <h3 className="font-playfair text-3xl font-bold mb-6 text-primary-glow">Path'o'Life</h3>
               <p className="font-inter text-lg text-gray-300 mb-6 leading-relaxed">
-                Empowering women through evidence-based lifestyle medicine
+                Ready to Feel Your Best? Start Your Wellness Transformation
               </p>
               <div className="flex space-x-4">
                 <a href="https://www.instagram.com/path.o.life?igsh=bHF1b2ZkbW43bnZo" target="_blank" rel="noopener noreferrer" className="p-3 bg-primary/20 rounded-full hover:bg-primary hover:scale-110 transition-all duration-300 cursor-pointer group">

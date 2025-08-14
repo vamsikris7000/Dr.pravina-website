@@ -112,7 +112,7 @@ const Appointment = mongoose.model('Appointment', appointmentSchema);
 const Message = mongoose.model('Message', messageSchema);
 
 // Auth endpoint
-app.post('/api/auth/login', async (req, res) => {
+app.post('/api/auth', async (req, res) => {
   try {
     const { email, password } = req.body;
 
