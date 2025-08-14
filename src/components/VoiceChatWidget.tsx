@@ -13,7 +13,7 @@ const VoiceChatWidget = () => {
       console.log("Fetching token for agent:", agentName);
       
       // Use proxy to avoid CORS issues in both development and production
-      const baseUrl = '/api/voice-integration';
+      const baseUrl = '/.netlify/functions/voice-integration';
       
       // Use the exact format from the working curl command
       const endpoints = [
@@ -141,7 +141,7 @@ const VoiceChatWidget = () => {
     try {
       console.log("Triggering agent to join room:", roomName);
       
-      const baseUrl = '/api/voice-integration';
+      const baseUrl = '/.netlify/functions/voice-integration';
       const response = await fetch(`${baseUrl}?path=agents/join`, {
         method: 'POST',
         headers: {

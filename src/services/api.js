@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:5001/api' : '/api');
+const API_BASE_URL = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:5001/api' : '/.netlify/functions');
 
 // Get token from localStorage
 const getToken = () => localStorage.getItem('adminToken');
@@ -11,7 +11,7 @@ const getHeaders = () => ({
 
 // Auth API
 export const loginAdmin = async (email, password) => {
-  const response = await fetch(`${API_BASE_URL}/auth/login`, {
+  const response = await fetch(`${API_BASE_URL}/auth`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -23,14 +23,14 @@ export const loginAdmin = async (email, password) => {
 
 // Patients API
 export const fetchPatients = async () => {
-  const response = await fetch(`${API_BASE_URL}/patients`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=patients`, {
     headers: getHeaders(),
   });
   return response.json();
 };
 
 export const createPatient = async (patientData) => {
-  const response = await fetch(`${API_BASE_URL}/patients`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=patients`, {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify(patientData),
@@ -39,7 +39,7 @@ export const createPatient = async (patientData) => {
 };
 
 export const updatePatientStatus = async (id, status) => {
-  const response = await fetch(`${API_BASE_URL}/patients/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=patients/${id}`, {
     method: 'PATCH',
     headers: getHeaders(),
     body: JSON.stringify({ status }),
@@ -48,7 +48,7 @@ export const updatePatientStatus = async (id, status) => {
 };
 
 export const deletePatient = async (id) => {
-  const response = await fetch(`${API_BASE_URL}/patients/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=patients/${id}`, {
     method: 'DELETE',
     headers: getHeaders(),
   });
@@ -57,14 +57,14 @@ export const deletePatient = async (id) => {
 
 // Appointments API
 export const fetchAppointments = async () => {
-  const response = await fetch(`${API_BASE_URL}/appointments`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=appointments`, {
     headers: getHeaders(),
   });
   return response.json();
 };
 
 export const createAppointment = async (appointmentData) => {
-  const response = await fetch(`${API_BASE_URL}/appointments`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=appointments`, {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify(appointmentData),
@@ -73,7 +73,7 @@ export const createAppointment = async (appointmentData) => {
 };
 
 export const updateAppointmentStatus = async (id, status) => {
-  const response = await fetch(`${API_BASE_URL}/appointments/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=appointments/${id}`, {
     method: 'PATCH',
     headers: getHeaders(),
     body: JSON.stringify({ status }),
@@ -82,7 +82,7 @@ export const updateAppointmentStatus = async (id, status) => {
 };
 
 export const deleteAppointment = async (id) => {
-  const response = await fetch(`${API_BASE_URL}/appointments/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=appointments/${id}`, {
     method: 'DELETE',
     headers: getHeaders(),
   });
@@ -91,14 +91,14 @@ export const deleteAppointment = async (id) => {
 
 // Messages API
 export const fetchMessages = async () => {
-  const response = await fetch(`${API_BASE_URL}/messages`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=messages`, {
     headers: getHeaders(),
   });
   return response.json();
 };
 
 export const createMessage = async (messageData) => {
-  const response = await fetch(`${API_BASE_URL}/messages`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=messages`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ export const createMessage = async (messageData) => {
 };
 
 export const updateMessageStatus = async (id, status) => {
-  const response = await fetch(`${API_BASE_URL}/messages/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=messages/${id}`, {
     method: 'PATCH',
     headers: getHeaders(),
     body: JSON.stringify({ status }),
@@ -118,7 +118,7 @@ export const updateMessageStatus = async (id, status) => {
 };
 
 export const deleteMessage = async (id) => {
-  const response = await fetch(`${API_BASE_URL}/messages/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=messages/${id}`, {
     method: 'DELETE',
     headers: getHeaders(),
   });
@@ -127,7 +127,7 @@ export const deleteMessage = async (id) => {
 
 // Workshops API
 export const fetchWorkshops = async () => {
-  const response = await fetch(`${API_BASE_URL}/workshops`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=workshops`, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -136,7 +136,7 @@ export const fetchWorkshops = async () => {
 };
 
 export const fetchAllWorkshops = async () => {
-  const response = await fetch(`${API_BASE_URL}/workshops/all`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=workshops/all`, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -145,7 +145,7 @@ export const fetchAllWorkshops = async () => {
 };
 
 export const createWorkshop = async (workshopData) => {
-  const response = await fetch(`${API_BASE_URL}/workshops`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=workshops`, {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify(workshopData),
@@ -154,7 +154,7 @@ export const createWorkshop = async (workshopData) => {
 };
 
 export const updateWorkshop = async (id, workshopData) => {
-  const response = await fetch(`${API_BASE_URL}/workshops/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=workshops/${id}`, {
     method: 'PUT',
     headers: getHeaders(),
     body: JSON.stringify(workshopData),
@@ -163,7 +163,7 @@ export const updateWorkshop = async (id, workshopData) => {
 };
 
 export const deleteWorkshop = async (id) => {
-  const response = await fetch(`${API_BASE_URL}/workshops/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/api?path=workshops/${id}`, {
     method: 'DELETE',
     headers: getHeaders(),
   });

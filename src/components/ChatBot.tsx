@@ -86,7 +86,7 @@ const ChatBot = () => {
     try {
       const apiUrl = window.location.hostname === 'localhost' 
         ? 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages'
-        : '/api/chatbot';
+        : '/.netlify/functions/chatbot';
       
       const apiKey = 'app-SjuVYGo01iqolHNI7nKIsG4t';
       
@@ -207,7 +207,7 @@ const ChatBot = () => {
     const apiKey = 'app-SjuVYGo01iqolHNI7nKIsG4t';
     const apiUrl = window.location.hostname === 'localhost' 
       ? 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages'
-      : '/api/chatbot';
+      : '/.netlify/functions/chatbot';
 
     // Use the passed registration data or fall back to state
     const regData = currentRegistrationData || registrationData;
