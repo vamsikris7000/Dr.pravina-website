@@ -88,7 +88,11 @@ const ChatBot = () => {
         ? 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages'
         : '/.netlify/functions/chatbot';
       
-      const apiKey = import.meta.env.VITE_DIFY_API_KEY || 'app-SjuVYGo01iqolHNI7nKIsG4t';
+      const apiKey = import.meta.env.VITE_DIFY_API_KEY;
+      if (!apiKey) {
+        console.warn('Dify API key is not configured. Chatbot may not work properly.');
+        return;
+      }
       
       await fetch(apiUrl, {
         method: 'POST',
@@ -204,7 +208,11 @@ const ChatBot = () => {
   }, []);
 
   const sendMessageToChatbot = async (userMessage: string, currentRegistrationData?: RegistrationData) => {
-    const apiKey = import.meta.env.VITE_DIFY_API_KEY || 'app-SjuVYGo01iqolHNI7nKIsG4t';
+    const apiKey = import.meta.env.VITE_DIFY_API_KEY;
+    if (!apiKey) {
+      throw new Error('Dify API key is not configured. Please set VITE_DIFY_API_KEY environment variable.');
+    }
+    
     const apiUrl = window.location.hostname === 'localhost' 
       ? 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages'
       : '/.netlify/functions/chatbot';

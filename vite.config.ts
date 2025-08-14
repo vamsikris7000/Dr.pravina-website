@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => ({
           });
           proxy.on('proxyReq', (proxyReq, req, res) => {
             // Add the API key header
-            proxyReq.setHeader('x-api-key', process.env.VITE_VOICE_API_KEY || 'xpectrum-ai@123');
+            proxyReq.setHeader('x-api-key', process.env.VITE_VOICE_API_KEY);
             console.log('Sending Request to the Target:', req.method, req.url);
           });
           proxy.on('proxyRes', (proxyRes, req, res) => {

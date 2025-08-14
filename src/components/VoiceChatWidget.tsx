@@ -12,6 +12,11 @@ const VoiceChatWidget = () => {
     try {
       console.log("Fetching token for agent:", agentName);
       
+      const apiKey = import.meta.env.VITE_VOICE_API_KEY;
+      if (!apiKey) {
+        throw new Error('Voice API key is not configured. Please set VITE_VOICE_API_KEY environment variable.');
+      }
+      
       // Use proxy to avoid CORS issues in both development and production
       const baseUrl = window.location.hostname === 'localhost' 
         ? '/api/voice-integration'
@@ -36,7 +41,7 @@ const VoiceChatWidget = () => {
           const requestOptions = {
             method: endpoint.method,
             headers: { 
-              'X-API-Key': import.meta.env.VITE_VOICE_API_KEY || 'xpectrum-ai@123'
+              'X-API-Key': import.meta.env.VITE_VOICE_API_KEY
             },
             ...(endpoint.body && { body: endpoint.body })
           };
@@ -66,7 +71,7 @@ const VoiceChatWidget = () => {
         console.log("Testing basic connectivity...");
         const testResponse = await fetch(`${baseUrl}`, {
           method: 'GET',
-          headers: { 'X-API-Key': import.meta.env.VITE_VOICE_API_KEY || 'xpectrum-ai@123' },
+          headers: { 'X-API-Key': import.meta.env.VITE_VOICE_API_KEY },
         });
         console.log("Basic connectivity test:", testResponse.status);
         const testText = await testResponse.text();
@@ -150,7 +155,7 @@ const VoiceChatWidget = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-API-Key': import.meta.env.VITE_VOICE_API_KEY || 'xpectrum-ai@123'
+          'X-API-Key': import.meta.env.VITE_VOICE_API_KEY
         },
         body: JSON.stringify({
           agent_name: agentName,
