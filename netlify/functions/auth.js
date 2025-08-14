@@ -33,8 +33,35 @@ export const handler = async function(event, context) {
     const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
     const JWT_SECRET = process.env.JWT_SECRET;
 
+    // Debug logging for production troubleshooting
+    console.log('Auth attempt:', {
+      receivedEmail: email,
+      receivedPassword: password ? '***' : 'undefined',
+      envAdminEmail: ADMIN_EMAIL,
+      envAdminPassword: ADMIN_PASSWORD ? '***' : 'undefined',
+      envJwtSecret: JWT_SECRET ? '***' : 'undefined'
+    });
+
+    // Check if environment variables are set
+    if (!ADMIN_EMAIL || !ADMIN_PASSWORD || !JWT_SECRET) {
+      console.error('Missing environment variables:', {
+        hasAdminEmail: !!ADMIN_EMAIL,
+        hasAdminPassword: !!ADMIN_PASSWORD,
+        hasJwtSecret: !!JWT_SECRET
+      });
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ error: 'Server configuration error' })
+      };
+    }
+
     // Check credentials
     if (email !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
+      console.log('Invalid credentials:', {
+        emailMatch: email === ADMIN_EMAIL,
+        passwordMatch: password === ADMIN_PASSWORD
+      });
       return {
         statusCode: 400,
         headers,
@@ -48,6 +75,8 @@ export const handler = async function(event, context) {
       JWT_SECRET,
       { expiresIn: '24h' }
     );
+
+    console.log('Login successful for:', ADMIN_EMAIL);
 
     return {
       statusCode: 200,
