@@ -1,0 +1,13 @@
+{
+  "name": "patholife-netlify-functions",
+  "version": "1.0.0",
+  "description": "Netlify functions for Path'o'Life website",
+  "main": "index.js",
+  "dependencies": {
+    "mongoose": "^8.10.0",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

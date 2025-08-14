@@ -76,6 +76,46 @@ const Navbar = () => {
             >
               Home
             </Link>
+            {/* About Dropdown */}
+            <div
+              className="relative group"
+              onMouseEnter={() => {
+                if (aboutCloseTimeout.current) clearTimeout(aboutCloseTimeout.current);
+                setAboutOpen(true);
+              }}
+              onMouseLeave={() => {
+                aboutCloseTimeout.current = setTimeout(() => setAboutOpen(false), 150);
+              }}
+            >
+              <button
+                className={`flex items-center text-sm font-medium font-inter transition-all duration-300 hover:text-primary hover:scale-105 px-2 ${
+                  location.pathname === "/about" ? "text-primary border-b-2 border-primary" : "text-foreground"
+                }`}
+                onClick={() => setAboutOpen((open) => !open)}
+                type="button"
+              >
+                About <ChevronDown className="ml-1 w-4 h-4" />
+              </button>
+              {aboutOpen && (
+                <div
+                  className="absolute left-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-border z-50 overflow-hidden"
+                  style={{ maxHeight: '200px' }}
+                >
+                  {aboutDropdown.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.path}
+                      className={`block px-6 py-3 text-sm font-inter font-medium transition-all duration-200 hover:bg-primary/10 hover:text-primary rounded-xl ${
+                        location.pathname === item.path ? "text-primary bg-primary/10" : "text-foreground"
+                      }`}
+                      onClick={() => setAboutOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
             {/* Live Workshops */}
             <Link
               key="Live Workshops"
@@ -130,46 +170,6 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-            {/* About Dropdown */}
-            <div
-              className="relative group"
-              onMouseEnter={() => {
-                if (aboutCloseTimeout.current) clearTimeout(aboutCloseTimeout.current);
-                setAboutOpen(true);
-              }}
-              onMouseLeave={() => {
-                aboutCloseTimeout.current = setTimeout(() => setAboutOpen(false), 150);
-              }}
-            >
-              <button
-                className={`flex items-center text-sm font-medium font-inter transition-all duration-300 hover:text-primary hover:scale-105 px-2 ${
-                  location.pathname === "/about" ? "text-primary border-b-2 border-primary" : "text-foreground"
-                }`}
-                onClick={() => setAboutOpen((open) => !open)}
-                type="button"
-              >
-                About <ChevronDown className="ml-1 w-4 h-4" />
-              </button>
-              {aboutOpen && (
-                <div
-                  className="absolute left-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-border z-50 overflow-hidden"
-                  style={{ maxHeight: '200px' }}
-                >
-                  {aboutDropdown.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.path}
-                      className={`block px-6 py-3 text-sm font-inter font-medium transition-all duration-200 hover:bg-primary/10 hover:text-primary rounded-xl ${
-                        location.pathname === item.path ? "text-primary bg-primary/10" : "text-foreground"
-                      }`}
-                      onClick={() => setAboutOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
             {/* Contact */}
             <Link
               key="Contact"
@@ -210,40 +210,6 @@ const Navbar = () => {
               >
                 Home
               </Link>
-              {/* Our Services Dropdown (collapsible) */}
-              <div className="">
-                <button
-                  className={`w-full flex items-center justify-between font-inter text-sm font-medium transition-all duration-300 p-3 rounded-xl hover:bg-primary/10 hover:text-primary ${
-                    services.some(s => s.path === location.pathname)
-                      ? "text-primary bg-primary/10 border-l-4 border-primary"
-                      : "text-foreground hover:scale-105"
-                  }`}
-                  onClick={() => setServicesOpen((open) => !open)}
-                  type="button"
-                >
-                  <span>Other Services</span>
-                  <ChevronDown className={`ml-2 w-4 h-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
-                </button>
-                {servicesOpen && (
-                  <div className="pl-4 mt-1 flex flex-col gap-1">
-                    {services.map((service) => (
-                      <Link
-                        key={service.name}
-                        to={service.path}
-                        className={`block px-4 py-2 text-sm font-inter font-medium transition-all duration-200 rounded-xl hover:bg-primary/10 hover:text-primary ${
-                          location.pathname === service.path ? "text-primary bg-primary/10" : "text-foreground"
-                        }`}
-                        onClick={() => {
-                          setIsOpen(false);
-                          setServicesOpen(false);
-                        }}
-                      >
-                        {service.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
               {/* About Dropdown (collapsible) */}
               <div className="">
                 <button
@@ -291,21 +257,53 @@ const Navbar = () => {
               >
                 Live Workshops
               </Link>
-              {/* Other nav items */}
-              {navItems.slice(2).map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  className={`font-inter text-sm font-medium transition-all duration-300 p-3 rounded-xl hover:bg-primary/10 hover:text-primary ${
-                    location.pathname === item.path
+              {/* Our Services Dropdown (collapsible) */}
+              <div className="">
+                <button
+                  className={`w-full flex items-center justify-between font-inter text-sm font-medium transition-all duration-300 p-3 rounded-xl hover:bg-primary/10 hover:text-primary ${
+                    services.some(s => s.path === location.pathname)
                       ? "text-primary bg-primary/10 border-l-4 border-primary"
                       : "text-foreground hover:scale-105"
                   }`}
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => setServicesOpen((open) => !open)}
+                  type="button"
                 >
-                  {item.name}
-                </Link>
-              ))}
+                  <span>Other Services</span>
+                  <ChevronDown className={`ml-2 w-4 h-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
+                </button>
+                {servicesOpen && (
+                  <div className="pl-4 mt-1 flex flex-col gap-1">
+                    {services.map((service) => (
+                      <Link
+                        key={service.name}
+                        to={service.path}
+                        className={`block px-4 py-2 text-sm font-inter font-medium transition-all duration-200 rounded-xl hover:bg-primary/10 hover:text-primary ${
+                          location.pathname === service.path ? "text-primary bg-primary/10" : "text-foreground"
+                        }`}
+                        onClick={() => {
+                          setIsOpen(false);
+                          setServicesOpen(false);
+                        }}
+                      >
+                        {service.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+              {/* Contact */}
+              <Link
+                key="Contact"
+                to="/contact"
+                className={`font-inter text-sm font-medium transition-all duration-300 p-3 rounded-xl hover:bg-primary/10 hover:text-primary ${
+                  location.pathname === "/contact"
+                    ? "text-primary bg-primary/10 border-l-4 border-primary"
+                    : "text-foreground hover:scale-105"
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                Contact
+              </Link>
               <Button variant="wellness" size="lg" className="w-full font-inter font-semibold mt-4">
                 Book Consultation
               </Button>

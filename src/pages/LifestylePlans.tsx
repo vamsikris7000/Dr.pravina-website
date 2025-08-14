@@ -239,24 +239,15 @@ const LifestylePlans = () => {
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-[#1a5f57] h-full"></div>
             
             {/* Timeline Items */}
-            <div className="space-y-16">
+            <div className="space-y-12">
               {/* Phase 1: Booking */}
               <div 
                 ref={(el) => (timelineRefs.current[0] = el)}
                 className="relative flex items-center opacity-0 transform translate-y-10 transition-all duration-1000 ease-out"
               >
                 <div className="w-1/2 pr-8 text-right">
-                  <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-                    <div className="flex items-center justify-end mb-4">
-                      <div className="w-12 h-12 bg-[#1a5f57] rounded-full flex items-center justify-center mr-4">
-                        <CheckCircle className="h-6 w-6 text-white" />
-                      </div>
-                      <h3 className="font-playfair text-2xl font-bold text-[#1a5f57]">Booking Your Journey Begins</h3>
-                    </div>
-                    <p className="font-inter text-gray-700 leading-relaxed">
-                      Once you book your 1, 3 or 6-month Lifestyle Medicine Package, we begin by welcoming you warmly and preparing you for your transformative journey.
-                    </p>
-                  </div>
+                  <h3 className="font-playfair text-2xl font-bold text-[#1a5f57] mb-2">Booking Your Journey Begins</h3>
+                  <p className="font-inter text-gray-700">Book your package and we'll welcome you warmly to start your transformative journey.</p>
                 </div>
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1a5f57] rounded-full border-4 border-white shadow-lg"></div>
                 <div className="w-1/2 pl-8"></div>
@@ -270,45 +261,8 @@ const LifestylePlans = () => {
                 <div className="w-1/2 pr-8"></div>
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1a5f57] rounded-full border-4 border-white shadow-lg"></div>
                 <div className="w-1/2 pl-8">
-                  <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-[#1a5f57] rounded-full flex items-center justify-center mr-4">
-                        <svg className="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <h3 className="font-playfair text-2xl font-bold text-[#1a5f57]">Pre-Consultation Phase: Your Welcome Kit</h3>
-                    </div>
-                    <p className="font-inter text-gray-700 leading-relaxed mb-4">
-                      You'll receive a beautiful, personalized Welcome Kit to help us understand your unique story:
-                    </p>
-                    <ul className="font-inter text-gray-700 space-y-2">
-                      <li className="flex items-start">
-                        <CheckCircle className="h-4 w-4 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Onboarding Assessment Forms</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-4 w-4 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Health & Medical History</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-4 w-4 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Lifestyle Assessment (Weight, Measurements)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-4 w-4 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Medications/Supplements</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-4 w-4 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Previous Lab Reports Review (If applicable)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-4 w-4 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Welcome Note & How This Journey Works</span>
-                      </li>
-                    </ul>
-                  </div>
+                  <h3 className="font-playfair text-2xl font-bold text-[#1a5f57] mb-2">Pre-Consultation: Welcome Kit</h3>
+                  <p className="font-inter text-gray-700">Receive your personalized welcome kit with assessment forms to understand your unique story.</p>
                 </div>
               </div>
 
@@ -318,69 +272,8 @@ const LifestylePlans = () => {
                 className="relative flex items-center opacity-0 transform translate-y-10 transition-all duration-1000 ease-out"
               >
                 <div className="w-1/2 pr-8 text-right">
-                  <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-                    <div className="flex items-center justify-end mb-4">
-                      <div className="w-12 h-12 bg-[#1a5f57] rounded-full flex items-center justify-center mr-4">
-                        <Heart className="h-6 w-6 text-white" />
-                      </div>
-                      <h3 className="font-playfair text-2xl font-bold text-[#1a5f57]">The Consultation Phase: Your Personalized Wellness Prescription</h3>
-                    </div>
-                    <p className="font-inter text-gray-700 leading-relaxed mb-4">
-                      In your 1:1 consultation, we will map out your holistic lifestyle i.e. a personalized prescription, blending science, compassion & tradition.
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                      <div>
-                        <h4 className="font-inter font-semibold text-[#1a5f57] mb-2">Your Personalized Plan Includes:</h4>
-                        <ul className="space-y-1">
-                          <li className="flex items-start">
-                            <CheckCircle className="h-3 w-3 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Your Path'o Life-Journal</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle className="h-3 w-3 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Personalized Illness Roadmap</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle className="h-3 w-3 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Nutrition & Mindful Eating</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle className="h-3 w-3 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Movement & Exercise Guidance</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle className="h-3 w-3 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Sleep & Stress Strategies</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-inter font-semibold text-[#1a5f57] mb-2">Additional Support:</h4>
-                        <ul className="space-y-1">
-                          <li className="flex items-start">
-                            <CheckCircle className="h-3 w-3 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Cycle or Life-Stage Support</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle className="h-3 w-3 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Emotional Wellness Tools</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle className="h-3 w-3 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Relationship & Community Guidance</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle className="h-3 w-3 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Clarity on Expectations & Milestones</span>
-                          </li>
-                          <li className="flex items-start">
-                            <CheckCircle className="h-3 w-3 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                            <span>Realistic Progress Markers</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+                  <h3 className="font-playfair text-2xl font-bold text-[#1a5f57] mb-2">Consultation: Personalized Plan</h3>
+                  <p className="font-inter text-gray-700">1:1 consultation to create your holistic lifestyle prescription blending science, compassion & tradition.</p>
                 </div>
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1a5f57] rounded-full border-4 border-white shadow-lg"></div>
                 <div className="w-1/2 pl-8"></div>
@@ -394,37 +287,8 @@ const LifestylePlans = () => {
                 <div className="w-1/2 pr-8"></div>
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1a5f57] rounded-full border-4 border-white shadow-lg"></div>
                 <div className="w-1/2 pl-8">
-                  <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-[#1a5f57] rounded-full flex items-center justify-center mr-4">
-                        <svg className="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      </div>
-                      <h3 className="font-playfair text-2xl font-bold text-[#1a5f57]">Post-Consultation Phase: Your Closure Kit</h3>
-                    </div>
-                    <p className="font-inter text-gray-700 leading-relaxed mb-4">
-                      At the end of your journey, you'll receive a thoughtful closure kit to help you sustain your progress long-term.
-                    </p>
-                    <ul className="font-inter text-gray-700 space-y-2">
-                      <li className="flex items-start">
-                        <CheckCircle className="h-4 w-4 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Final Review & Reflection Session</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-4 w-4 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Progress Summary & Achievements</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-4 w-4 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Long-term Maintenance Strategies</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-4 w-4 text-[#1a5f57] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Continued Support Resources</span>
-                      </li>
-                    </ul>
-                  </div>
+                  <h3 className="font-playfair text-2xl font-bold text-[#1a5f57] mb-2">Post-Consultation: Closure Kit</h3>
+                  <p className="font-inter text-gray-700">Receive a thoughtful closure kit to help you sustain your progress long-term.</p>
                 </div>
               </div>
             </div>
