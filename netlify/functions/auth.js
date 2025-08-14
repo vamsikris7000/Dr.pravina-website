@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
-exports.handler = async function(event, context) {
+export const handler = async function(event, context) {
   // Enable CORS
   const headers = {
     'Access-Control-Allow-Origin': '*',

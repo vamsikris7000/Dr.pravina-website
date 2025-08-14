@@ -88,7 +88,7 @@ const ChatBot = () => {
         ? 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages'
         : '/.netlify/functions/chatbot';
       
-      const apiKey = 'app-SjuVYGo01iqolHNI7nKIsG4t';
+      const apiKey = import.meta.env.VITE_DIFY_API_KEY || 'app-SjuVYGo01iqolHNI7nKIsG4t';
       
       await fetch(apiUrl, {
         method: 'POST',
@@ -204,7 +204,7 @@ const ChatBot = () => {
   }, []);
 
   const sendMessageToChatbot = async (userMessage: string, currentRegistrationData?: RegistrationData) => {
-    const apiKey = 'app-SjuVYGo01iqolHNI7nKIsG4t';
+    const apiKey = import.meta.env.VITE_DIFY_API_KEY || 'app-SjuVYGo01iqolHNI7nKIsG4t';
     const apiUrl = window.location.hostname === 'localhost' 
       ? 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages'
       : '/.netlify/functions/chatbot';

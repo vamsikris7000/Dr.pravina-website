@@ -36,7 +36,7 @@ const VoiceChatWidget = () => {
           const requestOptions = {
             method: endpoint.method,
             headers: { 
-              'X-API-Key': 'xpectrum-ai@123'
+              'X-API-Key': import.meta.env.VITE_VOICE_API_KEY || 'xpectrum-ai@123'
             },
             ...(endpoint.body && { body: endpoint.body })
           };
@@ -66,7 +66,7 @@ const VoiceChatWidget = () => {
         console.log("Testing basic connectivity...");
         const testResponse = await fetch(`${baseUrl}`, {
           method: 'GET',
-          headers: { 'X-API-Key': 'xpectrum-ai@123' },
+          headers: { 'X-API-Key': import.meta.env.VITE_VOICE_API_KEY || 'xpectrum-ai@123' },
         });
         console.log("Basic connectivity test:", testResponse.status);
         const testText = await testResponse.text();
@@ -150,7 +150,7 @@ const VoiceChatWidget = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-API-Key': 'xpectrum-ai@123'
+          'X-API-Key': import.meta.env.VITE_VOICE_API_KEY || 'xpectrum-ai@123'
         },
         body: JSON.stringify({
           agent_name: agentName,

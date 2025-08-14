@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 // Define schemas
 const workshopSchema = new mongoose.Schema({
@@ -91,7 +91,7 @@ try {
   Message = mongoose.model('Message', messageSchema);
 }
 
-exports.handler = async function(event, context) {
+export const handler = async function(event, context) {
   // Enable CORS
   const headers = {
     'Access-Control-Allow-Origin': '*',

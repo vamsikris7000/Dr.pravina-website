@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-exports.handler = async function(event, context) {
+export const handler = async function(event, context) {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json'
