@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 async function updateAdminPassword() {
   try {
-    const newPassword = 'pravina@1998';
+    const newPassword = process.env.ADMIN_PASSWORD || 'your_new_password_here';
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     
     console.log('✅ Admin password updated successfully!');

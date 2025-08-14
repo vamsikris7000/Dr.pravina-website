@@ -41,8 +41,8 @@ Visit `http://localhost:5000/health` to verify the server is running.
 - `DELETE /api/appointments/:id` - Delete appointment
 
 ## Admin Login
-- **Email:** engineers@xpectrum-ai.com
-- **Password:** engineer@2025
+- **Email:** your_admin_email
+- **Password:** your_admin_password
 
 ## Database Collections
 - `patients_info` - Patient submissions from the website

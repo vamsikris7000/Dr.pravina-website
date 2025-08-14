@@ -39,7 +39,7 @@ In Netlify dashboard → Site settings → Environment variables:
 
 ```
 MONGODB_URI=your_mongodb_atlas_connection_string
-BACKEND_URL=https://d1fs86umxjjz67.cloudfront.net
+BACKEND_URL=your_backend_url_here
 ```
 
 ### Step 4: Deploy
@@ -81,7 +81,7 @@ After deployment, your API endpoints will be:
 
 ### 1. **Test Admin Dashboard**
 - Go to `https://your-site.netlify.app/admin`
-- Login with: `engineers@xpectrum-ai.com` / `pravina@1998`
+- Login with: `your_admin_email` / `your_admin_password`
 - Verify all data is loading
 
 ### 2. **Test Chatbot**

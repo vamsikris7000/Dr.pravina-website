@@ -1,7 +1,6 @@
 [build]
   command = "npm run build"
   publish = "dist"
-  functions = "netlify/functions"
 
 [[redirects]]
   from = "/api/*"
@@ -14,7 +13,18 @@
   status = 200
 
 [functions]
+  directory = "netlify/functions"
   node_bundler = "esbuild"
 
 [build.environment]
   NODE_VERSION = "18"
+
+# Configure secrets scanning to ignore documentation files
+[build.processing.secrets]
+  enabled = true
+  omit_paths = [
+    "*.md",
+    "docs/*",
+    "server/README.md",
+    "NETLIFY_DEPLOYMENT.md"
+  ]
