@@ -5,7 +5,7 @@ const getApiPath = (endpoint) => {
   if (window.location.hostname === 'localhost') {
     return `${API_BASE_URL}/api${endpoint}`;
   }
-  return `${API_BASE_URL}/api?path=${endpoint.replace(/^\//, '')}`;
+  return `${API_BASE_URL}${endpoint}`;
 };
 
 // Get token from localStorage
