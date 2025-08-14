@@ -40,8 +40,8 @@ exports.handler = async function(event, context) {
     // Handle token generation
     if (path === 'tokens/generate') {
       const agentName = event.queryStringParameters?.agent_name || 'agent1';
-      const apiKey = 'xpectrum-ai@123';
-      const backendUrl = 'https://d1fs86umxjjz67.cloudfront.net';
+      const apiKey = process.env.VOICE_API_KEY;
+      const backendUrl = process.env.VOICE_API_BASE_URL;
       
       console.log(`Generating token for agent: ${agentName}`);
       
@@ -66,8 +66,8 @@ exports.handler = async function(event, context) {
     
     // Handle agent join request
     if (path === 'agents/join') {
-      const apiKey = 'xpectrum-ai@123';
-      const backendUrl = 'https://d1fs86umxjjz67.cloudfront.net';
+      const apiKey = process.env.VOICE_API_KEY;
+      const backendUrl = process.env.VOICE_API_BASE_URL;
       
       console.log('Agent join request:', body);
       
@@ -93,8 +93,8 @@ exports.handler = async function(event, context) {
     
     // Handle agents endpoint
     if (path === 'agents/all') {
-      const apiKey = 'xpectrum-ai@123';
-      const backendUrl = 'https://d1fs86umxjjz67.cloudfront.net';
+      const apiKey = process.env.VOICE_API_KEY;
+      const backendUrl = process.env.VOICE_API_BASE_URL;
       
       const response = await fetch(`${backendUrl}/agents/all`, {
         headers: {

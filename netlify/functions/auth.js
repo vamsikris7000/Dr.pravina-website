@@ -28,10 +28,10 @@ exports.handler = async function(event, context) {
   try {
     const { email, password } = JSON.parse(event.body);
 
-    // Admin credentials (you can move these to environment variables)
-    const ADMIN_EMAIL = 'engineers@xpectrum-ai.com';
-    const ADMIN_PASSWORD = 'pravina@1998';
-    const JWT_SECRET = 'patholife_admin_secret_key_2025';
+    // Admin credentials from environment variables
+    const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+    const JWT_SECRET = process.env.JWT_SECRET;
 
     // Check credentials
     if (email !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {

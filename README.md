@@ -32,8 +32,15 @@ cd <YOUR_PROJECT_NAME>
 # Step 3: Install the necessary dependencies.
 npm i
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Step 4: Set up environment variables
+cp .env.example .env
+# Edit .env file with your actual values
+
+# Step 5: Start the development server with auto-reloading and an instant preview.
 npm run dev
+
+# Step 6: Start the backend server (in a separate terminal)
+npm run server
 ```
 
 **Edit a file directly in GitHub**
@@ -50,6 +57,26 @@ npm run dev
 - Click on "New codespace" to launch a new Codespace environment.
 - Edit files directly within the Codespace and commit and push your changes once you're done.
 
+## Environment Variables
+
+This project uses environment variables for configuration. Copy `.env.example` to `.env` and fill in your values:
+
+### Required Environment Variables
+
+- `MONGODB_URI`: MongoDB connection string
+- `JWT_SECRET`: Secret key for JWT token generation
+- `ADMIN_EMAIL`: Admin panel login email
+- `ADMIN_PASSWORD`: Admin panel login password
+- `PORT`: Server port (default: 5001)
+- `VOICE_API_BASE_URL`: Voice integration API URL
+- `VOICE_API_KEY`: Voice integration API key
+- `DIFY_API_BASE_URL`: Dify chatbot API URL
+- `DIFY_API_KEY`: Dify chatbot API key
+
+### Security Note
+
+Never commit your `.env` file to version control. It's already added to `.gitignore`.
+
 ## What technologies are used for this project?
 
 This project is built with:
@@ -59,6 +86,8 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+- Node.js/Express (Backend)
+- MongoDB (Database)
 
 ## How can I deploy this project?
 

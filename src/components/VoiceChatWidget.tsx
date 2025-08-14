@@ -8,17 +8,19 @@ const VoiceChatWidget = () => {
   const [isConnected, setIsConnected] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
-  async function fetchLivekitToken(agentName = 'agent1') {
+  async function fetchLivekitToken(agentName = 'pravina') {
     try {
       console.log("Fetching token for agent:", agentName);
       
       // Use proxy to avoid CORS issues in both development and production
-      const baseUrl = '/.netlify/functions/voice-integration';
+      const baseUrl = window.location.hostname === 'localhost' 
+        ? '/api/voice-integration'
+        : '/.netlify/functions/voice-integration';
       
       // Use the exact format from the working curl command
       const endpoints = [
         {
-          url: `${baseUrl}?path=tokens/generate&agent_name=${agentName}`,
+          url: `${baseUrl}/tokens/generate?agent_name=${agentName}`,
           method: 'POST',
           body: null
         }
@@ -62,7 +64,7 @@ const VoiceChatWidget = () => {
       // If all endpoints fail, try a simple GET request to test connectivity
       try {
         console.log("Testing basic connectivity...");
-        const testResponse = await fetch(`${baseUrl}/`, {
+        const testResponse = await fetch(`${baseUrl}`, {
           method: 'GET',
           headers: { 'X-API-Key': 'xpectrum-ai@123' },
         });
@@ -88,7 +90,7 @@ const VoiceChatWidget = () => {
     
     let token, livekitUrl;
     try {
-      const agentName = 'agent1'; // Always use agent1
+      const agentName = 'pravina'; // Always use pravina
       console.log("Starting call with agent:", agentName);
       
       const tokenData = await fetchLivekitToken(agentName);
@@ -141,8 +143,10 @@ const VoiceChatWidget = () => {
     try {
       console.log("Triggering agent to join room:", roomName);
       
-      const baseUrl = '/.netlify/functions/voice-integration';
-      const response = await fetch(`${baseUrl}?path=agents/join`, {
+      const baseUrl = window.location.hostname === 'localhost' 
+        ? '/api/voice-integration'
+        : '/.netlify/functions/voice-integration';
+              const response = await fetch(`${baseUrl}/agents/join`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

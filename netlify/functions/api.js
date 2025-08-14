@@ -24,12 +24,18 @@ const workshopSchema = new mongoose.Schema({
 });
 
 const patientSchema = new mongoose.Schema({
-  name: String,
+  Name: String, // Capitalized to match MongoDB data
+  name: String, // Also support lowercase
   email: String,
   phone: String,
+  phoneNumber: Number,
   age: Number,
   gender: String,
+  city: String,
   concern: String,
+  mainHealthConcern: String,
+  symptomsExperienced: String,
+  healthGoals: String,
   status: {
     type: String,
     enum: ['pending', 'contacted', 'consulted', 'completed'],
@@ -37,7 +43,7 @@ const patientSchema = new mongoose.Schema({
   },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
-});
+}, { strict: false }); // Allow additional fields
 
 const appointmentSchema = new mongoose.Schema({
   name: String,
@@ -75,12 +81,12 @@ const messageSchema = new mongoose.Schema({
 let Workshop, Patient, Appointment, Message;
 try {
   Workshop = mongoose.model('Workshop');
-  Patient = mongoose.model('Patient');
+  Patient = mongoose.model('patients_info', patientSchema); // Use correct collection name
   Appointment = mongoose.model('Appointment');
   Message = mongoose.model('Message');
 } catch {
   Workshop = mongoose.model('Workshop', workshopSchema);
-  Patient = mongoose.model('Patient', patientSchema);
+  Patient = mongoose.model('patients_info', patientSchema); // Use correct collection name
   Appointment = mongoose.model('Appointment', appointmentSchema);
   Message = mongoose.model('Message', messageSchema);
 }
@@ -369,9 +375,9 @@ async function handlePatients(method, path, body, headers) {
         body: JSON.stringify(patient)
       };
     } else {
-      // Get all patients
+      // Get all patients using direct collection query
       try {
-        const patients = await Patient.find({}).sort({ createdAt: -1 });
+        const patients = await mongoose.connection.db.collection('patients_info').find({}).toArray();
         return {
           statusCode: 200,
           headers,
@@ -396,39 +402,60 @@ async function handlePatients(method, path, body, headers) {
       body: JSON.stringify(savedPatient)
     };
   } else if (method === 'PATCH' && id) {
-    // Update patient
-    const updatedPatient = await Patient.findByIdAndUpdate(
-      id,
-      { ...body, updatedAt: new Date() },
-      { new: true, runValidators: true }
-    );
-    if (!updatedPatient) {
+    // Update patient using direct collection query
+    try {
+      const updateData = { ...body, updatedAt: new Date() };
+      const result = await mongoose.connection.db.collection('patients_info').updateOne(
+        { _id: new mongoose.Types.ObjectId(id) },
+        { $set: updateData }
+      );
+      if (result.matchedCount === 1) {
+        const updatedPatient = await mongoose.connection.db.collection('patients_info').findOne({ _id: new mongoose.Types.ObjectId(id) });
+        return {
+          statusCode: 200,
+          headers,
+          body: JSON.stringify(updatedPatient)
+        };
+      } else {
+        return {
+          statusCode: 404,
+          headers,
+          body: JSON.stringify({ error: 'Patient not found' })
+        };
+      }
+    } catch (error) {
+      console.error('Error updating patient:', error);
       return {
-        statusCode: 404,
+        statusCode: 500,
         headers,
-        body: JSON.stringify({ error: 'Patient not found' })
+        body: JSON.stringify({ error: 'Internal server error' })
       };
     }
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify(updatedPatient)
-    };
   } else if (method === 'DELETE' && id) {
-    // Delete patient
-    const deletedPatient = await Patient.findByIdAndDelete(id);
-    if (!deletedPatient) {
+    // Delete patient using direct collection query
+    try {
+      const result = await mongoose.connection.db.collection('patients_info').deleteOne({ _id: new mongoose.Types.ObjectId(id) });
+      if (result.deletedCount === 1) {
+        return {
+          statusCode: 200,
+          headers,
+          body: JSON.stringify({ message: 'Patient deleted successfully' })
+        };
+      } else {
+        return {
+          statusCode: 404,
+          headers,
+          body: JSON.stringify({ error: 'Patient not found' })
+        };
+      }
+    } catch (error) {
+      console.error('Error deleting patient:', error);
       return {
-        statusCode: 404,
+        statusCode: 500,
         headers,
-        body: JSON.stringify({ error: 'Patient not found' })
+        body: JSON.stringify({ error: 'Internal server error' })
       };
     }
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({ message: 'Patient deleted successfully' })
-    };
   } else {
     return {
       statusCode: 405,

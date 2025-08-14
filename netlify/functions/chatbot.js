@@ -24,8 +24,8 @@ exports.handler = async function(event, context) {
   }
 
   try {
-    const apiKey = 'app-SjuVYGo01iqolHNI7nKIsG4t';
-    const apiUrl = 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages';
+    const apiKey = process.env.DIFY_API_KEY;
+    const apiUrl = `${process.env.DIFY_API_BASE_URL}/chat-messages`;
     const body = JSON.parse(event.body);
 
     console.log('Chatbot API called with body:', body);
