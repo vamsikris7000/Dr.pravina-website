@@ -19,7 +19,7 @@ const getHeaders = () => ({
 
 // Auth API
 export const loginAdmin = async (email, password) => {
-  const response = await fetch(getApiPath('/auth/login'), {
+  const response = await fetch(getApiPath('/auth'), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -54,7 +54,7 @@ const LifestylePlans = () => {
         "PDF guides or worksheets tailored to concern",
         "Option to upgrade to a longer plan"
       ],
-      ideal: "Best for Quick direction, light hand-holding, or mild symptoms"
+              ideal: "Best for Quick direction, gentle guidance, or mild symptoms"
     },
     {
       name: "Healing Plan",
@@ -66,7 +66,7 @@ const LifestylePlans = () => {
         "6 sessions with Dr. Pravina (biweekly)",
         "Fully customized routines and strategies",
         "WhatsApp follow-ups (2x/month)",
-        "Adjustments made as per progress",
+        "Adjustments made based on progress",
         "Access to expert advice if needed",
         "Focus on deep root-cause healing"
       ],
@@ -84,7 +84,7 @@ const LifestylePlans = () => {
         "Support with hormonal, fertility, weight or chronic concerns",
         "Integration with ObGyn or pediatric team if needed"
       ],
-      ideal: "Ideal for PCOS + weight management + fertility combo"
+              ideal: "Ideal for comprehensive care for PCOS, weight management, and fertility"
     }
   ];
 
