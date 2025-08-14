@@ -38,26 +38,40 @@ export const handler = async function(event, context) {
     const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
     const JWT_SECRET = process.env.JWT_SECRET;
 
-    // Debug logging for production troubleshooting
-    console.log('Auth attempt:', {
-      receivedEmail: email,
-      receivedPassword: password ? '***' : 'undefined',
-      envAdminEmail: ADMIN_EMAIL,
-      envAdminPassword: ADMIN_PASSWORD ? '***' : 'undefined',
-      envJwtSecret: JWT_SECRET ? '***' : 'undefined'
+    // Enhanced debug logging for production troubleshooting
+    console.log('=== AUTH DEBUG INFO ===');
+    console.log('Environment:', process.env.NODE_ENV || 'production');
+    console.log('Received credentials:', {
+      email: email,
+      passwordProvided: !!password,
+      passwordLength: password ? password.length : 0
     });
+    console.log('Environment variables status:', {
+      hasAdminEmail: !!ADMIN_EMAIL,
+      hasAdminPassword: !!ADMIN_PASSWORD,
+      hasJwtSecret: !!JWT_SECRET,
+      adminEmailValue: ADMIN_EMAIL || 'NOT_SET',
+      adminPasswordSet: ADMIN_PASSWORD ? 'SET' : 'NOT_SET',
+      jwtSecretSet: JWT_SECRET ? 'SET' : 'NOT_SET'
+    });
+    console.log('=== END DEBUG INFO ===');
 
     // Check if environment variables are set
     if (!ADMIN_EMAIL || !ADMIN_PASSWORD || !JWT_SECRET) {
-      console.error('Missing environment variables:', {
-        hasAdminEmail: !!ADMIN_EMAIL,
-        hasAdminPassword: !!ADMIN_PASSWORD,
-        hasJwtSecret: !!JWT_SECRET
-      });
+      const missingVars = [];
+      if (!ADMIN_EMAIL) missingVars.push('ADMIN_EMAIL');
+      if (!ADMIN_PASSWORD) missingVars.push('ADMIN_PASSWORD');
+      if (!JWT_SECRET) missingVars.push('JWT_SECRET');
+      
+      console.error('Missing environment variables:', missingVars);
       return {
         statusCode: 500,
         headers,
-        body: JSON.stringify({ error: 'Server configuration error' })
+        body: JSON.stringify({ 
+          error: 'Server configuration error',
+          message: `Missing environment variables: ${missingVars.join(', ')}`,
+          details: 'Please check Netlify environment variables configuration'
+        })
       };
     }
 
@@ -65,12 +79,17 @@ export const handler = async function(event, context) {
     if (email !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
       console.log('Invalid credentials:', {
         emailMatch: email === ADMIN_EMAIL,
-        passwordMatch: password === ADMIN_PASSWORD
+        passwordMatch: password === ADMIN_PASSWORD,
+        expectedEmail: ADMIN_EMAIL,
+        receivedEmail: email
       });
       return {
-        statusCode: 400,
+        statusCode: 401,
         headers,
-        body: JSON.stringify({ message: 'Invalid credentials' })
+        body: JSON.stringify({ 
+          message: 'Invalid credentials',
+          error: 'LOGIN_FAILED'
+        })
       };
     }
 
@@ -91,7 +110,8 @@ export const handler = async function(event, context) {
         user: { 
           email: ADMIN_EMAIL, 
           role: 'admin' 
-        } 
+        },
+        message: 'Login successful'
       })
     };
   } catch (error) {
@@ -99,7 +119,11 @@ export const handler = async function(event, context) {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: 'Internal server error' })
+      body: JSON.stringify({ 
+        error: 'Internal server error',
+        message: error.message,
+        details: 'Please check server logs for more information'
+      })
     };
   }
 }

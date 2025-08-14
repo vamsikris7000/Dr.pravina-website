@@ -24,7 +24,13 @@ const getHeaders = () => ({
 export const loginAdmin = async (email, password) => {
   try {
     const apiPath = getApiPath('/auth');
+    console.log('=== LOGIN DEBUG INFO ===');
     console.log('Attempting login to:', apiPath);
+    console.log('Environment:', import.meta.env.MODE);
+    console.log('API Base URL:', API_BASE_URL);
+    console.log('Email provided:', !!email);
+    console.log('Password provided:', !!password);
+    console.log('=== END LOGIN DEBUG ===');
     
     const response = await fetch(apiPath, {
       method: 'POST',
@@ -36,19 +42,37 @@ export const loginAdmin = async (email, password) => {
     });
     
     console.log('Login response status:', response.status);
+    console.log('Login response headers:', Object.fromEntries(response.headers.entries()));
     
     if (!response.ok) {
       console.error('Login failed with status:', response.status);
-      const errorText = await response.text();
-      console.error('Error response:', errorText);
-      throw new Error(`HTTP ${response.status}: ${errorText}`);
+      let errorText;
+      try {
+        const errorData = await response.json();
+        errorText = JSON.stringify(errorData);
+        console.error('Error response data:', errorData);
+      } catch (parseError) {
+        errorText = await response.text();
+        console.error('Error response text:', errorText);
+      }
+      
+      // Create a more informative error
+      const error = new Error(`HTTP ${response.status}: ${errorText}`);
+      error.status = response.status;
+      error.response = errorText;
+      throw error;
     }
     
     const data = await response.json();
-    console.log('Login successful:', data);
+    console.log('Login successful:', { hasToken: !!data.token, user: data.user });
     return data;
   } catch (error) {
-    console.error('Login error:', error);
+    console.error('Login error details:', {
+      message: error.message,
+      status: error.status,
+      response: error.response,
+      stack: error.stack
+    });
     throw error;
   }
 };
