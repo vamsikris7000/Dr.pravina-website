@@ -189,22 +189,7 @@ async function handleWorkshops(method, path, body, headers) {
   const id = parts[1];
 
   if (method === 'GET') {
-    if (id) {
-      // Get specific workshop
-      const workshop = await Workshop.findById(id);
-      if (!workshop) {
-        return {
-          statusCode: 404,
-          headers,
-          body: JSON.stringify({ error: 'Workshop not found' })
-        };
-      }
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify(workshop)
-      };
-    } else if (parts[1] === 'all') {
+    if (id === 'all') {
       // Get all workshops (for admin)
       try {
         const workshops = await Workshop.find({}).sort({ order: 1 });
@@ -250,6 +235,21 @@ async function handleWorkshops(method, path, body, headers) {
           body: JSON.stringify(fallbackWorkshops)
         };
       }
+    } else if (id) {
+      // Get specific workshop
+      const workshop = await Workshop.findById(id);
+      if (!workshop) {
+        return {
+          statusCode: 404,
+          headers,
+          body: JSON.stringify({ error: 'Workshop not found' })
+        };
+      }
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify(workshop)
+      };
     } else {
       // Get active workshops
       try {
