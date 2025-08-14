@@ -1,11 +1,14 @@
 const API_BASE_URL = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:5001' : '/.netlify/functions');
 
+// Add cache busting for production
+const CACHE_BUSTER = window.location.hostname !== 'localhost' ? `?v=${Date.now()}` : '';
+
 // Helper function to get the correct API path
 const getApiPath = (endpoint) => {
   if (window.location.hostname === 'localhost') {
     return `${API_BASE_URL}/api${endpoint}`;
   }
-  return `${API_BASE_URL}${endpoint}`;
+  return `${API_BASE_URL}${endpoint}${CACHE_BUSTER}`;
 };
 
 // Get token from localStorage
@@ -19,14 +22,35 @@ const getHeaders = () => ({
 
 // Auth API
 export const loginAdmin = async (email, password) => {
-  const response = await fetch(getApiPath('/auth'), {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email, password }),
-  });
-  return response.json();
+  try {
+    const apiPath = getApiPath('/auth');
+    console.log('Attempting login to:', apiPath);
+    
+    const response = await fetch(apiPath, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+      credentials: 'include'
+    });
+    
+    console.log('Login response status:', response.status);
+    
+    if (!response.ok) {
+      console.error('Login failed with status:', response.status);
+      const errorText = await response.text();
+      console.error('Error response:', errorText);
+      throw new Error(`HTTP ${response.status}: ${errorText}`);
+    }
+    
+    const data = await response.json();
+    console.log('Login successful:', data);
+    return data;
+  } catch (error) {
+    console.error('Login error:', error);
+    throw error;
+  }
 };
 
 // Patients API

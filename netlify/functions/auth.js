@@ -1,11 +1,16 @@
 import jwt from 'jsonwebtoken';
 
 export const handler = async function(event, context) {
-  // Enable CORS
+  // Enable CORS with specific origins
+  const origin = event.headers.origin || event.headers.Origin || '*';
   const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS'
+    'Access-Control-Allow-Origin': origin,
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS, GET',
+    'Access-Control-Allow-Credentials': 'true',
+    'Cache-Control': 'no-cache, no-store, must-revalidate',
+    'Pragma': 'no-cache',
+    'Expires': '0'
   };
 
   // Handle preflight requests
