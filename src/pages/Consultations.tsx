@@ -1,15 +1,55 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, Calendar, Heart, Baby, Stethoscope, User, Users2, Mail } from "lucide-react";
+import { Users, Calendar, Heart, Baby, User, Users2, Mail } from "lucide-react";
 import { chatbotEvents } from "@/lib/chatbot-events";
 import { Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
 
 const Consultations = () => {
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const paymentFormRef = useRef<HTMLDivElement>(null);
+
   const handleBookConsultation = () => {
-    chatbotEvents.openChat("Hey, I am interested in booking a consultation with Dr. Pravina");
+    chatbotEvents.openChat("I want to book my slot for the consultation.");
   };
+
+  const handleRazorpayPayment = () => {
+    setShowPaymentModal(true);
+  };
+
+  const closePaymentModal = () => {
+    setShowPaymentModal(false);
+  };
+
+  // Load Razorpay script when modal opens
+  useEffect(() => {
+    if (showPaymentModal && paymentFormRef.current) {
+      // Clear previous content
+      paymentFormRef.current.innerHTML = '';
+      
+      // Small delay to ensure DOM is ready
+      setTimeout(() => {
+        if (paymentFormRef.current) {
+          // Create form element
+          const form = document.createElement('form');
+          
+          // Create script element
+          const script = document.createElement('script');
+          script.src = 'https://checkout.razorpay.com/v1/payment-button.js';
+          script.setAttribute('data-payment_button_id', 'pl_R5IUKDPHZRvOI4');
+          script.async = true;
+          
+          // Append script to form
+          form.appendChild(script);
+          
+          // Append form to container
+          paymentFormRef.current.appendChild(form);
+        }
+      }, 100);
+    }
+  }, [showPaymentModal]);
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
@@ -29,7 +69,7 @@ const Consultations = () => {
               className="bg-white text-primary hover:bg-gray-50 hover:text-primary font-inter font-semibold border border-gray-200 shadow-sm"
               onClick={handleBookConsultation}
             >
-              Book Your Consultation
+              Book Your Slot
             </Button>
           </div>
         </div>
@@ -71,7 +111,116 @@ const Consultations = () => {
         </div>
       </section>
 
+      {/* 1:1 Consultation Details */}
+      <section className="py-24" style={{ backgroundColor: '#e9f5e9' }}>
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            {/* Main Consultation Card */}
+            <Card className="group hover:shadow-elevated hover:-translate-y-2 transition-all duration-500 animate-fade-in overflow-hidden border-0 shadow-lg relative mb-12 w-[90%] mx-auto">
+              {/* Solid Background */}
+              <div className="absolute inset-0 bg-[#1a5f57]"></div>
+              
+              <CardContent className="p-8 md:p-12 relative z-10">
+                <div className="text-center mb-8">
+                  <h2 className="font-playfair text-4xl md:text-5xl font-bold text-white mb-4">
+                    1:1 Lifestyle Consultation with Path'o'Life
+                  </h2>
+                  <p className="font-inter text-xl text-white/90 max-w-3xl mx-auto">
+                    This personalized 1:1 session is designed to guide you in understanding how Path'o'Life can transform your wellness journey.
+                  </p>
+                </div>
 
+                {/* What You'll Receive */}
+                <div className="bg-[#0d9488] rounded-2xl p-8 mb-8">
+                  <h3 className="font-playfair text-2xl font-bold text-white mb-6 text-center">
+                    During this session, you will receive:
+                  </h3>
+                  <div className="grid md:grid-cols-1 gap-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="flex-shrink-0 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
+                        <span className="text-primary font-bold text-sm">1</span>
+                      </div>
+                      <div>
+                        <p className="font-inter text-lg text-white leading-relaxed">
+                          <strong>Guidance on your current health and lifestyle patterns</strong>
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-4">
+                      <div className="flex-shrink-0 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
+                        <span className="text-primary font-bold text-sm">2</span>
+                      </div>
+                      <div>
+                        <p className="font-inter text-lg text-white leading-relaxed">
+                          <strong>Clarity on which Lifestyle Plan or specialist consultation is most suitable for your goals</strong>
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-4">
+                      <div className="flex-shrink-0 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
+                        <span className="text-primary font-bold text-sm">3</span>
+                      </div>
+                      <div>
+                        <p className="font-inter text-lg text-white leading-relaxed">
+                          <strong>Practical insights and next steps tailored to your unique needs</strong>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Call to Action */}
+                <div className="text-center">
+                  <p className="font-inter text-xl text-white mb-6">
+                    Book your 1:1 consultation today and take the first step toward a healthier, balanced life.
+                  </p>
+                  
+                  {/* Special Offer Badge */}
+                  <div className="inline-flex items-center bg-gradient-to-r from-yellow-400 to-orange-500 text-primary px-6 py-3 rounded-full mb-8 shadow-lg">
+                    <span className="font-inter font-bold text-lg">🎉 Special Offer: Get ₹300 off when you book after attending our workshop!</span>
+                  </div>
+                  
+                  <Button 
+                    variant="soft" 
+                    size="xl" 
+                    className="bg-white text-primary hover:bg-gray-50 hover:text-primary font-inter font-semibold border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300"
+                    onClick={handleRazorpayPayment}
+                  >
+                    Book Your 1:1 Consultation
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Additional Benefits */}
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center group animate-fade-in" style={{animationDelay: '100ms'}}>
+                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                  <User className="h-8 w-8" />
+                </div>
+                <h3 className="font-playfair text-xl font-bold text-foreground mb-3">Personalized Approach</h3>
+                <p className="font-inter text-muted-foreground">Every consultation is tailored to your unique health journey and specific goals</p>
+              </div>
+              
+              <div className="text-center group animate-fade-in" style={{animationDelay: '200ms'}}>
+                <div className="w-16 h-16 bg-gradient-to-br from-success to-success/80 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                  <Heart className="h-8 w-8" />
+                </div>
+                <h3 className="font-playfair text-xl font-bold text-foreground mb-3">Holistic Wellness</h3>
+                <p className="font-inter text-muted-foreground">Comprehensive guidance covering nutrition, lifestyle, and mental well-being</p>
+              </div>
+              
+              <div className="text-center group animate-fade-in" style={{animationDelay: '300ms'}}>
+                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                  <Calendar className="h-8 w-8" />
+                </div>
+                <h3 className="font-playfair text-xl font-bold text-foreground mb-3">Flexible Scheduling</h3>
+                <p className="font-inter text-muted-foreground">Choose a time that works best for you with our convenient online booking system</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="bg-foreground text-white py-20">
@@ -154,6 +303,29 @@ const Consultations = () => {
           </div>
         </div>
       </footer>
+
+      {/* Payment Modal */}
+      {showPaymentModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 max-w-md w-full mx-4 relative">
+            <button
+              onClick={closePaymentModal}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl font-bold"
+            >
+              ×
+            </button>
+            <h3 className="text-2xl font-bold text-center mb-4 text-primary">
+              Book Your 1:1 Consultation
+            </h3>
+            <p className="text-gray-600 text-center mb-6">
+              Complete your consultation booking
+            </p>
+            <div className="flex justify-center" ref={paymentFormRef}>
+              {/* Razorpay payment button will be loaded here */}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

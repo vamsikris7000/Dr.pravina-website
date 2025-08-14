@@ -765,9 +765,9 @@ This helps us schedule your session smoothly and provide personalized care.`;
                 </div>
               )}
               <div className="absolute right-1 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
-                {/* Mobile phone call button */}
-                <div className="lg:hidden">
-                  <VoiceChatWidget />
+                {/* Phone call button - show on both mobile and desktop */}
+                <div>
+                  <VoiceChatWidget variant="chatbar" />
                 </div>
                 {/* Send button */}
                 <Button

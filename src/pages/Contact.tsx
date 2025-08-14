@@ -114,6 +114,31 @@ const Contact = () => {
                     <p className="font-inter text-sm text-muted-foreground">Quick questions and community updates</p>
                   </div>
                 </div>
+
+                <div className="flex items-start space-x-6 group animate-fade-in" style={{animationDelay: '400ms'}}>
+                  <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                    <Instagram className="h-8 w-8 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-playfair text-xl font-bold text-foreground mb-2">Instagram DM</h3>
+                    <a href="https://www.instagram.com/path.o.life?igsh=bHF1b2ZkbW43bnZo" target="_blank" rel="noopener noreferrer" className="font-inter text-muted-foreground hover:text-primary transition-colors">
+                      @path.o.life
+                    </a>
+                    <p className="font-inter text-sm text-muted-foreground">Daily wellness tips</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-6 group animate-fade-in" style={{animationDelay: '500ms'}}>
+                  <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0 shadow-lg group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                    <Facebook className="h-8 w-8 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-playfair text-xl font-bold text-foreground mb-2">Facebook DM</h3>
+                    <a href="https://www.facebook.com/share/1Zui5tjBi9/" target="_blank" rel="noopener noreferrer" className="font-inter text-muted-foreground hover:text-primary transition-colors">
+                      Path'o'Life
+                    </a>
+                  </div>
+                </div>
               </div>
 
               {/* Contact Form */}

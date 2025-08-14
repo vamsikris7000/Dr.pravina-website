@@ -160,19 +160,19 @@ const Index = () => {
           src="/photos/HeroPageBackgorund.jpg" 
           alt="Hero Background" 
           className="absolute inset-0 w-full h-full object-cover z-0" 
-          style={{ pointerEvents: 'none' }}
+          style={{ pointerEvents: 'none', objectPosition: '20% center' }}
           aria-hidden="true"
         />
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40 z-10" aria-hidden="true"></div>
+        <div className="absolute inset-0 bg-black/50 z-10" aria-hidden="true"></div>
         
         
         <div className="relative container mx-auto py-16 sm:py-20 md:py-24 z-30">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="text-center lg:text-left animate-fade-in-up px-4 sm:px-0 w-full col-span-2">
               <h1 className="font-playfair text-responsive-5xl font-bold mb-4 md:mb-6 text-white leading-tight tracking-tight drop-shadow-lg" data-aos="fade-up">
-                Ready to Feel Your Best? <br />
-                Start Your Wellness Transformation
+                Empowering Women with <br />
+                Lifestyle Medicine
               </h1>
               <p className="font-inter text-responsive-lg mb-4 md:mb-5 font-medium text-white/90 drop-shadow-md tracking-wide" data-aos="fade-up" data-aos-delay="100">
                 Periods • Pregnancy • Postpartum & Lactation • Parenting • Weight Reset

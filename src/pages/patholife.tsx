@@ -95,11 +95,8 @@ const PathOLife = () => {
       {/* Hero Section */}
       <section className="relative py-24 text-white overflow-hidden" style={{ backgroundColor: '#1a5f57' }}>
         {/* Background decorative elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-20 h-20 border border-white/20 rounded-full"></div>
-          <div className="absolute bottom-20 right-16 w-16 h-16 border border-white/20 rounded-full"></div>
-          <div className="absolute top-1/2 left-1/4 w-12 h-12 border border-white/20 transform rotate-45"></div>
-        </div>
+        <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full animate-float"></div>
+        <div className="absolute bottom-20 right-20 w-16 h-16 bg-white/10 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
         
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative container mx-auto px-6">
@@ -115,7 +112,7 @@ const PathOLife = () => {
               </h2>
               
               <p className="font-inter text-xl md:text-2xl text-white/95 mb-6 leading-relaxed">
-                Ready to Feel Your Best? Start Your Wellness Transformation
+                Vidarbha's First Board Certified Lifestyle Medicine Physician
               </p>
               
               <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-4xl mx-auto">
@@ -228,32 +225,55 @@ const PathOLife = () => {
               
               <div className="space-y-6 text-lg text-muted-foreground font-inter leading-relaxed">
                 <p>
-                  Hello and Congratulations on taking a step towards a healthier, stronger, and more vibrant "you."
+                  <span className="font-semibold text-primary">1.</span> Hello and Congratulations on taking a step towards a healthier, stronger, and more vibrant "you."
                 </p>
                 
                 <p>
-                  At <span className="text-primary font-semibold">Path'o'Life</span>, we believe that true health is not built by pills alone, it's shaped by your daily choices, mindset, and habits.
+                  <span className="font-semibold text-primary">2.</span> At <span className="text-primary font-semibold">Path'o'Life</span>, we believe that true health is not built by pills alone, it's shaped by your daily choices, mindset, and habits.
                 </p>
                 
                 <p>
-                  In today's world, many health issues - from PCOS, infertility, and pregnancy complications to diabetes, weight gain, and burnout have roots in the way we live. Medicines can manage symptoms, but lasting change happens only when you address the root causes.
+                  <span className="font-semibold text-primary">3.</span> In today's world, many health issues - from PCOS, infertility, and pregnancy complications to diabetes, weight gain, and burnout have roots in the way we live. Medicines can manage symptoms, but lasting change happens only when you address the root causes.
                 </p>
                 
                 <p>
-                  We understand the unique pressures women face... the expectations, the multitasking, the silent battles with their bodies. That's why our mission is to walk beside you, guiding you with science-backed lifestyle medicine, the wisdom of our traditions, and practical tools you can actually use.
+                  <span className="font-semibold text-primary">4.</span> We understand the unique pressures women face... the expectations, the multitasking, the silent battles with their bodies. That's why our mission is to walk beside you, guiding you with science-backed lifestyle medicine, the wisdom of our traditions, and practical tools you can actually use.
                 </p>
                 
                 <p>
-                  Here, we ask you to keep an open mind, be ready to unlearn what no longer serves you, and embrace habits that match the needs of today's world while honoring the essence of our roots.
+                  <span className="font-semibold text-primary">5.</span> Here, we ask you to keep an open mind, be ready to unlearn what no longer serves you, and embrace habits that match the needs of today's world while honoring the essence of our roots.
                 </p>
                 
                 <p>
-                  Step by step, we'll help you build a life where your body feels energetic, your mind feels calm, and your heart feels supported.
+                  <span className="font-semibold text-primary">6.</span> Step by step, we'll help you build a life where your body feels energetic, your mind feels calm, and your heart feels supported.
                 </p>
                 
                 <p className="font-semibold text-foreground">
-                  At the core of Path'o'Life are 7 timeless, evidence-based pillars, the habits that shape your body, mind, and future at every stage of womanhood.
+                  <span className="text-primary">7.</span> At the core of Path'o'Life are 7 timeless, evidence-based pillars, the habits that shape your body, mind, and future at every stage of womanhood.
                 </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Mission and Vision */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="animate-fade-in-up">
+              <div className="flex items-center justify-center mb-6">
+                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent"></div>
+                <h2 className="font-playfair text-4xl md:text-5xl font-bold text-foreground mx-8 leading-tight drop-shadow-lg">Our Mission and Vision</h2>
+                <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-transparent"></div>
+              </div>
+              
+              <div className="space-y-8 text-lg text-muted-foreground font-inter leading-relaxed">
+                <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-2xl p-8 border border-primary/20">
+                  <p className="text-lg">
+                    To create a space where every woman feels empowered, informed, and supported through every phase of her health journey. Our vision is a future where lifestyle medicine becomes the first step in every woman's care, not the last resort. A world where health care starts in the kitchen, in mindful movement, in deep rest, in emotional connection...long before it starts in the hospital. We dream of communities where women lead vibrant, energetic, and joyful lives, passing on these habits to their children and creating a ripple of health that lasts for decades.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

@@ -15,7 +15,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import ChatBot from "./components/ChatBot";
-import VoiceChatWidget from "@/components/VoiceChatWidget";
+
 import PathOLife from "./pages/patholife";
 import Founder from "./pages/founder";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -53,7 +53,6 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
           <ChatBot />
-          <VoiceChatWidget />
         </BrowserRouter>
       </WorkshopProvider>
     </TooltipProvider>

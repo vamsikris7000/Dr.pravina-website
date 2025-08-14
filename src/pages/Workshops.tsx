@@ -1,9 +1,8 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Clock, Users, BookOpen, CheckCircle, Mail } from "lucide-react";
-import { chatbotEvents } from "@/lib/chatbot-events";
 import { Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 import { fetchWorkshops } from "@/services/api";
@@ -207,10 +206,47 @@ const Workshops = () => {
     return () => clearInterval(interval);
   }, []);
   
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [selectedWorkshop, setSelectedWorkshop] = useState<string>('');
+  const paymentFormRef = useRef<HTMLDivElement>(null);
+
   const handleWorkshopRegistration = (workshopTitle: string) => {
-    const message = `Hi, I want to register for the ${workshopTitle} workshop`;
-    chatbotEvents.openChat(message);
+    setSelectedWorkshop(workshopTitle);
+    setShowPaymentModal(true);
   };
+
+  const closePaymentModal = () => {
+    setShowPaymentModal(false);
+    setSelectedWorkshop('');
+  };
+
+  // Load Razorpay script when modal opens
+  useEffect(() => {
+    if (showPaymentModal && paymentFormRef.current) {
+      // Clear previous content
+      paymentFormRef.current.innerHTML = '';
+      
+      // Small delay to ensure DOM is ready
+      setTimeout(() => {
+        if (paymentFormRef.current) {
+          // Create form element
+          const form = document.createElement('form');
+          
+          // Create script element
+          const script = document.createElement('script');
+          script.src = 'https://checkout.razorpay.com/v1/payment-button.js';
+          script.setAttribute('data-payment_button_id', 'pl_R5IOS2nRVp5Gvu');
+          script.async = true;
+          
+          // Append script to form
+          form.appendChild(script);
+          
+          // Append form to container
+          paymentFormRef.current.appendChild(form);
+        }
+      }, 100);
+    }
+  }, [showPaymentModal]);
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#e9f5e9' }}>
@@ -252,26 +288,20 @@ const Workshops = () => {
         </div>
       </section>
 
-      {/* Call to Action Section */}
-      <section className="py-12" style={{ backgroundColor: '#e9f5e9' }}>
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="font-playfair text-3xl md:text-4xl font-semibold mb-4 text-foreground">
-              💫 Your journey to healing starts here.
-            </p>
-            <p className="font-inter text-lg text-muted-foreground">
-              Choose your workshop and join us live from the comfort of your home.
-            </p>
-          </div>
-        </div>
-      </section>
+
 
       {/* Workshops Grid */}
       <section className="pt-8 pb-24" style={{ backgroundColor: '#e9f5e9' }}>
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-8">
-              <h2 className="font-playfair text-3xl font-bold text-foreground">Available Workshops</h2>
+              <div className="flex items-center justify-center mb-6">
+                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent"></div>
+                <h2 className="font-playfair text-3xl font-bold text-foreground mx-8 leading-tight drop-shadow-lg">
+                  Available Workshops
+                </h2>
+                <div className="flex-1 h-px bg-gradient-to-l from-transparent via-foreground/30 to-transparent"></div>
+              </div>
             </div>
             {loading ? (
               <div className="text-center py-12">
@@ -338,7 +368,7 @@ const Workshops = () => {
                             </div>
                           </div>
                           <div className="text-center mt-2 pt-2 border-t border-primary/20">
-                            <span className="font-inter text-lg font-bold text-yellow-300">₹{workshop.price}</span>
+                            {/* Price removed from UI */}
                           </div>
                         </>
                       )}
@@ -378,7 +408,7 @@ const Workshops = () => {
                               <span className="font-inter text-sm font-semibold text-white">{workshop.time}</span>
                         </div>
                         <div className="flex items-center justify-center">
-                              <span className="font-inter text-lg font-bold text-yellow-300">₹{workshop.price}</span>
+                              {/* Price removed from UI */}
                         </div>
                           </>
                         )}
@@ -534,6 +564,29 @@ const Workshops = () => {
           </div>
         </div>
       </footer>
+
+      {/* Payment Modal */}
+      {showPaymentModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 max-w-md w-full mx-4 relative">
+            <button
+              onClick={closePaymentModal}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl font-bold"
+            >
+              ×
+            </button>
+            <h3 className="text-2xl font-bold text-center mb-4 text-primary">
+              Register for {selectedWorkshop}
+            </h3>
+            <p className="text-gray-600 text-center mb-6">
+              Complete your registration by making the payment
+            </p>
+            <div className="flex justify-center" ref={paymentFormRef}>
+              {/* Razorpay payment button will be loaded here */}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -21,8 +21,10 @@ export default defineConfig(({ mode }) => ({
             console.log('proxy error', err);
           });
           proxy.on('proxyReq', (proxyReq, req, res) => {
-            // Add the API key header
-            proxyReq.setHeader('x-api-key', process.env.VITE_VOICE_API_KEY);
+            // Add the API key header only if it exists
+            if (process.env.VITE_VOICE_API_KEY) {
+              proxyReq.setHeader('x-api-key', process.env.VITE_VOICE_API_KEY);
+            }
             console.log('Sending Request to the Target:', req.method, req.url);
           });
           proxy.on('proxyRes', (proxyRes, req, res) => {

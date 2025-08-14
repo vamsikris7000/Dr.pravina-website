@@ -2,7 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { Phone, PhoneOff } from "lucide-react";
 import * as LivekitClient from "livekit-client";
 
-const VoiceChatWidget = () => {
+interface VoiceChatWidgetProps {
+  variant?: 'chatbar' | 'standalone';
+}
+
+const VoiceChatWidget = ({ variant = 'standalone' }: VoiceChatWidgetProps) => {
   const [status, setStatus] = useState<'idle' | 'connecting' | 'connected'>('idle');
   const [room, setRoom] = useState<any>(null);
   const [isConnected, setIsConnected] = useState(false);
@@ -224,6 +228,25 @@ const VoiceChatWidget = () => {
     );
   }
 
+  // If variant is 'chatbar', show only the phone icon (mobile style) for both desktop and mobile
+  if (variant === 'chatbar') {
+    return (
+      <button
+        className="flex items-center justify-center rounded-full w-10 h-10 transition-all shadow-lg focus:outline-none text-white font-semibold hover:scale-105"
+        style={{ 
+          backgroundColor: status === 'connected' ? '#ef4444' : '#0d9488',
+          border: status === 'connected' ? '1px solid #ef4444' : '1px solid #0d9488'
+        }}
+        onClick={status === 'connected' ? endCall : startCall}
+        disabled={status === 'connecting'}
+        aria-label={status === 'connected' ? 'End call' : 'Start phone call'}
+      >
+        {status === 'connected' ? <PhoneOff className="w-5 h-5" /> : <Phone className="w-5 h-5" />}
+      </button>
+    );
+  }
+
+  // Standalone version (original behavior)
   return (
     <>
       {/* Desktop version - full button */}
