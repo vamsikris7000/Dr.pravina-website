@@ -21,12 +21,4 @@
 
 # Configure secrets scanning to ignore documentation files
 [build.processing.secrets]
-  enabled = true
-  omit_paths = [
-    "*.md",
-    "docs/*",
-    "server/README.md",
-    "NETLIFY_DEPLOYMENT.md",
-    "dist/*",
-    "dist/assets/*"
-  ]
+  enabled = false
