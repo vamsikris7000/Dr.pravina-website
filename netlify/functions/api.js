@@ -192,68 +192,58 @@ async function handleWorkshops(method, path, body, headers) {
     if (id === 'all') {
       // Get all workshops (for admin)
       try {
+        console.log('Fetching all workshops for admin...');
         const workshops = await Workshop.find({}).sort({ order: 1 });
+        console.log(`Found ${workshops.length} workshops in database`);
         return {
           statusCode: 200,
           headers,
           body: JSON.stringify(workshops)
         };
       } catch (error) {
-        console.error('Error fetching workshops:', error);
-        // Return fallback workshop data
-        const fallbackWorkshops = [
-          {
-            _id: '1',
-            title: 'The Weight Reset for Women',
-            subtitle: 'Transform your relationship with food and body',
-            audience: 'All women 18+',
-            day: 'Saturday',
-            date: 'Coming Soon',
-            time: 'Coming Soon',
-            price: 499,
-            status: 'coming-soon',
-            isActive: true,
-            order: 1
-          },
-          {
-            _id: '2',
-            title: 'PCOS Unplugged',
-            subtitle: 'Understanding and managing PCOS naturally',
-            audience: 'Teens & young women',
-            day: 'Sunday',
-            date: 'Coming Soon',
-            time: 'Coming Soon',
-            price: 499,
-            status: 'coming-soon',
-            isActive: true,
-            order: 2
-          }
-        ];
+        console.error('Error fetching all workshops:', error);
         return {
-          statusCode: 200,
+          statusCode: 500,
           headers,
-          body: JSON.stringify(fallbackWorkshops)
+          body: JSON.stringify({ 
+            error: 'Failed to fetch workshops',
+            message: error.message
+          })
         };
       }
     } else if (id) {
       // Get specific workshop
-      const workshop = await Workshop.findById(id);
-      if (!workshop) {
+      try {
+        const workshop = await Workshop.findById(id);
+        if (!workshop) {
+          return {
+            statusCode: 404,
+            headers,
+            body: JSON.stringify({ error: 'Workshop not found' })
+          };
+        }
         return {
-          statusCode: 404,
+          statusCode: 200,
           headers,
-          body: JSON.stringify({ error: 'Workshop not found' })
+          body: JSON.stringify(workshop)
+        };
+      } catch (error) {
+        console.error('Error fetching specific workshop:', error);
+        return {
+          statusCode: 500,
+          headers,
+          body: JSON.stringify({ 
+            error: 'Failed to fetch workshop',
+            message: error.message
+          })
         };
       }
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify(workshop)
-      };
     } else {
       // Get active workshops
       try {
+        console.log('Fetching active workshops...');
         const workshops = await Workshop.find({ isActive: true }).sort({ order: 1 });
+        console.log(`Found ${workshops.length} active workshops in database`);
         return {
           statusCode: 200,
           headers,
@@ -261,39 +251,13 @@ async function handleWorkshops(method, path, body, headers) {
         };
       } catch (error) {
         console.error('Error fetching active workshops:', error);
-        // Return fallback workshop data
-        const fallbackWorkshops = [
-          {
-            _id: '1',
-            title: 'The Weight Reset for Women',
-            subtitle: 'Transform your relationship with food and body',
-            audience: 'All women 18+',
-            day: 'Saturday',
-            date: 'Coming Soon',
-            time: 'Coming Soon',
-            price: 499,
-            status: 'coming-soon',
-            isActive: true,
-            order: 1
-          },
-          {
-            _id: '2',
-            title: 'PCOS Unplugged',
-            subtitle: 'Understanding and managing PCOS naturally',
-            audience: 'Teens & young women',
-            day: 'Sunday',
-            date: 'Coming Soon',
-            time: 'Coming Soon',
-            price: 499,
-            status: 'coming-soon',
-            isActive: true,
-            order: 2
-          }
-        ];
         return {
-          statusCode: 200,
+          statusCode: 500,
           headers,
-          body: JSON.stringify(fallbackWorkshops)
+          body: JSON.stringify({ 
+            error: 'Failed to fetch active workshops',
+            message: error.message
+          })
         };
       }
     }
