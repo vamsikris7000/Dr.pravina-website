@@ -85,7 +85,7 @@ const ChatBot = () => {
   const preWarmChatbot = async () => {
     try {
       const apiUrl = window.location.hostname === 'localhost' 
-        ? 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages'
+        ? `${import.meta.env.VITE_DIFY_API_BASE_URL}/chat-messages`
         : '/.netlify/functions/chatbot';
       
       const apiKey = import.meta.env.VITE_DIFY_API_KEY;
@@ -214,7 +214,7 @@ const ChatBot = () => {
     }
     
     const apiUrl = window.location.hostname === 'localhost' 
-      ? 'https://d22yt2oewbcglh.cloudfront.net/v1/chat-messages'
+      ? `${import.meta.env.VITE_DIFY_API_BASE_URL}/chat-messages`
       : '/.netlify/functions/chatbot';
 
     // Use the passed registration data or fall back to state

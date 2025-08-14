@@ -26,5 +26,7 @@
     "*.md",
     "docs/*",
     "server/README.md",
-    "NETLIFY_DEPLOYMENT.md"
+    "NETLIFY_DEPLOYMENT.md",
+    "dist/*",
+    "dist/assets/*"
   ]

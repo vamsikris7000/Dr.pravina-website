@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
     proxy: {
       '/api/voice-integration': {
-        target: 'https://d1fs86umxjjz67.cloudfront.net',
+        target: process.env.VITE_VOICE_API_BASE_URL || 'https://your-voice-api-url.com',
         changeOrigin: true,
         rewrite: (path) => {
           // Remove the /api/voice-integration prefix and add the path
