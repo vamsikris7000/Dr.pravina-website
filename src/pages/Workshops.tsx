@@ -403,12 +403,12 @@ const Workshops = () => {
                   ) : (
                           <>
                             <div className="flex items-center justify-center mb-2">
-                              <Calendar className="h-4 w-4 text-white mr-2" />
-                              <span className="font-inter text-sm font-semibold text-white">{workshop.day}, {workshop.date}</span>
+                              <Calendar className="h-4 w-4 text-yellow-300 mr-2" />
+                              <span className="font-inter text-base md:text-sm font-bold text-yellow-300 drop-shadow-lg">{workshop.day}, {workshop.date}</span>
                             </div>
                         <div className="flex items-center justify-center mb-2">
-                              <Clock className="h-4 w-4 text-white mr-2" />
-                              <span className="font-inter text-sm font-semibold text-white">{workshop.time}</span>
+                              <Clock className="h-4 w-4 text-yellow-300 mr-2" />
+                              <span className="font-inter text-base md:text-sm font-bold text-yellow-300 drop-shadow-lg">{workshop.time}</span>
                         </div>
                         <div className="flex items-center justify-center">
                               {/* Price removed from UI */}
