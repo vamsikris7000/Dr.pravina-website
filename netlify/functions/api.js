@@ -85,7 +85,7 @@ try {
   Appointment = mongoose.model('Appointment');
   Message = mongoose.model('Message');
 } catch {
-  Workshop = mongoose.model('Workshop', workshopSchema);
+  Workshop = mongoose.model('Workshop', workshopSchema, 'workshops'); // Explicitly specify collection name
   Patient = mongoose.model('patients_info', patientSchema); // Use correct collection name
   Appointment = mongoose.model('Appointment', appointmentSchema);
   Message = mongoose.model('Message', messageSchema);
@@ -134,11 +134,13 @@ export const handler = async function(event, context) {
     try {
       if (mongoose.connection.readyState !== 1) {
         console.log('Connecting to MongoDB...');
+        console.log('MongoDB URI:', process.env.MONGODB_URI ? 'SET' : 'NOT_SET');
         await mongoose.connect(process.env.MONGODB_URI, {
           useNewUrlParser: true,
           useUnifiedTopology: true,
         });
         console.log('MongoDB connected successfully');
+        console.log('Connected to database:', mongoose.connection.db.databaseName);
       }
     } catch (dbError) {
       console.error('MongoDB connection error:', dbError);
@@ -188,13 +190,24 @@ async function handleWorkshops(method, path, body, headers) {
   const parts = path.split('/');
   const id = parts[1];
 
+  console.log('=== WORKSHOPS HANDLER ===');
+  console.log('Method:', method);
+  console.log('Path:', path);
+  console.log('Parts:', parts);
+  console.log('ID:', id);
+
   if (method === 'GET') {
     if (id === 'all') {
       // Get all workshops (for admin)
       try {
         console.log('Fetching all workshops for admin...');
+        console.log('Database name:', mongoose.connection.db.databaseName);
+        console.log('Collection name: workshops');
+        
         const workshops = await Workshop.find({}).sort({ order: 1 });
         console.log(`Found ${workshops.length} workshops in database`);
+        console.log('Workshop titles:', workshops.map(w => w.title));
+        
         return {
           statusCode: 200,
           headers,
@@ -214,14 +227,17 @@ async function handleWorkshops(method, path, body, headers) {
     } else if (id) {
       // Get specific workshop
       try {
+        console.log('Fetching specific workshop with ID:', id);
         const workshop = await Workshop.findById(id);
         if (!workshop) {
+          console.log('Workshop not found with ID:', id);
           return {
             statusCode: 404,
             headers,
             body: JSON.stringify({ error: 'Workshop not found' })
           };
         }
+        console.log('Found workshop:', workshop.title);
         return {
           statusCode: 200,
           headers,
@@ -242,8 +258,13 @@ async function handleWorkshops(method, path, body, headers) {
       // Get active workshops
       try {
         console.log('Fetching active workshops...');
+        console.log('Database name:', mongoose.connection.db.databaseName);
+        console.log('Collection name: workshops');
+        
         const workshops = await Workshop.find({ isActive: true }).sort({ order: 1 });
         console.log(`Found ${workshops.length} active workshops in database`);
+        console.log('Active workshop titles:', workshops.map(w => w.title));
+        
         return {
           statusCode: 200,
           headers,

@@ -80,11 +80,21 @@ export const handler = async function(event, context) {
         status: String,
         createdAt: Date,
         updatedAt: Date
-      }));
+      }), 'workshops'); // Explicitly specify collection name
 
+      console.log('Testing workshops collection in drs_db...');
       const workshops = await Workshop.find({});
       workshopsCount = workshops.length;
       console.log(`Found ${workshopsCount} workshops in database`);
+      
+      if (workshopsCount > 0) {
+        console.log('Workshop titles:', workshops.map(w => w.title));
+        console.log('Sample workshop:', {
+          title: workshops[0].title,
+          isActive: workshops[0].isActive,
+          status: workshops[0].status
+        });
+      }
 
     } catch (dbError) {
       console.error('MongoDB connection/query error:', dbError);
