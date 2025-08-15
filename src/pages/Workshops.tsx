@@ -33,10 +33,24 @@ const Workshops = () => {
   const fetchWorkshopsData = async () => {
     try {
       setLoading(true);
+      console.log('=== WORKSHOPS FRONTEND DEBUG ===');
+      console.log('Fetching workshops...');
+      
       const data = await fetchWorkshops();
+      console.log('Raw data received:', data);
+      console.log('Data type:', typeof data);
+      console.log('Is array:', Array.isArray(data));
       
       // Check if data is an array (success) or error object
       if (Array.isArray(data)) {
+        console.log('Data is array, length:', data.length);
+        console.log('First workshop:', data[0]);
+        console.log('All workshops isActive status:', data.map(w => ({ title: w.title, isActive: w.isActive })));
+        
+        const activeWorkshops = data.filter(workshop => workshop.isActive);
+        console.log('Active workshops count:', activeWorkshops.length);
+        console.log('Active workshops:', activeWorkshops.map(w => w.title));
+        
         setWorkshops(data);
         console.log(`Loaded ${data.length} workshops from database`);
       } else {
@@ -52,6 +66,7 @@ const Workshops = () => {
       alert('Failed to load workshops. Please check your connection and try again.');
     } finally {
       setLoading(false);
+      console.log('=== WORKSHOPS FRONTEND DEBUG END ===');
     }
   };
 
@@ -172,9 +187,17 @@ const Workshops = () => {
               <div className="text-center py-12">
                 <p className="text-muted-foreground">No workshops available at the moment.</p>
                 <p className="text-sm text-muted-foreground mt-2">Please check back later.</p>
+                <div className="mt-4 p-4 bg-gray-100 rounded text-left text-xs">
+                  <p><strong>Debug Info:</strong></p>
+                  <p>Workshops array length: {workshops.length}</p>
+                  <p>Loading state: {loading.toString()}</p>
+                  <p>Workshops data: {JSON.stringify(workshops, null, 2)}</p>
+                </div>
               </div>
             ) : (
               <>
+                {console.log('Rendering workshops, count:', workshops.length)}
+                {console.log('Active workshops:', workshops.filter(w => w.isActive).length)}
                 {workshops.filter(workshop => workshop.isActive).map((workshop, index) => (
                 <Card key={workshop._id} className="group hover:shadow-elevated hover:-translate-y-2 transition-all duration-500 animate-fade-in mb-8 overflow-hidden border-0 shadow-lg relative" style={{animationDelay: `${index * 100}ms`}}>
                   {/* Background Image Container */}
