@@ -111,10 +111,6 @@ const PathOLife = () => {
                 Your Health Deserves More
               </h2>
               
-              <p className="font-inter text-xl md:text-2xl text-white/95 mb-6 leading-relaxed">
-                Vidarbha's First Board Certified Lifestyle Medicine Physician
-              </p>
-              
               <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-4xl mx-auto">
                 <span className="px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full text-white font-inter text-sm md:text-base font-medium border border-white/20 hover:bg-white/25 transition-all duration-300">
                   Women's Health

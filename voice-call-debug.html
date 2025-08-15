@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Call Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f0f8f0; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .warning { background-color: #fff3cd; border-color: #ffeaa7; }
+        .loading { background-color: #e2e3e5; border-color: #d6d8db; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; }
+        .status { font-weight: bold; margin: 10px 0; }
+        .status.success { color: #28a745; }
+        .status.error { color: #dc3545; }
+        .status.warning { color: #ffc107; }
+    </style>
+</head>
+<body>
+    <h1>📞 Voice Call Debug Dashboard</h1>
+    
+    <div class="test-section">
+        <h2>🔧 Voice Integration Status</h2>
+        <button onclick="testVoiceIntegration()">Test Voice Integration</button>
+        <div id="voice-integration-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🎫 Token Generation Test</h2>
+        <button onclick="testTokenGeneration()">Generate Token for Pravina</button>
+        <div id="token-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🤖 Agent Join Test</h2>
+        <button onclick="testAgentJoin()">Test Agent Join</button>
+        <div id="agent-join-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>📋 Voice Call Status</h2>
+        <div id="call-status">
+            <div class="status warning">⏳ No call in progress</div>
+        </div>
+        <button onclick="startVoiceCall()">Start Voice Call</button>
+        <button onclick="stopVoiceCall()">Stop Voice Call</button>
+    </div>
+
+    <div class="test-section">
+        <h2>🔍 LiveKit Connection Test</h2>
+        <button onclick="testLiveKitConnection()">Test LiveKit Connection</button>
+        <div id="livekit-result"></div>
+    </div>
+
+    <script>
+        const API_BASE = '/.netlify/functions';
+        let currentToken = null;
+        let currentRoom = null;
+        
+        function showResult(elementId, data, type = 'success') {
+            const element = document.getElementById(elementId);
+            element.className = `test-section ${type}`;
+            element.innerHTML = `
+                <h3>${type === 'error' ? '❌ Error' : type === 'warning' ? '⚠️ Warning' : '✅ Success'}</h3>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+        }
+
+        function showLoading(elementId) {
+            const element = document.getElementById(elementId);
+            element.className = 'test-section loading';
+            element.innerHTML = '<h3>⏳ Loading...</h3>';
+        }
+
+        function updateCallStatus(status, type = 'warning') {
+            const element = document.getElementById('call-status');
+            element.innerHTML = `<div class="status ${type}">${status}</div>`;
+        }
+
+        async function testVoiceIntegration() {
+            showLoading('voice-integration-result');
+            try {
+                const response = await fetch(`${API_BASE}/voice-integration`);
+                const data = await response.json();
+                showResult('voice-integration-result', data);
+            } catch (error) {
+                showResult('voice-integration-result', { error: error.message }, 'error');
+            }
+        }
+
+        async function testTokenGeneration() {
+            showLoading('token-result');
+            try {
+                const response = await fetch(`${API_BASE}/voice-integration/tokens/generate?agent_name=pravina`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                const data = await response.json();
+                currentToken = data.token || data.access_token;
+                showResult('token-result', data);
+            } catch (error) {
+                showResult('token-result', { error: error.message }, 'error');
+            }
+        }
+
+        async function testAgentJoin() {
+            showLoading('agent-join-result');
+            try {
+                const response = await fetch(`${API_BASE}/voice-integration/agents/join`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        room_name: 'test-room',
+                        agent_name: 'pravina'
+                    })
+                });
+                const data = await response.json();
+                showResult('agent-join-result', data);
+            } catch (error) {
+                showResult('agent-join-result', { error: error.message }, 'error');
+            }
+        }
+
+        async function testLiveKitConnection() {
+            showLoading('livekit-result');
+            try {
+                if (!currentToken) {
+                    showResult('livekit-result', { error: 'No token available. Generate a token first.' }, 'error');
+                    return;
+                }
+
+                // Test LiveKit URL from token
+                const tokenData = JSON.parse(atob(currentToken.split('.')[1]));
+                const livekitUrl = tokenData.video?.room || 'No room info in token';
+                
+                showResult('livekit-result', {
+                    token: currentToken.substring(0, 50) + '...',
+                    tokenData: tokenData,
+                    livekitUrl: livekitUrl,
+                    roomName: tokenData.video?.room,
+                    participantIdentity: tokenData.sub
+                });
+            } catch (error) {
+                showResult('livekit-result', { error: error.message }, 'error');
+            }
+        }
+
+        async function startVoiceCall() {
+            updateCallStatus('🔄 Starting voice call...', 'warning');
+            
+            try {
+                // Step 1: Generate token
+                const tokenResponse = await fetch(`${API_BASE}/voice-integration/tokens/generate?agent_name=pravina`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const tokenData = await tokenResponse.json();
+                
+                if (!tokenData.token && !tokenData.access_token) {
+                    updateCallStatus('❌ Failed to generate token', 'error');
+                    return;
+                }
+
+                currentToken = tokenData.token || tokenData.access_token;
+                currentRoom = tokenData.room_name;
+                
+                updateCallStatus(`✅ Token generated for room: ${currentRoom}`, 'success');
+                
+                // Step 2: Trigger agent join
+                const joinResponse = await fetch(`${API_BASE}/voice-integration/agents/join`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        room_name: currentRoom,
+                        agent_name: 'pravina'
+                    })
+                });
+                const joinData = await joinResponse.json();
+                
+                if (joinData.success) {
+                    updateCallStatus(`✅ Agent join triggered. Room: ${currentRoom}`, 'success');
+                } else {
+                    updateCallStatus(`⚠️ Agent join failed: ${joinData.message}`, 'warning');
+                }
+                
+            } catch (error) {
+                updateCallStatus(`❌ Voice call error: ${error.message}`, 'error');
+            }
+        }
+
+        function stopVoiceCall() {
+            currentToken = null;
+            currentRoom = null;
+            updateCallStatus('⏹️ Voice call stopped', 'warning');
+        }
+
+        // Auto-run basic tests on page load
+        window.onload = function() {
+            testVoiceIntegration();
+        };
+    </script>
+</body>
+</html>
