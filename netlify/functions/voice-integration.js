@@ -23,15 +23,26 @@ export const handler = async function(event, context) {
   let apiPath = path;
   if (!apiPath) {
     const urlPath = event.path || '';
+    console.log('Full URL path:', urlPath);
+    
     // Remove the function name from the path
-    apiPath = urlPath.replace('/.netlify/functions/voice-integration', '').replace('/voice-integration', '');
+    // The URL structure is: /.netlify/functions/voice-integration/tokens/generate
+    // We need to extract: tokens/generate
+    if (urlPath.includes('/voice-integration/')) {
+      apiPath = urlPath.split('/voice-integration/')[1];
+    } else if (urlPath.includes('/.netlify/functions/voice-integration/')) {
+      apiPath = urlPath.split('/.netlify/functions/voice-integration/')[1];
+    }
+    
+    console.log('Extracted apiPath from URL:', apiPath);
   }
   
   console.log('=== VOICE INTEGRATION DEBUG ===');
-  console.log('Original path:', path);
-  console.log('Extracted apiPath:', apiPath);
+  console.log('Original path from query:', path);
+  console.log('Final apiPath:', apiPath);
   console.log('Method:', method);
-  console.log('URL path:', event.path);
+  console.log('Full URL path:', event.path);
+  console.log('Query parameters:', event.queryStringParameters);
   
   try {
     // Handle root path - return service info
@@ -193,10 +204,11 @@ export const handler = async function(event, context) {
     }
     
     // Default response for unknown paths
+    console.log(`Unknown path: ${apiPath}`);
     return {
       statusCode: 404,
       headers,
-      body: JSON.stringify({ error: 'Not found', path })
+      body: JSON.stringify({ error: 'Not found', path: apiPath })
     };
   } catch (error) {
     console.error('Voice integration error:', error);
@@ -206,4 +218,4 @@ export const handler = async function(event, context) {
       body: JSON.stringify({ error: 'Internal server error', details: error.message })
     };
   }
-}
+};
