@@ -220,9 +220,6 @@ const ChatBot = () => {
     // Use the passed registration data or fall back to state
     const regData = currentRegistrationData || registrationData;
 
-    // Generate contextual response if available
-    const contextualResponse = generateContextualResponse(userMessage, regData);
-    
     try {
       const requestBody: any = {
         inputs: {},
@@ -254,19 +251,6 @@ const ChatBot = () => {
 
       if (!reader) {
         throw new Error('Failed to get response reader');
-      }
-
-      // If we have a contextual response, use it instead of API call
-      if (contextualResponse) {
-        console.log('Using contextual response:', contextualResponse);
-        const botMessageId = `bot-${Date.now()}`;
-        setMessages(prev => [...prev, {
-          id: botMessageId,
-          text: contextualResponse,
-          isUser: false,
-          timestamp: new Date(),
-        }]);
-        return;
       }
 
       // Create a bot message that we'll update as we stream
