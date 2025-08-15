@@ -12,6 +12,19 @@
   to = "/index.html"
   status = 200
 
+# Force HTTPS redirects
+[[redirects]]
+  from = "http://patholife.in/*"
+  to = "https://patholife.in/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.patholife.in/*"
+  to = "https://www.patholife.in/:splat"
+  status = 301
+  force = true
+
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"

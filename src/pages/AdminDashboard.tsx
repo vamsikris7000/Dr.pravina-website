@@ -135,7 +135,11 @@ const AdminDashboard = () => {
     setMessagesLoading(true);
     setWorkshopsLoading(true);
     
+    console.log('=== ADMIN DASHBOARD DATA LOADING ===');
+    
     try {
+      console.log('Fetching data from MongoDB...');
+      
       const [patientsData, appointmentsData, messagesData, workshopsData] = await Promise.all([
         fetchPatients(),
         fetchAppointments(),
@@ -143,16 +147,35 @@ const AdminDashboard = () => {
         fetchAllWorkshops()
       ]);
       
+      console.log('Data received:', {
+        patients: Array.isArray(patientsData) ? patientsData.length : 'Error',
+        appointments: Array.isArray(appointmentsData) ? appointmentsData.length : 'Error',
+        messages: Array.isArray(messagesData) ? messagesData.length : 'Error',
+        workshops: Array.isArray(workshopsData) ? workshopsData.length : 'Error'
+      });
+      
       // Check if responses are arrays (success) or error objects
-      setPatients(Array.isArray(patientsData) ? patientsData : []);
-      setAppointments(Array.isArray(appointmentsData) ? appointmentsData : []);
-      setMessages(Array.isArray(messagesData) ? messagesData : []);
-      console.log('Workshops data received:', workshopsData);
+      const patientsArray = Array.isArray(patientsData) ? patientsData : [];
+      const appointmentsArray = Array.isArray(appointmentsData) ? appointmentsData : [];
+      const messagesArray = Array.isArray(messagesData) ? messagesData : [];
       const workshopsArray = Array.isArray(workshopsData) ? workshopsData : [];
-      console.log('Setting workshops:', workshopsArray.length, 'workshops');
+      
+      console.log('Setting data:', {
+        patients: patientsArray.length,
+        appointments: appointmentsArray.length,
+        messages: messagesArray.length,
+        workshops: workshopsArray.length
+      });
+      
+      setPatients(patientsArray);
+      setAppointments(appointmentsArray);
+      setMessages(messagesArray);
       setWorkshops(workshopsArray);
+      
+      console.log('Data loaded successfully');
+      
     } catch (error) {
-      console.error('Error loading data:', error);
+      console.error('Error loading admin data:', error);
       // Set empty arrays on error to prevent crashes
       setPatients([]);
       setAppointments([]);
@@ -164,6 +187,7 @@ const AdminDashboard = () => {
       setMessagesLoading(false);
       setWorkshopsLoading(false);
       setLoading(false);
+      console.log('=== ADMIN DASHBOARD DATA LOADING COMPLETE ===');
     }
   };
 
