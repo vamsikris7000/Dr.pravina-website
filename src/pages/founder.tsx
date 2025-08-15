@@ -77,7 +77,7 @@ const Founder = () => {
                 MBBS, MD (Pathology), DipIBLM (USA)
               </p>
               
-              <p className="font-inter text-xl md:text-2xl text-white/95 mb-6 leading-relaxed">
+              <p className="font-inter text-xl md:text-2xl text-white mb-6 leading-relaxed" style={{backgroundColor: 'rgba(255,255,255,0.1)', padding: '10px', borderRadius: '5px'}}>
                 Vidarbha's First Board Certified Lifestyle Medicine Physician
               </p>
               
