@@ -55,15 +55,51 @@ const Workshops = () => {
         console.log(`Loaded ${data.length} workshops from database`);
       } else {
         console.error('Error response from workshops API:', data);
-        setWorkshops([]);
-        // Show error message to user
-        alert('Unable to load workshops. Please try again later.');
+        
+        // Fallback to direct API call
+        console.log('Trying direct API call as fallback...');
+        try {
+          const directResponse = await fetch('https://patholife.netlify.app/.netlify/functions/api?path=workshops');
+          const directData = await directResponse.json();
+          console.log('Direct API response:', directData);
+          
+          if (Array.isArray(directData)) {
+            console.log('Direct API successful, setting workshops');
+            setWorkshops(directData);
+          } else {
+            console.error('Direct API also failed');
+            setWorkshops([]);
+            alert('Unable to load workshops. Please try again later.');
+          }
+        } catch (directError) {
+          console.error('Direct API call failed:', directError);
+          setWorkshops([]);
+          alert('Failed to load workshops. Please check your connection and try again.');
+        }
       }
     } catch (error) {
       console.error('Error fetching workshops:', error);
-      setWorkshops([]);
-      // Show error message to user
-      alert('Failed to load workshops. Please check your connection and try again.');
+      
+      // Fallback to direct API call
+      console.log('Trying direct API call as fallback...');
+      try {
+        const directResponse = await fetch('https://patholife.netlify.app/.netlify/functions/api?path=workshops');
+        const directData = await directResponse.json();
+        console.log('Direct API response:', directData);
+        
+        if (Array.isArray(directData)) {
+          console.log('Direct API successful, setting workshops');
+          setWorkshops(directData);
+        } else {
+          console.error('Direct API also failed');
+          setWorkshops([]);
+          alert('Failed to load workshops. Please check your connection and try again.');
+        }
+      } catch (directError) {
+        console.error('Direct API call failed:', directError);
+        setWorkshops([]);
+        alert('Failed to load workshops. Please check your connection and try again.');
+      }
     } finally {
       setLoading(false);
       console.log('=== WORKSHOPS FRONTEND DEBUG END ===');

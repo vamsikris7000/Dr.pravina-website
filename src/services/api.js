@@ -184,12 +184,36 @@ export const deleteMessage = async (id) => {
 
 // Workshops API
 export const fetchWorkshops = async () => {
-  const response = await fetch(getApiPath('/workshops'), {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  return response.json();
+  console.log('=== FETCH WORKSHOPS DEBUG ===');
+  const apiPath = getApiPath('/workshops');
+  console.log('API Path:', apiPath);
+  
+  try {
+    const response = await fetch(apiPath, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    console.log('Response status:', response.status);
+    console.log('Response ok:', response.ok);
+    
+    if (!response.ok) {
+      console.error('Response not ok:', response.status);
+      throw new Error(`HTTP ${response.status}`);
+    }
+    
+    const data = await response.json();
+    console.log('Response data:', data);
+    console.log('Data type:', typeof data);
+    console.log('Is array:', Array.isArray(data));
+    console.log('=== FETCH WORKSHOPS DEBUG END ===');
+    
+    return data;
+  } catch (error) {
+    console.error('Fetch workshops error:', error);
+    throw error;
+  }
 };
 
 export const fetchAllWorkshops = async () => {
