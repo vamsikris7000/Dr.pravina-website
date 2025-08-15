@@ -113,8 +113,18 @@ export const handler = async function(event, context) {
   const method = event.httpMethod;
   const body = event.body ? JSON.parse(event.body) : {};
 
-  // Reconstruct the path
-  const apiPath = path || '';
+  // Reconstruct the path - handle both query parameter and direct path
+  let apiPath = path || '';
+  
+  // If no path in query params, try to extract from the URL path
+  if (!apiPath) {
+    const urlPath = event.path || '';
+    // Remove the function name from the path
+    apiPath = urlPath.replace('/.netlify/functions/api', '').replace('/api', '');
+  }
+
+  console.log('API Path:', apiPath);
+  console.log('Method:', method);
 
   try {
     // Check if MongoDB URI is available

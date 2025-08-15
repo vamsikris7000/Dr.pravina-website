@@ -32,77 +32,166 @@ const Workshops = () => {
 
   const fetchWorkshopsData = async () => {
     try {
-      setLoading(true);
-      console.log('=== WORKSHOPS FRONTEND DEBUG ===');
-      console.log('Fetching workshops...');
-      
       const data = await fetchWorkshops();
-      console.log('Raw data received:', data);
-      console.log('Data type:', typeof data);
-      console.log('Is array:', Array.isArray(data));
-      
-      // Check if data is an array (success) or error object
-      if (Array.isArray(data)) {
-        console.log('Data is array, length:', data.length);
-        console.log('First workshop:', data[0]);
-        console.log('All workshops isActive status:', data.map(w => ({ title: w.title, isActive: w.isActive })));
-        
-        const activeWorkshops = data.filter(workshop => workshop.isActive);
-        console.log('Active workshops count:', activeWorkshops.length);
-        console.log('Active workshops:', activeWorkshops.map(w => w.title));
-        
-        setWorkshops(data);
-        console.log(`Loaded ${data.length} workshops from database`);
-      } else {
-        console.error('Error response from workshops API:', data);
-        
-        // Fallback to direct API call
-        console.log('Trying direct API call as fallback...');
-        try {
-          const directResponse = await fetch('https://patholife.netlify.app/.netlify/functions/api?path=workshops');
-          const directData = await directResponse.json();
-          console.log('Direct API response:', directData);
-          
-          if (Array.isArray(directData)) {
-            console.log('Direct API successful, setting workshops');
-            setWorkshops(directData);
-          } else {
-            console.error('Direct API also failed');
-            setWorkshops([]);
-            alert('Unable to load workshops. Please try again later.');
-          }
-        } catch (directError) {
-          console.error('Direct API call failed:', directError);
-          setWorkshops([]);
-          alert('Failed to load workshops. Please check your connection and try again.');
-        }
-      }
+      setWorkshops(data);
     } catch (error) {
       console.error('Error fetching workshops:', error);
-      
-      // Fallback to direct API call
-      console.log('Trying direct API call as fallback...');
-      try {
-        const directResponse = await fetch('https://patholife.netlify.app/.netlify/functions/api?path=workshops');
-        const directData = await directResponse.json();
-        console.log('Direct API response:', directData);
-        
-        if (Array.isArray(directData)) {
-          console.log('Direct API successful, setting workshops');
-          setWorkshops(directData);
-        } else {
-          console.error('Direct API also failed');
-          setWorkshops([]);
-          alert('Failed to load workshops. Please check your connection and try again.');
+      // Fallback to default workshops if backend is not available
+      const fallbackWorkshops = [
+        {
+          _id: "1",
+          title: "The Weight Reset for Women",
+          subtitle: "Not Just Weight Loss, A Full Body Reset",
+          audience: "For All Women 18+",
+          icon: "👩🏻‍⚕️",
+          day: "Sunday",
+          date: "8th Aug",
+          time: "4:50 PM - 7:00 PM",
+          price: 499,
+          features: [
+            "Understand your hormones & weight connection",
+            "Tackle belly fat, cravings & low energy",
+            "Anti-inflammatory nutrition made practical",
+            "Smart movement & strength strategies",
+            "Stress, sleep & metabolism mastery",
+            "Build habits that last, not bounce back"
+          ],
+          description: "Transform your relationship with weight through hormone-aware strategies.",
+          isActive: true,
+          order: 1,
+          status: 'live' as const,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          _id: "2",
+          title: "PCOS Unplugged",
+          subtitle: "Your Hormones, Hair, Skin & Sanity",
+          audience: "For Teens & Young Women",
+          icon: "🌸",
+          day: "Saturday",
+          date: "10th Aug",
+          time: "3:00 PM - 6:30 PM",
+          price: 499,
+          features: [
+            "Decode your hormones & cycle",
+            "Period problems & PCOS types", 
+            "Skin, hair, mood & weight tips",
+            "Menstrual cup basics & hygiene",
+            "PCOS-friendly food & movement",
+            "Cycle syncing & stress hacks"
+          ],
+          description: "Navigate PCOS with confidence through practical lifestyle strategies.",
+          isActive: true,
+          order: 2,
+          status: 'live' as const,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          _id: "3",
+          title: "Pre-Pregnancy Power Couple",
+          subtitle: "Plan Parenthood with Purpose",
+          audience: "For Couples Planning Pregnancy",
+          icon: "👫🏻",
+          day: "Friday",
+          date: "15th Aug",
+          time: "5:00 PM - 8:30 PM",
+          price: 499,
+          features: [
+            "Fertility nutrition for both partners",
+            "Cycle tracking & fertile window basics",
+            "Lifestyle shifts to boost conception",
+            "Detox, stress & sleep prep",
+            "Emotional alignment & partner mindset",
+            "Myths vs science of getting pregnant"
+          ],
+          description: "Prepare for pregnancy with evidence-based strategies for both partners.",
+          isActive: true,
+          order: 3,
+          status: 'live' as const,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          _id: "4",
+          title: "Pregnancy Wellness Workshop",
+          subtitle: "Feel Nourished, Calm & Connected",
+          audience: "For Expecting Mothers (All Trimesters)",
+          icon: "🤱🏻",
+          day: "Wednesday",
+          date: "20th Aug",
+          time: "4:00 PM - 7:30 PM",
+          price: 499,
+          features: [
+            "Pregnancy nutrition & meal planning",
+            "Safe movement & exercise guidelines",
+            "Stress management & mental wellness",
+            "Sleep optimization & energy boosters",
+            "Partner involvement & support strategies",
+            "Birth preparation & postpartum planning"
+          ],
+          description: "Nurture yourself and your baby with comprehensive pregnancy wellness guidance.",
+          isActive: true,
+          order: 4,
+          status: 'live' as const,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          _id: "5",
+          title: "Postpartum Recovery & Healing",
+          subtitle: "Your Body, Your Recovery, Your Way",
+          audience: "For New Mothers (0-12 months postpartum)",
+          icon: "🍼",
+          day: "Tuesday",
+          date: "25th Aug",
+          time: "3:30 PM - 7:00 PM",
+          price: 499,
+          features: [
+            "Postpartum healing & recovery timeline",
+            "Nutrition for healing & breastfeeding",
+            "Pelvic floor & core restoration",
+            "Mental health & emotional support",
+            "Sleep strategies for new parents",
+            "Return to exercise & movement safely"
+          ],
+          description: "Support your postpartum recovery with evidence-based healing strategies.",
+          isActive: true,
+          order: 5,
+          status: 'live' as const,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          _id: "6",
+          title: "Parenting with Purpose",
+          subtitle: "Raising Happy, Healthy Children",
+          audience: "For Parents of Children 0-5 years",
+          icon: "👨‍👩‍👧‍👦",
+          day: "Monday",
+          date: "30th Aug",
+          time: "5:30 PM - 8:00 PM",
+          price: 499,
+          features: [
+            "Child development milestones",
+            "Nutrition for growing children",
+            "Sleep training & routines",
+            "Behavior management strategies",
+            "Parental self-care & stress management",
+            "Building strong family bonds"
+          ],
+          description: "Navigate the challenges of early parenting with confidence and purpose.",
+          isActive: true,
+          order: 6,
+          status: 'live' as const,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
         }
-      } catch (directError) {
-        console.error('Direct API call failed:', directError);
-        setWorkshops([]);
-        alert('Failed to load workshops. Please check your connection and try again.');
-      }
+      ];
+      setWorkshops(fallbackWorkshops);
     } finally {
       setLoading(false);
-      console.log('=== WORKSHOPS FRONTEND DEBUG END ===');
     }
   };
 
@@ -223,17 +312,9 @@ const Workshops = () => {
               <div className="text-center py-12">
                 <p className="text-muted-foreground">No workshops available at the moment.</p>
                 <p className="text-sm text-muted-foreground mt-2">Please check back later.</p>
-                <div className="mt-4 p-4 bg-gray-100 rounded text-left text-xs">
-                  <p><strong>Debug Info:</strong></p>
-                  <p>Workshops array length: {workshops.length}</p>
-                  <p>Loading state: {loading.toString()}</p>
-                  <p>Workshops data: {JSON.stringify(workshops, null, 2)}</p>
-                </div>
               </div>
             ) : (
               <>
-                {console.log('Rendering workshops, count:', workshops.length)}
-                {console.log('Active workshops:', workshops.filter(w => w.isActive).length)}
                 {workshops.filter(workshop => workshop.isActive).map((workshop, index) => (
                 <Card key={workshop._id} className="group hover:shadow-elevated hover:-translate-y-2 transition-all duration-500 animate-fade-in mb-8 overflow-hidden border-0 shadow-lg relative" style={{animationDelay: `${index * 100}ms`}}>
                   {/* Background Image Container */}
