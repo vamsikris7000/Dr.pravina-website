@@ -87,8 +87,8 @@ try {
 } catch {
   Workshop = mongoose.model('Workshop', workshopSchema, 'workshops'); // Explicitly specify collection name
   Patient = mongoose.model('patients_info', patientSchema); // Use correct collection name
-  Appointment = mongoose.model('Appointment', appointmentSchema);
-  Message = mongoose.model('Message', messageSchema);
+  Appointment = mongoose.model('Appointment', appointmentSchema, 'appointments'); // Explicitly specify collection name
+  Message = mongoose.model('Message', messageSchema, 'messages'); // Explicitly specify collection name
 }
 
 export const handler = async function(event, context) {
@@ -353,17 +353,27 @@ async function handlePatients(method, path, body, headers) {
   const parts = path.split('/');
   const id = parts[1];
 
+  console.log('=== PATIENTS HANDLER ===');
+  console.log('Method:', method);
+  console.log('Path:', path);
+  console.log('Parts:', parts);
+  console.log('ID:', id);
+  console.log('Database name:', mongoose.connection.db.databaseName);
+
   if (method === 'GET') {
     if (id) {
       // Get specific patient
+      console.log('Fetching specific patient with ID:', id);
       const patient = await Patient.findById(id);
       if (!patient) {
+        console.log('Patient not found with ID:', id);
         return {
           statusCode: 404,
           headers,
           body: JSON.stringify({ error: 'Patient not found' })
         };
       }
+      console.log('Found patient:', patient.Name || patient.name);
       return {
         statusCode: 200,
         headers,
@@ -372,7 +382,13 @@ async function handlePatients(method, path, body, headers) {
     } else {
       // Get all patients using direct collection query
       try {
+        console.log('Fetching all patients from patients_info collection...');
+        console.log('Collection name: patients_info');
+        
         const patients = await mongoose.connection.db.collection('patients_info').find({}).toArray();
+        console.log(`Found ${patients.length} patients in database`);
+        console.log('Patient names:', patients.map(p => p.Name || p.name || 'No name'));
+        
         return {
           statusCode: 200,
           headers,
@@ -389,8 +405,10 @@ async function handlePatients(method, path, body, headers) {
     }
   } else if (method === 'POST') {
     // Create new patient
+    console.log('Creating new patient:', body);
     const patient = new Patient(body);
     const savedPatient = await patient.save();
+    console.log('Patient created successfully:', savedPatient._id);
     return {
       statusCode: 201,
       headers,
@@ -399,6 +417,7 @@ async function handlePatients(method, path, body, headers) {
   } else if (method === 'PATCH' && id) {
     // Update patient using direct collection query
     try {
+      console.log('Updating patient with ID:', id);
       const updateData = { ...body, updatedAt: new Date() };
       const result = await mongoose.connection.db.collection('patients_info').updateOne(
         { _id: new mongoose.Types.ObjectId(id) },
@@ -406,12 +425,14 @@ async function handlePatients(method, path, body, headers) {
       );
       if (result.matchedCount === 1) {
         const updatedPatient = await mongoose.connection.db.collection('patients_info').findOne({ _id: new mongoose.Types.ObjectId(id) });
+        console.log('Patient updated successfully');
         return {
           statusCode: 200,
           headers,
           body: JSON.stringify(updatedPatient)
         };
       } else {
+        console.log('Patient not found for update');
         return {
           statusCode: 404,
           headers,
@@ -429,14 +450,17 @@ async function handlePatients(method, path, body, headers) {
   } else if (method === 'DELETE' && id) {
     // Delete patient using direct collection query
     try {
+      console.log('Deleting patient with ID:', id);
       const result = await mongoose.connection.db.collection('patients_info').deleteOne({ _id: new mongoose.Types.ObjectId(id) });
       if (result.deletedCount === 1) {
+        console.log('Patient deleted successfully');
         return {
           statusCode: 200,
           headers,
           body: JSON.stringify({ message: 'Patient deleted successfully' })
         };
       } else {
+        console.log('Patient not found for deletion');
         return {
           statusCode: 404,
           headers,
@@ -465,17 +489,27 @@ async function handleAppointments(method, path, body, headers) {
   const parts = path.split('/');
   const id = parts[1];
 
+  console.log('=== APPOINTMENTS HANDLER ===');
+  console.log('Method:', method);
+  console.log('Path:', path);
+  console.log('Parts:', parts);
+  console.log('ID:', id);
+  console.log('Database name:', mongoose.connection.db.databaseName);
+
   if (method === 'GET') {
     if (id) {
       // Get specific appointment
+      console.log('Fetching specific appointment with ID:', id);
       const appointment = await Appointment.findById(id);
       if (!appointment) {
+        console.log('Appointment not found with ID:', id);
         return {
           statusCode: 404,
           headers,
           body: JSON.stringify({ error: 'Appointment not found' })
         };
       }
+      console.log('Found appointment:', appointment.name);
       return {
         statusCode: 200,
         headers,
@@ -484,7 +518,13 @@ async function handleAppointments(method, path, body, headers) {
     } else {
       // Get all appointments
       try {
+        console.log('Fetching all appointments from appointments collection...');
+        console.log('Collection name: appointments');
+        
         const appointments = await Appointment.find({}).sort({ createdAt: -1 });
+        console.log(`Found ${appointments.length} appointments in database`);
+        console.log('Appointment names:', appointments.map(a => a.name || 'No name'));
+        
         return {
           statusCode: 200,
           headers,
@@ -501,8 +541,10 @@ async function handleAppointments(method, path, body, headers) {
     }
   } else if (method === 'POST') {
     // Create new appointment
+    console.log('Creating new appointment:', body);
     const appointment = new Appointment(body);
     const savedAppointment = await appointment.save();
+    console.log('Appointment created successfully:', savedAppointment._id);
     return {
       statusCode: 201,
       headers,
@@ -510,18 +552,21 @@ async function handleAppointments(method, path, body, headers) {
     };
   } else if (method === 'PATCH' && id) {
     // Update appointment
+    console.log('Updating appointment with ID:', id);
     const updatedAppointment = await Appointment.findByIdAndUpdate(
       id,
       { ...body, updatedAt: new Date() },
       { new: true, runValidators: true }
     );
     if (!updatedAppointment) {
+      console.log('Appointment not found for update');
       return {
         statusCode: 404,
         headers,
         body: JSON.stringify({ error: 'Appointment not found' })
       };
     }
+    console.log('Appointment updated successfully');
     return {
       statusCode: 200,
       headers,
@@ -529,14 +574,17 @@ async function handleAppointments(method, path, body, headers) {
     };
   } else if (method === 'DELETE' && id) {
     // Delete appointment
+    console.log('Deleting appointment with ID:', id);
     const deletedAppointment = await Appointment.findByIdAndDelete(id);
     if (!deletedAppointment) {
+      console.log('Appointment not found for deletion');
       return {
         statusCode: 404,
         headers,
         body: JSON.stringify({ error: 'Appointment not found' })
       };
     }
+    console.log('Appointment deleted successfully');
     return {
       statusCode: 200,
       headers,
@@ -556,17 +604,27 @@ async function handleMessages(method, path, body, headers) {
   const parts = path.split('/');
   const id = parts[1];
 
+  console.log('=== MESSAGES HANDLER ===');
+  console.log('Method:', method);
+  console.log('Path:', path);
+  console.log('Parts:', parts);
+  console.log('ID:', id);
+  console.log('Database name:', mongoose.connection.db.databaseName);
+
   if (method === 'GET') {
     if (id) {
       // Get specific message
+      console.log('Fetching specific message with ID:', id);
       const message = await Message.findById(id);
       if (!message) {
+        console.log('Message not found with ID:', id);
         return {
           statusCode: 404,
           headers,
           body: JSON.stringify({ error: 'Message not found' })
         };
       }
+      console.log('Found message:', message.name);
       return {
         statusCode: 200,
         headers,
@@ -575,7 +633,13 @@ async function handleMessages(method, path, body, headers) {
     } else {
       // Get all messages
       try {
+        console.log('Fetching all messages from messages collection...');
+        console.log('Collection name: messages');
+        
         const messages = await Message.find({}).sort({ createdAt: -1 });
+        console.log(`Found ${messages.length} messages in database`);
+        console.log('Message names:', messages.map(m => m.name || 'No name'));
+        
         return {
           statusCode: 200,
           headers,
@@ -592,8 +656,10 @@ async function handleMessages(method, path, body, headers) {
     }
   } else if (method === 'POST') {
     // Create new message
+    console.log('Creating new message:', body);
     const message = new Message(body);
     const savedMessage = await message.save();
+    console.log('Message created successfully:', savedMessage._id);
     return {
       statusCode: 201,
       headers,
@@ -601,18 +667,21 @@ async function handleMessages(method, path, body, headers) {
     };
   } else if (method === 'PATCH' && id) {
     // Update message
+    console.log('Updating message with ID:', id);
     const updatedMessage = await Message.findByIdAndUpdate(
       id,
       { ...body, updatedAt: new Date() },
       { new: true, runValidators: true }
     );
     if (!updatedMessage) {
+      console.log('Message not found for update');
       return {
         statusCode: 404,
         headers,
         body: JSON.stringify({ error: 'Message not found' })
       };
     }
+    console.log('Message updated successfully');
     return {
       statusCode: 200,
       headers,
@@ -620,14 +689,17 @@ async function handleMessages(method, path, body, headers) {
     };
   } else if (method === 'DELETE' && id) {
     // Delete message
+    console.log('Deleting message with ID:', id);
     const deletedMessage = await Message.findByIdAndDelete(id);
     if (!deletedMessage) {
+      console.log('Message not found for deletion');
       return {
         statusCode: 404,
         headers,
         body: JSON.stringify({ error: 'Message not found' })
       };
     }
+    console.log('Message deleted successfully');
     return {
       statusCode: 200,
       headers,
