@@ -184,12 +184,183 @@ export const deleteMessage = async (id) => {
 
 // Workshops API
 export const fetchWorkshops = async () => {
-  const response = await fetch(getApiPath('/workshops'), {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  return response.json();
+  try {
+    const response = await fetch(getApiPath('/workshops'), {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    // Check if response is ok
+    if (!response.ok) {
+      console.error('Workshops API error:', response.status, response.statusText);
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    // Check if response is JSON
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      console.error('Workshops API returned non-JSON response:', contentType);
+      throw new Error('API returned non-JSON response');
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching workshops:', error);
+    // Return fallback data instead of throwing
+    return [
+      {
+        _id: "1",
+        title: "The Weight Reset for Women",
+        subtitle: "Not Just Weight Loss, A Full Body Reset",
+        audience: "For All Women 18+",
+        icon: "👩🏻‍⚕️",
+        day: "Saturday",
+        date: "23rd Aug",
+        time: "9:00 AM - 11:00 AM",
+        price: 499,
+        features: [
+          "Understand your hormones & weight connection",
+          "Tackle belly fat, cravings & low energy",
+          "Anti-inflammatory nutrition made practical",
+          "Smart movement & strength strategies",
+          "Stress, sleep & metabolism mastery",
+          "Build habits that last, not bounce back"
+        ],
+        description: "Transform your relationship with weight through hormone-aware strategies.",
+        isActive: true,
+        order: 1,
+        status: 'live',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      },
+      {
+        _id: "2",
+        title: "PCOS Unplugged",
+        subtitle: "Your Hormones, Hair, Skin & Sanity",
+        audience: "For Teens & Young Women",
+        icon: "🌸",
+        day: "Friday",
+        date: "29th Aug",
+        time: "6:00 PM - 8:00 PM",
+        price: 499,
+        features: [
+          "Decode your hormones & cycle",
+          "Period problems & PCOS types", 
+          "Skin, hair, mood & weight tips",
+          "Menstrual cup basics & hygiene",
+          "PCOS-friendly food & movement",
+          "Cycle syncing & stress hacks"
+        ],
+        description: "Navigate PCOS with confidence through practical lifestyle strategies.",
+        isActive: true,
+        order: 2,
+        status: 'live',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      },
+      {
+        _id: "3",
+        title: "Pre-Pregnancy Power Couple",
+        subtitle: "Plan Parenthood with Purpose",
+        audience: "For Couples Planning Pregnancy",
+        icon: "👫🏻",
+        day: "Friday",
+        date: "5th Sep",
+        time: "6:00 PM - 8:00 PM",
+        price: 499,
+        features: [
+          "Fertility nutrition for both partners",
+          "Cycle tracking & fertile window basics",
+          "Lifestyle shifts to boost conception",
+          "Detox, stress & sleep prep",
+          "Emotional alignment & partner mindset",
+          "Myths vs science of getting pregnant"
+        ],
+        description: "Prepare for pregnancy with evidence-based strategies for both partners.",
+        isActive: true,
+        order: 3,
+        status: 'live',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      },
+      {
+        _id: "4",
+        title: "Pregnancy Wellness Workshop",
+        subtitle: "Feel Nourished, Calm & Connected",
+        audience: "For Expecting Mothers (All Trimesters)",
+        icon: "🤱🏻",
+        day: "Coming Soon",
+        date: "Coming Soon",
+        time: "Coming Soon",
+        price: 499,
+        features: [
+          "Pregnancy nutrition & meal planning",
+          "Safe movement & exercise guidelines",
+          "Stress management & mental wellness",
+          "Sleep optimization & energy boosters",
+          "Partner involvement & support strategies",
+          "Birth preparation & postpartum planning"
+        ],
+        description: "Nurture yourself and your baby with comprehensive pregnancy wellness guidance.",
+        isActive: true,
+        order: 4,
+        status: 'coming-soon',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      },
+      {
+        _id: "5",
+        title: "Confident Breastfeeding",
+        subtitle: "Nurture Your Baby. Reclaim Your Body.",
+        audience: "For New & Expecting Moms",
+        icon: "🍼",
+        day: "Coming Soon",
+        date: "Coming Soon",
+        time: "Coming Soon",
+        price: 499,
+        features: [
+          "Lactation techniques & myths",
+          "Latch, supply, positions & pumping",
+          "Recovery after birth for body, mind, sleep",
+          "Postpartum nutrition & emotional support",
+          "Indian rituals & modern healing practices",
+          "Space for real talk, not just survival"
+        ],
+        description: "Supporting new mothers through postpartum recovery and breastfeeding.",
+        isActive: true,
+        order: 5,
+        status: 'coming-soon',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      },
+      {
+        _id: "6",
+        title: "First Foods",
+        subtitle: "Foundations of Child Nutrition & Lifestyle",
+        audience: "For Moms with Children (6 Months to 5 Years)",
+        icon: "👨‍👩‍👧‍👦",
+        day: "Coming Soon",
+        date: "Coming Soon",
+        time: "Coming Soon",
+        price: 499,
+        features: [
+          "When & how to start solids",
+          "Daily feeding plans & schedules",
+          "Immunity-boosting foods & habits",
+          "Gut health, picky eating & meal battles",
+          "Holistic child lifestyle routines (food, sleep, screen, play)",
+          "Indian food wisdom with modern evidence"
+        ],
+        description: "Learn essential strategies for nurturing healthy and happy children through proper nutrition and effective parenting techniques.",
+        isActive: true,
+        order: 6,
+        status: 'coming-soon',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      }
+    ];
+  }
 };
 
 export const fetchAllWorkshops = async () => {
