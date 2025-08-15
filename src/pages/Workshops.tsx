@@ -32,11 +32,8 @@ const Workshops = () => {
 
   const fetchWorkshopsData = async () => {
     try {
-      // Temporarily force fallback data to test the updated timings
-      throw new Error('Forcing fallback data for testing');
-      
-      // const data = await fetchWorkshops();
-      // setWorkshops(data);
+      const data = await fetchWorkshops();
+      setWorkshops(data);
     } catch (error) {
       console.error('Error fetching workshops:', error);
       // Fallback to default workshops if backend is not available
@@ -403,12 +400,12 @@ const Workshops = () => {
                   ) : (
                           <>
                             <div className="flex items-center justify-center mb-2">
-                              <Calendar className="h-4 w-4 text-yellow-300 mr-2" />
-                              <span className="font-inter text-base md:text-sm font-bold text-yellow-300 drop-shadow-lg">{workshop.day}, {workshop.date}</span>
+                              <Calendar className="h-4 w-4 text-yellow-400 mr-2" />
+                              <span className="font-inter text-base md:text-sm font-bold text-yellow-400 drop-shadow-lg" style={{color: '#fbbf24 !important'}}>{workshop.day}, {workshop.date}</span>
                             </div>
                         <div className="flex items-center justify-center mb-2">
-                              <Clock className="h-4 w-4 text-yellow-300 mr-2" />
-                              <span className="font-inter text-base md:text-sm font-bold text-yellow-300 drop-shadow-lg">{workshop.time}</span>
+                              <Clock className="h-4 w-4 text-yellow-400 mr-2" />
+                              <span className="font-inter text-base md:text-sm font-bold text-yellow-400 drop-shadow-lg" style={{color: '#fbbf24 !important'}}>{workshop.time}</span>
                         </div>
                         <div className="flex items-center justify-center">
                               {/* Price removed from UI */}
