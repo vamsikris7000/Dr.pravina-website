@@ -32,8 +32,11 @@ const Workshops = () => {
 
   const fetchWorkshopsData = async () => {
     try {
-      const data = await fetchWorkshops();
-      setWorkshops(data);
+      // Temporarily force fallback data to test the updated timings
+      throw new Error('Forcing fallback data for testing');
+      
+      // const data = await fetchWorkshops();
+      // setWorkshops(data);
     } catch (error) {
       console.error('Error fetching workshops:', error);
       // Fallback to default workshops if backend is not available
