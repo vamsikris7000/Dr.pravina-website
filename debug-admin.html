@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Debug Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button:hover {
+            background: #0056b3;
+        }
+        .result {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        .loading {
+            color: #007bff;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .step {
+            margin: 20px 0;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Admin Dashboard Debug Tool</h1>
+    
+    <div class="container">
+        <h2>Step 1: Test Login</h2>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" value="drpravina.patholife@gmail.com" placeholder="Enter admin email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" value="pravina@1998" placeholder="Enter admin password">
+        </div>
+        <button class="button" onclick="testLogin()">Test Login</button>
+        <div id="loginResult" class="result"></div>
+    </div>
+
+    <div class="container">
+        <h2>Step 2: Test Data Loading (After Login)</h2>
+        <button class="button" onclick="testPatients()">Test Patients API</button>
+        <button class="button" onclick="testAppointments()">Test Appointments API</button>
+        <button class="button" onclick="testMessages()">Test Messages API</button>
+        <button class="button" onclick="testWorkshops()">Test Workshops API</button>
+        <div id="dataResult" class="result"></div>
+    </div>
+
+    <div class="container">
+        <h2>Step 3: Check Local Storage</h2>
+        <button class="button" onclick="checkLocalStorage()">Check Local Storage</button>
+        <div id="storageResult" class="result"></div>
+    </div>
+
+    <div class="container">
+        <h2>Step 4: Manual Admin Dashboard Test</h2>
+        <div class="step">
+            <p><strong>Instructions:</strong></p>
+            <ol>
+                <li>Click "Test Login" above and make sure it succeeds</li>
+                <li>Go to <a href="https://patholife.in/admin" target="_blank">patholife.in/admin</a></li>
+                <li>Login with the same credentials</li>
+                <li>Check if data loads in the dashboard</li>
+                <li>If not, open browser console (F12) and check for errors</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        const DOMAIN = 'patholife.in';
+
+        async function makeRequest(url, options = {}) {
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    ...options
+                });
+                
+                const data = await response.json();
+                return { success: response.ok, status: response.status, data };
+            } catch (error) {
+                return { success: false, error: error.message };
+            }
+        }
+
+        function showResult(elementId, result, isError = false) {
+            const element = document.getElementById(elementId);
+            element.textContent = JSON.stringify(result, null, 2);
+            element.className = `result ${isError ? 'error' : 'success'}`;
+        }
+
+        function showLoading(elementId) {
+            const element = document.getElementById(elementId);
+            element.textContent = 'Loading...';
+            element.className = 'result loading';
+        }
+
+        async function testLogin() {
+            showLoading('loginResult');
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (!email || !password) {
+                showResult('loginResult', { error: 'Please enter both email and password' }, true);
+                return;
+            }
+            
+            const result = await makeRequest(`https://${DOMAIN}/.netlify/functions/auth`, {
+                method: 'POST',
+                body: JSON.stringify({ email, password })
+            });
+            
+            if (result.success && result.data.token) {
+                // Store token for data testing
+                localStorage.setItem('adminToken', result.data.token);
+                showResult('loginResult', {
+                    success: true,
+                    message: 'Login successful! Token stored.',
+                    user: result.data.user,
+                    tokenPreview: result.data.token.substring(0, 50) + '...'
+                }, false);
+            } else {
+                showResult('loginResult', result, true);
+            }
+        }
+
+        async function testPatients() {
+            showLoading('dataResult');
+            const token = localStorage.getItem('adminToken');
+            
+            if (!token) {
+                showResult('dataResult', { error: 'No token found. Please login first.' }, true);
+                return;
+            }
+            
+            const result = await makeRequest(`https://${DOMAIN}/.netlify/functions/api?path=patients_info`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (result.success && Array.isArray(result.data)) {
+                showResult('dataResult', {
+                    success: true,
+                    count: result.data.length,
+                    sample: result.data.slice(0, 3),
+                    message: 'Patients data loaded successfully!'
+                }, false);
+            } else {
+                showResult('dataResult', result, true);
+            }
+        }
+
+        async function testAppointments() {
+            showLoading('dataResult');
+            const token = localStorage.getItem('adminToken');
+            
+            if (!token) {
+                showResult('dataResult', { error: 'No token found. Please login first.' }, true);
+                return;
+            }
+            
+            const result = await makeRequest(`https://${DOMAIN}/.netlify/functions/api?path=appointments`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (result.success && Array.isArray(result.data)) {
+                showResult('dataResult', {
+                    success: true,
+                    count: result.data.length,
+                    sample: result.data.slice(0, 3),
+                    message: 'Appointments data loaded successfully!'
+                }, false);
+            } else {
+                showResult('dataResult', result, true);
+            }
+        }
+
+        async function testMessages() {
+            showLoading('dataResult');
+            const token = localStorage.getItem('adminToken');
+            
+            if (!token) {
+                showResult('dataResult', { error: 'No token found. Please login first.' }, true);
+                return;
+            }
+            
+            const result = await makeRequest(`https://${DOMAIN}/.netlify/functions/api?path=messages`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (result.success && Array.isArray(result.data)) {
+                showResult('dataResult', {
+                    success: true,
+                    count: result.data.length,
+                    sample: result.data.slice(0, 3),
+                    message: 'Messages data loaded successfully!'
+                }, false);
+            } else {
+                showResult('dataResult', result, true);
+            }
+        }
+
+        async function testWorkshops() {
+            showLoading('dataResult');
+            const token = localStorage.getItem('adminToken');
+            
+            if (!token) {
+                showResult('dataResult', { error: 'No token found. Please login first.' }, true);
+                return;
+            }
+            
+            const result = await makeRequest(`https://${DOMAIN}/.netlify/functions/api?path=workshops/all`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (result.success && Array.isArray(result.data)) {
+                showResult('dataResult', {
+                    success: true,
+                    count: result.data.length,
+                    sample: result.data.slice(0, 3),
+                    message: 'Workshops data loaded successfully!'
+                }, false);
+            } else {
+                showResult('dataResult', result, true);
+            }
+        }
+
+        function checkLocalStorage() {
+            const token = localStorage.getItem('adminToken');
+            const result = {
+                hasToken: !!token,
+                tokenPreview: token ? token.substring(0, 50) + '...' : 'No token found',
+                localStorageKeys: Object.keys(localStorage)
+            };
+            showResult('storageResult', result, !token);
+        }
+
+        // Auto-check local storage on load
+        window.onload = function() {
+            checkLocalStorage();
+        };
+    </script>
+</body>
+</html>
