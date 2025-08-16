@@ -16,10 +16,13 @@ const getApiPath = (endpoint) => {
 const getToken = () => localStorage.getItem('adminToken');
 
 // API headers with authentication
-const getHeaders = () => ({
-  'Content-Type': 'application/json',
-  'Authorization': `Bearer ${getToken()}`
-});
+const getHeaders = () => {
+  const token = getToken();
+  return {
+    'Content-Type': 'application/json',
+    ...(token && { 'Authorization': `Bearer ${token}` })
+  };
+};
 
 // Auth API
 export const loginAdmin = async (email, password) => {
@@ -80,10 +83,21 @@ export const loginAdmin = async (email, password) => {
 
 // Patients API
 export const fetchPatients = async () => {
-  const response = await fetch(getApiPath('/patients'), {
-    headers: getHeaders(),
-  });
-  return response.json();
+  try {
+    const response = await fetch(getApiPath('/patients'), {
+      headers: getHeaders(),
+    });
+    
+    if (!response.ok) {
+      console.error('Patients API error:', response.status, response.statusText);
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching patients:', error);
+    return [];
+  }
 };
 
 export const createPatient = async (patientData) => {
@@ -114,10 +128,21 @@ export const deletePatient = async (id) => {
 
 // Appointments API
 export const fetchAppointments = async () => {
-  const response = await fetch(getApiPath('/appointments'), {
-    headers: getHeaders(),
-  });
-  return response.json();
+  try {
+    const response = await fetch(getApiPath('/appointments'), {
+      headers: getHeaders(),
+    });
+    
+    if (!response.ok) {
+      console.error('Appointments API error:', response.status, response.statusText);
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching appointments:', error);
+    return [];
+  }
 };
 
 export const createAppointment = async (appointmentData) => {
@@ -148,10 +173,21 @@ export const deleteAppointment = async (id) => {
 
 // Messages API
 export const fetchMessages = async () => {
-  const response = await fetch(getApiPath('/messages'), {
-    headers: getHeaders(),
-  });
-  return response.json();
+  try {
+    const response = await fetch(getApiPath('/messages'), {
+      headers: getHeaders(),
+    });
+    
+    if (!response.ok) {
+      console.error('Messages API error:', response.status, response.statusText);
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching messages:', error);
+    return [];
+  }
 };
 
 export const createMessage = async (messageData) => {
@@ -364,12 +400,21 @@ export const fetchWorkshops = async () => {
 };
 
 export const fetchAllWorkshops = async () => {
-  const response = await fetch(getApiPath('/workshops/all'), {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  return response.json();
+  try {
+    const response = await fetch(getApiPath('/workshops/all'), {
+      headers: getHeaders(),
+    });
+    
+    if (!response.ok) {
+      console.error('Workshops API error:', response.status, response.statusText);
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching workshops:', error);
+    return [];
+  }
 };
 
 export const createWorkshop = async (workshopData) => {

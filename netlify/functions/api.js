@@ -1,4 +1,20 @@
 import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
+
+// Authentication middleware
+const authenticateToken = (token) => {
+  if (!token) {
+    return { valid: false, error: 'No token provided' };
+  }
+  
+  try {
+    const cleanToken = token.replace('Bearer ', '');
+    const decoded = jwt.verify(cleanToken, process.env.JWT_SECRET);
+    return { valid: true, user: decoded };
+  } catch (error) {
+    return { valid: false, error: 'Invalid token' };
+  }
+};
 
 // Define schemas
 const workshopSchema = new mongoose.Schema({
@@ -166,13 +182,13 @@ export const handler = async function(event, context) {
 
     // Handle different API endpoints
     if (apiPath.startsWith('workshops')) {
-      return await handleWorkshops(method, apiPath, body, headers);
+      return await handleWorkshops(method, apiPath, body, headers, token);
     } else if (apiPath.startsWith('patients')) {
-      return await handlePatients(method, apiPath, body, headers);
+      return await handlePatients(method, apiPath, body, headers, token);
     } else if (apiPath.startsWith('appointments')) {
-      return await handleAppointments(method, apiPath, body, headers);
+      return await handleAppointments(method, apiPath, body, headers, token);
     } else if (apiPath.startsWith('messages')) {
-      return await handleMessages(method, apiPath, body, headers);
+      return await handleMessages(method, apiPath, body, headers, token);
     } else {
       // Return empty data for unknown paths
       return {
@@ -196,7 +212,7 @@ export const handler = async function(event, context) {
 }
 
 // Workshop handlers
-async function handleWorkshops(method, path, body, headers) {
+async function handleWorkshops(method, path, body, headers, token) {
   const parts = path.split('/');
   const id = parts[1];
 
@@ -205,6 +221,19 @@ async function handleWorkshops(method, path, body, headers) {
   console.log('Path:', path);
   console.log('Parts:', parts);
   console.log('ID:', id);
+
+  // Check authentication for admin operations
+  if (method === 'GET' && id === 'all') {
+    // Getting all workshops requires authentication
+    const auth = authenticateToken(token);
+    if (!auth.valid) {
+      return {
+        statusCode: 401,
+        headers,
+        body: JSON.stringify({ error: 'Authentication required', message: auth.error })
+      };
+    }
+  }
 
   if (method === 'GET') {
     if (id === 'all') {
@@ -349,7 +378,7 @@ async function handleWorkshops(method, path, body, headers) {
 }
 
 // Patient handlers
-async function handlePatients(method, path, body, headers) {
+async function handlePatients(method, path, body, headers, token) {
   const parts = path.split('/');
   const id = parts[1];
 
@@ -359,6 +388,19 @@ async function handlePatients(method, path, body, headers) {
   console.log('Parts:', parts);
   console.log('ID:', id);
   console.log('Database name:', mongoose.connection.db.databaseName);
+
+  // Check authentication for admin operations
+  if (method === 'GET' && !id) {
+    // Getting all patients requires authentication
+    const auth = authenticateToken(token);
+    if (!auth.valid) {
+      return {
+        statusCode: 401,
+        headers,
+        body: JSON.stringify({ error: 'Authentication required', message: auth.error })
+      };
+    }
+  }
 
   if (method === 'GET') {
     if (id) {
@@ -485,7 +527,7 @@ async function handlePatients(method, path, body, headers) {
 }
 
 // Appointment handlers
-async function handleAppointments(method, path, body, headers) {
+async function handleAppointments(method, path, body, headers, token) {
   const parts = path.split('/');
   const id = parts[1];
 
@@ -495,6 +537,19 @@ async function handleAppointments(method, path, body, headers) {
   console.log('Parts:', parts);
   console.log('ID:', id);
   console.log('Database name:', mongoose.connection.db.databaseName);
+
+  // Check authentication for admin operations
+  if (method === 'GET' && !id) {
+    // Getting all appointments requires authentication
+    const auth = authenticateToken(token);
+    if (!auth.valid) {
+      return {
+        statusCode: 401,
+        headers,
+        body: JSON.stringify({ error: 'Authentication required', message: auth.error })
+      };
+    }
+  }
 
   if (method === 'GET') {
     if (id) {
@@ -600,7 +655,7 @@ async function handleAppointments(method, path, body, headers) {
 }
 
 // Message handlers
-async function handleMessages(method, path, body, headers) {
+async function handleMessages(method, path, body, headers, token) {
   const parts = path.split('/');
   const id = parts[1];
 
@@ -610,6 +665,19 @@ async function handleMessages(method, path, body, headers) {
   console.log('Parts:', parts);
   console.log('ID:', id);
   console.log('Database name:', mongoose.connection.db.databaseName);
+
+  // Check authentication for admin operations
+  if (method === 'GET' && !id) {
+    // Getting all messages requires authentication
+    const auth = authenticateToken(token);
+    if (!auth.valid) {
+      return {
+        statusCode: 401,
+        headers,
+        body: JSON.stringify({ error: 'Authentication required', message: auth.error })
+      };
+    }
+  }
 
   if (method === 'GET') {
     if (id) {
