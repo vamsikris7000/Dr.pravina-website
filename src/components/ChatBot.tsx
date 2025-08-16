@@ -83,6 +83,12 @@ const ChatBot = () => {
 
   // Pre-warm the chatbot connection
   const preWarmChatbot = async () => {
+    // Check if we've already pre-warmed in this session
+    if (localStorage.getItem('chatbot_prewarmed')) {
+      console.log('Chatbot already pre-warmed, skipping');
+      return;
+    }
+    
     try {
       const apiUrl = window.location.hostname === 'localhost' 
         ? `${import.meta.env.VITE_DIFY_API_BASE_URL}/chat-messages`
@@ -107,6 +113,10 @@ const ChatBot = () => {
           user: 'abc-123'
         }),
       });
+      
+      // Mark as pre-warmed for this session
+      localStorage.setItem('chatbot_prewarmed', 'true');
+      console.log('Chatbot pre-warmed successfully');
     } catch (error) {
       // Silently fail pre-warm
       console.log('Pre-warm failed, continuing normally');
@@ -136,6 +146,7 @@ const ChatBot = () => {
       localStorage.removeItem('chatbot_registration_data');
       localStorage.removeItem('chatbot_conversation_id');
       localStorage.removeItem('chatbot_messages');
+      localStorage.removeItem('chatbot_prewarmed');
       
       // Mark session as started
       localStorage.setItem('chatbot_session_started', 'true');
@@ -592,6 +603,7 @@ const ChatBot = () => {
                     localStorage.removeItem('chatbot_conversation_id');
                     localStorage.removeItem('chatbot_messages');
                     localStorage.removeItem('chatbot_session_started');
+                    localStorage.removeItem('chatbot_prewarmed');
                     
                     setConversationId('');
                     setRegistrationData({ isComplete: false });
