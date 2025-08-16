@@ -8,8 +8,8 @@ const getApiPath = (endpoint) => {
   if (window.location.hostname === 'localhost') {
     return `${API_BASE_URL}/api${endpoint}`;
   }
-  // For Netlify functions, use the working path structure
-  return `${API_BASE_URL}${endpoint}${CACHE_BUSTER}`;
+  // For Netlify functions, use the query parameter structure
+  return `${API_BASE_URL}/api?path=${endpoint.replace('/', '')}${CACHE_BUSTER}`;
 };
 
 // Get token from localStorage
