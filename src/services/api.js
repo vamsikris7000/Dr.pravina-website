@@ -13,7 +13,30 @@ const getApiPath = (endpoint) => {
 };
 
 // Get token from localStorage
-const getToken = () => localStorage.getItem('adminToken');
+const getToken = () => {
+  const token = localStorage.getItem('adminToken');
+  
+  // Check if token exists and is not expired
+  if (token) {
+    try {
+      // Decode JWT to check expiration (without verification)
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const currentTime = Math.floor(Date.now() / 1000);
+      
+      if (payload.exp && payload.exp < currentTime) {
+        console.log('Token expired, removing from localStorage');
+        localStorage.removeItem('adminToken');
+        return null;
+      }
+    } catch (error) {
+      console.log('Invalid token format, removing from localStorage');
+      localStorage.removeItem('adminToken');
+      return null;
+    }
+  }
+  
+  return token;
+};
 
 // API headers with authentication
 const getHeaders = () => {
@@ -98,6 +121,15 @@ export const fetchPatients = async () => {
       headers: getHeaders(),
     });
     
+    if (response.status === 401) {
+      console.log('Token expired, attempting to re-login...');
+      // Clear expired token
+      localStorage.removeItem('adminToken');
+      // Redirect to login or trigger re-login
+      window.location.href = '/admin';
+      return [];
+    }
+    
     if (!response.ok) {
       console.error('Patients API error:', response.status, response.statusText);
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -143,6 +175,13 @@ export const fetchAppointments = async () => {
       headers: getHeaders(),
     });
     
+    if (response.status === 401) {
+      console.log('Token expired, attempting to re-login...');
+      localStorage.removeItem('adminToken');
+      window.location.href = '/admin';
+      return [];
+    }
+    
     if (!response.ok) {
       console.error('Appointments API error:', response.status, response.statusText);
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -187,6 +226,13 @@ export const fetchMessages = async () => {
     const response = await fetch(getApiPath('/messages'), {
       headers: getHeaders(),
     });
+    
+    if (response.status === 401) {
+      console.log('Token expired, attempting to re-login...');
+      localStorage.removeItem('adminToken');
+      window.location.href = '/admin';
+      return [];
+    }
     
     if (!response.ok) {
       console.error('Messages API error:', response.status, response.statusText);
