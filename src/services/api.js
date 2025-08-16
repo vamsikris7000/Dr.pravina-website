@@ -59,7 +59,11 @@ const getHeaders = () => {
 // Auth API
 export const loginAdmin = async (email, password) => {
   try {
-    const apiPath = getApiPath('/auth');
+    // Auth endpoint should be direct, not through the API path
+    const apiPath = window.location.hostname === 'localhost' 
+      ? `${API_BASE_URL}/auth`
+      : '/.netlify/functions/auth';
+      
     console.log('=== LOGIN DEBUG INFO ===');
     console.log('Attempting login to:', apiPath);
     console.log('Environment:', import.meta.env.MODE);
