@@ -73,6 +73,8 @@ This project uses environment variables for configuration. Copy `.env.example` t
 - `DIFY_API_BASE_URL`: Dify chatbot API URL
 - `DIFY_API_KEY`: Dify chatbot API key
 
+**Note**: Set these in your Netlify environment variables for production deployment.
+
 ### Security Note
 
 Never commit your `.env` file to version control. It's already added to `.gitignore`.
