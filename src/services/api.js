@@ -9,7 +9,8 @@ const getApiPath = (endpoint) => {
     return `${API_BASE_URL}/api${endpoint}`;
   }
   // For Netlify functions, use the query parameter structure
-  return `${API_BASE_URL}/api?path=${endpoint.replace('/', '')}${CACHE_BUSTER}`;
+  // Add cache buster as a separate query parameter, not appended to path
+  return `${API_BASE_URL}/api?path=${endpoint.replace('/', '')}&${CACHE_BUSTER.replace('?', '')}`;
 };
 
 // Get token from localStorage
