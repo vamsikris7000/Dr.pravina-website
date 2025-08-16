@@ -1,7 +1,7 @@
 const API_BASE_URL = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:5001' : '/.netlify/functions');
 
 // Add cache busting for production
-const CACHE_BUSTER = window.location.hostname !== 'localhost' ? `?v=${Date.now()}` : '';
+const CACHE_BUSTER = window.location.hostname !== 'localhost' ? `?v=${Date.now()}_${Math.random().toString(36).substr(2, 9)}` : '';
 
 // Helper function to get the correct API path
 const getApiPath = (endpoint) => {
