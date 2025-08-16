@@ -465,6 +465,13 @@ export const fetchAllWorkshops = async () => {
       headers: getHeaders(),
     });
     
+    if (response.status === 401) {
+      console.log('Token expired, attempting to re-login...');
+      localStorage.removeItem('adminToken');
+      window.location.href = '/admin';
+      return [];
+    }
+    
     if (!response.ok) {
       console.error('Workshops API error:', response.status, response.statusText);
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
