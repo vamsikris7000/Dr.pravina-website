@@ -294,9 +294,9 @@ export const fetchWorkshops = async () => {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
     
-    // Check if response is JSON
+    // Check if response is JSON - be more flexible with content-type
     const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
+    if (!contentType || (!contentType.includes('application/json') && !contentType.includes('text/plain'))) {
       console.error('Workshops API returned non-JSON response:', contentType);
       throw new Error('API returned non-JSON response');
     }
