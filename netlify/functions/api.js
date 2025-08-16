@@ -183,6 +183,8 @@ export const handler = async function(event, context) {
     // Handle different API endpoints
     if (apiPath.startsWith('workshops')) {
       return await handleWorkshops(method, apiPath, body, headers, token);
+    } else if (apiPath.startsWith('patients_info')) {
+      return await handlePatients(method, apiPath, body, headers, token);
     } else if (apiPath.startsWith('patients')) {
       return await handlePatients(method, apiPath, body, headers, token);
     } else if (apiPath.startsWith('appointments')) {

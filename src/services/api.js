@@ -84,7 +84,7 @@ export const loginAdmin = async (email, password) => {
 // Patients API
 export const fetchPatients = async () => {
   try {
-    const response = await fetch(getApiPath('/patients'), {
+    const response = await fetch(getApiPath('/patients_info'), {
       headers: getHeaders(),
     });
     
@@ -101,7 +101,7 @@ export const fetchPatients = async () => {
 };
 
 export const createPatient = async (patientData) => {
-  const response = await fetch(getApiPath('/patients'), {
+  const response = await fetch(getApiPath('/patients_info'), {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify(patientData),
@@ -110,7 +110,7 @@ export const createPatient = async (patientData) => {
 };
 
 export const updatePatientStatus = async (id, status) => {
-  const response = await fetch(getApiPath(`/patients/${id}`), {
+  const response = await fetch(getApiPath(`/patients_info/${id}`), {
     method: 'PATCH',
     headers: getHeaders(),
     body: JSON.stringify({ status }),
@@ -119,7 +119,7 @@ export const updatePatientStatus = async (id, status) => {
 };
 
 export const deletePatient = async (id) => {
-  const response = await fetch(getApiPath(`/patients/${id}`), {
+  const response = await fetch(getApiPath(`/patients_info/${id}`), {
     method: 'DELETE',
     headers: getHeaders(),
   });
