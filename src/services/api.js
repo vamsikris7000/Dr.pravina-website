@@ -18,6 +18,15 @@ const getToken = () => localStorage.getItem('adminToken');
 // API headers with authentication
 const getHeaders = () => {
   const token = getToken();
+  console.log('=== API HEADERS DEBUG ===');
+  console.log('Token from localStorage:', token ? 'FOUND' : 'NOT FOUND');
+  console.log('Token preview:', token ? `${token.substring(0, 20)}...` : 'N/A');
+  console.log('Headers being sent:', {
+    'Content-Type': 'application/json',
+    ...(token && { 'Authorization': `Bearer ${token.substring(0, 20)}...` })
+  });
+  console.log('=== END API HEADERS DEBUG ===');
+  
   return {
     'Content-Type': 'application/json',
     ...(token && { 'Authorization': `Bearer ${token}` })
@@ -69,6 +78,7 @@ export const loginAdmin = async (email, password) => {
     
     const data = await response.json();
     console.log('Login successful:', { hasToken: !!data.token, user: data.user });
+    console.log('Token preview:', data.token ? `${data.token.substring(0, 20)}...` : 'N/A');
     return data;
   } catch (error) {
     console.error('Login error details:', {
