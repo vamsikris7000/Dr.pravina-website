@@ -365,7 +365,7 @@ const AdminDashboard = () => {
             </TabsTrigger>
             <TabsTrigger value="patients" className="flex items-center gap-2">
               <Users className="h-4 w-4" />
-              Patients ({patients.length})
+              Patients Info ({patients.length})
             </TabsTrigger>
             <TabsTrigger value="appointments" className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
@@ -392,7 +392,7 @@ const AdminDashboard = () => {
                 <CardContent>
                   <div className="text-2xl font-bold">{Array.isArray(patients) ? patients.length : 0}</div>
                   <p className="text-xs text-muted-foreground">
-                    {Array.isArray(patients) ? patients.filter(p => p.status === 'new').length : 0} new submissions
+                    {Array.isArray(patients) ? patients.filter(p => p.status === 'new').length : 0} new submissions (v2)
                   </p>
                 </CardContent>
               </Card>
