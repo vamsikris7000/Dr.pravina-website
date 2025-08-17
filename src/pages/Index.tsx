@@ -644,6 +644,9 @@ const Index = () => {
                 <p className="font-inter text-gray-500 text-xs mt-1">
                   Designed with wellness in mind
                 </p>
+                <p className="font-inter text-gray-600 text-xs mt-2">
+                  Partnered with <span className="text-blue-400 font-medium">Xpectrum-AI</span>
+                </p>
               </div>
             </div>
           </div>

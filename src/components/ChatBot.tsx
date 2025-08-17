@@ -546,37 +546,14 @@ const ChatBot = () => {
           style={{ boxShadow: '0 8px 40px 0 rgba(13, 148, 136, 0.10)' }}
         >
           <DialogHeader className="p-4 md:p-6 border-b border-teal-100 flex-shrink-0 rounded-t-2xl md:rounded-t-3xl" style={{ backgroundColor: '#F2FAF7' }}>
-            <div className="flex items-center justify-between gap-4">
-              <div className="text-xs text-gray-500 text-center flex-1">
-                Powered by <span className="font-semibold text-blue-600">Xpectrum-AI</span> agents
+            <div className="flex items-center justify-center">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-px bg-gray-400"></div>
+                <div className="text-xs text-gray-500 text-center">
+                  Powered by <span className="font-semibold text-blue-600">Xpectrum-AI</span> agents
+                </div>
+                <div className="w-8 h-px bg-gray-400"></div>
               </div>
-              {conversationId && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    // Clear localStorage
-                    localStorage.removeItem('chatbot_registration_data');
-                    localStorage.removeItem('chatbot_conversation_id');
-                    localStorage.removeItem('chatbot_messages');
-                    localStorage.removeItem('chatbot_session_started');
-                    
-                    setConversationId('');
-                    setRegistrationData({ isComplete: false });
-                    setMessages([{
-                      id: "welcome",
-                      text: "👋 Hello there! How can we assist you?",
-                      isUser: false,
-                      timestamp: new Date(),
-                    }]);
-                    console.log('New chat started manually');
-                  }}
-                  className="text-xs h-8 px-3 md:px-4 whitespace-nowrap flex-shrink-0 ml-auto"
-                >
-                  <span className="hidden sm:inline">New Chat</span>
-                  <span className="sm:hidden">New</span>
-                </Button>
-              )}
             </div>
             {conversationId && (
               <div className="text-xs text-teal-600 text-center mt-1 px-2">

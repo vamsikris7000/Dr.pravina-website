@@ -665,7 +665,7 @@ const AdminDashboard = () => {
                               variant={workshop.status === 'live' ? 'default' : 'outline'}
                               size="sm"
                               onClick={() => handleWorkshopStatusToggle(workshop._id, workshop.status)}
-                              className={`min-w-[100px] ${
+                              className={`min-w-[80px] max-w-[100px] text-xs ${
                                 workshop.status === 'live' 
                                   ? 'bg-green-600 hover:bg-green-700 text-white' 
                                   : 'bg-orange-500 hover:bg-orange-600 text-white'
