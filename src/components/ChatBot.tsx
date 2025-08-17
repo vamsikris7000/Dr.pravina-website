@@ -531,10 +531,7 @@ const ChatBot = () => {
                 </div>
               </div>
 
-              {/* Xpectrum-AI branding */}
-              <div className="text-xs text-gray-500 text-center mt-2">
-                Powered by <span className="font-semibold text-blue-600">Xpectrum-AI</span>
-              </div>
+
 
             </div>
           </div>
@@ -549,10 +546,10 @@ const ChatBot = () => {
           style={{ boxShadow: '0 8px 40px 0 rgba(13, 148, 136, 0.10)' }}
         >
           <DialogHeader className="p-4 md:p-6 border-b border-teal-100 flex-shrink-0 rounded-t-2xl md:rounded-t-3xl" style={{ backgroundColor: '#F2FAF7' }}>
-            <div className="flex items-center justify-between gap-2">
-              <DialogTitle className="text-lg md:text-2xl font-playfair font-bold text-teal-700 leading-tight">
-                Questions about Joining? Ask us here.
-              </DialogTitle>
+            <div className="flex items-center justify-between gap-4">
+              <div className="text-xs text-gray-500 text-center flex-1">
+                Powered by <span className="font-semibold text-blue-600">Xpectrum-AI</span> agents
+              </div>
               {conversationId && (
                 <Button
                   variant="outline"
@@ -574,7 +571,7 @@ const ChatBot = () => {
                     }]);
                     console.log('New chat started manually');
                   }}
-                  className="text-xs h-8 px-2 md:px-3 whitespace-nowrap flex-shrink-0"
+                  className="text-xs h-8 px-3 md:px-4 whitespace-nowrap flex-shrink-0 ml-auto"
                 >
                   <span className="hidden sm:inline">New Chat</span>
                   <span className="sm:hidden">New</span>
@@ -596,9 +593,6 @@ const ChatBot = () => {
                 📝 Registration in progress - {registrationData.firstName} {registrationData.lastName || ''}
               </div>
             )}
-            <div className="text-xs text-gray-500 text-center mt-2 px-2 border-t border-gray-200 pt-2">
-              Powered by <span className="font-semibold text-blue-600">Xpectrum-AI</span> agent
-            </div>
           </DialogHeader>
 
           {/* Messages */}
