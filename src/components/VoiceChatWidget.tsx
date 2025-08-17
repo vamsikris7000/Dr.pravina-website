@@ -237,9 +237,13 @@ const VoiceChatWidget = ({ variant = 'standalone' }: VoiceChatWidgetProps) => {
           <img 
             src="/photos/x.jpeg" 
             alt="Connecting" 
-            className="w-4 h-4 animate-pulse animate-bounce"
+            className="w-5 h-5 animate-pulse animate-bounce object-contain"
             style={{
               animation: 'float 2s ease-in-out infinite'
+            }}
+            onError={(e) => {
+              console.error('Failed to load connecting image:', e);
+              e.currentTarget.style.display = 'none';
             }}
           />
         </div>
@@ -282,9 +286,13 @@ const VoiceChatWidget = ({ variant = 'standalone' }: VoiceChatWidgetProps) => {
           <img 
             src="/photos/x.jpeg" 
             alt="Connecting" 
-            className="w-5 h-5 animate-pulse"
+            className="w-6 h-6 animate-pulse object-contain"
             style={{
               animation: 'float 2s ease-in-out infinite'
+            }}
+            onError={(e) => {
+              console.error('Failed to load connecting image:', e);
+              e.currentTarget.style.display = 'none';
             }}
           />
         ) : (
@@ -333,9 +341,13 @@ const VoiceChatWidget = ({ variant = 'standalone' }: VoiceChatWidgetProps) => {
             <img 
               src="/photos/x.jpeg" 
               alt="Connecting" 
-              className="w-5 h-5 animate-pulse"
+              className="w-6 h-6 animate-pulse object-contain"
               style={{
                 animation: 'float 2s ease-in-out infinite'
+              }}
+              onError={(e) => {
+                console.error('Failed to load connecting image:', e);
+                e.currentTarget.style.display = 'none';
               }}
             />
           ) : (
