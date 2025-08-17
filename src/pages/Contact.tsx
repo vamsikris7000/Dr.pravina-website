@@ -317,8 +317,8 @@ const Contact = () => {
                 <p className="font-inter text-gray-500 text-xs mt-1">
                   Designed with wellness in mind
                 </p>
-                <p className="font-inter text-gray-600 text-xs mt-2 flex items-center justify-center gap-2">
-                  Partnered with <img src="/photos/XpectrumLogo.png" alt="Xpectrum-AI" className="h-6 w-auto object-contain" />
+                <p className="font-inter text-gray-600 text-xs mt-2 flex items-center justify-center gap-3">
+                  <span>Partnered with</span> <img src="/photos/XpectrumLogo.png" alt="Xpectrum-AI" className="h-6 w-auto object-contain" />
                 </p>
               </div>
             </div>

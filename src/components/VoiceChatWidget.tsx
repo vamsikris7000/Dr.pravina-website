@@ -2,17 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Phone, PhoneOff } from "lucide-react";
 import * as LivekitClient from "livekit-client";
 
-// Add floating animation styles
-const floatingAnimation = `
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-4px);
-    }
-  }
-`;
+
 
 interface VoiceChatWidgetProps {
   variant?: 'chatbar' | 'standalone';
@@ -233,19 +223,10 @@ const VoiceChatWidget = ({ variant = 'standalone' }: VoiceChatWidgetProps) => {
   } else if (status === 'connecting') {
     buttonContent = (
       <div className="flex items-center gap-2 font-semibold tracking-wide text-white text-base">
-        <div className="relative">
-          <img 
-            src="/photos/x.jpeg" 
-            alt="Connecting" 
-            className="w-5 h-5 animate-pulse animate-bounce object-contain"
-            style={{
-              animation: 'float 2s ease-in-out infinite'
-            }}
-            onError={(e) => {
-              console.error('Failed to load connecting image:', e);
-              e.currentTarget.style.display = 'none';
-            }}
-          />
+        <div className="flex items-center justify-center space-x-1">
+          <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+          <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+          <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
         </div>
         Connecting...
       </div>
@@ -256,16 +237,7 @@ const VoiceChatWidget = ({ variant = 'standalone' }: VoiceChatWidgetProps) => {
     );
   }
 
-  // Inject floating animation CSS
-  useEffect(() => {
-    const style = document.createElement('style');
-    style.textContent = floatingAnimation;
-    document.head.appendChild(style);
-    
-    return () => {
-      document.head.removeChild(style);
-    };
-  }, []);
+
 
   // If variant is 'chatbar', show only the phone icon (mobile style) for both desktop and mobile
   if (variant === 'chatbar') {
@@ -283,18 +255,11 @@ const VoiceChatWidget = ({ variant = 'standalone' }: VoiceChatWidgetProps) => {
         {status === 'connected' ? (
           <PhoneOff className="w-5 h-5" />
         ) : status === 'connecting' ? (
-          <img 
-            src="/photos/x.jpeg" 
-            alt="Connecting" 
-            className="w-6 h-6 animate-pulse object-contain"
-            style={{
-              animation: 'float 2s ease-in-out infinite'
-            }}
-            onError={(e) => {
-              console.error('Failed to load connecting image:', e);
-              e.currentTarget.style.display = 'none';
-            }}
-          />
+          <div className="flex items-center justify-center space-x-1">
+            <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+            <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+            <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+          </div>
         ) : (
           <Phone className="w-5 h-5" />
         )}
@@ -338,18 +303,11 @@ const VoiceChatWidget = ({ variant = 'standalone' }: VoiceChatWidgetProps) => {
           {status === 'connected' ? (
             <PhoneOff className="w-5 h-5" />
           ) : status === 'connecting' ? (
-            <img 
-              src="/photos/x.jpeg" 
-              alt="Connecting" 
-              className="w-6 h-6 animate-pulse object-contain"
-              style={{
-                animation: 'float 2s ease-in-out infinite'
-              }}
-              onError={(e) => {
-                console.error('Failed to load connecting image:', e);
-                e.currentTarget.style.display = 'none';
-              }}
-            />
+            <div className="flex items-center justify-center space-x-1">
+              <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+              <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+              <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+            </div>
           ) : (
             <Phone className="w-5 h-5" />
           )}
