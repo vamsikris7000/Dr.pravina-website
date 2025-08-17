@@ -298,8 +298,8 @@ const Consultations = () => {
                 <p className="font-inter text-gray-500 text-xs mt-1">
                   Designed with wellness in mind
                 </p>
-                <p className="font-inter text-gray-600 text-xs mt-2">
-                  Partnered with <span className="text-blue-400 font-medium">Xpectrum-AI</span>
+                <p className="font-inter text-gray-600 text-xs mt-2 flex items-center justify-center gap-2">
+                  Partnered with <img src="/photos/XpectrumLogo.png" alt="Xpectrum-AI" className="h-6 w-auto object-contain" />
                 </p>
               </div>
             </div>

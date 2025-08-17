@@ -510,7 +510,17 @@ const ChatBot = () => {
                 />
                 {!isFocused && !inputValue && (
                   <div className="absolute left-4 top-1/2 transform -translate-y-1/2 pointer-events-none select-none" style={{ color: '#368079' }}>
-                    👋 Hello there! How can we assist you?
+                    {conversationId ? (
+                      <>
+                        <span className="hidden sm:inline">💬 Continue chat...</span>
+                        <span className="sm:hidden">💬 Continue...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="hidden sm:inline">👋 Hello there! How can we assist you?</span>
+                        <span className="sm:hidden">👋 Hello there!</span>
+                      </>
+                    )}
                   </div>
                 )}
                 <div className="absolute right-1 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
