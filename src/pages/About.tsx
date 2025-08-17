@@ -130,12 +130,12 @@ const About = () => {
             <h2 className="font-playfair text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight text-center">Her Journey</h2>
             
             <div className="relative">
-              <div className="float-left mr-6 mb-4 animate-scale-in">
+              <div className="md:float-left md:mr-6 mb-4 animate-scale-in">
                 <div className="relative">
                   <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-pulse-glow"></div>
                   
                   {/* Photo Carousel */}
-                  <div className="relative w-80 h-96 rounded-2xl shadow-elevated overflow-hidden">
+                  <div className="relative w-full max-w-80 h-80 md:h-96 rounded-2xl shadow-elevated overflow-hidden">
                     <img 
                       src={journeyPhotos[currentPhoto]} 
                       alt={`Dr. Pravina Kale - Journey Photo ${currentPhoto + 1}`} 
@@ -258,9 +258,9 @@ const About = () => {
               <div className="flex group" style={{ animation: 'scroll-left 20s linear infinite' }}>
                 {/* First set of cards */}
                 {professionalHighlights.map((highlight, index) => (
-                  <div key={`first-${index}`} className="flex-shrink-0 w-80 mx-4">
+                  <div key={`first-${index}`} className="flex-shrink-0 w-64 md:w-80 mx-2 md:mx-4">
                     <Card className="h-full bg-white shadow-lg border-gray-200 hover:shadow-xl transition-all duration-300 hover:scale-105 group-hover:pause">
-                      <CardContent className="p-6 text-center">
+                      <CardContent className="p-4 md:p-6 text-center">
                         <div className={`w-16 h-16 bg-gradient-to-br ${highlight.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
                           <highlight.icon className="h-8 w-8 text-white" />
                         </div>
@@ -277,9 +277,9 @@ const About = () => {
                 
                 {/* Duplicate set for seamless loop */}
                 {professionalHighlights.map((highlight, index) => (
-                  <div key={`second-${index}`} className="flex-shrink-0 w-80 mx-4">
+                  <div key={`second-${index}`} className="flex-shrink-0 w-64 md:w-80 mx-2 md:mx-4">
                     <Card className="h-full bg-white shadow-lg border-gray-200 hover:shadow-xl transition-all duration-300 hover:scale-105 group-hover:pause">
-                      <CardContent className="p-6 text-center">
+                      <CardContent className="p-4 md:p-6 text-center">
                         <div className={`w-16 h-16 bg-gradient-to-br ${highlight.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
                           <highlight.icon className="h-8 w-8 text-white" />
                         </div>
@@ -399,9 +399,9 @@ const About = () => {
                     color: "from-emerald-400 to-emerald-600"
                   }
                 ].map((achievement, index) => (
-                  <div key={`first-${index}`} className="flex-shrink-0 w-80 mx-4">
+                  <div key={`first-${index}`} className="flex-shrink-0 w-64 md:w-80 mx-2 md:mx-4">
                     <Card className="h-full bg-white shadow-lg border-gray-200 hover:shadow-xl transition-all duration-300 hover:scale-105 group-hover:pause">
-                      <CardContent className="p-6 text-center">
+                      <CardContent className="p-4 md:p-6 text-center">
                         <div className={`w-16 h-16 bg-gradient-to-br ${achievement.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg text-2xl`}>
                           {achievement.icon}
                         </div>
@@ -485,9 +485,9 @@ const About = () => {
                     color: "from-emerald-400 to-emerald-600"
                   }
                 ].map((achievement, index) => (
-                  <div key={`second-${index}`} className="flex-shrink-0 w-80 mx-4">
+                  <div key={`second-${index}`} className="flex-shrink-0 w-64 md:w-80 mx-2 md:mx-4">
                     <Card className="h-full bg-white shadow-lg border-gray-200 hover:shadow-xl transition-all duration-300 hover:scale-105 group-hover:pause">
-                      <CardContent className="p-6 text-center">
+                      <CardContent className="p-4 md:p-6 text-center">
                         <div className={`w-16 h-16 bg-gradient-to-br ${achievement.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg text-2xl`}>
                           {achievement.icon}
                         </div>
