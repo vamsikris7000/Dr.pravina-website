@@ -560,7 +560,14 @@ const ChatBot = () => {
               <div className="flex items-center gap-3">
                 <div className="w-8 h-px bg-gray-400"></div>
                 <div className="text-xs text-gray-500 text-center">
-                  Powered by <span className="font-semibold text-blue-600">Xpectrum-AI</span> agents
+                  Powered by <a 
+                    href="https://www.xpectrum-ai.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="font-semibold text-blue-600 hover:text-blue-700 transition-colors duration-200"
+                  >
+                    Xpectrum-AI
+                  </a> agents
                 </div>
                 <div className="w-8 h-px bg-gray-400"></div>
               </div>
