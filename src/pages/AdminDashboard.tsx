@@ -358,7 +358,7 @@ const AdminDashboard = () => {
         </div>
 
         <Tabs defaultValue="dashboard" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 gap-2 md:gap-0 mb-8">
+          <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 gap-1 md:gap-0 mb-8">
             <TabsTrigger value="dashboard" className="flex items-center gap-1 md:gap-2 text-xs md:text-sm data-[state=active]:bg-blue-100 data-[state=active]:text-blue-900">
               <BarChart3 className="h-3 w-3 md:h-4 md:w-4" />
               <span className="hidden sm:inline">Dashboard</span>
@@ -382,7 +382,7 @@ const AdminDashboard = () => {
             <TabsTrigger value="workshops" className="flex items-center gap-1 md:gap-2 text-xs md:text-sm data-[state=active]:bg-blue-100 data-[state=active]:text-blue-900">
               <BookOpen className="h-3 w-3 md:h-4 md:w-4" />
               <span className="hidden sm:inline">Workshops ({workshops.length})</span>
-              <span className="sm:hidden">Workshops ({workshops.length})</span>
+              <span className="sm:hidden">WS ({workshops.length})</span>
             </TabsTrigger>
           </TabsList>
 
