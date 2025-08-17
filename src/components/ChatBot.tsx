@@ -531,6 +531,10 @@ const ChatBot = () => {
                 </div>
               </div>
 
+              {/* Xpectrum-AI branding */}
+              <div className="text-xs text-gray-500 text-center mt-2">
+                Powered by <span className="font-semibold text-blue-600">Xpectrum-AI</span>
+              </div>
 
             </div>
           </div>
@@ -540,13 +544,13 @@ const ChatBot = () => {
       {/* Chat Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={handleDialogClose}>
         <DialogContent
-          className="w-[75vw] max-w-[75vw] h-[75vh] max-h-[75vh] p-0 gap-0 rounded-3xl border-0 shadow-2xl bg-white flex flex-col transition-all duration-300 ease-in-out animate-fade-in overflow-hidden font-poppins
-            sm:max-w-full sm:max-h-full sm:p-2"
+          className="w-[95vw] max-w-[95vw] h-[90vh] max-h-[90vh] p-0 gap-0 rounded-2xl md:rounded-3xl border-0 shadow-2xl bg-white flex flex-col transition-all duration-300 ease-in-out animate-fade-in overflow-hidden font-poppins
+            md:w-[75vw] md:max-w-[75vw] md:h-[75vh] md:max-h-[75vh]"
           style={{ boxShadow: '0 8px 40px 0 rgba(13, 148, 136, 0.10)' }}
         >
-          <DialogHeader className="p-6 border-b border-teal-100 flex-shrink-0 rounded-t-3xl" style={{ backgroundColor: '#F2FAF7' }}>
-            <div className="flex items-center justify-between">
-              <DialogTitle className="text-2xl font-playfair font-bold text-teal-700">
+          <DialogHeader className="p-4 md:p-6 border-b border-teal-100 flex-shrink-0 rounded-t-2xl md:rounded-t-3xl" style={{ backgroundColor: '#F2FAF7' }}>
+            <div className="flex items-center justify-between gap-2">
+              <DialogTitle className="text-lg md:text-2xl font-playfair font-bold text-teal-700 leading-tight">
                 Questions about Joining? Ask us here.
               </DialogTitle>
               {conversationId && (
@@ -570,27 +574,31 @@ const ChatBot = () => {
                     }]);
                     console.log('New chat started manually');
                   }}
-                  className="text-xs h-8 px-3"
+                  className="text-xs h-8 px-2 md:px-3 whitespace-nowrap flex-shrink-0"
                 >
-                  New Chat
+                  <span className="hidden sm:inline">New Chat</span>
+                  <span className="sm:hidden">New</span>
                 </Button>
               )}
             </div>
             {conversationId && (
-              <div className="text-xs text-teal-600 text-center mt-1">
+              <div className="text-xs text-teal-600 text-center mt-1 px-2">
                 💬 Continuing conversation
               </div>
             )}
             {registrationData.userName && (
-              <div className="text-xs text-blue-600 text-center mt-1">
+              <div className="text-xs text-blue-600 text-center mt-1 px-2">
                 👤 Chatting with {registrationData.userName}
               </div>
             )}
             {registrationData.firstName && (
-              <div className="text-xs text-green-600 text-center mt-1">
+              <div className="text-xs text-green-600 text-center mt-1 px-2">
                 📝 Registration in progress - {registrationData.firstName} {registrationData.lastName || ''}
               </div>
             )}
+            <div className="text-xs text-gray-500 text-center mt-2 px-2 border-t border-gray-200 pt-2">
+              Powered by <span className="font-semibold text-blue-600">Xpectrum-AI</span> agent
+            </div>
           </DialogHeader>
 
           {/* Messages */}
