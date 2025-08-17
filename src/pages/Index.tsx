@@ -645,7 +645,15 @@ const Index = () => {
                   Designed with wellness in mind
                 </p>
                 <p className="font-inter text-gray-600 text-xs mt-2 flex items-center justify-center gap-3">
-                  <span>Partnered with</span> <img src="/photos/XpectrumLogo.png" alt="Xpectrum-AI" className="h-6 w-auto object-contain" />
+                  <span>Partnered with</span> 
+                  <a 
+                    href="https://www.xpectrum-ai.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:opacity-80 transition-opacity duration-200"
+                  >
+                    <img src="/photos/XpectrumLogo.png" alt="Xpectrum-AI" className="h-6 w-auto object-contain" />
+                  </a>
                 </p>
               </div>
             </div>

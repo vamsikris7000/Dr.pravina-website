@@ -652,26 +652,33 @@ const AdminDashboard = () => {
                               <p className="text-xs text-gray-500">{workshop.audience}</p>
                             </div>
                           </div>
-                          <div className="flex gap-2 flex-shrink-0">
+                          <div className="flex gap-1 md:gap-2 flex-shrink-0">
                             <Button
                               variant="outline"
                               size="sm"
                               onClick={() => handleWorkshopEdit(workshop._id)}
+                              className="text-xs px-2 md:px-3"
                             >
-                              <Edit className="h-4 w-4 mr-2" />
-                              Edit
+                              <Edit className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />
+                              <span className="hidden sm:inline">Edit</span>
+                              <span className="sm:hidden">E</span>
                             </Button>
                             <Button
                               variant={workshop.status === 'live' ? 'default' : 'outline'}
                               size="sm"
                               onClick={() => handleWorkshopStatusToggle(workshop._id, workshop.status)}
-                              className={`min-w-[80px] max-w-[100px] text-xs ${
+                              className={`text-xs px-2 md:px-3 min-w-[60px] md:min-w-[80px] max-w-[80px] md:max-w-[100px] ${
                                 workshop.status === 'live' 
                                   ? 'bg-green-600 hover:bg-green-700 text-white' 
                                   : 'bg-orange-500 hover:bg-orange-600 text-white'
                               }`}
                             >
-                              {workshop.status === 'live' ? 'Live' : 'Coming Soon'}
+                              {workshop.status === 'live' ? (
+                                <span className="hidden sm:inline">Live</span>
+                              ) : (
+                                <span className="hidden sm:inline">Coming Soon</span>
+                              )}
+                              <span className="sm:hidden">{workshop.status === 'live' ? 'Live' : 'Soon'}</span>
                             </Button>
                           </div>
                         </div>
