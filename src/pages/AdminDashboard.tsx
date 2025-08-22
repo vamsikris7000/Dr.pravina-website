@@ -20,7 +20,8 @@ import {
   RefreshCw,
   MessageSquare,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  User
 } from "lucide-react";
 import AdminLogin from "@/components/AdminLogin";
 import { 
@@ -28,6 +29,7 @@ import {
   fetchAppointments, 
   fetchMessages,
   fetchAllWorkshops,
+  fetchPaymentForms,
   updatePatientStatus, 
   updateAppointmentStatus,
   updateMessageStatus,
@@ -94,8 +96,32 @@ interface Workshop {
   updatedAt: string;
 }
 
+interface PaymentForm {
+  _id: string;
+  fullName: string;
+  age: number;
+  cityState: string;
+  email: string;
+  phoneNumber: string;
+  heardFrom: string;
+  registeredFor: 'Wellness Reset' | 'Healing Plan' | '6 Months' | '1:1 Consultation';
+  paymentStatus: 'pending' | 'completed' | 'failed' | 'cancelled';
+  razorpayOrderId?: string;
+  razorpayPaymentId?: string;
+  razorpaySignature?: string;
+  amount: number;
+  currency: string;
+  serviceStatus: 'pending' | 'active' | 'completed' | 'cancelled';
+  startDate?: string;
+  endDate?: string;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 const AdminDashboard = () => {
   const [editingWorkshops, setEditingWorkshops] = useState<{[key: string]: boolean}>({});
+  const [paymentForms, setPaymentForms] = useState<PaymentForm[]>([]);
   
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -140,18 +166,20 @@ const AdminDashboard = () => {
     try {
       console.log('Fetching data from MongoDB...');
       
-      const [patientsData, appointmentsData, messagesData, workshopsData] = await Promise.all([
+      const [patientsData, appointmentsData, messagesData, workshopsData, paymentFormsData] = await Promise.all([
         fetchPatients(),
         fetchAppointments(),
         fetchMessages(),
-        fetchAllWorkshops()
+        fetchAllWorkshops(),
+        fetchPaymentForms()
       ]);
       
       console.log('Data received:', {
         patients: Array.isArray(patientsData) ? patientsData.length : 'Error',
         appointments: Array.isArray(appointmentsData) ? appointmentsData.length : 'Error',
         messages: Array.isArray(messagesData) ? messagesData.length : 'Error',
-        workshops: Array.isArray(workshopsData) ? workshopsData.length : 'Error'
+        workshops: Array.isArray(workshopsData) ? workshopsData.length : 'Error',
+        paymentForms: Array.isArray(paymentFormsData) ? paymentFormsData.length : 'Error'
       });
       
       // Check if responses are arrays (success) or error objects
@@ -159,18 +187,21 @@ const AdminDashboard = () => {
       const appointmentsArray = Array.isArray(appointmentsData) ? appointmentsData : [];
       const messagesArray = Array.isArray(messagesData) ? messagesData : [];
       const workshopsArray = Array.isArray(workshopsData) ? workshopsData : [];
+      const paymentFormsArray = Array.isArray(paymentFormsData) ? paymentFormsData : [];
       
       console.log('Setting data:', {
         patients: patientsArray.length,
         appointments: appointmentsArray.length,
         messages: messagesArray.length,
-        workshops: workshopsArray.length
+        workshops: workshopsArray.length,
+        paymentForms: paymentFormsArray.length
       });
       
       setPatients(patientsArray);
       setAppointments(appointmentsArray);
       setMessages(messagesArray);
       setWorkshops(workshopsArray);
+      setPaymentForms(paymentFormsArray);
       
       console.log('Data loaded successfully');
       
@@ -181,6 +212,7 @@ const AdminDashboard = () => {
       setAppointments([]);
       setMessages([]);
       setWorkshops([]);
+      setPaymentForms([]);
     } finally {
       setPatientsLoading(false);
       setAppointmentsLoading(false);
@@ -358,7 +390,7 @@ const AdminDashboard = () => {
         </div>
 
         <Tabs defaultValue="dashboard" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 gap-1 md:gap-0 mb-8">
+          <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 gap-1 md:gap-0 mb-8">
             <TabsTrigger value="dashboard" className="flex items-center gap-1 md:gap-2 text-xs md:text-sm data-[state=active]:bg-blue-100 data-[state=active]:text-blue-900">
               <BarChart3 className="h-3 w-3 md:h-4 md:w-4" />
               <span className="hidden sm:inline">Dashboard</span>
@@ -383,6 +415,11 @@ const AdminDashboard = () => {
               <BookOpen className="h-3 w-3 md:h-4 md:w-4" />
               <span className="hidden sm:inline">Workshops ({workshops.length})</span>
               <span className="sm:hidden">WS ({workshops.length})</span>
+            </TabsTrigger>
+            <TabsTrigger value="payments" className="flex items-center gap-1 md:gap-2 text-xs md:text-sm data-[state=active]:bg-blue-100 data-[state=active]:text-blue-900">
+              <User className="h-3 w-3 md:h-4 md:w-4" />
+              <span className="hidden sm:inline">Payment Forms ({paymentForms.length})</span>
+              <span className="sm:hidden">Payments ({paymentForms.length})</span>
             </TabsTrigger>
           </TabsList>
 
@@ -826,6 +863,152 @@ const AdminDashboard = () => {
                     </div>
                   </div>
                 )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Payment Forms Tab */}
+          <TabsContent value="payments" className="space-y-6">
+            <Card>
+              <CardHeader className="flex justify-between items-center">
+                <CardTitle>Payment Forms - All Registrations</CardTitle>
+                <div className="flex gap-2">
+                  <Select defaultValue="all" onValueChange={(value) => {
+                    // Filter logic can be added here if needed
+                  }}>
+                    <SelectTrigger className="w-40">
+                      <SelectValue placeholder="Filter by type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Registrations</SelectItem>
+                      <SelectItem value="workshops">Workshops Only</SelectItem>
+                      <SelectItem value="consultations">Consultations Only</SelectItem>
+                      <SelectItem value="lifestyle-plans">Lifestyle Plans Only</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Button variant="outline" size="sm" onClick={loadData}>
+                    <RefreshCw className="h-4 w-4 mr-2" />
+                    Refresh
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                {!Array.isArray(paymentForms) || paymentForms.length === 0 ? (
+                  <div className="text-center py-8">
+                    <User className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                    <p className="text-sm text-gray-500">No payment forms yet</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    <div className="max-h-96 overflow-y-auto border rounded-lg bg-gray-50">
+                      <div className="space-y-2 p-3">
+                        {paymentForms.map((form, index) => (
+                          <div 
+                            key={form._id} 
+                            className="flex items-center justify-between p-3 border rounded-lg bg-white hover:bg-gray-50 cursor-pointer transition-colors shadow-sm"
+                          >
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs text-gray-400 font-mono">#{index + 1}</span>
+                              <div>
+                                <h4 className="font-semibold text-sm">{form.fullName}</h4>
+                                <p className="text-xs text-gray-600">{form.email} • {form.phoneNumber}</p>
+                                <p className="text-xs text-gray-500">{form.cityState} • Age: {form.age}</p>
+                                <p className="text-xs text-blue-600 font-medium">
+                                  ₹{form.amount} • 
+                                  <span className={`ml-1 px-2 py-0.5 rounded-full text-xs ${
+                                    form.registeredFor.includes('Workshop') || form.registeredFor.includes('Weight Reset') || form.registeredFor.includes('PCOS') || form.registeredFor.includes('Pre-Pregnancy') || form.registeredFor.includes('Pregnancy') || form.registeredFor.includes('Postpartum') || form.registeredFor.includes('Parenting') || form.registeredFor.includes('Lab2Life') || form.registeredFor.includes('PathoLife') ? 'bg-purple-100 text-purple-800' :
+                                    form.registeredFor === '1:1 Consultation' ? 'bg-blue-100 text-blue-800' :
+                                    form.registeredFor === 'Wellness Reset' ? 'bg-green-100 text-green-800' :
+                                    form.registeredFor === 'Healing Plan' ? 'bg-orange-100 text-orange-800' :
+                                    form.registeredFor === '6 Months' ? 'bg-red-100 text-red-800' :
+                                    'bg-gray-100 text-gray-800'
+                                  }`}>
+                                    {form.registeredFor}
+                                  </span>
+                                </p>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <p className="text-xs text-gray-600">
+                                {new Date(form.createdAt).toLocaleDateString()}
+                              </p>
+                              <div className="flex flex-col gap-1">
+                                <span className={`px-2 py-1 rounded-full text-xs ${
+                                  form.paymentStatus === 'completed' ? 'bg-green-100 text-green-800' : 
+                                  form.paymentStatus === 'pending' ? 'bg-yellow-100 text-yellow-800' : 
+                                  'bg-red-100 text-red-800'
+                                }`}>
+                                  Payment: {form.paymentStatus}
+                                </span>
+                                <span className={`px-2 py-1 rounded-full text-xs ${
+                                  form.serviceStatus === 'pending' ? 'bg-blue-100 text-blue-800' : 
+                                  form.serviceStatus === 'active' ? 'bg-purple-100 text-purple-800' : 
+                                  form.serviceStatus === 'completed' ? 'bg-green-100 text-green-800' : 
+                                  'bg-gray-100 text-gray-800'
+                                }`}>
+                                  Service: {form.serviceStatus}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div className="text-center pt-2 text-xs text-gray-500 mb-2">
+                      Showing {paymentForms.length} of {paymentForms.length} payment forms
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Registration Summary */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Registration Summary</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="text-center p-4 bg-purple-50 rounded-lg border border-purple-200">
+                    <div className="text-2xl font-bold text-purple-600">
+                      {paymentForms.filter(form => 
+                        form.registeredFor.includes('Workshop') || 
+                        form.registeredFor.includes('Weight Reset') || 
+                        form.registeredFor.includes('PCOS') || 
+                        form.registeredFor.includes('Pre-Pregnancy') || 
+                        form.registeredFor.includes('Pregnancy') || 
+                        form.registeredFor.includes('Postpartum') || 
+                        form.registeredFor.includes('Parenting') || 
+                        form.registeredFor.includes('Lab2Life') || 
+                        form.registeredFor.includes('PathoLife')
+                      ).length}
+                    </div>
+                    <div className="text-sm text-purple-700">Workshop Registrations</div>
+                  </div>
+                  <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <div className="text-2xl font-bold text-blue-600">
+                      {paymentForms.filter(form => form.registeredFor === '1:1 Consultation').length}
+                    </div>
+                    <div className="text-sm text-blue-700">1:1 Consultations</div>
+                  </div>
+                  <div className="text-center p-4 bg-green-50 rounded-lg border border-green-200">
+                    <div className="text-2xl font-bold text-green-600">
+                      {paymentForms.filter(form => 
+                        form.registeredFor === 'Wellness Reset' || 
+                        form.registeredFor === 'Healing Plan' || 
+                        form.registeredFor === '6 Months'
+                      ).length}
+                    </div>
+                    <div className="text-sm text-green-700">Lifestyle Plans</div>
+                  </div>
+                  <div className="text-center p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <div className="text-2xl font-bold text-gray-600">
+                      {paymentForms.filter(form => form.paymentStatus === 'completed').length}
+                    </div>
+                    <div className="text-sm text-gray-700">Completed Payments</div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>

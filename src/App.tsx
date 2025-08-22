@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Workshops from "./pages/Workshops";
@@ -23,39 +24,43 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ReturnsRefundPolicy from "./pages/ReturnsRefundPolicy";
 import TermsConditions from "./pages/TermsConditions";
 import { WorkshopProvider } from "./contexts/WorkshopContext";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <WorkshopProvider>
-        <BrowserRouter>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/workshops" element={<Workshops />} />
-            <Route path="/consultations" element={<Consultations />} />
-            <Route path="/wellness-plans" element={<LifestylePlans />} />
-            <Route path="/lab2life" element={<Lab2Life />} />
+    <HelmetProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <WorkshopProvider>
+          <BrowserRouter>
+            <GoogleAnalytics />
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/workshops" element={<Workshops />} />
+              <Route path="/consultations" element={<Consultations />} />
+              <Route path="/wellness-plans" element={<LifestylePlans />} />
+              <Route path="/lab2life" element={<Lab2Life />} />
 
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/patholife" element={<PathOLife />} />
-            <Route path="/founder" element={<Founder />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/returns-refund-policy" element={<ReturnsRefundPolicy />} />
-            <Route path="/terms-conditions" element={<TermsConditions />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/doctor-panel" element={<AdminDashboard />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <ChatBot />
-        </BrowserRouter>
-      </WorkshopProvider>
-    </TooltipProvider>
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/patholife" element={<PathOLife />} />
+              <Route path="/founder" element={<Founder />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/returns-refund-policy" element={<ReturnsRefundPolicy />} />
+              <Route path="/terms-conditions" element={<TermsConditions />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/doctor-panel" element={<AdminDashboard />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <ChatBot />
+          </BrowserRouter>
+        </WorkshopProvider>
+      </TooltipProvider>
+    </HelmetProvider>
   </QueryClientProvider>
 );
 

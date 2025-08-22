@@ -359,3 +359,40 @@ export const deleteWorkshop = async (id) => {
   });
   return response.json();
 }; 
+
+
+
+// Payment Forms API
+export const fetchPaymentForms = async () => {
+  try {
+    const response = await fetch(getApiPath('/payment-forms'), {
+      headers: getHeaders(),
+    });
+    
+    if (response.status === 401) {
+      console.log('Token expired, attempting to re-login...');
+      localStorage.removeItem('adminToken');
+      window.location.href = '/admin';
+      return [];
+    }
+    
+    if (!response.ok) {
+      console.error('Payment Forms API error:', response.status, response.statusText);
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching payment forms:', error);
+    return [];
+  }
+};
+
+export const updatePaymentFormStatus = async (id, status) => {
+  const response = await fetch(getApiPath(`/payment-form/${id}/status`), {
+    method: 'PATCH',
+    headers: getHeaders(),
+    body: JSON.stringify({ serviceStatus: status }),
+  });
+  return response.json();
+};
