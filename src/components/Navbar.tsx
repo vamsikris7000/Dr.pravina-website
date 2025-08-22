@@ -128,6 +128,7 @@ const Navbar = () => {
             >
               Live Workshops
             </Link>
+
             {/* Our Services Dropdown */}
             <div
               className="relative group"
@@ -257,6 +258,7 @@ const Navbar = () => {
               >
                 Live Workshops
               </Link>
+
               {/* Our Services Dropdown (collapsible) */}
               <div className="">
                 <button

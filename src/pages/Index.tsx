@@ -6,11 +6,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Calendar, Mail, BookOpen, Heart, Star, Users, MessageSquare, Instagram, Facebook, Linkedin, Youtube, Award, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
+import { Calendar, Mail, BookOpen, Heart, Star, Users, MessageSquare, Instagram, Facebook, Linkedin, Youtube, Award, ChevronLeft, ChevronRight, MessageCircle, Brain } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import Founder from './founder';
 import PathOLife from './patholife';
+import LifestyleQuiz from "@/components/LifestyleQuiz";
 
 const advisoryBoardImages = [
   '/photos/Picture1.png',
@@ -44,6 +45,17 @@ function HexFlower({ label, text }) {
 const Index = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
+
+  const scrollToServices = () => {
+    const servicesSection = document.getElementById('services-heading');
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
 
   const testimonials = [
     {
@@ -188,20 +200,38 @@ const Index = () => {
               </p>
               
               <div className="mt-8 md:mt-10 max-w-4xl mx-auto lg:mx-0">
-                <Link to="/workshops" className="inline-block">
-                  <div className="bg-white border border-gray-200 rounded-xl px-6 py-3 hover:bg-gray-50 hover:scale-105 transition-all duration-300 cursor-pointer group shadow-sm">
-                    <div className="flex items-center justify-center space-x-2">
-                      <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center">
-                        <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />
-                        </svg>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                  <Link to="/workshops" className="inline-block flex-1 sm:flex-none">
+                    <div className="bg-white border border-gray-200 rounded-xl px-6 py-3 hover:bg-gray-50 hover:scale-105 transition-all duration-300 cursor-pointer group shadow-sm w-full sm:w-auto min-w-[280px]">
+                      <div className="flex items-center justify-center space-x-2">
+                        <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center">
+                          <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <h3 className="font-playfair text-lg md:text-xl font-bold text-primary text-center group-hover:text-primary">
+                          Upcoming Workshops
+                        </h3>
                       </div>
-                      <h3 className="font-playfair text-lg md:text-xl font-bold text-primary text-center group-hover:text-primary">
-                        Upcoming Workshops
-                      </h3>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                  
+                  <button
+                    onClick={() => setShowQuiz(true)}
+                    className="inline-block flex-1 sm:flex-none"
+                  >
+                    <div className="bg-white border border-gray-200 rounded-xl px-6 py-3 hover:bg-gray-50 hover:scale-105 transition-all duration-300 cursor-pointer group shadow-sm w-full sm:w-auto min-w-[280px]">
+                      <div className="flex items-center justify-center space-x-2">
+                        <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center">
+                          <Brain className="w-4 h-4 text-primary" />
+                        </div>
+                        <h3 className="font-playfair text-lg md:text-xl font-bold text-primary text-center group-hover:text-primary">
+                          Lifestyle Quiz
+                        </h3>
+                      </div>
+                    </div>
+                  </button>
+                </div>
               </div>
             </div>
             
@@ -671,6 +701,13 @@ const Index = () => {
           </div>
         </div>
       </footer>
+      
+             {/* Lifestyle Quiz Modal */}
+       <LifestyleQuiz 
+         isOpen={showQuiz} 
+         onClose={() => setShowQuiz(false)} 
+         onExploreServices={scrollToServices}
+       />
     </div>
   );
 };

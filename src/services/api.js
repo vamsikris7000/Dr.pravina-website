@@ -396,3 +396,29 @@ export const updatePaymentFormStatus = async (id, status) => {
   });
   return response.json();
 };
+
+// Quiz Leads API
+export const fetchQuizLeads = async () => {
+  try {
+    const response = await fetch(getApiPath('/quiz-leads'), {
+      headers: getHeaders(),
+    });
+    
+    if (response.status === 401) {
+      console.log('Token expired, attempting to re-login...');
+      localStorage.removeItem('adminToken');
+      window.location.href = '/admin';
+      return [];
+    }
+    
+    if (!response.ok) {
+      console.error('Quiz Leads API error:', response.status, response.statusText);
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching quiz leads:', error);
+    return [];
+  }
+};
