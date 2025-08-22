@@ -16,8 +16,25 @@ netlify deploy --prod
 
 ### 2. **Environment Variables**
 Set these in your Netlify dashboard:
+
+**Frontend Variables:**
 ```
 VITE_API_URL=/.netlify/functions
+VITE_VOICE_API_BASE_URL=https://your-voice-api-domain.com
+VITE_VOICE_API_KEY=your_voice_api_key_here
+```
+
+**Backend Variables:**
+```
+MONGODB_URI=your_mongodb_connection_string_here
+JWT_SECRET=your_jwt_secret_key_here
+ADMIN_EMAIL=your_admin_email_here
+ADMIN_PASSWORD=your_admin_password_here
+DIFY_API_BASE_URL=your_dify_api_base_url_here
+DIFY_API_KEY=your_dify_api_key_here
+VOICE_API_BASE_URL=your_voice_api_base_url_here
+VOICE_API_KEY=your_voice_api_key_here
+NODE_ENV=production
 ```
 
 ### 3. **Build Settings**
@@ -44,7 +61,7 @@ netlify/
 Functions are automatically deployed with your frontend. No separate deployment needed.
 
 ### 3. **Environment Variables**
-Set these in your Netlify dashboard:
+Set these in your Netlify dashboard (see Frontend section above for complete list):
 ```
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret_key
