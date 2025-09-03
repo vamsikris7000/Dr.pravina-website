@@ -30,6 +30,7 @@ import {
   fetchMessages,
   fetchAllWorkshops,
   fetchPaymentForms,
+  fetchQuizLeads,
   updatePatientStatus, 
   updateAppointmentStatus,
   updateMessageStatus,
@@ -119,9 +120,35 @@ interface PaymentForm {
   updatedAt: string;
 }
 
+interface QuizLead {
+  _id: string;
+  name: string;
+  email: string;
+  score: number;
+  result: {
+    range: string;
+    title: string;
+    message: string;
+  };
+  pillarScores: {
+    [key: string]: {
+      score: number;
+      maxScore: number;
+      percentage: number;
+    };
+  };
+  answers: { [key: number]: number };
+  submittedAt: string;
+  emailSent: boolean;
+  emailSentAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 const AdminDashboard = () => {
   const [editingWorkshops, setEditingWorkshops] = useState<{[key: string]: boolean}>({});
   const [paymentForms, setPaymentForms] = useState<PaymentForm[]>([]);
+  const [quizLeads, setQuizLeads] = useState<QuizLead[]>([]);
   
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -133,6 +160,7 @@ const AdminDashboard = () => {
   const [appointmentsLoading, setAppointmentsLoading] = useState(false);
   const [messagesLoading, setMessagesLoading] = useState(false);
   const [workshopsLoading, setWorkshopsLoading] = useState(false);
+  const [quizLeadsLoading, setQuizLeadsLoading] = useState(false);
   const [showAllMessages, setShowAllMessages] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
   const [isMessageDialogOpen, setIsMessageDialogOpen] = useState(false);
@@ -160,18 +188,20 @@ const AdminDashboard = () => {
     setAppointmentsLoading(true);
     setMessagesLoading(true);
     setWorkshopsLoading(true);
+    setQuizLeadsLoading(true);
     
     console.log('=== ADMIN DASHBOARD DATA LOADING ===');
     
     try {
       console.log('Fetching data from MongoDB...');
       
-      const [patientsData, appointmentsData, messagesData, workshopsData, paymentFormsData] = await Promise.all([
+      const [patientsData, appointmentsData, messagesData, workshopsData, paymentFormsData, quizLeadsData] = await Promise.all([
         fetchPatients(),
         fetchAppointments(),
         fetchMessages(),
         fetchAllWorkshops(),
-        fetchPaymentForms()
+        fetchPaymentForms(),
+        fetchQuizLeads()
       ]);
       
       console.log('Data received:', {
@@ -179,7 +209,8 @@ const AdminDashboard = () => {
         appointments: Array.isArray(appointmentsData) ? appointmentsData.length : 'Error',
         messages: Array.isArray(messagesData) ? messagesData.length : 'Error',
         workshops: Array.isArray(workshopsData) ? workshopsData.length : 'Error',
-        paymentForms: Array.isArray(paymentFormsData) ? paymentFormsData.length : 'Error'
+        paymentForms: Array.isArray(paymentFormsData) ? paymentFormsData.length : 'Error',
+        quizLeads: Array.isArray(quizLeadsData) ? quizLeadsData.length : 'Error'
       });
       
       // Check if responses are arrays (success) or error objects
@@ -188,13 +219,15 @@ const AdminDashboard = () => {
       const messagesArray = Array.isArray(messagesData) ? messagesData : [];
       const workshopsArray = Array.isArray(workshopsData) ? workshopsData : [];
       const paymentFormsArray = Array.isArray(paymentFormsData) ? paymentFormsData : [];
+      const quizLeadsArray = Array.isArray(quizLeadsData) ? quizLeadsData : [];
       
       console.log('Setting data:', {
         patients: patientsArray.length,
         appointments: appointmentsArray.length,
         messages: messagesArray.length,
         workshops: workshopsArray.length,
-        paymentForms: paymentFormsArray.length
+        paymentForms: paymentFormsArray.length,
+        quizLeads: quizLeadsArray.length
       });
       
       setPatients(patientsArray);
@@ -202,6 +235,7 @@ const AdminDashboard = () => {
       setMessages(messagesArray);
       setWorkshops(workshopsArray);
       setPaymentForms(paymentFormsArray);
+      setQuizLeads(quizLeadsArray);
       
       console.log('Data loaded successfully');
       
@@ -213,11 +247,13 @@ const AdminDashboard = () => {
       setMessages([]);
       setWorkshops([]);
       setPaymentForms([]);
+      setQuizLeads([]);
     } finally {
       setPatientsLoading(false);
       setAppointmentsLoading(false);
       setMessagesLoading(false);
       setWorkshopsLoading(false);
+      setQuizLeadsLoading(false);
       setLoading(false);
       console.log('=== ADMIN DASHBOARD DATA LOADING COMPLETE ===');
     }
@@ -390,7 +426,7 @@ const AdminDashboard = () => {
         </div>
 
         <Tabs defaultValue="dashboard" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 gap-1 md:gap-0 mb-8">
+          <TabsList className="grid w-full grid-cols-3 md:grid-cols-7 gap-1 md:gap-0 mb-8">
             <TabsTrigger value="dashboard" className="flex items-center gap-1 md:gap-2 text-xs md:text-sm data-[state=active]:bg-blue-100 data-[state=active]:text-blue-900">
               <BarChart3 className="h-3 w-3 md:h-4 md:w-4" />
               <span className="hidden sm:inline">Dashboard</span>
@@ -416,6 +452,11 @@ const AdminDashboard = () => {
               <span className="hidden sm:inline">Workshops ({workshops.length})</span>
               <span className="sm:hidden">WS ({workshops.length})</span>
             </TabsTrigger>
+            <TabsTrigger value="quiz-scores" className="flex items-center gap-1 md:gap-2 text-xs md:text-sm data-[state=active]:bg-blue-100 data-[state=active]:text-blue-900">
+              <BarChart3 className="h-3 w-3 md:h-4 md:w-4" />
+              <span className="hidden sm:inline">Quiz Scores ({quizLeads.length})</span>
+              <span className="sm:hidden">Quiz ({quizLeads.length})</span>
+            </TabsTrigger>
             <TabsTrigger value="payments" className="flex items-center gap-1 md:gap-2 text-xs md:text-sm data-[state=active]:bg-blue-100 data-[state=active]:text-blue-900">
               <User className="h-3 w-3 md:h-4 md:w-4" />
               <span className="hidden sm:inline">Payment Forms ({paymentForms.length})</span>
@@ -425,7 +466,7 @@ const AdminDashboard = () => {
 
           {/* Dashboard Tab */}
           <TabsContent value="dashboard" className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Total Patients</CardTitle>
@@ -460,6 +501,18 @@ const AdminDashboard = () => {
                   <p className="text-xs text-muted-foreground">6 workshops available</p>
                 </CardContent>
               </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Quiz Scores</CardTitle>
+                  <BarChart3 className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{Array.isArray(quizLeads) ? quizLeads.length : 0}</div>
+                  <p className="text-xs text-muted-foreground">
+                    {Array.isArray(quizLeads) ? quizLeads.filter(q => q.score >= 50).length : 0} high scores (50+)
+                  </p>
+                </CardContent>
+              </Card>
             </div>
 
             <Card>
@@ -491,6 +544,42 @@ const AdminDashboard = () => {
                   )) : (
                     <div className="text-center py-4">
                       <p className="text-sm text-gray-500">No patients data available</p>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Recent Quiz Scores</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {Array.isArray(quizLeads) ? quizLeads.slice(0, 3).map((quizLead) => (
+                    <div key={quizLead._id} className="flex items-center justify-between p-4 border rounded-lg">
+                      <div>
+                        <h4 className="font-semibold">{quizLead.name}</h4>
+                        <p className="text-sm text-gray-600">{quizLead.email}</p>
+                        <p className="text-xs text-gray-500">{quizLead.result.title}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm text-gray-600">
+                          {new Date(quizLead.submittedAt || quizLead.createdAt).toLocaleDateString()}
+                        </p>
+                        <span className={`px-2 py-1 rounded-full text-xs ${
+                          quizLead.score >= 64 ? 'bg-green-100 text-green-800' : 
+                          quizLead.score >= 50 ? 'bg-yellow-100 text-yellow-800' : 
+                          quizLead.score >= 29 ? 'bg-orange-100 text-orange-800' : 
+                          'bg-red-100 text-red-800'
+                        }`}>
+                          {quizLead.score}/70
+                        </span>
+                      </div>
+                    </div>
+                  )) : (
+                    <div className="text-center py-4">
+                      <p className="text-sm text-gray-500">No quiz scores data available</p>
                     </div>
                   )}
                 </div>
@@ -860,6 +949,79 @@ const AdminDashboard = () => {
                     
                     <div className="text-center pt-2 text-xs text-gray-500 mb-2">
                       Showing {Array.isArray(messages) ? messages.length : 0} of {Array.isArray(messages) ? messages.length : 0} messages
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Quiz Scores Tab */}
+          <TabsContent value="quiz-scores" className="space-y-6">
+            <Card>
+              <CardHeader className="flex justify-between items-center">
+                <CardTitle>Quiz Score Submissions</CardTitle>
+                <Button variant="outline" size="sm" onClick={loadData}>
+                  <RefreshCw className="h-4 w-4 mr-2" />
+                  Refresh
+                </Button>
+              </CardHeader>
+              <CardContent>
+                {quizLeadsLoading ? (
+                  <div className="text-center py-8">
+                    <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-4" />
+                    <p>Loading quiz scores...</p>
+                  </div>
+                ) : !Array.isArray(quizLeads) || quizLeads.length === 0 ? (
+                  <div className="text-center py-8">
+                    <BarChart3 className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                    <p className="text-sm text-gray-500">No quiz scores yet</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {Array.isArray(quizLeads) ? (
+                      <div className="max-h-96 overflow-y-auto border rounded-lg bg-gray-50">
+                        <div className="space-y-2 p-3">
+                          {quizLeads.map((quizLead, index) => (
+                            <div 
+                              key={quizLead._id} 
+                              className="flex items-center justify-between p-3 border rounded-lg bg-white hover:bg-gray-50 transition-colors shadow-sm"
+                            >
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs text-gray-400 font-mono">#{index + 1}</span>
+                                <div>
+                                  <h4 className="font-semibold text-sm">{quizLead.name}</h4>
+                                  <p className="text-xs text-gray-600">{quizLead.email}</p>
+                                  <p className="text-xs text-gray-500">
+                                    Score: {quizLead.score}/70 • {quizLead.result.title}
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="text-right">
+                                <p className="text-xs text-gray-600">
+                                  {new Date(quizLead.submittedAt || quizLead.createdAt).toLocaleDateString()}
+                                </p>
+                                <span className={`px-2 py-1 rounded-full text-xs ${
+                                  quizLead.score >= 64 ? 'bg-green-100 text-green-800' : 
+                                  quizLead.score >= 50 ? 'bg-yellow-100 text-yellow-800' : 
+                                  quizLead.score >= 29 ? 'bg-orange-100 text-orange-800' : 
+                                  'bg-red-100 text-red-800'
+                                }`}>
+                                  {quizLead.score}/70
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="text-center py-4">
+                        <p className="text-sm text-gray-500">No quiz scores data available</p>
+                      </div>
+                    )}
+                    
+                    <div className="text-center pt-2 text-xs text-gray-500 mb-2">
+                      Showing {Array.isArray(quizLeads) ? quizLeads.length : 0} of {Array.isArray(quizLeads) ? quizLeads.length : 0} quiz scores
                     </div>
                   </div>
                 )}

@@ -193,7 +193,7 @@ const LifestylePlans = () => {
                         <p className="font-playfair text-4xl font-bold text-primary">{plan.price}</p>
                       </>
                     )}
-                    {plan.name === "Lifestyle Transformation" && (
+                    {plan.name === "6 Months" && (
                       <>
                         <p className="font-playfair text-2xl font-bold text-muted-foreground line-through">₹29999</p>
                         <p className="font-playfair text-4xl font-bold text-primary">{plan.price}</p>
