@@ -109,7 +109,7 @@ const LifestylePlans = () => {
       ideal: "Best for PCOS, fertility, postpartum, or weight loss"
     },
     {
-      name: "6 Months",
+      name: "Lifestyle Transformation",
       price: "₹19999",
       duration: "6 Months",
       color: "from-teal-400 to-teal-600",
@@ -193,7 +193,7 @@ const LifestylePlans = () => {
                         <p className="font-playfair text-4xl font-bold text-primary">{plan.price}</p>
                       </>
                     )}
-                    {plan.name === "6 Months" && (
+                    {plan.name === "Lifestyle Transformation" && (
                       <>
                         <p className="font-playfair text-2xl font-bold text-muted-foreground line-through">₹29999</p>
                         <p className="font-playfair text-4xl font-bold text-primary">{plan.price}</p>
